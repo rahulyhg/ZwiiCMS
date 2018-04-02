@@ -1,4 +1,4 @@
-ChangeLog :
+ChangeLog version améliorée :
 
 - 0.8.2
      - Erreur dans la présentation d'un lien vide dans le menu
