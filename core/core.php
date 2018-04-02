@@ -1804,10 +1804,12 @@ class layout extends common {
 			$items .= '<li>';
 			// Menu image
 
-			if ($this->getData(['page',$parentPageId,'disable']) === true			)			   
-			{				$items .= '<a href="#">'; 		    }
-		    else
-		    {				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';			}
+			if ( $this->getData(['page',$parentPageId,'disable']) === true					
+				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+
+					{$items .= '<a href="#">';}
+		    else {
+				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';			}
 
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
@@ -1861,10 +1863,12 @@ class layout extends common {
 			
 				// Menu Image
 
-				if ($this->getData(['page',$childKey,'disable']) === true			)			   
-				{				$items .= '<a href="#">'; 		    }
-				else
-				{				$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+				if ( $this->getData(['page',$childKey,'disable']) === true					
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+
+						{$items .= '<a href="#">';}
+				else {
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
 
 				switch ($this->getData(['page', $childKey, 'typeMenu'])) {
 					case '' :
