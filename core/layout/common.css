@@ -1,0 +1,1019 @@
+/**
+ * This file is part of Zwii.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Rémi Jean <remi.jean@outlook.com>
+ * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @license GNU General Public License, version 3
+ * @link http://zwiicms.com/
+ */
+
+/**
+ * Éléments génériques
+ */
+
+html,
+body {
+	min-height: 100%;
+}
+body {
+	margin: 0 10px;
+}
+
+/**
+ * Éléments spécifiques
+ */
+
+/* Liens */
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* Titres */
+h1 {
+	font-size: 1.8em;
+}
+h2 {
+	font-size: 1.6em;
+}
+h3 {
+	font-size: 1.4em;
+}
+h4 {
+	font-size: 1.2em;
+}
+
+/* Listes */
+ul {
+	list-style: square;
+}
+li ul {
+	margin: 0;
+}
+
+/* Séparateur */
+hr {
+	border: 0;
+	border-top: 1px solid #C5D1D4;
+}
+
+/* Égalisation des margins */
+h1,
+h2,
+h3,
+h4,
+p,
+hr,
+ul,
+ol {
+	margin: 15px 0;
+}
+
+/* Image */
+img {
+	max-width: 100%;
+	height: auto;
+}
+img[align='left'] {
+	margin-right: 10px;
+}
+img[align='right'] {
+	margin-left: 10px;
+}
+
+/* Tableau */
+:not([class^="col"]) > .tableWrapper {
+	margin: 10px 0;
+}
+.table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+.table thead tr {
+	background: #212223;
+	color: #FFF;
+	text-align: left;
+}
+.table tbody tr {
+	background: #F6F7F8;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+.table tbody tr:nth-child(2n + 2) {
+	background: #ECEFF1;
+}
+.table tbody tr:hover {
+	background: #FCF2E8;
+}
+.table th {
+	font-weight: normal;
+	padding: 15px 10px !important;
+}
+/* Supprime le padding des cols dans les cellules des tableaux */
+td > .col1,
+td > .col2,
+td > .col3,
+td > .col4,
+td > .col5,
+td > .col6,
+td > .col7,
+td > .col8,
+td > .col9,
+td > .col10,
+td > .col11,
+td > .col12 {
+	padding: 0 !important;
+}
+
+/* Notifications */
+#notification {
+	padding: 14px;
+	color: #FFF;
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 500px;
+	width: 100%;
+	z-index: 20;
+	text-align: center;
+	animation: notificationBounce .5s;
+	top: 30px;
+	border-radius: 2px;
+}
+#notification.notificationSuccess {
+	background: #27AE60;
+}
+#notification.notificationError {
+	background: #E74C3C;
+}
+#notification.notificationOther {
+	background: #F39C12;
+}
+#notificationClose {
+	cursor: pointer;
+	float: right;
+	opacity: .8;
+}
+#notificationProgress {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 6px;
+	border-radius: 2px;
+}
+#notification.notificationSuccess #notificationProgress {
+	background: #219251;
+}
+#notification.notificationError #notificationProgress {
+	background: #D62C1A;
+}
+#notification.notificationOther #notificationProgress {
+	background: #D8890B;
+}
+#notificationClose:hover {
+	opacity: 1;
+}
+@keyframes notificationBounce {
+	0% {
+		transform: translateX(-50%) translateY(-30px);
+	}
+	40% {
+		transform: translateX(-50%) translateY(10px);
+	}
+	60% {
+		transform: translateX(-50%) translateY(-10px);
+	}
+	80% {
+		transform: translateX(-50%) translateY(5px);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-5px);
+	}
+}
+
+/* Notice */
+.notice {
+	display: inline-block;
+	color: #E74C3C;
+}
+
+/* Container */
+.container {
+	margin: auto;
+}
+
+/* Barre de membre */
+#bar {
+	background: #212223;
+	padding-left: 5px; /* Pour éviter que le select touche le bord lorsque la fenêtre est redimensionnée */
+	margin: 0 -10px;
+	text-align: right;
+}
+#bar:after {
+	content: " ";
+	clear: both;
+	display: block;
+}
+#bar ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	height: 45px;
+	line-height: 45px;
+}
+#bar #barLeft {
+	float: left;
+}
+#bar #barRight {
+	float: right;
+	font-size: .8em;
+}
+#bar li {
+	display: inline;
+}
+#bar a {
+	display: inline-block;
+	padding: 0 12px;
+	color: #FFF;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+#bar a:hover {
+	background: #191A1A;
+	text-decoration: none;
+}
+#bar a:active {
+	background: #111112;
+}
+#bar select {
+	width: 250px;
+	border: 0;
+}
+@media (max-width: 768px) {
+	#bar {
+		text-align: center;
+		padding: 0;
+	}
+	#bar ul {
+		float: none !important;
+		height: auto;
+	}
+	#bar select {
+		width: 70%;
+	}
+}
+
+/* Site */
+#site {
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+/* Bannière */
+body > header {
+	margin: 0 -10px;
+}
+header {
+	position: relative;
+}
+header span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1.2;
+	margin: 0 10px;
+}
+header .container {
+	overflow: hidden;
+	height: 100%;
+}
+
+/* Menu */
+body > nav {
+	margin: 0 -10px;
+}
+nav #toggle {
+	cursor: pointer;
+	text-align: right;
+	display: none;
+	font-weight: bold;
+}
+nav #toggle span {
+	display: block;
+}
+nav #menu {
+	display: block;
+}
+nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+nav li {
+	display: inline-block;
+	position: relative;
+}
+nav li ul {
+	display: block;
+	position: absolute;
+	width: 200px;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transition: .3s ease-out;
+	transition: .3s ease-out;
+}
+nav li ul li {
+	display: block;
+	text-align: left;
+}
+nav li:hover ul {
+	z-index: 1;
+	opacity: 1;
+}
+nav a {
+	display: inherit;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+nav a:hover {
+	text-decoration: none;
+}
+@media (max-width: 768px) {
+	nav #toggle {
+		display: block;
+	}
+	nav #menu {
+		display: none;
+		text-align: left !important;
+	}
+	nav li {
+		display: block;
+	}
+	nav li ul {
+		z-index: 1;
+		opacity: 1;
+		position: static;
+		min-width: inherit;
+		width: auto;
+	}
+	nav a {
+		padding: 15px !important;
+	}
+	nav li ul a {
+		padding-left: 40px !important;
+	}
+}
+
+/* Corps */
+section {
+	padding: 20px;
+}
+section #sectionTitle {
+	margin-top: 0;
+}
+section:after {
+	content: " ";
+	display: table;
+	clear: both;
+}
+
+/* Pied de page */
+body > footer {
+	margin: 0 -10px;
+}
+footer {
+	text-align: center;
+	font-size: .8em;
+	padding: 10px 20px;
+}
+footer #footerSocials {
+	font-size: 1.6em;
+}
+footer #footerSocials span {
+	color: #FFF;
+	padding: 9px;
+	margin: 0 5px;
+	display: inline-block;
+	border-radius: 2px;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+footer #footerSocials .zwiico-facebook {
+	background: #3B5999;
+}
+footer #footerSocials .zwiico-facebook:hover {
+	background: #324B80;
+}
+footer #footerSocials .zwiico-googleplus {
+	background: #DD4B39;
+}
+footer #footerSocials .zwiico-googleplus:hover {
+	background: #D03724;
+}
+footer #footerSocials .zwiico-instagram {
+	background: #E4405F;
+}
+footer #footerSocials .zwiico-instagram:hover {
+	background: #E02246;
+}
+footer #footerSocials .zwiico-pinterest {
+	background: #BD081C;
+}
+footer #footerSocials .zwiico-pinterest:hover {
+	background: #9C0717;
+}
+footer #footerSocials .zwiico-twitter {
+	background: #55ACEE;
+}
+footer #footerSocials .zwiico-twitter:hover {
+	background: #369DEB;
+}
+footer #footerSocials .zwiico-youtube {
+	background: #CD201F;
+}
+footer #footerSocials .zwiico-youtube:hover {
+	background: #AF1B1B;
+}
+
+/* Bulle de dialogue */
+.speech {
+	margin: 16px;
+	text-align: center;
+}
+.speechMimi {
+	display: block;
+	margin: auto;
+}
+.speechBubble {
+	display: block;
+	padding: 20px;
+	position: relative;
+	max-width: 500px;
+	width: 100%;
+	margin: 16px auto;
+	text-align: left;
+	border-radius: 2px;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+.speechBubble:before {
+	content: " ";
+	position: absolute;
+	left: 50%;
+	margin-left: -20px;
+	bottom: -30px;
+	border: 20px solid;
+}
+
+/* Remonter en haut */
+#backToTop {
+	position: fixed;
+	z-index: 30;
+	right: 30px;
+	bottom: 50px;
+	padding: 13px 16px 16px;
+	background: rgba(33, 34, 35, .8);
+	color: #FFF;
+	cursor: pointer;
+	display: none;
+	border-radius: 50%;
+	-webkit-transition: background.3s ease-out;
+	transition: background .3s ease-out;
+}
+#backToTop:hover {
+	background: rgba(33, 34, 35, .9);
+}
+#backToTop:active {
+	background: rgba(33, 34, 35, 1);
+}
+
+/* Message sur les cookies */
+#cookieConsent {
+	opacity: .9;
+	background: #212223;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	color: #FFF;
+	padding: 10px;
+	z-index: 20;
+	text-align: center;
+	font-size: .9em;
+}
+#cookieConsentConfirm {
+	cursor: pointer;
+	margin-left: 10px;
+	background: #666;
+	padding: 4px 8px;
+	display: inline-block;
+	-webkit-transition: background.3s ease-out;
+	transition: background .3s ease-out;
+}
+#cookieConsentConfirm:hover {
+	background: #777;
+}
+
+/* Bloc */
+.block {
+	border: 1px solid #D8DFE3;
+	padding: 20px 20px 10px;
+	margin: 20px 0;
+	word-wrap: break-word;
+	border-radius: 2px;
+}
+.block:first-of-type {
+	margin-top: 0;
+}
+.block:last-of-type {
+	margin-bottom: 0;
+}
+.block h4 {
+	margin: -20px -20px 10px -20px;
+	padding: 10px;
+	background: #ECEFF1;
+}
+
+/* Aides */
+.helpButton {
+	cursor: help;
+	margin: 0 5px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Lightbox */
+.lightbox {
+	background: #FFF;
+	width: 100vw;
+	max-width: 500px;
+	padding: 20px;
+}
+.lightbox .lightboxButtons {
+	text-align: center;
+	margin-top: 30px;
+}
+.lightbox .lightboxButtons .button {
+	width: 100%;
+	max-width: 80px;
+	margin: 0 10px;
+}
+
+/**
+ * Inputs
+ */
+
+/* Inputs génériques */
+input[type='email'],
+input[type='text'],
+input[type='password'],
+.inputFile,
+select,
+textarea {
+	padding: 10px; /* -1px à cause des bordures */
+	background: #FFF;
+	border: 1px solid #D8DFE3;
+	width: 100%;
+	border-radius: 2px;
+	font-family: inherit;
+	-webkit-transition: border .3s ease-out;
+	transition: border .3s ease-out;
+}
+select {
+	padding: 7px;
+}
+input[type='email']:hover,
+input[type='text']:hover,
+input[type='password']:hover,
+.inputFile:hover,
+select:hover,
+textarea:hover {
+	border: 1px solid;
+}
+input[type='email'].notice,
+input[type='text'].notice,
+input[type='password'].notice,
+.inputFile.notice,
+select.notice,
+textarea.notice {
+	border: 1px solid #E74C3C;
+	background: #FAD7D3;
+}
+input[type='email'].notice:hover,
+input[type='text'].notice:hover,
+input[type='password'].notice:hover,
+.inputFile.notice:hover,
+select.notice:hover,
+textarea.notice:hover {
+	border: 1px solid #A82315;
+}
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+	background: #F6F7F8 !important;
+	color: #94A5B0 !important;
+}
+button:disabled .zwiico-spin {
+	color: #50616C !important /* Icône de soumission unique */
+}
+button {
+	width: 100%;
+	padding: 11px;
+	border: 0;
+	cursor: pointer;
+	font-family: inherit;
+	border-radius: 2px;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+textarea {
+	height: 100px;
+	resize: vertical;
+}
+label {
+	display: inline-block;
+	margin-bottom: 4px;
+}
+/* Simule le padding des cols pour les inputs en dehors des cols */
+:not([class^="col"]) > .inputWrapper {
+	padding: 10px 0;
+}
+/* Supprime le padding d'une row dans un col */
+[class^="col"] > .row {
+	margin: -10px;
+}
+
+/* Bouton */
+.button {
+	width: 100%;
+	display: inline-block;
+	padding: 11px;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	border-radius: 2px;
+	-webkit-transition: background .3s ease-out;
+	transition: background .3s ease-out;
+}
+.button:hover {
+	text-decoration: none;
+}
+.button.disabled {
+	pointer-events: none;
+	cursor: default;
+	background: #F6F7F8 !important;
+	color: #94A5B0 !important;
+}
+.button.buttonGrey {
+	background: #ECEFF1;
+}
+.button.buttonGrey:hover {
+	background: #E2E7EA;
+}
+.button.buttonGrey:active {
+	background: #D8DFE3;
+}
+.button.buttonRed {
+	background: #E74C3C;
+	color: #FFF;
+}
+.button.buttonRed:hover {
+	background: #E53E2D;
+}
+.button.buttonRed:active {
+	background: #E3301E;
+}
+
+/* Upload de fichiers */
+.inputFile {
+	margin: 0;
+	display: inline-block;
+	width: 88%;
+}
+.inputFileDelete {
+	display: inline-block;
+	width: 10%;
+	padding: 10px 0;
+	background: #F5F5F5;
+	text-align: center;
+	float: right;
+}
+.inputFile:hover {
+	text-decoration: none;
+}
+
+/* Pagination */
+.pagination {
+	padding: 10px 0;
+}
+.pagination a {
+	display: inline-block;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+}
+.pagination a:hover {
+	text-decoration: none;
+}
+.pagination a.disabled {
+	pointer-events: none;
+	cursor: default;
+	background: #F6F7F8 !important;
+	color: #94A5B0 !important;
+}
+.pagination a:first-child {
+	margin-left: 0;
+}
+.pagination a:last-child {
+	margin-right: 0;
+}
+
+/* Cases à cocher (pas de display none sinon le hover ne fonctionne pas sous Chrome) */
+input[type='checkbox'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+input[type='checkbox'] + label {
+	display: inline-block;
+	margin-right: 10px;
+	cursor: pointer;
+}
+input[type='checkbox'] + label span {
+	vertical-align: middle;
+}
+input[type='checkbox'] + label:before {
+	content: '\2713';
+	display: inline-block;
+	text-align: center;
+	color: transparent;
+	margin-right: 5px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 10px;
+	font-weight: bold;
+	background: #FDFDFD;
+	border: 1px solid #D8DFE3;
+	vertical-align: top;
+	border-radius: 2px;
+}
+input[type='checkbox'].notice + label:before {
+	background: #E74C3C;
+}
+input[type='checkbox']:hover + label:before,
+input[type='checkbox']:checked:active + label:before {
+	background: #ECEFF1;
+}
+input[type='checkbox']:disabled + label:before{
+	background: #F6F7F8 !important;
+}
+
+/* Sélecteur de date */
+.datepicker {
+	cursor: text;
+}
+.pika-select {
+	padding: 0; /* À cause du padding ajouté aux selects */
+}
+
+/**
+ * Grille
+ */
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.row {
+	margin: 0 -10px;
+	font-size: 0; /* Hack whitespace */
+}
+/* Supprime les margins du premier et du dernier élément d'un col, utile pour les cols générés depuis l'éditeur de texte. (Ne s'applique pas aux rows pour ne pas supprimer les margins négatifs) */
+.row > div > :first-child:not(.row) {
+	margin-top: 0;
+}
+.row > div > :last-child:not(.row) {
+	margin-bottom: 0;
+}
+.col1,
+.col2,
+.col3,
+.col4,
+.col5,
+.col6,
+.col7,
+.col8,
+.col9,
+.col10,
+.col11,
+.col12 {
+	vertical-align: top;
+	padding: 10px;
+	width: 100%;
+	min-height: 1px;
+	display: inline-block;
+}
+@media (min-width: 992px) {
+	.col1 {
+		width: 8.33333333%;
+	}
+	.col2 {
+		width: 16.66666667%;
+	}
+	.col3 {
+		width: 25%;
+	}
+	.col4 {
+		width: 33.33333333%;
+	}
+	.col5 {
+		width: 41.66666667%;
+	}
+	.col6 {
+		width: 50%;
+	}
+	.col7 {
+		width: 58.33333333%;
+	}
+	.col8 {
+		width: 66.66666667%;
+	}
+	.col9 {
+		width: 75%;
+	}
+	.col10 {
+		width: 83.33333333%;
+	}
+	.col11 {
+		width: 91.66666667%;
+	}
+	.col12 {
+		width: 100%;
+	}
+	.offset1 {
+		margin-left: 8.33333333%;
+	}
+	.offset2 {
+		margin-left: 16.66666667%;
+	}
+	.offset3 {
+		margin-left: 25%;
+	}
+	.offset4 {
+		margin-left: 33.33333333%;
+	}
+	.offset5 {
+		margin-left: 41.66666667%;
+	}
+	.offset6 {
+		margin-left: 50%;
+	}
+	.offset7 {
+		margin-left: 58.33333333%;
+	}
+	.offset8 {
+		margin-left: 66.66666667%;
+	}
+	.offset9 {
+		margin-left: 75%;
+	}
+	.offset10 {
+		margin-left: 83.33333333%;
+	}
+	.offset11 {
+		margin-left: 91.66666667%;
+	}
+}
+
+/**
+ * Grille pour tableau
+ */
+
+td.col1,
+th.col1,
+td.col2,
+th.col2,
+td.col3,
+th.col3,
+td.col4,
+th.col4,
+td.col5,
+th.col5,
+td.col6,
+th.col6,
+td.col7,
+th.col7,
+td.col8,
+th.col8,
+td.col9,
+th.col9,
+td.col10,
+th.col10,
+td.col11,
+th.col11,
+td.col12,
+th.col12 {
+	vertical-align: inherit;
+	width: 100%;
+	min-height: 1px;
+	display: table-cell;
+}
+td.col1,
+th.col1 {
+	width: 8.33333333%;
+}
+td.col2,
+th.col2 {
+	width: 16.66666667%;
+}
+td.col3,
+th.col3 {
+	width: 25%;
+}
+td.col4,
+th.col4 {
+	width: 33.33333333%;
+}
+td.col5,
+th.col5 {
+	width: 41.66666667%;
+}
+td.col6,
+th.col6 {
+	width: 50%;
+}
+td.col7,
+th.col7 {
+	width: 58.33333333%;
+}
+td.col8,
+th.col8 {
+	width: 66.66666667%;
+}
+td.col9,
+th.col9 {
+	width: 75%;
+}
+td.col10,
+th.col10 {
+	width: 83.33333333%;
+}
+td.col11,
+th.col11 {
+	width: 91.66666667%;
+}
+td.col12,
+th.col12 {
+	width: 100%;
+}
+
+/**
+ * Classes rapides
+ */
+
+.displayNone {
+	display: none;
+}
+.textAlignCenter {
+	text-align: center;
+}
+.textAlignRight {
+	text-align: right;
+}
+.verticalAlignBottom {
+	vertical-align: bottom;
+}
+.verticalAlignMiddle {
+	vertical-align: middle;
+}
+.clearBoth {
+	clear: both;
+}
+.colorGreen {
+	color: #27AE60;
+}
+.colorRed {
+	color: #E74C3C;
+}
+.colorOrange {
+	color: #F39C12;
+}

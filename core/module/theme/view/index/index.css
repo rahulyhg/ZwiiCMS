@@ -1,0 +1,48 @@
+/**
+ * This file is part of Zwii.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Rémi Jean <remi.jean@outlook.com>
+ * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @license GNU General Public License, version 3
+ * @link http://zwiicms.com/
+ */
+
+#bar,
+#site,
+header,
+nav,
+section,
+footer {
+	position: relative;
+	z-index: 10;
+}
+#themeShowAll,
+#themeBack,
+#themeAdvanced {
+	position: relative;
+	z-index: 11;
+}
+.themeOverlay {
+	-webkit-transition: all .3s;
+	transition: all .3s;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 5;
+	cursor: pointer;
+	content: " ";
+	display: block;
+	background: transparent;
+}
+.themeOverlay:not(.themeOverlayHideBackground):hover,
+.themeOverlayTriggerHover {
+	background: rgba(39, 174, 96, .5);
+}
+#themeOverlayBody {
+	position: fixed; /* Sinon l'overlay s'arrête à la hauteur de la fenêtre et non de la page*/
+}

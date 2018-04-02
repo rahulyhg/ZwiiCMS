@@ -1,0 +1,126 @@
+/**
+ * Voici une feuille de style type, bien entendu vous pouvez ajouter
+ * ou supprimer des propriétés CSS en fonction de vos besoins.
+ */
+
+/**
+ * Éléments principaux
+ */
+
+/* Fond du site */
+body {
+}
+
+/* Site */
+#site {
+}
+
+/* Bannière */
+header {
+}
+
+/* Titre de la bannière */
+header span {
+}
+
+/* Menu */
+nav {
+}
+
+/* Items du menu */
+nav a {
+}
+
+/* Items au survol du menu */
+nav a:hover {
+}
+
+/* Item courant du menu */
+nav a.active {
+}
+
+/* Bas de page */
+footer {
+}
+
+/* Liens du bas de page */
+footer a {
+}
+
+/* Réseaux sociaux dans le bas de page */
+#footerSocials {
+}
+
+/* Texte libre dans le bas de page */
+#footerText {
+}
+
+/* Copyright dans le bas de page */
+#footerCopyright {
+}
+
+/**
+ * Éléments de contenu
+ */
+
+/* Titres */
+h1,
+h2,
+h3,
+h4 {
+}
+
+/* Liens */
+a {
+}
+
+/* Liens au survol */
+a:hover {
+}
+
+/* Liens au clic */
+a:active {
+}
+
+/* Boutons */
+.button,
+button[type='submit'],
+.pagination a {
+}
+
+/* Boutons au survol */
+.button:hover,
+button[type='submit']:hover,
+.pagination a:hover {
+}
+
+/* Boutons au clic */
+.button:active,
+button[type='submit']:active,
+.pagination a:active {
+}
+
+/* Cases à cocher */
+input[type='checkbox']:checked + label:before {
+}
+
+/* Cases à cocher au survol */
+input[type='checkbox']:not(:active):checked:hover + label:before,
+input[type='checkbox']:active + label:before {
+}
+
+/* Champs de formulaire */
+input[type='text'],
+input[type='password'],
+.inputFile,
+select,
+textarea {
+}
+
+/* Champs de formulaire au survol */
+input[type='text']:hover,
+input[type='password']:hover,
+.inputFile:hover,
+select:hover,
+textarea:hover {
+}
