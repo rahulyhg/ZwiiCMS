@@ -1,5 +1,10 @@
 ChangeLog version améliorée :
-
+- 0.9.2 Erreur de balises dans le menu
+- 0.9.1 correction dans la gestion du menu (balises manquantes)
+- 0.9
+    - correction du bug des commentaires non déposés quand connecté
+    - Retour de l'écran de redirection
+- 0.8.2 Désactivation de l'inactivation des pages en mode connecté, ne nécessite pas de naviguer dans l'arborescence avec le menu (comportement identique aux pages cachées).
 - 0.8.2
      - Erreur dans la présentation d'un lien vide dans le menu
 - 0.8.1 Modification cosmétique dans la présentation du thème l'option d'inactivation d'une page disparaît si masquée
