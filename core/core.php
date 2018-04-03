@@ -1153,7 +1153,7 @@ class core extends common {
 				if(array_key_exists($action, $module::$actions)) {
 					$module->$action();
 					$output = $module->output;
-					// Check le groupe de l'utilisateur
+					// Check le groupe de l'utilisateur			
 					if(
 						(
 							$module::$actions[$action] === self::GROUP_VISITOR
@@ -1165,7 +1165,7 @@ class core extends common {
 						AND $output['access'] === true
 					) {
 						// Enregistrement du contenu de la méthode POST lorsqu'une notice est présente
-						if(common::$inputNotices) {
+						if(common::$inputNotices) {													
 							foreach($_POST as $postId => $postValue) {
 								if(is_array($postValue)) {
 									foreach($postValue as $subPostId => $subPostValue) {
@@ -1850,7 +1850,7 @@ class layout extends common {
 			if($childrenPageIds) {
 				$items .= template::ico('down', 'left');
 			}
-				$items .= '</a>';
+			$items .= '</a>';
 		
 		
 			
@@ -1901,12 +1901,13 @@ class layout extends common {
 						}
 						break;				
 				}
-
+				$items .=  '</a></li>';
 				// Menu Image
-				
+
 			}
 			$items .= '</ul>';
 			$items .= '</li>';
+
 		}
 		// Lien de connexion
 		if(
