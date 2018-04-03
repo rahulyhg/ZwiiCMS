@@ -1,3 +1,5 @@
+
+
 /**
  * This file is part of Zwii.
  *
@@ -8,7 +10,23 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
- */
+ *
+ * 
+ **/
 
-self.location='<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>';
-
+if (document.referrer.indexOf("edit") === -1)
+{
+	core.confirm(
+		"Souhaitez-vous accéder à l'interface de modification de la page ? En cas de refus, vous serez redirigé vers l'URL saisie dans le module de redirection.",
+		function() {
+			$(location).attr("href", "<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>");
+		},
+		function() {
+			$(location).attr("href", "<?php echo helper::baseUrl() . $this->getUrl(); ?>/force");
+		}
+	);
+}
+else
+{
+	$(location).attr("href", "<?php echo helper::baseUrl(); ?>");
+}
