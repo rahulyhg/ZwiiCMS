@@ -297,7 +297,7 @@ class blog extends common {
 					// Crée le commentaire
 					$commentId = helper::increment(uniqid(), $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']));
 					$this->setData(['module', $this->getUrl(0), $this->getUrl(1), 'comment', $commentId, [
-						'author' => $this->getInput('blogArticleAuthor', helper::FILTER_STRING_SHORT, false),
+						'author' => $this->getInput('blogArticleAuthor', helper::FILTER_STRING_SHORT, empty($this->getInput('blogArticleUserId')) ? TRUE : FALSE),
 						'content' => $this->getInput('blogArticleContent', helper::FILTER_STRING_SHORT, true),
 						'createdOn' => time(),
 						'userId' => $this->getInput('blogArticleUserId'),
