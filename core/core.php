@@ -1917,7 +1917,7 @@ class layout extends common {
 			)
 			OR $this->getUrl(0) === 'theme'
 		) {
-			$items .= '<li id="menuLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '><a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '">Connexion</a>';
+			$items .= '<li id="menuLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '><a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '">Connexion</a></li>';
 		}
 		// Retourne les items du menu
 		echo '<ul>' . $items . '</ul>';
