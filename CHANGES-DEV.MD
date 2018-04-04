@@ -1,4 +1,5 @@
 ChangeLog version améliorée :
+- 0.9.5 Corrige une erreur deans le filemanger si une seule extension demandée
 - 0.9.4 Corrige les droits sur la rédaction des commentaires
 - 0.9.3 Corrige un bug présent depuis au moins la version 8.1 et qui fait boucler l'édition d'une page avec un module de redirection; Après édition, un clic sur retour ou enregistrer renvoie vers la  page d'accueil en édition.
 - 0.9.2 Erreur de balises dans le menu
