@@ -85,11 +85,11 @@
 					</div>
 				</div>
 				<div id="themeMenuPositionOptions" class="displayNone">
-					<?php echo template::checkbox('themeMenuMargin', true, 'Aligner le menu avec le contenu', [
-						'checked' => $this->getData(['theme', 'menu', 'margin'])
-					]); ?>
+							<?php echo template::checkbox('themeMenuMargin', true, 'Aligner le menu avec le contenu', [
+								'checked' => $this->getData(['theme', 'menu', 'margin'])
+							]); ?>
 				</div>
-			</div>
+			</div>			
 		</div>
 	</div>
 	<div class="row">

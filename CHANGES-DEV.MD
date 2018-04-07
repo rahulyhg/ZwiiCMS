@@ -1,4 +1,6 @@
 ChangeLog version bêta 8.3 :
+- 0.9.7 Permet au menu de sortir de la largeur du site quand il est au-dessus de la bannière
+- 0.9.6 Corrige l'affichage d'une erreur 404 si le contenu d'une page est supprimé
 - 0.9.5 Corrige une erreur deans le filemanger si une seule extension demandée
 - 0.9.4 Corrige les droits sur la rédaction des commentaires
 - 0.9.3 Corrige un bug présent depuis au moins la version 8.1 et qui fait boucler l'édition d'une page avec un module de redirection; Après édition, un clic sur retour ou enregistrer renvoie vers la  page d'accueil en édition.

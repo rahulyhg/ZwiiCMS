@@ -127,8 +127,10 @@ class theme extends common {
 		'hide' => 'Caché',
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
+		'body-top' => 'Au-dessus et en-dehors du site',		
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière'
+
 	];
 	public static $radius = [
 		'0' => 'Aucun',
@@ -172,6 +174,11 @@ class theme extends common {
 		'960px' => 'Moyenne (960 pixels)',
 		'1170px' => 'Grande (1170 pixels)',
 		'100%' => 'Fluide (100%)'
+	];
+
+	public static $menuWide = [
+		'container' => 'sur la largeur du site',
+		'container-large' => 'sur la largeur de la page'
 	];
 
 	/**
@@ -334,7 +341,7 @@ class theme extends common {
 				'position' => $this->getInput('themeMenuPosition'),
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
-				'textTransform' => $this->getInput('themeMenuTextTransform')
+				'textTransform' => $this->getInput('themeMenuTextTransform'),
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

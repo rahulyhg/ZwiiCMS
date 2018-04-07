@@ -87,7 +87,7 @@ $("#themeMenuLoginLink").on("change", function() {
 // Affiche / Cache les options de la position
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'site-first' || $(this).val() === 'site-second') {
-		$("#themeMenuPositionOptions").slideDown();
+		$("#themeMenuPositionOptions").slideDown();	
 	}
 	else {
 		$("#themeMenuPositionOptions").slideUp(function() {

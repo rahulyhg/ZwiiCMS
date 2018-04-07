@@ -209,6 +209,10 @@ td > .col12 {
 	margin: auto;
 }
 
+.container-large {
+	width: 100%;
+}
+
 /* Barre de membre */
 #bar {
 	background: #212223;

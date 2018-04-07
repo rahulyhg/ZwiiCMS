@@ -16,11 +16,14 @@
 <?php $layout->showStyle(); ?>
 <?php $layout->showBar(); ?>
 <?php $layout->showNotification(); ?>
-<?php if($this->getData(['theme', 'menu', 'position']) === 'body-first'): ?>
+<?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'body-top' ): ?>
 	<!-- Menu dans le fond du site avant la bannière -->
 	<nav>
 		<div id="toggle"><?php echo template::ico('menu'); ?></div>
-		<div id="menu" class="container">
+		<div id="menu" class="
+		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-top'){echo 'container-large';}else{echo'container';}
+		?>">
+
 			<?php $layout->showMenu(); ?>
 		</div>
 	</nav>

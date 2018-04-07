@@ -178,7 +178,7 @@ class page extends common {
 						'iconUrl' => $this->getinput('pageIconUrl'),
 						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 
 						// Menu image						
-						'content' => $this->getInput('pageEditContent', null),
+						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'metaDescription' => $this->getInput('pageEditMetaDescription', helper::FILTER_STRING_LONG),
 						'metaTitle' => $this->getInput('pageEditMetaTitle'),
