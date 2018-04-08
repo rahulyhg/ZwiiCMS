@@ -234,10 +234,17 @@ if (!isset($_GET['type'])){
 
 $extensions=null;
 if (isset($_GET['extensions'])){
-	$extensions = explode(',', urldecode($_GET['extensions']));
+	$extensions = json_decode(urldecode($_GET['extensions']));
+	$ext_tmp = array();
+	foreach($extensions as $extension){
+		$extension = fix_strtolower($extension);
+		if(in_array( $extension, $config['ext'])){
+			$ext_tmp[]=$extension;
+		}
+	}
 	if($extensions){
-		$ext = $extensions;
-		$show_filter_buttons = false;
+		$ext = $ext_tmp;
+		$config['show_filter_buttons'] = false;
 	}
 }
 
