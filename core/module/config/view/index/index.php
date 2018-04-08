@@ -32,7 +32,7 @@
 			<div class="block">
 				<h4>Options avancées</h4>
 				<?php echo template::file('configFavicon', [
-					//'extensions' => 'ico',
+					'type' => 1,
 					'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
 					'label' => 'Favicon',
 					'value' => $this->getData(['config', 'favicon'])
