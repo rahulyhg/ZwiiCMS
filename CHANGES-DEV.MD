@@ -1,4 +1,5 @@
 ChangeLog version bêta 8.3 :
+- 0.9.8 Améliore la correction du bug RFM
 - 0.9.7 Permet au menu de sortir de la largeur du site quand il est au-dessus de la bannière
 - 0.9.6 Corrige l'affichage d'une erreur 404 si le contenu d'une page est supprimé
 - 0.9.5 Corrige une erreur deans le filemanger si une seule extension demandée
