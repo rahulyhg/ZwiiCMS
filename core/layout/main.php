@@ -94,30 +94,20 @@
 		if ($this->getData(['theme','header','linkHome'])){
 		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
 		<!-- menu image -->
-
-
 		<header <?php if($this->getData(['theme', 'header', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<?php if(
 				$this->getData(['theme', 'header', 'textHide']) === false
 				// Affiche toujours le titre de la bannière pour l'édition du thème
 				OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 			): ?>
-			<!-- menu image -->
-			<?php	
-			if ($this->getData(['theme','header','linkHome'])){
-			echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-				<div class="container">
-					<span><?php echo $this->getData(['config', 'title']); ?></span>
-				</div>
-			<?php
-			if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
-			?>
+			<div class="container">
+				<span><?php echo $this->getData(['config', 'title']); ?></span>
+			</div>
 			<?php endif; ?>
-			<!-- menu image -->
-
 		</header>
-		
-	<?php endif; ?>
+		<?php
+		if ($this->getData(['theme','header','linkHome'])){echo "</a>";}	?>
+		<?php endif; ?>
 	<?php if(
 		$this->getData(['theme', 'menu', 'position']) === 'site-second'
 		// Affiche toujours le menu pour l'édition du thème
