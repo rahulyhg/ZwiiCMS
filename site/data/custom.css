@@ -3,6 +3,7 @@
  * ou supprimer des propriétés CSS en fonction de vos besoins.
  */
 
+
 /**
  * Éléments principaux
  */
@@ -123,4 +124,11 @@ input[type='password']:hover,
 .inputFile:hover,
 select:hover,
 textarea:hover {
+}
+
+/* iframe du module Inclusion*/
+iframe {
+  width:100%;
+  height:1000px;
+  border:none;
 }

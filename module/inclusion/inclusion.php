@@ -12,7 +12,7 @@
  * @link http://zwiicms.com/
  */
 
-class redirection extends common {
+class inclusion extends common {
 
 	public static $actions = [
 		'config' => self::GROUP_MODERATOR,
@@ -25,7 +25,7 @@ class redirection extends common {
 	public function config() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			$this->setData(['module', $this->getUrl(0), 'url', $this->getInput('redirectionConfigUrl', helper::FILTER_URL, true)]);
+			$this->setData(['module', $this->getUrl(0), 'url', $this->getInput('inclusionConfigUrl', helper::FILTER_URL, true)]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),
@@ -57,13 +57,13 @@ class redirection extends common {
 				'view' => 'index'
 			]);
 		}
-		// Sinon redirection
+		// Sinon inclusion
 		else {
 			// Incrémente le compteur de clics
 			$this->setData(['module', $this->getUrl(0), 'count', helper::filter($this->getData(['module', $this->getUrl(0), 'count']) + 1, helper::FILTER_INT)]);
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => $this->getData(['module', $this->getUrl(0), 'url']),
+				'content' => '<iframe src="' . helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), 'url']) . '"></iframe>' ,
 				'state' => true
 			]);
 		}
