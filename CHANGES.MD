@@ -1,4 +1,4 @@
-# ChangeLog 
+﻿# ChangeLog 
 
 ## version 8.3.11 :
 * Modifications : 
@@ -13,6 +13,7 @@
     - affichage d'une erreur 404 si le contenu d'une page est supprimé
     - erreur deans le filemanger si une seule extension demandée
     - corrige les droits sur la rédaction des commentaires
+    - nouvelles icones de menu
 ## 8.2.9
 * Correction :  filemanger : erreur dans la navigation du filemanager dans la sélection de la favicon
 * Modifi :      on peut effacer le contenu d'une page sans provoquer d'erreur 404 
