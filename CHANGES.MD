@@ -1,5 +1,10 @@
 ﻿# ChangeLog 
 
+## version 8.3.12 :
+* Modification : 
+    - bouton de retour dans la page d'un article de blog
+* Correction :
+    - miniatures des exemples 
 ## version 8.3.11 :
 * Modifications : 
     - Thème : menu et sous menu sous forme de texte ou d'image (avec ou sans bulle)
