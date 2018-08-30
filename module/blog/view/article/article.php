@@ -91,4 +91,18 @@
 		<?php endforeach; ?>
 	</div>
 </div>
+<div class="row">
+	<div class="col5">
+	</div>
+	<div class="col2">
+		<?php echo template::button('blogBack', [
+					'class' => 'buttonGrey',
+					'href' => helper::baseUrl() . $this->getUrl(0),
+					'ico' => 'left',
+					'value' => 'Retour'
+		]); ?>
+	</div>
+	<div class="col5">
+	</div>
+</div>
 <?php echo $module::$pages; ?>
