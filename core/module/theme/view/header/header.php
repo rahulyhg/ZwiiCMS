@@ -57,9 +57,19 @@
 							]); ?>
 						</div>
 					</div>
-					<?php echo template::checkbox('themeHeaderTextHide', true, 'Cacher le titre du site', [
-						'checked' => $this->getData(['theme', 'header', 'textHide'])
-					]); ?>
+					<div class="row">
+						<div class="col6">
+							<?php echo template::checkbox('themeHeaderTextHide', true, 'Cacher le titre du site', [
+								'checked' => $this->getData(['theme', 'header', 'textHide'])
+							]); ?>
+						</div>
+						<div class="col6">
+							<?php echo template::select('themeHeaderImageContainer', $module::$headerWide, [
+								'label' => 'Adaptation',
+								'selected' => $this->getData(['theme', 'header', 'imageContainer'])
+							]); ?>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

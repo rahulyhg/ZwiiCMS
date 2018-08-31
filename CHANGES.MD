@@ -1,5 +1,10 @@
 ﻿# ChangeLog 
 
+Préversion 8.3.13 :
+* Modifications : 
+    - Bannière responsive
+    - Options de position des menus selon la position de la bannière
+
 ## version 8.3.12 :
 * Modification : 
     - bouton de retour dans la page d'un article de blog

@@ -286,6 +286,9 @@ body > header {
 }
 header {
 	position: relative;
+	margin:0;
+	padding:0;
+
 }
 header span {
 	display: inline-block;
