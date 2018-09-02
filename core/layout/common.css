@@ -77,7 +77,7 @@ ol {
 /* Image */
 img {
 	max-width: 100%;
-	height: auto;
+	/* height: auto; */
 }
 img[align='left'] {
 	margin-right: 10px;

@@ -188,8 +188,11 @@ class theme extends common {
 
 	public static $headerWide = [
 		'auto' => 'Automatique',
-		'cover' => 'Recouvrir',
-		'contain' => 'Dimensionner'
+		'initial' => 'Taille initiale',
+		'contain' => 'Image entière',		
+		'cover' => 'Largeur adaptée au fond',
+		'100% 100%' => 'Taille adaptée au fond'
+
 	];
 
 	/**

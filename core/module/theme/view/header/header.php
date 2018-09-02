@@ -65,7 +65,7 @@
 						</div>
 						<div class="col6">
 							<?php echo template::select('themeHeaderImageContainer', $module::$headerWide, [
-								'label' => 'Adaptation',
+								'label' => 'Taille',
 								'selected' => $this->getData(['theme', 'header', 'imageContainer'])
 							]); ?>
 						</div>
