@@ -11,3 +11,11 @@
 #blogArticleOr {
 	padding: 10px;
 }
+/* Modif CroqueWeb */
+@media (max-width: 767px) {
+	#blogArticlePicture {
+	height:150px;
+	max-width: 100%;}
+  }
+/* fin modif croqueweb */
+

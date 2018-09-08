@@ -1,14 +1,12 @@
 ﻿# ChangeLog 
 
-Préversion 8.3.13b :
-* Modification :
-    - Option Adpatation de la bannière dans le thème
 
 Préversion 8.3.13 :
 * Modifications : 
-    - Bannière responsive
+    - Bannière "responsive", nouvelles options
     - Options de position des menus selon la position de la bannière
-    - Mise à jout TinyMCE
+    - Bouton Edition dans un article du blog
+    - Mise à jour TinyMCE    
 
 ## version 8.3.12 :
 * Modification : 
