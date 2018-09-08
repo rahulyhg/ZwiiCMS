@@ -4,6 +4,7 @@
 Préversion 8.3.13 :
 * Modifications : 
     - Bannière "responsive", nouvelles options
+    - Bouton Edit dans Blog
     - Options de position des menus selon la position de la bannière
     - Bouton Edition dans un article du blog
     - Mise à jour TinyMCE    

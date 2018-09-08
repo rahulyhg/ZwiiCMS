@@ -107,7 +107,7 @@
  		<?php echo template::button('blogEdit', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . '/blog/edit/' . $this->getUrl(1),
-					'value' => 'Edition'
+					'value' => 'Editer'
 		]); ?>
     </div>
     <div class="col4">
