@@ -7,6 +7,7 @@ Options -Indexes
 # Attention, surtout ne rien modifier ci-dessous !
 <<<<<<< HEAD
 # URL rewriting
+<<<<<<< HEAD
 <ifModule mod_rewrite.c>
 	RewriteEngine on
 	RewriteBase /ZwiiCMS-dev/
@@ -17,3 +18,5 @@ Options -Indexes
 =======
 # URL rewriting
 >>>>>>> 8.3.13
+=======
+>>>>>>> 01bb746d85945fc264fe7ce1db51c8716ab97b49
