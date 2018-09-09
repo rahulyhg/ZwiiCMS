@@ -91,9 +91,30 @@
 		<?php endforeach; ?>
 	</div>
 </div>
+<?php  if($this->getUser('group') >= self::GROUP_ADMIN): ?>
 <div class="row">
-	<div class="col5">
+	<div class="col4">
 	</div>
+    <div class="col2">
+		<?php echo template::button('blogBack', [
+					'class' => 'buttonGrey',
+					'href' => helper::baseUrl() . $this->getUrl(0),
+					'ico' => 'left',
+					'value' => 'Retour'
+		]); ?>
+    </div>
+    <div class="col2">
+ 		<?php echo template::button('blogEdit', [
+					'class' => 'buttonGrey',
+					'href' => helper::baseUrl() . '/blog/edit/' . $this->getUrl(1),
+					'value' => 'Editer'
+		]); ?>
+    </div>
+    <div class="col4">
+	</div>
+</div>
+<?php else: ?>
+<div class="row">
 	<div class="col2">
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
@@ -102,7 +123,8 @@
 					'value' => 'Retour'
 		]); ?>
 	</div>
-	<div class="col5">
+	<div class="col10">
 	</div>
 </div>
+<?php endif; ?>
 <?php echo $module::$pages; ?>

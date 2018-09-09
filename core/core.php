@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.3.12';
+	const ZWII_VERSION = '8.3.13';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -325,9 +325,8 @@ class common {
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'textHide' => false,
 				'textTransform' => 'none',
-				// Menu Image
-				'linkHome' => 'false'
-				// Menu Image
+				'linkHome' => 'false',
+				'imageContainer' => 'auto'
 			],
 			'link' => [
 				'textColor' => 'rgba(74, 105, 189, 1)'
@@ -862,6 +861,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 826]);			
 			$this->SaveData();
 		}
+		// Version 8.3.13
+		if($this->getData(['core', 'dataVersion']) < 8313) {
+			$this->setData(['theme','header','imageContainer','auto']);
+			$this->setData(['core', 'dataVersion', 8313]);
+			$this->SaveData();
+
+		}
 	}
 
 }
@@ -970,7 +976,11 @@ class core extends common {
 					$css .= 'header{margin:20px 20px 0 20px}';
 				}
 			}
+			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
 			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
+			// Modif CrowueWeb pour la bannière
+			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
+			// Fin modif Croque Web
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}

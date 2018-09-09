@@ -16,9 +16,13 @@
 $("input, select").on("change", function() {
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
+
 	var css = "@import url('https://fonts.googleapis.com/css?family=" + headerFont + "');";
+	// Adaptation aux média
+	css += "@media (max-width: 767px) {header{height:" + $("#themeHeaderHeight").val() + "/2;line-height:" + $("#themeHeaderHeight").val() + "/2;}}";
 	// Couleurs, image, alignement et hauteur de la bannière
 	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";height:" + $("#themeHeaderHeight").val() + ";line-height:" + $("#themeHeaderHeight").val() + "}";
+		
 	var themeHeaderImage = $("#themeHeaderImage").val();
 	if(themeHeaderImage) {
 		css += "header{background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + "}";
@@ -26,6 +30,8 @@ $("input, select").on("change", function() {
 	else {
 		css += "header{background-image:none}";
 	}
+	// Adaptation de la bannière
+	css += "header{background-size:" + $("#themeHeaderImageContainer").val() + "}";
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
 	// Cache le titre de la bannière

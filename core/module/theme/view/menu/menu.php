@@ -66,10 +66,18 @@
 				<h4>Configuration</h4>
 				<div class="row">
 					<div class="col4">
-						<?php echo template::select('themeMenuPosition', $module::$menuPositions, [
+					<?php 
+					if ( $this->getData(['theme', 'header', 'position']) == "site")
+					{	echo template::select('themeMenuPosition', $module::$menuPositionsSite, [
 							'label' => 'Position',
 							'selected' => $this->getData(['theme', 'menu', 'position'])
-						]); ?>
+						]);
+					}else{
+					echo template::select('themeMenuPosition', $module::$menuPositionsBody, [
+						'label' => 'Position',
+						'selected' => $this->getData(['theme', 'menu', 'position'])
+					]);	}
+					?>	
 					</div>
 					<div class="col4">
 						<?php echo template::select('themeMenuHeight', $module::$menuHeights, [

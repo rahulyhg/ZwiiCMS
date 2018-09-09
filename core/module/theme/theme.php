@@ -123,15 +123,20 @@ class theme extends common {
 		'20px 15px' => 'Grande',
 		'25px 15px' => 'Très grande'
 	];
-	public static $menuPositions = [
-		'hide' => 'Caché',
+	public static $menuPositionsSite = [		
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
-		'body-top' => 'Au-dessus et en-dehors du site',		
-		'body-first' => 'Au dessus du site avant la bannière',
-		'body-second' => 'Au dessus du site après la bannière'
+		'body-top' => 'Au-dessus et en-dehors du site',	
+		'hide' => 'Caché'
 
 	];
+	public static $menuPositionsBody = [
+		'body-first' => 'Au dessus du site avant la bannière',
+		'body-second' => 'Au dessus du site après la bannière',
+		'body-top' => 'Au-dessus et en-dehors du site',		
+		'hide' => 'Caché'
+
+	];	
 	public static $radius = [
 		'0' => 'Aucun',
 		'5px' => 'Très léger',
@@ -179,6 +184,14 @@ class theme extends common {
 	public static $menuWide = [
 		'container' => 'sur la largeur du site',
 		'container-large' => 'sur la largeur de la page'
+	];
+
+	public static $headerWide = [
+		'auto' => 'Automatique',
+		'contain' => 'Image entière',		
+		'cover' => 'Largeur adaptée au fond',
+		'100% 100%' => 'Taille adaptée au fond'
+
 	];
 
 	/**
@@ -292,11 +305,11 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
-				'textTransform' => $this->getInput('themeHeaderTextTransform'),
-				// Menu Image
-				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN)
-				// Menu Image
+				'textTransform' => $this->getInput('themeHeaderTextTransform'),				
+				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
+				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
+
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',

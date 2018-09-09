@@ -1,5 +1,13 @@
 ﻿# ChangeLog 
 
+
+Préversion 8.3.13 :
+* Modifications : 
+    - Bannière "responsive", nouvelles options de positionnement
+    - Bouton Edit dans Blog
+    - Options de position des menus selon la position de la bannière
+    - Mise à jour TinyMCE    
+
 ## version 8.3.12 :
 * Modification : 
     - bouton de retour dans la page d'un article de blog
