@@ -1,7 +1,7 @@
 ﻿# ChangeLog 
 
 
-Préversion 8.3.13 :
+## Préversion 8.3.13 :
 * Modifications : 
     - Bannière "responsive", nouvelles options de positionnement
     - Bouton Edit dans Blog
