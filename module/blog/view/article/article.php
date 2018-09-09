@@ -106,11 +106,12 @@
     <div class="col2">
  		<?php echo template::button('blogEdit', [
 					'class' => 'buttonGrey',
-					'href' => helper::baseUrl() . 'blog/edit/' . $this->getUrl(1),
+					'href' => helper::baseUrl() . $this->getUrl(0). '/edit/' . $this->getUrl(1),
 					'value' => 'Editer'
 		]); ?>
     </div>
     <div class="col4">
+	
 	</div>
 </div>
 <?php else: ?>
@@ -121,7 +122,7 @@
 					'href' => helper::baseUrl() . $this->getUrl(0),
 					'ico' => 'left',
 					'value' => 'Retour'
-		]); ?>
+		]); ?>		
 	</div>
 	<div class="col10">
 	</div>
