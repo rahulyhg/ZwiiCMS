@@ -5,18 +5,3 @@ SetEnv SESSION_USE_TRANS_SID 0
 Options -Indexes
 
 # Attention, surtout ne rien modifier ci-dessous !
-<<<<<<< HEAD
-# URL rewriting
-<<<<<<< HEAD
-<ifModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteBase /ZwiiCMS-dev/
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^(.*)$ index.php?$1 [L]
-</ifModule>
-=======
-# URL rewriting
->>>>>>> 8.3.13
-=======
->>>>>>> 01bb746d85945fc264fe7ce1db51c8716ab97b49
