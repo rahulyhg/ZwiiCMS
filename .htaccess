@@ -13,10 +13,3 @@ Options -Indexes
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ index.php?$1 [L]
 </ifModule>
-<ifModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteBase /ZwiiCMS-dev/
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^(.*)$ index.php?$1 [L]
-</ifModule>
