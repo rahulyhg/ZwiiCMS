@@ -62,6 +62,12 @@ class theme extends common {
 		'Ubuntu' => 'Ubuntu',
 		'Vollkorn' => 'Vollkorn'
 	];
+	public static $footerblocks = [
+		'0' => 'Masqué',
+		'1' => 'Bloc Gauche',
+		'2' => 'Bloc Central',
+		'3' => 'Bloc Droite'
+	];
 	public static $fontWeights = [
 		'normal' => 'Normal',
 		'bold' => 'Gras'
@@ -266,7 +272,10 @@ class theme extends common {
 				'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
 				'text' => $this->getInput('themeFooterText', null),
 				'textAlign' => $this->getInput('themeFooterTextAlign'),
-				'textColor' => $this->getInput('themeFooterTextColor')
+				'textColor' => $this->getInput('themeFooterTextColor'),
+				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
+				'textPosition' => $this->getInput('themeFooterTextPosition'),
+				'socialsPosition' => $this->getInput('themeFooterSocialsPosition')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

@@ -398,7 +398,13 @@ footer {
 	text-align: center;
 	font-size: .8em;
 	padding: 10px 20px;
+vertical-align:middle;
 }
+
+footer .col4 {
+	vertical-align: middle
+}
+
 footer #footerSocials {
 	font-size: 1.6em;
 }

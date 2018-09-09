@@ -308,7 +308,10 @@ class common {
 				'socialsAlign' => 'center',
 				'text' => '',
 				'textAlign' => 'center',
-				'textColor' => 'rgba(33, 34, 35, 1)'
+				'textColor' => 'rgba(33, 34, 35, 1)',
+				'copyrightPosition' => '3',
+				'textPosition' => '2',
+				'socialsPosition' => '1'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -868,6 +871,16 @@ class common {
 			$this->SaveData();
 
 		}
+		// Version 8.3.14
+		if($this->getData(['core', 'dataVersion']) < 8314) {
+			$this->setData(['theme','footer','socialsPosition','1']);
+			$this->setData(['theme','footer','textPosition','2']);			
+			$this->setData(['theme','footer','copyrightPosition','3']);			
+			$this->setData(['core', 'dataVersion', 8314]);
+			$this->SaveData();
+
+		}
+		
 	}
 
 }
