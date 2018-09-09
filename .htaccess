@@ -1,4 +1,4 @@
-# Cache le PHPSESSID de l'url
+﻿# Cache le PHPSESSID de l'url
 SetEnv SESSION_USE_TRANS_SID 0
 
 # Bloque l'accès à la liste des fichiers
@@ -6,10 +6,3 @@ Options -Indexes
 
 # Attention, surtout ne rien modifier ci-dessous !
 # URL rewriting
-<ifModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteBase /ZwiiCMS-dev/
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^(.*)$ index.php?$1 [L]
-</ifModule>
