@@ -429,6 +429,7 @@ class common {
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $timezone;
+
 	private $url = '';
 	private $user = [];
 

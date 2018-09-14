@@ -305,6 +305,11 @@ header .container {
 body > nav {
 	margin: 0 -10px;
 }
+/* Items du menu */
+nav a > img {
+	margin: -4px 0;
+	vertical-align: middle;
+  }
 nav #toggle {
 	cursor: pointer;
 	text-align: right;
