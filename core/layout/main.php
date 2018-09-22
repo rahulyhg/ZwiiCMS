@@ -135,36 +135,38 @@
 		)
 	): ?>
 		<!-- Pied de page dans le site -->
+		
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div class="container">
 				<div class="row">
-					<div class="col4"> <!-- bloc gauche -->
+
+					<div class="col4" id="left"> <!-- bloc gauche -->
 					<?php 
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === '1') {
+						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {
 							$layout->showSocials(); }
-						if($this->getData(['theme', 'footer', 'textPosition']) === '1') {
+						if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 							$layout->showFooterText(); }
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === '1') {
+						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'left') {
 							$layout->showCopyright(); }
 					?>
 					</div>
-					<div class="col4"> <!-- bloc central -->
+					<div class="col4" id="center"> <!-- bloc central -->
 					<?php								
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === '2') {
+						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'center') {
 							$layout->showSocials(); }
-						if($this->getData(['theme', 'footer', 'textPosition']) === '2') {
+						if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 							$layout->showFooterText(); }
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === '2') {
+						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'center') {
 							$layout->showCopyright(); }			
 					?>
 					</div>
-					<div class="col4"> <!-- bloc droite -->
+					<div class="col4" id="right"> <!-- bloc droite -->
 					<?php					
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === '3') {
+						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'right') {
 							$layout->showSocials(); }
-						if($this->getData(['theme', 'footer', 'textPosition']) === '3') {
+						if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 							$layout->showFooterText(); }
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === '3') {
+						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'right') {
 							$layout->showCopyright(); }			
 					?>			
 					</div>			
@@ -176,40 +178,40 @@
 <?php if($this->getData(['theme', 'footer', 'position']) === 'body'): ?>
 	<!-- Pied de page dans le fond du site -->
 	<footer>
-		<!--<div class="container">-->
+		<div class="container-large">
 			<div class="row">
-				<div class="col4"> <!-- bloc gauche -->
+				<div class="col4" id="left"> <!-- bloc gauche -->
 				<?php 
-				    if($this->getData(['theme', 'footer', 'socialsPosition']) === '1') {
+				    if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {
 						$layout->showSocials(); }
-					if($this->getData(['theme', 'footer', 'textPosition']) === '1') {
+					if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 						$layout->showFooterText(); }
-					if($this->getData(['theme', 'footer', 'copyrightPosition']) === '1') {
+					if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'left') {
 						$layout->showCopyright(); }
 				?>
 				</div>
-				<div class="col4"> <!-- bloc central -->
+				<div class="col4" id="center"> <!-- bloc central -->
 				<?php								
-					if($this->getData(['theme', 'footer', 'socialsPosition']) === '2') {
+					if($this->getData(['theme', 'footer', 'socialsPosition']) === 'center') {
 						$layout->showSocials(); }
-					if($this->getData(['theme', 'footer', 'textPosition']) === '2') {
+					if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 						$layout->showFooterText(); }
-					if($this->getData(['theme', 'footer', 'copyrightPosition']) === '2') {
+					if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'center') {
 						$layout->showCopyright(); }			
 				?>
 				</div>
-				<div class="col4"> <!-- bloc droite -->
+				<div class="col4" id="right"> <!-- bloc droite -->
 				<?php					
-					if($this->getData(['theme', 'footer', 'socialsPosition']) === '3') {
+					if($this->getData(['theme', 'footer', 'socialsPosition']) === 'right') {
 						$layout->showSocials(); }
-					if($this->getData(['theme', 'footer', 'textPosition']) === '3') {
+					if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 						$layout->showFooterText(); }
-					if($this->getData(['theme', 'footer', 'copyrightPosition']) === '3') {
+					if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'right') {
 						$layout->showCopyright(); }			
 				?>			
 				</div>			
 			</div>
-		<!-- </div> -->
+		</div>
 	</footer>
 <?php endif; ?>
 <!-- Lien remonter en haut -->

@@ -63,10 +63,10 @@ class theme extends common {
 		'Vollkorn' => 'Vollkorn'
 	];
 	public static $footerblocks = [
-		'0' => 'Masqué',
-		'1' => 'Bloc Gauche',
-		'2' => 'Bloc Central',
-		'3' => 'Bloc Droite'
+		'hide' => 'Masqué',
+		'left' => 'Bloc Gauche',
+		'center' => 'Bloc Central',
+		'right' => 'Bloc Droite'
 	];
 	public static $fontWeights = [
 		'normal' => 'Normal',
