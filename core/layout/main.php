@@ -139,7 +139,6 @@
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div class="container">
 				<div class="row">
-
 					<div class="col4" id="left"> <!-- bloc gauche -->
 					<?php 
 						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {
