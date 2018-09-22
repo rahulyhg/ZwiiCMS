@@ -1845,14 +1845,14 @@ class layout extends common {
 				    break;				    
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img  alt="'.$this->getData(['page', $parentPageId, 'title']).'"  src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				    $items .= '<img  alt="'.$this->getData(['page', $parentPageId, 'title']).'"  src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
 				    $items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
@@ -1860,7 +1860,7 @@ class layout extends common {
 					break;
 				case 'icontext' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img  alt="'.$this->getData(['page', $parentPageId, 'title']).'"  src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
