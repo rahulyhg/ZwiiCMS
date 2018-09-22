@@ -59,66 +59,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Emplacement du contenu</h4>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
-							'label' => 'Réseaux sociaux',
-							'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
-							'label' => 'Texte personnalisé',
-							'selected' => $this->getData(['theme', 'footer', 'textPosition'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
-							'label' => 'Copyright',
-							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
-						]); ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Alignement du contenu</h4>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
-							'label' => 'Réseaux sociaux',
-							'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
-							'label' => 'Texte personnalisé',
-							'selected' => $this->getData(['theme', 'footer', 'textAlign'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
-							'label' => 'Copyright',
-							'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
-						]); ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col12">
 			<div class="block">
 				<h4>Contenu personnalisé</h4>
 				<?php echo template::textarea('themeFooterText', [
-					'label' => 'Texte du pied de page',
+					'label' => 'Contenu (texte ou HTML)',
 					'value' => $this->getData(['theme', 'footer', 'text'])
 				]); ?>
 				<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
@@ -127,5 +74,48 @@
 				]); ?>
 			</div>
 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col4">
+			<div class="block">
+				<h4>Réseaux sociaux</h4>
+					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
+						'label' => 'Emplacement',
+						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
+					]); ?>
+					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
+						'label' => 'Alignement',
+						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
+					]); ?>
+			</div>
+		</div>
+		<div class="col4">
+			<div class="block">
+				<h4>Contenu personnalisé</h4>
+					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
+						'label' => 'Emplacement',
+						'selected' => $this->getData(['theme', 'footer', 'textPosition'])
+					]); ?>
+					<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
+						'label' => 'Alignement',
+						'selected' => $this->getData(['theme', 'footer', 'textAlign'])
+					]); ?>
+
+			</div>		
+		</div>
+		<div class="col4">
+			<div class="block">
+				<h4>Copyright</h4>
+					<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
+						'label' => 'Emplacement',
+						'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
+					]); ?>	
+					<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
+						'label' => 'Alignement',
+						'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
+					]); ?>								
+			</div>		
+		</div>				
 	</div>
 <?php echo template::formClose(); ?>
