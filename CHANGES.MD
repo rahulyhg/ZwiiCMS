@@ -1,7 +1,11 @@
 ﻿# ChangeLog 
 
 
-## Préversion 8.3.13 :
+## Préversion version 8.3.14
+* Modifications :
+	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
+
+## version 8.3.13 :
 * Modifications : 
     - Bannière "responsive", nouvelles options de positionnement
     - Bouton Edit dans Blog
