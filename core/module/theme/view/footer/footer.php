@@ -79,19 +79,6 @@
 	<div class="row">
 		<div class="col4">
 			<div class="block">
-				<h4>Réseaux sociaux</h4>
-					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
-					]); ?>
-					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
-						'label' => 'Alignement',
-						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
-					]); ?>
-			</div>
-		</div>
-		<div class="col4">
-			<div class="block">
 				<h4>Contenu personnalisé</h4>
 					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
 						'label' => 'Emplacement',
@@ -103,6 +90,19 @@
 					]); ?>
 
 			</div>		
+		</div>	
+		<div class="col4">
+			<div class="block">
+				<h4>Réseaux sociaux</h4>
+					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
+						'label' => 'Emplacement',
+						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
+					]); ?>
+					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
+						'label' => 'Alignement',
+						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
+					]); ?>
+			</div>
 		</div>
 		<div class="col4">
 			<div class="block">

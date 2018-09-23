@@ -10,6 +10,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
+ * @Edition  : 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
  */
 
 class theme extends common {
