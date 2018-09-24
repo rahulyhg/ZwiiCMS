@@ -407,11 +407,11 @@ footer {
 }
 
 footer .col4 {
-	vertical-align: middle
+	vertical-align: middle;
 }
 
 footer #footerSocials {
-	font-size: 1.6em;
+	font-size: 1.0em;
 }
 footer #footerSocials span {
 	color: #FFF;

@@ -22,6 +22,7 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
@@ -63,16 +64,16 @@ $("#themeFooterTextPosition").on("change",function() {
 				$("#footerText").hide();
 				break;
 			case 'left':
-				$("#footerText").show().appendTo("#bodyLeft");			
-				$("#footerText").show().appendTo("#siteLeft");
+				$("#footerText").show().prependTo("#bodyLeft");			
+				$("#footerText").show().prependTo("#siteLeft");
 				break;
 			case 'center':
-				$("#footerText").show().appendTo("#bodyCenter");
-				$("#footerText").show().appendTo("#siteCenter");
+				$("#footerText").show().prependTo("#bodyCenter");
+				$("#footerText").show().prependTo("#siteCenter");
 				break;
 			case 'right':
-				$("#footerText").show().appendTo("#bodyRight");
-				$("#footerText").show().appendTo("#siteRight");				
+				$("#footerText").show().prependTo("#bodyRight");
+				$("#footerText").show().prependTo("#siteRight");				
 				break;
 	}
 }).trigger("change");
