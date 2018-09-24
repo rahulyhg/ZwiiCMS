@@ -4,6 +4,8 @@
 ## Préversion version 8.3.14
 * Modifications :
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
+	- Balise ALT dans les images du menu
+	- Config RFM 
 
 ## version 8.3.13 :
 * Modifications : 
