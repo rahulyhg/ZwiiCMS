@@ -94,11 +94,7 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").show().appendTo("#siteRight");				
 				break;
 	}
-}).trigger("change");
-
-// Bloc Copyright
-$("#themeFooterCopyrightPosition").on("change",function() {
-	switch($("#themeFooterCopyrightPosition").val()) {
+		switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
 				break;		
@@ -116,6 +112,7 @@ $("#themeFooterCopyrightPosition").on("change",function() {
 				break;
 	}
 }).trigger("change");
+
 
 // Fin Position dans les blocs
 
