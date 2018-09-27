@@ -55,31 +55,28 @@ $("input, select").on("change", function() {
 	}
 });
 
-
 // Position dans les blocs FT
+
 // Bloc texte personnalisé
-$("#themeFooterTextPosition").on("change",function() {
+
+$("#themeFooterForm").on("change",function() {
 	switch($("#themeFooterTextPosition").val()) {
 			case 'hide':
 				$("#footerText").hide();
 				break;
 			case 'left':
-				$("#footerText").show().prependTo("#bodyLeft");			
-				$("#footerText").show().prependTo("#siteLeft");
+				$("#footerText").show().appendTo("#bodyLeft");			
+				$("#footerText").show().appendTo("#siteLeft");
 				break;
 			case 'center':
-				$("#footerText").show().prependTo("#bodyCenter");
-				$("#footerText").show().prependTo("#siteCenter");
+				$("#footerText").show().appendTo("#bodyCenter");
+				$("#footerText").show().appendTo("#siteCenter");
 				break;
 			case 'right':
-				$("#footerText").show().prependTo("#bodyRight");
-				$("#footerText").show().prependTo("#siteRight");				
+				$("#footerText").show().appendTo("#bodyRight");
+				$("#footerText").show().appendTo("#siteRight");				
 				break;
 	}
-}).trigger("change");
-
-// Bloc socials
-$("#themeFooterSocialsPosition").on("change",function() {
 	switch($("#themeFooterSocialsPosition").val()) {
 			case 'hide':
 				$("#footerSocials").hide();
