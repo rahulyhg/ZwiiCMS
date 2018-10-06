@@ -55,7 +55,8 @@ class common {
 				'youtubeId' => ''
 			],
 			'timezone' => 'Europe/Paris',
-			'title' => 'Zwii, votre site en quelques clics !'
+			'title' => 'Zwii, votre site en quelques clics !',
+			'ItemsperPage' => '10'
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -869,16 +870,15 @@ class common {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 8313]);
 			$this->SaveData();
-
 		}
 		// Version 8.3.14
 		if($this->getData(['core', 'dataVersion']) < 8314) {
 			$this->setData(['theme','footer','socialsPosition','1']);
 			$this->setData(['theme','footer','textPosition','2']);			
 			$this->setData(['theme','footer','copyrightPosition','3']);			
+			$this->setData(['config','ItemsperPage','10']);
 			$this->setData(['core', 'dataVersion', 8314]);
 			$this->SaveData();
-
 		}
 		
 	}
@@ -1619,9 +1619,10 @@ class helper {
 	 * @param array $array Tableau de donnée à utiliser
 	 * @param string $url URL à utiliser, la dernière partie doit correspondre au numéro de page, par défaut utiliser $this->getUrl()
 	 * @param null|int $sufix Suffixe de l'url
+	 * @param $item pagination nombre d'éléments par page
 	 * @return array
 	 */
-	public static function pagination($array, $url, $sufix = null) {
+	public static function pagination($array, $url, $item, $sufix = null) {
 		// Scinde l'url
 		$url = explode('/', $url);
 		// Url de pagination
@@ -1631,13 +1632,13 @@ class helper {
 		// Nombre d'éléments à afficher
 		$nbElements = count($array);
 		// Nombre de page
-		$nbPage = ceil($nbElements / 10);
+		$nbPage = ceil($nbElements / $item);
 		// Page courante
 		$currentPage = is_numeric($urlPagination) ? self::filter($urlPagination, self::FILTER_INT) : 1;
 		// Premier élément de la page
-		$firstElement = ($currentPage - 1) * 10;
+		$firstElement = ($currentPage - 1) * $item;
 		// Dernier élément de la page
-		$lastElement = $firstElement + 10;
+		$lastElement = $firstElement + $item;
 		$lastElement = ($lastElement > $nbElements) ? $nbElements : $lastElement;
 		// Mise en forme de la liste des pages
 		$pages = '';

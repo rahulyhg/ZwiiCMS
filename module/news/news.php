@@ -82,7 +82,7 @@ class news extends common {
 		// Ids des news par ordre de publication
 		$newsIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($newsIds, $this->getUrl());
+		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// News en fonction de la pagination
@@ -203,7 +203,7 @@ class news extends common {
 			}
 		}
 		// Pagination
-		$pagination = helper::pagination($newsIds, $this->getUrl());
+		$pagination = helper::pagination($newsIds, $this->getUrl()$this->getData(['config','ItemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// News en fonction de la pagination

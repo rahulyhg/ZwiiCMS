@@ -1,18 +1,20 @@
-﻿# ChangeLog 
+# ChangeLog 
 
 
 ## Préversion version 8.3.14
 * Modifications :
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
-	- Balise ALT dans les images du menu
-	- Config RFM 
+	- Pagination variable du nombres d'articles par page (news, blog et form)
 
 ## version 8.3.13 :
 * Modifications : 
     - Bannière "responsive", nouvelles options de positionnement
     - Bouton Edit dans Blog
     - Options de position des menus selon la position de la bannière
-    - Mise à jour TinyMCE    
+    - Bouton Edition dans un article du blog
+    - Balise ALT dans les images du menu
+    - Correction RFM
+ 
 
 ## version 8.3.12 :
 * Modification : 

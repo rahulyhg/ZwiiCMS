@@ -1,15 +1,5 @@
-# Fichiers temporaires
-site/tmp/*
-
-# Sauvegardes
-site/backup/*
-
 # Fichiers de données
-site/data/*
-
-# Fichiers uploadés
-site/file/source/*
-site/file/thumb/*
+site/*
 
 # Dossiers vides dans GitHub
 !.gitkeep

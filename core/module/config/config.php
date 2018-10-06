@@ -134,6 +134,13 @@ class config extends common {
 		'Pacific/Fiji'			=> '(GMT+12:00) Fiji',
 		'Asia/Kamchatka'		=> '(GMT+12:00) Kamchatka'
 	];
+	// Nombre d'objets par page
+	public static $ItemsList = [
+		'5' => '5 articles',
+		'10' => '10 articles',
+		'15' => '15 articles',
+		'20' => '20  articles'		
+	];
 
 	/**
 	 * Sauvegarde des données
@@ -184,7 +191,8 @@ class config extends common {
 						'youtubeId' => $this->getInput('configSocialYoutubeId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true)
+					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
+					'ItemsperPage' => $this->getInput('ItemsperPage')
 				]
 			]);
 			if(self::$inputNotices === []) {

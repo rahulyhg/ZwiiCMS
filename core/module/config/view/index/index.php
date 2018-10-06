@@ -46,10 +46,22 @@
 				<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
 					'checked' => $this->getData(['config', 'cookieConsent'])
 				]); ?>
-				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-					'checked' => helper::checkRewrite(),
-					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
-				]); ?>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+							'checked' => helper::checkRewrite(),
+							'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
+						]); ?>
+					</div>
+					<div class="col6">					
+						<?php echo template::select('ItemsperPage', $module::$ItemsList, [
+							'label' => 'Pagination',
+							'selected' => $this->getData(['config', 'ItemsperPage']),
+							'help' => 'Nombre d\'articles de blog ou de news par page'
+						]); ?>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="col6">
