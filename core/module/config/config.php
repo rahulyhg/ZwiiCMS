@@ -136,10 +136,10 @@ class config extends common {
 	];
 	// Nombre d'objets par page
 	public static $ItemsList = [
-		'5' => '5 articles',
-		'10' => '10 articles',
-		'15' => '15 articles',
-		'20' => '20  articles'		
+		5 => '5 articles',
+		10 => '10 articles',
+		15 => '15 articles',
+		20 => '20  articles'		
 	];
 
 	/**

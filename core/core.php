@@ -56,7 +56,7 @@ class common {
 			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
-			'ItemsperPage' => '10'
+			'ItemsperPage' => 10
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -1618,8 +1618,8 @@ class helper {
 	 * Crée un système de pagination (retourne un tableau contenant les informations sur la pagination (first, last, pages))
 	 * @param array $array Tableau de donnée à utiliser
 	 * @param string $url URL à utiliser, la dernière partie doit correspondre au numéro de page, par défaut utiliser $this->getUrl()
+	 * @param string  $item pagination nombre d'éléments par page 
 	 * @param null|int $sufix Suffixe de l'url
-	 * @param $item pagination nombre d'éléments par page
 	 * @return array
 	 */
 	public static function pagination($array, $url, $item, $sufix = null) {
