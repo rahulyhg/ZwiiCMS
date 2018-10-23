@@ -1,4 +1,4 @@
-# Fichiers de données
+﻿# Fichiers de données
 site/*
 
 # Dossiers vides dans GitHub
@@ -6,3 +6,6 @@ site/*
 
 # PHPStorm
 .idea/
+
+#Visual Code
+.vscode
