@@ -1,11 +1,4 @@
-<!--
-	Ligne originale
-	<div id="blogArticlePicture" style="background-image:url('<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>');"></div>
--->
-<div><img src="<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>"></div>
-<!--
-	Fin mod
--->
+<div id="blogArticlePicture" style="background-image:url('<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>');"></div>
 <h4 class="textAlignRight">
 	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'firstname']); ?>
 	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'lastname']); ?>
