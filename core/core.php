@@ -1984,6 +1984,14 @@ class layout extends common {
 	}
 
 	/**
+	 * Affiche le type
+	 */
+	public function showMetaType() {
+		echo '<meta property="og:type" content="website" />';
+	}
+
+
+	/**
 	 * Affiche la notification
 	 */
 	public function showNotification() {
