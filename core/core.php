@@ -75,6 +75,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -92,6 +93,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => 'accueil',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -110,6 +112,7 @@ class common {
 				'metaTitle' => '',
 				'moduleId' => '',
 				'parentPageId' => '',
+				'modulePosition' => 'bottom',
 				'position' => 2,
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
@@ -126,6 +129,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'blog',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 3,
 				'group' => self::GROUP_VISITOR,
@@ -143,6 +147,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'gallery',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 4,
 				'group' => self::GROUP_VISITOR,
@@ -160,6 +165,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'redirection',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 5,
 				'group' => self::GROUP_VISITOR,
@@ -177,6 +183,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'form',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 6,
 				'group' => self::GROUP_VISITOR,
@@ -1265,11 +1272,24 @@ class core extends common {
 							if(file_exists($viewPath)) {
 								ob_start();
 								include $viewPath;
-								$this->addOutput([
-									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()
-								]);
+								$modpos = $this->getData(['page', $this->getUrl(0), 'modulePosition']);
+								if ($modpos === 'top') {				
+									$this->addOutput([
+									'content' => ob_get_clean() . ($output['showPageContent'] ? $pageContent : '')]);
+								}
+								else if ($modpos === 'free') {
+									$begin = strstr($pageContent, '[]', true);
+									$end = strstr($pageContent, '[]');
+									$cut=2; 
+									$end=substr($end,-strlen($end)+$cut);
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $begin : '') . ob_get_clean() . ($output['showPageContent'] ? $end : '')]);								}
+								else {	
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()]);
+								}			
 							}
-						}
+						}					
 						// Librairies
 						if($output['vendor'] !== $this->output['vendor']) {
 							$this->addOutput([

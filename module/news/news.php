@@ -203,7 +203,7 @@ class news extends common {
 			}
 		}
 		// Pagination
-		$pagination = helper::pagination($newsIds, $this->getUrl()$this->getData(['config','ItemsperPage']));
+		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// News en fonction de la pagination

@@ -5,6 +5,8 @@
 * Modifications :
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
 	- Pagination variable du nombres d'articles par page (news, blog et form)
+	- Position d'un module Galerie dans une page (PeterRabbit)
+	- Amélioration de la position de l'images d'en-tête dans la partie Blog (PeterRabbit)
 
 ## version 8.3.13 :
 * Modifications : 
