@@ -6,6 +6,7 @@
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
 	- Pagination variable du nombres d'articles par page (news, blog et form)
 	- Position du module Galerie dans une page ; haut ; bas ou libre avec les doubles crochets insérés dans l'article [] (PeterRabbit)
+    - Prise en compte des balises OpenGraph title et description
 
 ## version 8.3.13 :
 * Modifications : 

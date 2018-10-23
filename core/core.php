@@ -1972,13 +1972,15 @@ class layout extends common {
 	 */
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
+		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
 	}
 
 	/**
 	 * Affiche la meta description
 	 */
 	public function showMetaDescription() {
-		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '">';
+		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '" />';
+		echo '<meta property="og:description" content="' . $this->core->output['metaDescription'] . '" />';
 	}
 
 	/**
