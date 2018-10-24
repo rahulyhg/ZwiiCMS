@@ -602,6 +602,27 @@ class common {
 	}
 
 	/**
+	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas.
+	 * En local, copie du site décran de ZwiiCMS
+	 */	
+	public function makeImageTag () {
+		if (!file_exists('site/file/source/screenshot.png'))
+		{
+			if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
+				$site = 'https://ZwiiCMS.com'; } else {
+				$site = helper::baseUrl(false);	}
+
+			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true&key=AIzaSyBqIP3mGvATby3mU_Xn-UoZjbVoem6MfBI');	
+			$googlePagespeedData = json_decode($googlePagespeedData, true);
+			$screenshot = $googlePagespeedData['screenshot']['data'];
+			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+			$data = 'data:image/jpeg;base64,'.$screenshot;
+			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+			file_put_contents( 'site/file/source/screenshot.png',$data);
+		}
+	}
+
+	/**
 	 * Accède aux données
 	 * @param array $keys Clé(s) des données
 	 * @return mixed
@@ -1996,6 +2017,7 @@ class layout extends common {
 	public function showMetaImage() {		
 		echo '<meta property="og:image" content="' . helper::baseUrl() .'site/screenshot.png" />';
 	}
+
 
 
 	/**

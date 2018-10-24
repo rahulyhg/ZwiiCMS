@@ -1,3 +1,4 @@
+<?php $this->makeImageTag(); ?>
 <?php echo template::formOpen('configForm'); ?>
 	<div class="row">
 		<div class="col2">
@@ -24,25 +25,14 @@
 
 				<?php echo template::text('configTitle', [
 					'label' => 'Titre du site',
-					'value' => $this->getData(['config', 'title'])
+					'value' => $this->getData(['config', 'title']),
+					'help'  => 'Affiché dans la barre de titre et inclus lors des partages sur les réseaux sociaux'
 				]); ?>
 				<?php echo template::textarea('configMetaDescription', [
 					'label' => 'Description du site',
-					'value' => $this->getData(['config', 'metaDescription'])
+					'value' => $this->getData(['config', 'metaDescription']),
+					'help'  => 'La description est incluse lors  des partages sur les réseaux sociaux'
 				]); ?>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::button('configmetaImage', [
-							'href' => helper::baseUrl() . 'config/metaimage',
-							'value' => 'Rafraîchir la capture <br /> d\'écran du site'
-							]); ?>
-					</div>
-					<div class="col6">
-						<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
-					</div>
-				</div>
-
-
 			</div>
 			<div class="block">
 				<h4>Options avancées</h4>
@@ -60,23 +50,18 @@
 				]); ?>
 				<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
 					'checked' => $this->getData(['config', 'cookieConsent'])
+				]); ?>					
+				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+					'checked' => helper::checkRewrite(),
+					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
 				]); ?>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-							'checked' => helper::checkRewrite(),
-							'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
-						]); ?>
-					</div>
-					<div class="col6">					
-						<?php echo template::select('ItemsperPage', $module::$ItemsList, [
-							'label' => 'Pagination',
-							'selected' => $this->getData(['config', 'ItemsperPage']),
-							'help' => 'Nombre d\'articles de blog ou de news par page'
-						]); ?>
-					</div>
-				</div>
-
+			
+								
+				<?php echo template::select('ItemsperPage', $module::$ItemsList, [
+					'label' => 'Pagination Blog et News',
+					'selected' => $this->getData(['config', 'ItemsperPage']),
+					'help' => 'Nombre d\'articles de blog ou de news par page'
+				]); ?>
 			</div>
 		</div>
 		<div class="col6">
@@ -158,6 +143,24 @@
 						]); ?>
 					</div>
 				</div>
+			</div>
+			<div class="block">
+				<h4>Copie d'écran pour OpenGraph :</h4>
+				<div class="col3">		
+						<!--
+						Bouton inutile	
+						<?php echo template::button('configmetaImage', [
+							'href' => helper::baseUrl() . 'config/metaimage',
+							'value' => 'Rafraîchir la capture <br /> d\'écran du site'
+							]); ?>
+						-->						
+				</div>
+				<div class="col6">
+					<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+				</div>
+				<div class="col3">
+				</div>
+				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>				
 			</div>
 		</div>
 	</div>
