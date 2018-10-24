@@ -1984,10 +1984,17 @@ class layout extends common {
 	}
 
 	/**
-	 * Affiche le type
+	 * Affiche le meta type
 	 */
 	public function showMetaType() {
 		echo '<meta property="og:type" content="website" />';
+	}
+
+	/**
+	 * Affiche la meta image (site screenshot)
+	 */
+	public function showMetaImage() {		
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'site/screenshot.png" />';
 	}
 
 

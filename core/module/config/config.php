@@ -146,6 +146,7 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
+
 		// Creation du ZIP
 		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
@@ -165,6 +166,31 @@ class config extends common {
 			'display' => self::DISPLAY_RAW
 		]);
 	}
+
+	/**
+	 * Réalise une copie d'écran
+	 *  https://www.codexworld.com/capture-screenshot-website-url-php-google-api/
+	 */
+	public function metaimage() {
+		// fonction désactivée pour un site local
+		if ( strpos(helper::baseUrl(false),'localhost') === 0 OR strpos(helper::baseUrl(false),'127.0.0.1') === 0)
+		{
+			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true&key=AIzaSyA_JOJidlWFgEiyxTlSGi2_fORgYsCZFtA');	
+			$googlePagespeedData = json_decode($googlePagespeedData, true);
+			$screenshot = $googlePagespeedData['screenshot']['data'];
+			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+			$data = 'data:image/jpeg;base64,'.$screenshot;
+			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+			file_put_contents( helper::baseUrl(false) . '/site/file/source/screenshot.png',$data);
+
+			// Valeurs en sortie
+			$this->addOutput([
+				'notification' => 'Image tag réinitialisée',
+				'redirect' => helper::baseUrl() . 'config',
+				'state' => true
+			]);
+			}
+	}	
 
 	/**
 	 * Configuration

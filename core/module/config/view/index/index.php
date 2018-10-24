@@ -16,6 +16,12 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Informations générales</h4>
+
+				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+					'label' => 'Page d\'accueil',
+					'selected' => $this->getData(['config', 'homePageId'])
+				]); ?>
+
 				<?php echo template::text('configTitle', [
 					'label' => 'Titre du site',
 					'value' => $this->getData(['config', 'title'])
@@ -24,10 +30,19 @@
 					'label' => 'Description du site',
 					'value' => $this->getData(['config', 'metaDescription'])
 				]); ?>
-				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
-					'label' => 'Page d\'accueil',
-					'selected' => $this->getData(['config', 'homePageId'])
-				]); ?>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::button('configmetaImage', [
+							'href' => helper::baseUrl() . 'config/metaimage',
+							'value' => 'Rafraîchir la capture <br /> d\'écran du site'
+							]); ?>
+					</div>
+					<div class="col6">
+						<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+					</div>
+				</div>
+
+
 			</div>
 			<div class="block">
 				<h4>Options avancées</h4>

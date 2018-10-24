@@ -7,6 +7,7 @@
 	<?php $layout->showMetaTitle(); ?>
 	<?php $layout->showMetaDescription(); ?>
 	<?php $layout->showMetaType(); ?>	
+	<?php $layout->showMetaImage(); ?>		
 	<?php $layout->showFavicon(); ?>
 	<?php $layout->showVendor(); ?>
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
