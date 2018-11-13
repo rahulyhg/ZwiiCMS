@@ -6,6 +6,10 @@ Zwii est un CMS sans base de données (Flat-File) qui permet à ses utilisateurs
 
 Zwii a été créé par un développeur de talent, [Rémi Jean](https://remijean.fr/), il est désormais maintenu par la communauté et hébergé sur ce git.
 
+## Version stable
+
+* La version stable est numérotée 8.4.0 (équivalente à la dév 8.3.14)
+
 ## Configuration recommandée
 
 * PHP 5.6 ou plus
