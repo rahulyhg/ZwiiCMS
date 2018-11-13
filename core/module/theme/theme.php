@@ -10,6 +10,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
+ * @Edition  : 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
  */
 
 class theme extends common {
@@ -61,6 +62,12 @@ class theme extends common {
 		'Signika' => 'Signika',
 		'Ubuntu' => 'Ubuntu',
 		'Vollkorn' => 'Vollkorn'
+	];
+	public static $footerblocks = [
+		'hide' => 'Masqué',
+		'left' => 'Bloc Gauche',
+		'center' => 'Bloc Central',
+		'right' => 'Bloc Droite'
 	];
 	public static $fontWeights = [
 		'normal' => 'Normal',
@@ -266,7 +273,10 @@ class theme extends common {
 				'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
 				'text' => $this->getInput('themeFooterText', null),
 				'textAlign' => $this->getInput('themeFooterTextAlign'),
-				'textColor' => $this->getInput('themeFooterTextColor')
+				'textColor' => $this->getInput('themeFooterTextColor'),
+				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
+				'textPosition' => $this->getInput('themeFooterTextPosition'),
+				'socialsPosition' => $this->getInput('themeFooterSocialsPosition')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

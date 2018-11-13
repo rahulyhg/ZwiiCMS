@@ -128,6 +128,13 @@
 					'maxlength' => '500',
 					'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
 				]); ?>
+				<?php if (($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'form') or ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'gallery')) {
+					echo template::select('configModulePosition', $module::$modulePosition,[
+					'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
+					'label' => 'Position du module dans la page',
+					'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
+				]);
+				} ?>				
 				<?php echo template::checkbox('pageEditHideTitle', true, 'Cacher le titre', [
 					'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 				]); ?>

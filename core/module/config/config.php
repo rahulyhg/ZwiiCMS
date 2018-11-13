@@ -134,11 +134,20 @@ class config extends common {
 		'Pacific/Fiji'			=> '(GMT+12:00) Fiji',
 		'Asia/Kamchatka'		=> '(GMT+12:00) Kamchatka'
 	];
+	// Nombre d'objets par page
+	public static $ItemsList = [
+		5 => '5 articles',
+		10 => '10 articles',
+		15 => '15 articles',
+		20 => '20  articles'		
+	];
+
 
 	/**
 	 * Sauvegarde des données
 	 */
 	public function backup() {
+
 		// Creation du ZIP
 		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
@@ -158,6 +167,34 @@ class config extends common {
 			'display' => self::DISPLAY_RAW
 		]);
 	}
+
+	/**
+	 * Réalise une copie d'écran
+	 *  https://www.codexworld.com/capture-screenshot-website-url-php-google-api/
+	 */
+	public function configmetaimage() {
+		// fonction désactivée pour un site local		
+		if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
+			$site = 'https://ZwiiCMS.com'; } else {
+			$site = helper::baseUrl(false);	}
+
+		$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true&key=AIzaSyA_JOJidlWFgEiyxTlSGi2_fORgYsCZFtA');
+		$googlePagespeedData = json_decode($googlePagespeedData, true);
+		$screenshot = $googlePagespeedData['screenshot']['data'];
+		$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+		$data = 'data:image/jpeg;base64,'.$screenshot;
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+		file_put_contents( 'site/file/source/screenshot.png',$data);
+
+		// Valeurs en sortie
+		$this->addOutput([
+			'notification' => 'Image tag réinitialisée',
+			'redirect' => helper::baseUrl() . 'config',
+			'state' => true
+		]);
+	}	
+
+	
 
 	/**
 	 * Configuration
@@ -184,7 +221,8 @@ class config extends common {
 						'youtubeId' => $this->getInput('configSocialYoutubeId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true)
+					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
+					'ItemsperPage' => $this->getInput('ItemsperPage')
 				]
 			]);
 			if(self::$inputNotices === []) {

@@ -101,7 +101,7 @@ class form extends common {
 		$data = $this->getData(['module', $this->getUrl(0), 'data']);
 		if($data) {
 			// Pagination
-			$pagination = helper::pagination($data, $this->getUrl());
+			$pagination = helper::pagination($data, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 			// Liste des pages
 			self::$pagination = $pagination['pages'];
 			// Inverse l'ordre du tableau

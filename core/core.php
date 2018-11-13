@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.3.13';
+	const ZWII_VERSION = '8.4.0';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -55,7 +55,8 @@ class common {
 				'youtubeId' => ''
 			],
 			'timezone' => 'Europe/Paris',
-			'title' => 'Zwii, votre site en quelques clics !'
+			'title' => 'Zwii, votre site en quelques clics !',
+			'ItemsperPage' => 10
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -74,6 +75,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -91,6 +93,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => 'accueil',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -109,6 +112,7 @@ class common {
 				'metaTitle' => '',
 				'moduleId' => '',
 				'parentPageId' => '',
+				'modulePosition' => 'bottom',
 				'position' => 2,
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
@@ -124,6 +128,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'blog',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 3,
 				'group' => self::GROUP_VISITOR,
@@ -141,6 +146,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'gallery',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 4,
 				'group' => self::GROUP_VISITOR,
@@ -158,6 +164,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'redirection',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 5,
 				'group' => self::GROUP_VISITOR,
@@ -175,6 +182,7 @@ class common {
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'form',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 6,
 				'group' => self::GROUP_VISITOR,
@@ -307,7 +315,10 @@ class common {
 				'socialsAlign' => 'center',
 				'text' => '',
 				'textAlign' => 'center',
-				'textColor' => 'rgba(33, 34, 35, 1)'
+				'textColor' => 'rgba(33, 34, 35, 1)',
+				'copyrightPosition' => '3',
+				'textPosition' => '2',
+				'socialsPosition' => '1'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -590,6 +601,27 @@ class common {
 	}
 
 	/**
+	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas
+	 * En local, copie du site décran de ZwiiCMS
+	 */	
+	public function makeImageTag () {
+		if (!file_exists('site/file/source/screenshot.png'))
+		{
+			if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
+				$site = 'https://ZwiiCMS.com'; } else {
+				$site = helper::baseUrl(false);	}
+
+			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');	
+			$googlePagespeedData = json_decode($googlePagespeedData, true);
+			$screenshot = $googlePagespeedData['screenshot']['data'];
+			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+			$data = 'data:image/jpeg;base64,'.$screenshot;
+			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+			file_put_contents( 'site/file/source/screenshot.png',$data);
+		}
+	}
+
+	/**
 	 * Accède aux données
 	 * @param array $keys Clé(s) des données
 	 * @return mixed
@@ -865,8 +897,17 @@ class common {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 8313]);
 			$this->SaveData();
-
 		}
+		// Version 8.4.0
+		if($this->getData(['core', 'dataVersion']) < 840) {
+			$this->setData(['theme','footer','socialsPosition','1']);
+			$this->setData(['theme','footer','textPosition','2']);			
+			$this->setData(['theme','footer','copyrightPosition','3']);			
+			$this->setData(['config','ItemsperPage','10']);
+			$this->setData(['core', 'dataVersion', 840]);
+			$this->SaveData();
+		}
+		
 	}
 
 }
@@ -1251,11 +1292,24 @@ class core extends common {
 							if(file_exists($viewPath)) {
 								ob_start();
 								include $viewPath;
-								$this->addOutput([
-									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()
-								]);
+								$modpos = $this->getData(['page', $this->getUrl(0), 'modulePosition']);
+								if ($modpos === 'top') {				
+									$this->addOutput([
+									'content' => ob_get_clean() . ($output['showPageContent'] ? $pageContent : '')]);
+								}
+								else if ($modpos === 'free') {
+									$begin = strstr($pageContent, '[]', true);
+									$end = strstr($pageContent, '[]');
+									$cut=2; 
+									$end=substr($end,-strlen($end)+$cut);
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $begin : '') . ob_get_clean() . ($output['showPageContent'] ? $end : '')]);								}
+								else {	
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()]);
+								}			
 							}
-						}
+						}					
 						// Librairies
 						if($output['vendor'] !== $this->output['vendor']) {
 							$this->addOutput([
@@ -1604,10 +1658,11 @@ class helper {
 	 * Crée un système de pagination (retourne un tableau contenant les informations sur la pagination (first, last, pages))
 	 * @param array $array Tableau de donnée à utiliser
 	 * @param string $url URL à utiliser, la dernière partie doit correspondre au numéro de page, par défaut utiliser $this->getUrl()
+	 * @param string  $item pagination nombre d'éléments par page 
 	 * @param null|int $sufix Suffixe de l'url
 	 * @return array
 	 */
-	public static function pagination($array, $url, $sufix = null) {
+	public static function pagination($array, $url, $item, $sufix = null) {
 		// Scinde l'url
 		$url = explode('/', $url);
 		// Url de pagination
@@ -1617,13 +1672,13 @@ class helper {
 		// Nombre d'éléments à afficher
 		$nbElements = count($array);
 		// Nombre de page
-		$nbPage = ceil($nbElements / 10);
+		$nbPage = ceil($nbElements / $item);
 		// Page courante
 		$currentPage = is_numeric($urlPagination) ? self::filter($urlPagination, self::FILTER_INT) : 1;
 		// Premier élément de la page
-		$firstElement = ($currentPage - 1) * 10;
+		$firstElement = ($currentPage - 1) * $item;
 		// Dernier élément de la page
-		$lastElement = $firstElement + 10;
+		$lastElement = $firstElement + $item;
 		$lastElement = ($lastElement > $nbElements) ? $nbElements : $lastElement;
 		// Mise en forme de la liste des pages
 		$pages = '';
@@ -1827,30 +1882,30 @@ class layout extends common {
 				    break;
 				case 'text' :
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    break;				    
+				    break;
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
 				    $items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    }				
+				    }
 					break;
 				case 'icontext' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
-				    break;				
+				    break;
 		       }
 		       // Menu Image
 			
@@ -1885,30 +1940,30 @@ class layout extends common {
 						break;
 					case 'text' :
 						$items .= $this->getData(['page', $childKey, 'title']);
-						break;				    
+						break;
 					case 'icon' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						} else {
 						$items .= $this->getData(['page', $parentPageId, 'title']);
 						}
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
 						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
-						}				
+						}
 						break;
 					case 'icontext' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						$items .= $this->getData(['page', $childKey, 'title']);
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
 						}
-						break;				
+						break;
 				}
 				$items .=  '</a></li>';
 				// Menu Image
@@ -1937,14 +1992,32 @@ class layout extends common {
 	 */
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
+		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
 	}
 
 	/**
 	 * Affiche la meta description
 	 */
 	public function showMetaDescription() {
-		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '">';
+		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '" />';
+		echo '<meta property="og:description" content="' . $this->core->output['metaDescription'] . '" />';
 	}
+
+	/**
+	 * Affiche le meta type
+	 */
+	public function showMetaType() {
+		echo '<meta property="og:type" content="website" />';
+	}
+
+	/**
+	 * Affiche la meta image (site screenshot)
+	 */
+	public function showMetaImage() {		
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'site/screenshot.png" />';
+	}
+
+
 
 	/**
 	 * Affiche la notification

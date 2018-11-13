@@ -1,3 +1,4 @@
+<?php $this->makeImageTag(); ?>
 <?php echo template::formOpen('configForm'); ?>
 	<div class="row">
 		<div class="col2">
@@ -16,17 +17,21 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Informations générales</h4>
-				<?php echo template::text('configTitle', [
-					'label' => 'Titre du site',
-					'value' => $this->getData(['config', 'title'])
-				]); ?>
-				<?php echo template::textarea('configMetaDescription', [
-					'label' => 'Description du site',
-					'value' => $this->getData(['config', 'metaDescription'])
-				]); ?>
+
 				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
 					'label' => 'Page d\'accueil',
 					'selected' => $this->getData(['config', 'homePageId'])
+				]); ?>
+
+				<?php echo template::text('configTitle', [
+					'label' => 'Titre du site',
+					'value' => $this->getData(['config', 'title']),
+					'help'  => 'Affiché dans la barre de titre et inclus lors des partages sur les réseaux sociaux'
+				]); ?>
+				<?php echo template::textarea('configMetaDescription', [
+					'label' => 'Description du site',
+					'value' => $this->getData(['config', 'metaDescription']),
+					'help'  => 'La description est incluse lors  des partages sur les réseaux sociaux'
 				]); ?>
 			</div>
 			<div class="block">
@@ -45,10 +50,17 @@
 				]); ?>
 				<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
 					'checked' => $this->getData(['config', 'cookieConsent'])
-				]); ?>
+				]); ?>					
 				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 					'checked' => helper::checkRewrite(),
 					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
+				]); ?>
+			
+								
+				<?php echo template::select('ItemsperPage', $module::$ItemsList, [
+					'label' => 'Pagination Blog et News',
+					'selected' => $this->getData(['config', 'ItemsperPage']),
+					'help' => 'Nombre d\'articles de blog ou de news par page'
 				]); ?>
 			</div>
 		</div>
@@ -131,6 +143,24 @@
 						]); ?>
 					</div>
 				</div>
+			</div>
+			<div class="block">
+				<h4>Copie d'écran pour OpenGraph :</h4>
+				<div class="col3">		
+						<!--
+						Bouton inutile	
+						<?php echo template::button('configmetaImage', [
+							'href' => helper::baseUrl() . 'config/metaimage',
+							'value' => 'Rafraîchir la capture <br /> d\'écran du site'
+							]); ?>
+						-->						
+				</div>
+				<div class="col6">
+					<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+				</div>
+				<div class="col3">
+				</div>
+				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>				
 			</div>
 		</div>
 	</div>

@@ -305,6 +305,11 @@ header .container {
 body > nav {
 	margin: 0 -10px;
 }
+/* Items du menu */
+nav a > img {
+	margin: -4px 0;
+	vertical-align: middle;
+  }
 nav #toggle {
 	cursor: pointer;
 	text-align: right;
@@ -398,9 +403,15 @@ footer {
 	text-align: center;
 	font-size: .8em;
 	padding: 10px 20px;
+    vertical-align:middle;
 }
+
+footer .col4 {
+	vertical-align: middle;
+}
+
 footer #footerSocials {
-	font-size: 1.6em;
+	font-size: 1.0em;
 }
 footer #footerSocials span {
 	color: #FFF;
