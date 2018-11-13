@@ -21,7 +21,7 @@ if(version_compare(PHP_VERSION, '5.6.0', '<')) {
 
 /* Set locale to French */
 date_default_timezone_set('Europe/Paris');
-setlocale (LC_TIME, 'fra_fra');
+setlocale (LC_TIME, 'fra_fra', 'french');
 
 /**
  * Initialisation de Zwii

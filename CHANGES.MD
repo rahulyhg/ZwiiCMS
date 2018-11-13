@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 8.4.2
+* Correction :
+    - Modifications de la présentation des en-têtes d'articles de Blog et de News
+    - Format du mois au format long et en français
+
 ## Version 8.4.1
 * Correction :
     - Erreur de type empêchant l'affichage des articles du blog (nombre d'articles par page)
@@ -13,8 +18,7 @@
     - Modification de la position des boutons retour et éditer lors de l'affichage d'un article si connecté
     - Mise en forme de la composition des articles et des news 
     - Suppression du message de l'édition des redirections
-    - Modifications de la présentation des en-têtes d'articles de Blog et de News
-    - Format du mois au format long et en français
+
 * Corrections : 
     - Accès aux pages désactivées par le sitemap
     - Réduction du temps d'affichage des notifications

@@ -9,7 +9,8 @@
 <p class="signature">
     <?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'firstname']); ?>
 	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'lastname']); ?>
-	le <?php echo strftime('%d %B %Y à %H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn'])); ?>
+	<?php echo utf8_encode(strftime('- %d %B %Y', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
+	à <?php echo utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>	
 <!-- </h4> -->
 </p>
 
