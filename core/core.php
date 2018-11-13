@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.0';
+	const ZWII_VERSION = '8.4.1';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -904,7 +904,7 @@ class common {
 			$this->setData(['theme','footer','socialsPosition','1']);
 			$this->setData(['theme','footer','textPosition','2']);			
 			$this->setData(['theme','footer','copyrightPosition','3']);			
-			$this->setData(['config','ItemsperPage','10']);
+			$this->setData(['config','ItemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 840]);
 			$this->SaveData();
 		}

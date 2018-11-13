@@ -38,6 +38,7 @@
 			<div class="block">
 				<h4>Image</h4>
 				<?php echo template::file('themeHeaderImage', [
+					'help' => 'Si vous souhaitez une bannière vraiment responsive, composez une image aux dimensions prévues par Zwii avec titre, logo, slogan, etc. et choisissez la position « Cachée ».',
 					'label' => 'Fond',
 					'type' => 1,
 					'value' => $this->getData(['theme', 'header', 'image'])

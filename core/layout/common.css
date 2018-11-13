@@ -76,8 +76,8 @@ ol {
 
 /* Image */
 img {
-	max-width: 100%;
-	height: auto;
+	max-width: 100% !important; 
+	height: auto !important;
 }
 img[align='left'] {
 	margin-right: 10px;
@@ -309,6 +309,11 @@ header span {
 header .container {
 	overflow: hidden;
 	height: 100%;
+}
+
+/* Bannière image responsive */
+.responsive-banner img {
+		display:block; width:100%;
 }
 
 /* Menu */

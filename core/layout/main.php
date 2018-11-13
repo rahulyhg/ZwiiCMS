@@ -25,8 +25,7 @@
 		<div id="menu" class="
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-top'){echo 'container-large';}else{echo'container';}
 		?>">
-
-			<?php $layout->showMenu(); ?>
+		<?php $layout->showMenu(); ?>
 		</div>
 	</nav>
 <?php endif; ?>
