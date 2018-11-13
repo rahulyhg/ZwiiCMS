@@ -1,5 +1,5 @@
 <?php
-$version = "9.12.2";
+$version = "9.13.1";
 if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
@@ -8,7 +8,7 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
-date_default_timezone_set('Europe/Paris');
+date_default_timezone_set('Europe/Rome');
 setlocale(LC_CTYPE, 'fr_FR'); //correct transliteration
 
 /*
@@ -100,11 +100,22 @@ $config = array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| mime file control to define files extensions
+	|--------------------------------------------------------------------------
+	|
+	| If you want to be forced to assign the extension starting from the mime type
+	|
+	*/
+	'mime_extension_rename'	=> true,
+
+
+	/*
+	|--------------------------------------------------------------------------
 	| FTP configuration BETA VERSION
 	|--------------------------------------------------------------------------
 	|
 	| If you want enable ftp use write these parametres otherwise leave empty
-	| Remember to set base_url properly to point in the ftp server domain and
+	| Remember to set base_url properly to point in the ftp server domain and 
 	| upload dir will be ftp_base_folder + upload_dir so without final /
 	|
 	*/
@@ -132,6 +143,20 @@ $config = array(
 	'ftp_base_url'     => "http://host.com/testFTP",
 	*/
 
+	/*
+	|--------------------------------------------------------------------------
+	| Multiple files selection
+	|--------------------------------------------------------------------------
+	| The user can delete multiple files, select all files , deselect all files
+	*/
+	'multiple_selection' => false,
+	/*
+	|
+	| The user can have a select button that pass a json to external input or pass the first file selected to editor
+	| If you use responsivefilemanager tinymce extension can copy into editor multiple object like images, videos, audios, links in the same time
+	|
+	 */
+	'multiple_selection_action_button' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -215,13 +240,13 @@ $config = array(
 	//Show or not language selection feature in filemanager
 	'show_language_selection'				=> true,
 	//active or deactive the transliteration (mean convert all strange characters in A..Za..z0..9 characters)
-	'transliteration'						=> true,
+	'transliteration'						=> false,
 	//convert all spaces on files name and folders name with $replace_with variable
-	'convert_spaces'						=> true,
+	'convert_spaces'						=> false,
 	//convert all spaces on files name and folders name this value
 	'replace_with'							=> "_",
 	//convert to lowercase the files and folders name
-	'lower_case'							=> true,
+	'lower_case'							=> false,
 
 	//Add ?484899493349 (time value) to returned images to prevent cache
 	'add_time_to_img'                       => false,
@@ -261,9 +286,9 @@ $config = array(
 	//******************
 	//
 	// WATERMARK IMAGE
-	//
-	//Watermark url or false
-	'image_watermark'                          => false,
+	// 
+	//Watermark path or false
+	'image_watermark'                          => false,//"../watermark.png",
 	# Could be a pre-determined position such as:
 	#           tl = top left,
 	#           t  = top (middle),
@@ -279,7 +304,7 @@ $config = array(
 	# padding: If using a pre-determined position you can
 	#         adjust the padding from the edges by passing an amount
 	#         in pixels. If using co-ordinates, this value is ignored.
-	'image_watermark_padding'                 => 0,
+	'image_watermark_padding'                 => 10,
 
 	//******************
 	// Default layout setting
@@ -322,7 +347,7 @@ $config = array(
 	// if you want you can add html,css etc.
 	// but for security reasons it's NOT RECOMMENDED!
 	'editable_text_file_exts'                 => array( 'txt', 'log', 'xml', 'html', 'css', 'htm', 'js' ),
-	
+
 	// Preview with Google Documents
 	'googledoc_enabled'                       => true,
 	'googledoc_file_exts'                     => array( 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx' , 'pdf', 'odt', 'odp', 'ods'),
@@ -338,11 +363,18 @@ $config = array(
 	//**********************
 	//Allowed extensions (lowercase insert)
 	//**********************
-	'ext_img'                                 => array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg','ico'), //Images
-	'ext_file'                                => array('doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm'), //Files
-	'ext_video'                               => array('mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', 'flv', 'webm'), //Video
-	'ext_music'                               => array('mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav'), //Audio
-	'ext_misc'                                => array('7z', 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg'), //Archives
+	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg', 'ico' ), //Images
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff'), //Files
+	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
+	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
+	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
+
+
+	//*********************
+	//  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
+	//  otherwise check Allowed extensions configuration
+	//*********************
+	'ext_blacklist'							  => false, //['jpg'],
 
 	/******************
 	* AVIARY config
@@ -352,7 +384,7 @@ $config = array(
 	'aviary_language'                         => "fr",
 	'aviary_theme'                            => "light",
 	'aviary_tools'                            => "all",
-	'aviary_maxSize'                          => "1920",
+	'aviary_maxSize'                          => "1400",
 	// Add or modify the Aviary options below as needed - they will be json encoded when added to the configuration so arrays can be utilized as needed
 
 	//The filter and sorter are managed through both javascript and php scripts because if you have a lot of

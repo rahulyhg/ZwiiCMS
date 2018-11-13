@@ -1,9 +1,11 @@
 <?php echo template::formOpen('pageEditForm'); ?>
 	<div class="row">
-		<div class="col2">
+	<div class="col2">
+			<?php $href = helper::baseUrl() . $this->getUrl(2); ?>
+      <?php if ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'redirection')$href = helper::baseUrl(); ?>
 			<?php echo template::button('pageEditBack', [
 				'class' => 'buttonGrey',
-				'href' => helper::baseUrl() . $this->getUrl(2),
+				'href' => $href,
 				'ico' => 'left',
 				'value' => 'Retour'
 			]); ?>

@@ -106,7 +106,8 @@ class blog extends common {
 			// Met en forme le tableau
 			$comment = $comments[$commentIds[$i]];
 			self::$comments[] = [
-				date('d/m/Y H:i', $comment['createdOn']),
+				//date('d/m/Y H:i', $comment['createdOn']),
+				strftime('%d %B %Y à %H:%M', $comment['createdOn']),
 				$comment['content'],
 				$comment['userId'] ? $this->getData(['user', $comment['userId'], 'firstname']) . ' ' . $this->getData(['user', $comment['userId'], 'lastname']) : $comment['author'],
 				template::button('blogCommentDelete' . $commentIds[$i], [
@@ -161,7 +162,8 @@ class blog extends common {
 			// Met en forme le tableau
 			self::$articles[] = [
 				$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'title']),
-				date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
+				// date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
+				strftime('%d %B %Y à %H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
 				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
 				template::button('blogConfigEdit' . $articleIds[$i], [
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i],

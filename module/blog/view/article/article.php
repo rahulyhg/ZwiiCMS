@@ -1,10 +1,18 @@
+<!--
 <div id="blogArticlePicture" style="background-image:url('<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>');"></div>
-<h4 class="textAlignRight">
-	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'firstname']); ?>
-	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'lastname']); ?>
-	le <?php echo date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn'])); ?>
-</h4>
+-->
+<div><img src="<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>"></div>
+
 <?php echo $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'content']); ?>
+
+<!-- <h4 class="textAlignRight"> -->
+<p class="signature">
+    <?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'firstname']); ?>
+	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'lastname']); ?>
+	le <?php echo strftime('%d %B %Y à %H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn'])); ?>
+<!-- </h4> -->
+</p>
+
 <div class="clearBoth"></div>
 <h2 id="comment">
 	<?php $commentsNb = count($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment'])); ?>
@@ -84,7 +92,7 @@
 					<?php else: ?>
 						<?php echo $comment['author']; ?>
 					<?php endif; ?>
-					le <?php echo date('d/m/Y - H:i', $comment['createdOn']); ?>
+					le <?php echo strftime('%d %B %Y à %H:%M', $comment['createdOn']); ?>
 				</h4>
 				<?php echo $comment['content']; ?>
 			</div>
@@ -93,8 +101,6 @@
 </div>
 <?php  if($this->getUser('group') >= self::GROUP_ADMIN): ?>
 <div class="row">
-	<div class="col4">
-	</div>
     <div class="col2">
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
@@ -103,20 +109,13 @@
 					'value' => 'Retour'
 		]); ?>
     </div>
-    <div class="col2">
+    <div class="col2 offset8">
  		<?php echo template::button('blogEdit', [
-					'class' => 'buttonGrey',
-<<<<<<< HEAD
-					'href' => helper::baseUrl() . $this->getUrl(0). '/edit/' . $this->getUrl(1),
-=======
+					'class' => 'buttonBlue',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $this->getUrl(1),
->>>>>>> 8.3.14
 					'value' => 'Editer'
 		]); ?>
     </div>
-    <div class="col4">
-	
-	</div>
 </div>
 <?php else: ?>
 <div class="row">
@@ -126,7 +125,7 @@
 					'href' => helper::baseUrl() . $this->getUrl(0),
 					'ico' => 'left',
 					'value' => 'Retour'
-		]); ?>		
+		]); ?>
 	</div>
 	<div class="col10">
 	</div>

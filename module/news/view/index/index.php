@@ -4,11 +4,13 @@
 			<?php foreach($module::$news as $newsId => $news): ?>
 				<div class="block">
 					<h4>
-						<?php echo $this->getData(['user', $news['userId'], 'firstname']) . ' ' . $this->getData(['user', $news['userId'], 'lastname']); ?>
-						le <?php echo date('d/m/Y H:i', $news['publishedOn']); ?>
+						Le <?php echo strftime('%d %B %Y à %H:%M', $news['publishedOn']); ?>
 					</h4>
 					<h2><?php echo $news['title']; ?></h2>
 					<?php echo $news['content']; ?>
+					<p class="signature">
+						<?php echo $this->getData(['user', $news['userId'], 'firstname']) . ' ' . $this->getData(['user', $news['userId'], 'lastname']); ?>
+					</p>
 					<div class="clearBoth"></div>
 				</div>
 			<?php endforeach; ?>
