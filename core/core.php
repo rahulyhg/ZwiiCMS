@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.3.14';
+	const ZWII_VERSION = '8.4.0';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -602,7 +602,7 @@ class common {
 	}
 
 	/**
-	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas.
+	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas
 	 * En local, copie du site décran de ZwiiCMS
 	 */	
 	public function makeImageTag () {
@@ -612,7 +612,7 @@ class common {
 				$site = 'https://ZwiiCMS.com'; } else {
 				$site = helper::baseUrl(false);	}
 
-			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true&key=AIzaSyBqIP3mGvATby3mU_Xn-UoZjbVoem6MfBI');	
+			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');	
 			$googlePagespeedData = json_decode($googlePagespeedData, true);
 			$screenshot = $googlePagespeedData['screenshot']['data'];
 			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
@@ -899,13 +899,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 8313]);
 			$this->SaveData();
 		}
-		// Version 8.3.14
-		if($this->getData(['core', 'dataVersion']) < 8314) {
+		// Version 8.4.0
+		if($this->getData(['core', 'dataVersion']) < 840) {
 			$this->setData(['theme','footer','socialsPosition','1']);
 			$this->setData(['theme','footer','textPosition','2']);			
 			$this->setData(['theme','footer','copyrightPosition','3']);			
 			$this->setData(['config','ItemsperPage','10']);
-			$this->setData(['core', 'dataVersion', 8314]);
+			$this->setData(['core', 'dataVersion', 840]);
 			$this->SaveData();
 		}
 		
