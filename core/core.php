@@ -119,10 +119,11 @@ class common {
 				'title' => 'Cachée'
 			],
 			'blog' => [
-	    
+			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 					
+                'disable' => false,                 			
+                // menu image			
 				'content' => "<p>Cette page contient une instance du module de blog. Cliquez sur un article afin de le lire et de poster des commentaires.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
