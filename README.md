@@ -2,7 +2,9 @@
 
 Zwii est un CMS sans base de données (Flat-File) qui permet à ses utilisateurs de créer et gérer facilement un site web sans aucune connaissance en programmation.
 
-[Site](http://zwiicms.com/) - [Forum](http://forum.zwiicms.com/) - [GitHub](https://github.com/remijean/ZwiiCMS/)
+Zwii a été développé par [Rémi Jean](https://github.com/remijean/ZwiiCMS), depuis le printemps 2018, le CMS est développé par la communauté et hébergé sur ce Git.
+
+[Site](http://zwiicms.com/) - [Forum](http://forum.zwiicms.com/) - [GitHub](https://github.com/fredtempez/ZwiiCMS)
 
 ## Configuration recommandée
 
