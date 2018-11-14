@@ -4,6 +4,10 @@
 * Correction : 
     - URL incorrecte dans Metaimage
     - Erreur dans la génération du sitemap
+    - Taille du texte de la bannnière maximale relative (vmax)
+    - Préfixe des en-têtes html pour OpenGraph
+    - Balise Titre dans Socials
+    - Conformité W3C des URL dans socials
 
 ## Version 8.4.2
 * Correction :

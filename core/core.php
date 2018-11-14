@@ -1821,7 +1821,7 @@ class layout extends common {
 	 */
 	public function showCopyright() {
 		$items = '<div id="footerCopyright">';
-		$items .= 'Motorisé par <a href="http://zwiicms.com/" target="_blank">Zwii</a>';
+		$items .= 'Motorisé par <a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
 		$items .= ' | <a href="' . helper::baseUrl() . 'sitemap">Plan du site</a>';
 		if(
 			(
@@ -2129,18 +2129,23 @@ class layout extends common {
 			switch($socialName) {
 				case 'facebookId':
 					$socialUrl = 'https://www.facebook.com/';
+					$title = 'Facebook';
 					break;
 				case 'googleplusId':
 					$socialUrl = 'https://plus.google.com/';
+					$title = 'Google +';
 					break;
 				case 'instagramId':
 					$socialUrl = 'https://www.instagram.com/';
+					$title = 'Instagram';
 					break;
 				case 'pinterestId':
 					$socialUrl = 'https://pinterest.com/';
+					$title = 'Twitter';
 					break;
 				case 'twitterId':
 					$socialUrl = 'https://twitter.com/';
+					$title = 'Youtube';
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
@@ -2149,7 +2154,7 @@ class layout extends common {
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" target="_blank">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" title="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
 			}
 		}
 		if($socials !== '') {

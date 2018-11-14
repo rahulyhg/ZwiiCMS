@@ -90,7 +90,7 @@ class theme extends common {
 		'1.8em' => 'Petite',
 		'2em' => 'Moyenne',
 		'2.2em' => 'Grande',
-		'2.4em' => 'Très grande'
+		'2.4vmax' => 'Très grande'
 	];
 	public static $headerHeights = [
 		'100px' => 'Très petite (100 pixels)',
