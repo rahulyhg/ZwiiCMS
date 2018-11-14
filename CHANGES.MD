@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 8.4.3
+* Correction : 
+    - URL incorrecte dans Metaimage
+    - Erreur dans la génération du sitemap
+
 ## Version 8.4.2
 * Correction :
     - Modifications de la présentation des en-têtes d'articles de Blog et de News
