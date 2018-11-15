@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.4.4
+* Correction : 
+    - Valeur par défaut et d'update des éléments du footer dans les blocks 
+
 ## Version 8.4.3
 * Correction : 
     - URL incorrecte dans Metaimage
