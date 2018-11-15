@@ -911,9 +911,9 @@ class common {
 
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {
-			$this->setData(['theme','footer','socialsPosition','center']);
+			$this->setData(['theme','footer','socialsPosition','none']);
 			$this->setData(['theme','footer','textPosition','none']);			
-			$this->setData(['theme','footer','copyrightPosition','none']);			
+			$this->setData(['theme','footer','copyrightPosition','center']);			
 			$this->setData(['core', 'dataVersion', 844]);
 			$this->SaveData();
 		}		
