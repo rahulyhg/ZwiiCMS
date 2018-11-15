@@ -318,8 +318,8 @@ class common {
 				'textAlign' => 'center',
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'copyrightPosition' => 'center',
-				'textPosition' => 'center',
-				'socialsPosition' => 'center'
+				'textPosition' => 'hide',
+				'socialsPosition' => 'hide'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -1027,10 +1027,8 @@ class core extends common {
 				}
 			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
-			// Modif CrowueWeb pour la bannière
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
 			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
-			// Fin modif Croque Web
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
