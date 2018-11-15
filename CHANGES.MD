@@ -1,5 +1,11 @@
 # ChangeLog 
 
+## Version 8.4.5
+* corrections :
+    - nettoyage du code core.php
+    - W3C ajout de balise title manquante
+    - Inversion de deux balises dans Socials
+
 ## Version 8.4.4
 * Correction : 
     - Valeur par défaut et d'update des éléments du footer dans les blocks 
