@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.4.4
+* Correction : 
+    - Valeur par défaut et d'update des éléments du footer dans les blocks 
+
 ## Version 8.4.3
 * Correction : 
     - URL incorrecte dans Metaimage
@@ -22,7 +26,7 @@
 * Modifications :
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
 	- Pagination variable du nombres d'articles par page (news, blog et form)
-	- Position des modules Galerie et Form dans une page ; haut ; bas ou libre avec les doubles crochets insérés dans l'article [] (PeterRabbit)
+	- Position des modules Galerie et Form dans une page ; haut ; bas ou libre avec les doubles crochets insérés dans l'article []
     - Prise en compte des balises OpenGraph obligatoires title , description, type et images
     - Modification de la position des boutons retour et éditer lors de l'affichage d'un article si connecté
     - Mise en forme de la composition des articles et des news 

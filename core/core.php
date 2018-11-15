@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.3';
+	const ZWII_VERSION = '8.4.4';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -317,9 +317,9 @@ class common {
 				'text' => '',
 				'textAlign' => 'center',
 				'textColor' => 'rgba(33, 34, 35, 1)',
-				'copyrightPosition' => '3',
-				'textPosition' => '2',
-				'socialsPosition' => '1'
+				'copyrightPosition' => 'center',
+				'textPosition' => 'hide',
+				'socialsPosition' => 'hide'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -909,6 +909,15 @@ class common {
 			$this->SaveData();
 		}
 
+		// Version 8.4.4
+		if($this->getData(['core', 'dataVersion']) < 844) {
+			$this->setData(['theme','footer','socialsPosition','center']);
+			$this->setData(['theme','footer','textPosition','none']);			
+			$this->setData(['theme','footer','copyrightPosition','none']);			
+			$this->setData(['core', 'dataVersion', 844]);
+			$this->SaveData();
+		}		
+
 	}
 
 }
@@ -1018,10 +1027,8 @@ class core extends common {
 				}
 			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
-			// Modif CrowueWeb pour la bannière
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
 			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
-			// Fin modif Croque Web
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
