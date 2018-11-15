@@ -2148,11 +2148,11 @@ class layout extends common {
 					break;
 				case 'pinterestId':
 					$socialUrl = 'https://pinterest.com/';
-					$title = 'Twitter';
+					$title = 'Pinterest';
 					break;
 				case 'twitterId':
 					$socialUrl = 'https://twitter.com/';
-					$title = 'Youtube';
+					$title = 'Twitter';
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
