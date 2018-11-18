@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.4.6
+* corrections : 
+    - encodage des dates dans la liste des articles news et blog
+
 ## Version 8.4.5
 * corrections :
     - nettoyage du code core.php
