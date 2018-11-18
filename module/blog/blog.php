@@ -156,7 +156,7 @@ class blog extends common {
 		// Pagination
 		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
-		self::$pages = $pagination['pages'];
+		self::$pages = $pagination['pages']; 
 		// Articles en fonction de la pagination
 		for($i = $pagination['first']; $i < $pagination['last']; $i++) {
 			// Met en forme le tableau
