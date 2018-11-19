@@ -917,6 +917,13 @@ class common {
 			$this->setData(['theme','footer','copyrightPosition','center']);			
 			$this->setData(['core', 'dataVersion', 844]);
 			$this->SaveData();
+		}	
+		
+		// Version 8.4.6
+		if($this->getData(['core', 'dataVersion']) < 846) {
+			$this->setData(['config','ItemsperPage',10]);
+			$this->setData(['core', 'dataVersion', 846]);
+			$this->SaveData();
 		}		
 
 	}
