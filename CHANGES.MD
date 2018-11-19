@@ -2,7 +2,8 @@
 
 ## Version 8.4.6
 * corrections : 
-    - encodage des dates dans la liste des articles news et blog
+    - Encodage des dates dans la liste des articles news et blog
+    - Variable itemsperpage stockée dans le mauvais type
 
 ## Version 8.4.5
 * corrections :
