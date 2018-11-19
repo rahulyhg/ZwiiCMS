@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.5';
+	const ZWII_VERSION = '8.4.6';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -601,26 +601,26 @@ class common {
 		}
 	}
 
+
 	/**
 	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas
 	 * En local, copie du site décran de ZwiiCMS
-	 */
+	 */	
 	public function makeImageTag () {
 		if (!file_exists('site/file/source/screenshot.png'))
-		{
-			if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{
-				$site = 'https://ZwiiCMS.com'; } else {
-				$site = helper::baseUrl(false);	}
-
-			$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');
-			$googlePagespeedData = json_decode($googlePagespeedData, true);
-			$screenshot = $googlePagespeedData['screenshot']['data'];
-			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
-			$data = 'data:image/jpeg;base64,'.$screenshot;
-			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
-			file_put_contents( 'site/file/source/screenshot.png',$data);
+		{ 			
+			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
+				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
+				$googlePagespeedData = json_decode($googlePagespeedData, true);
+				$screenshot = $googlePagespeedData['screenshot']['data'];
+				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+				$data = 'data:image/jpeg;base64,'.$screenshot;
+				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+				file_put_contents( 'site/file/source/screenshot.png',$data);
+			}
 		}
 	}
+
 
 	/**
 	 * Accède aux données
