@@ -8,6 +8,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
+ * @Author 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
  */
 
 /**
@@ -21,6 +22,7 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
@@ -52,6 +54,71 @@ $("input, select").on("change", function() {
 			break;
 	}
 });
+
+// Position dans les blocs FT
+
+// Bloc texte personnalisé
+
+$("#themeFooterForm").on("change",function() {
+	switch($("#themeFooterTextPosition").val()) {
+			case 'hide':
+				$("#footerText").hide();
+				break;
+			case 'left':
+				$("#footerText").show().appendTo("#bodyLeft");			
+				$("#footerText").show().appendTo("#siteLeft");
+				break;
+			case 'center':
+				$("#footerText").show().appendTo("#bodyCenter");
+				$("#footerText").show().appendTo("#siteCenter");
+				break;
+			case 'right':
+				$("#footerText").show().appendTo("#bodyRight");
+				$("#footerText").show().appendTo("#siteRight");				
+				break;
+	}
+	switch($("#themeFooterSocialsPosition").val()) {
+			case 'hide':
+				$("#footerSocials").hide();
+				break;		
+			case 'left':
+				$("#footerSocials").show().appendTo("#bodyLeft");			
+				$("#footerSocials").show().appendTo("#siteLeft");
+				break;
+			case 'center':
+				$("#footerSocials").show().appendTo("#bodyCenter");
+				$("#footerSocials").show().appendTo("#siteCenter");
+				break;
+			case 'right':
+				$("#footerSocials").show().appendTo("#bodyRight");
+				$("#footerSocials").show().appendTo("#siteRight");				
+				break;
+	}
+		switch($("#themeFooterCopyrightPosition").val()) {
+			case 'hide':
+				$("#footerCopyright").hide();
+				break;		
+			case 'left':
+				$("#footerCopyright").show().appendTo("#bodyLeft");			
+				$("#footerCopyright").show().appendTo("#siteLeft");
+				break;
+			case 'center':
+				$("#footerCopyright").show().appendTo("#bodyCenter");
+				$("#footerCopyright").show().appendTo("#siteCenter");
+				break;
+			case 'right':
+				$("#footerCopyright").show().appendTo("#bodyRight");
+				$("#footerCopyright").show().appendTo("#siteRight");				
+				break;
+	}
+}).trigger("change");
+
+
+// Fin Position dans les blocs
+
+
+
+
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {
 	if($(this).is(":checked")) {

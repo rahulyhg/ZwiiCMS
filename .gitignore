@@ -1,3 +1,4 @@
+﻿<<<<<<< HEAD
 # Fichiers temporaires
 site/tmp/*
 
@@ -11,8 +12,17 @@ site/data/*
 site/file/source/*
 site/file/thumb/*
 
+
+﻿# Fichiers de données
+site/*
+
 # Dossiers vides dans GitHub
 !.gitkeep
 
 # PHPStorm
 .idea/
+
+
+#Visual Code
+.vscode
+

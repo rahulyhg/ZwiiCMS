@@ -98,7 +98,7 @@ class blog extends common {
 		// Ids des commentaires par ordre de création
 		$commentIds = array_keys(helper::arrayCollumn($comments, 'createdOn', 'SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($commentIds, $this->getUrl());
+		$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// Commentaires en fonction de la pagination
@@ -106,7 +106,8 @@ class blog extends common {
 			// Met en forme le tableau
 			$comment = $comments[$commentIds[$i]];
 			self::$comments[] = [
-				date('d/m/Y H:i', $comment['createdOn']),
+				//date('d/m/Y H:i', $comment['createdOn']),
+				strftime('%d %B %Y à %H:%M', $comment['createdOn']),
 				$comment['content'],
 				$comment['userId'] ? $this->getData(['user', $comment['userId'], 'firstname']) . ' ' . $this->getData(['user', $comment['userId'], 'lastname']) : $comment['author'],
 				template::button('blogCommentDelete' . $commentIds[$i], [
@@ -153,15 +154,16 @@ class blog extends common {
 		// Ids des articles par ordre de publication
 		$articleIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($articleIds, $this->getUrl());
+		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
-		self::$pages = $pagination['pages'];
+		self::$pages = $pagination['pages']; 
 		// Articles en fonction de la pagination
 		for($i = $pagination['first']; $i < $pagination['last']; $i++) {
 			// Met en forme le tableau
 			self::$articles[] = [
 				$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'title']),
-				date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
+				// date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
+				utf8_encode(strftime('%d %B %Y - %H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),
 				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
 				template::button('blogConfigEdit' . $articleIds[$i], [
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i],
@@ -312,7 +314,7 @@ class blog extends common {
 				// Ids des commentaires par ordre de publication
 				$commentIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']), 'createdOn', 'SORT_DESC'));
 				// Pagination
-				$pagination = helper::pagination($commentIds, $this->getUrl(), '#comment');
+				$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']),'#comment');
 				// Liste des pages
 				self::$pages = $pagination['pages'];
 				// Commentaires en fonction de la pagination
@@ -340,7 +342,7 @@ class blog extends common {
 				}
 			}
 			// Pagination
-			$pagination = helper::pagination($articleIds, $this->getUrl());
+			$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 			// Liste des pages
 			self::$pages = $pagination['pages'];
 			// Articles en fonction de la pagination

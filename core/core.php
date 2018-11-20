@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.3.13';
+	const ZWII_VERSION = '8.4.6';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -55,7 +55,8 @@ class common {
 				'youtubeId' => ''
 			],
 			'timezone' => 'Europe/Paris',
-			'title' => 'Zwii, votre site en quelques clics !'
+			'title' => 'Zwii, votre site en quelques clics !',
+			'ItemsperPage' => 10
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -66,14 +67,15 @@ class common {
 			'accueil' => [
 			    // menu image
 			    'typeMenu' => 'text',
-                'iconUrl' => '',	
-                'disable' => false, 		
+                'iconUrl' => '',
+                'disable' => false,
                 // menu image
 				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a title=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -84,13 +86,14 @@ class common {
 			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 			
-                // menu image			
+                'disable' => false,
+                // menu image
 				'content' => "<p>Vous pouvez assigner des parents à vos pages afin de mieux organiser votre menu !</p>\r\n<div class=\"row\">\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n</div>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
+				'modulePosition' => 'bottom',
 				'parentPageId' => 'accueil',
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
@@ -101,29 +104,32 @@ class common {
 			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 			
-                // menu image			
+                'disable' => false,
+                // menu image
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
 				'parentPageId' => '',
+				'modulePosition' => 'bottom',
 				'position' => 2,
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
 				'title' => 'Cachée'
 			],
 			'blog' => [
-	    
+			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 					
+                'disable' => false,
+                // menu image
 				'content' => "<p>Cette page contient une instance du module de blog. Cliquez sur un article afin de le lire et de poster des commentaires.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'blog',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 3,
 				'group' => self::GROUP_VISITOR,
@@ -134,13 +140,14 @@ class common {
 			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 			
-                // menu image		
+                'disable' => false,
+                // menu image
 				'content' => "<p>Cette page contient une instance du module de galeries photos. Cliquez sur la galerie ci-dessous afin de voir les photos qu'elle contient.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'gallery',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 4,
 				'group' => self::GROUP_VISITOR,
@@ -150,14 +157,15 @@ class common {
 			'site-de-zwii' => [
 			    // menu image
 			    'typeMenu' => 'text',
-                'iconUrl' => '',	
-                'disable' => false,                 		
-                // menu image			
+                'iconUrl' => '',
+                'disable' => false,
+                // menu image
 				'content' => "",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'redirection',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 5,
 				'group' => self::GROUP_VISITOR,
@@ -168,13 +176,14 @@ class common {
 			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
-                'disable' => false,                 			
-                // menu image			
+                'disable' => false,
+                // menu image
 				'content' => "<p>Cette page contient un exemple de formulaire conçu à partir du module de génération de formulaires. Il est configuré pour envoyer les données saisies par mail aux administrateurs du site.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'form',
+				'modulePosition' => 'bottom',
 				'parentPageId' => '',
 				'position' => 6,
 				'group' => self::GROUP_VISITOR,
@@ -307,7 +316,10 @@ class common {
 				'socialsAlign' => 'center',
 				'text' => '',
 				'textAlign' => 'center',
-				'textColor' => 'rgba(33, 34, 35, 1)'
+				'textColor' => 'rgba(33, 34, 35, 1)',
+				'copyrightPosition' => 'center',
+				'textPosition' => 'hide',
+				'socialsPosition' => 'hide'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -589,6 +601,28 @@ class common {
 		}
 	}
 
+
+	/**
+	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas
+	 * En local, copie du site décran de ZwiiCMS
+	 */	
+	public function makeImageTag () {
+		if (!file_exists('site/file/source/screenshot.png'))
+		{ 			
+			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
+				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
+				$googlePagespeedData = json_decode($googlePagespeedData, true);
+				$screenshot = $googlePagespeedData['screenshot']['data'];
+				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+				$data = 'data:image/jpeg;base64,'.$screenshot;
+				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+				file_put_contents( 'site/file/source/screenshot.png',$data);
+			}
+		}
+	}
+	
+
+
 	/**
 	 * Accède aux données
 	 * @param array $keys Clé(s) des données
@@ -852,12 +886,12 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 822) {
 			$this->setData(['config', 'maintenance', false]);
 			$this->setData(['core', 'dataVersion', 822]);
-			$this->saveData();		
+			$this->saveData();
 		}
 		// Version 8.2.6
 		if($this->getData(['core', 'dataVersion']) < 826) {
 			$this->setData(['theme','header','linkHome',false]);
-			$this->setData(['core', 'dataVersion', 826]);			
+			$this->setData(['core', 'dataVersion', 826]);
 			$this->SaveData();
 		}
 		// Version 8.3.13
@@ -865,8 +899,33 @@ class common {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 8313]);
 			$this->SaveData();
-
 		}
+		// Version 8.4.0
+		if($this->getData(['core', 'dataVersion']) < 840) {
+			$this->setData(['theme','footer','socialsPosition','1']);
+			$this->setData(['theme','footer','textPosition','2']);
+			$this->setData(['theme','footer','copyrightPosition','3']);
+			$this->setData(['config','ItemsperPage',10]);
+			$this->setData(['core', 'dataVersion', 840]);
+			$this->SaveData();
+		}
+
+		// Version 8.4.4
+		if($this->getData(['core', 'dataVersion']) < 844) {
+			$this->setData(['theme','footer','socialsPosition','none']);
+			$this->setData(['theme','footer','textPosition','none']);			
+			$this->setData(['theme','footer','copyrightPosition','center']);			
+			$this->setData(['core', 'dataVersion', 844]);
+			$this->SaveData();
+		}	
+		
+		// Version 8.4.6
+		if($this->getData(['core', 'dataVersion']) < 846) {
+			$this->setData(['config','ItemsperPage',10]);
+			$this->setData(['core', 'dataVersion', 846]);
+			$this->SaveData();
+		}		
+
 	}
 
 }
@@ -976,10 +1035,8 @@ class core extends common {
 				}
 			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
-			// Modif CrowueWeb pour la bannière
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
 			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
-			// Fin modif Croque Web
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
@@ -1133,7 +1190,7 @@ class core extends common {
 					// Menu image
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])					
+		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
 					// Menu image
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
@@ -1162,7 +1219,7 @@ class core extends common {
 				if(array_key_exists($action, $module::$actions)) {
 					$module->$action();
 					$output = $module->output;
-					// Check le groupe de l'utilisateur			
+					// Check le groupe de l'utilisateur
 					if(
 						(
 							$module::$actions[$action] === self::GROUP_VISITOR
@@ -1174,7 +1231,7 @@ class core extends common {
 						AND $output['access'] === true
 					) {
 						// Enregistrement du contenu de la méthode POST lorsqu'une notice est présente
-						if(common::$inputNotices) {													
+						if(common::$inputNotices) {
 							foreach($_POST as $postId => $postValue) {
 								if(is_array($postValue)) {
 									foreach($postValue as $subPostId => $subPostValue) {
@@ -1251,9 +1308,22 @@ class core extends common {
 							if(file_exists($viewPath)) {
 								ob_start();
 								include $viewPath;
-								$this->addOutput([
-									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()
-								]);
+								$modpos = $this->getData(['page', $this->getUrl(0), 'modulePosition']);
+								if ($modpos === 'top') {
+									$this->addOutput([
+									'content' => ob_get_clean() . ($output['showPageContent'] ? $pageContent : '')]);
+								}
+								else if ($modpos === 'free') {
+									$begin = strstr($pageContent, '[]', true);
+									$end = strstr($pageContent, '[]');
+									$cut=2;
+									$end=substr($end,-strlen($end)+$cut);
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $begin : '') . ob_get_clean() . ($output['showPageContent'] ? $end : '')]);								}
+								else {
+									$this->addOutput([
+									'content' => ($output['showPageContent'] ? $pageContent : '') . ob_get_clean()]);
+								}
 							}
 						}
 						// Librairies
@@ -1604,10 +1674,11 @@ class helper {
 	 * Crée un système de pagination (retourne un tableau contenant les informations sur la pagination (first, last, pages))
 	 * @param array $array Tableau de donnée à utiliser
 	 * @param string $url URL à utiliser, la dernière partie doit correspondre au numéro de page, par défaut utiliser $this->getUrl()
+	 * @param string  $item pagination nombre d'éléments par page
 	 * @param null|int $sufix Suffixe de l'url
 	 * @return array
 	 */
-	public static function pagination($array, $url, $sufix = null) {
+	public static function pagination($array, $url, $item, $sufix = null) {
 		// Scinde l'url
 		$url = explode('/', $url);
 		// Url de pagination
@@ -1617,13 +1688,13 @@ class helper {
 		// Nombre d'éléments à afficher
 		$nbElements = count($array);
 		// Nombre de page
-		$nbPage = ceil($nbElements / 10);
+		$nbPage = ceil($nbElements / $item);
 		// Page courante
 		$currentPage = is_numeric($urlPagination) ? self::filter($urlPagination, self::FILTER_INT) : 1;
 		// Premier élément de la page
-		$firstElement = ($currentPage - 1) * 10;
+		$firstElement = ($currentPage - 1) * $item;
 		// Dernier élément de la page
-		$lastElement = $firstElement + 10;
+		$lastElement = $firstElement + $item;
 		$lastElement = ($lastElement > $nbElements) ? $nbElements : $lastElement;
 		// Mise en forme de la liste des pages
 		$pages = '';
@@ -1765,8 +1836,8 @@ class layout extends common {
 	 */
 	public function showCopyright() {
 		$items = '<div id="footerCopyright">';
-		$items .= 'Motorisé par <a href="http://zwiicms.com/" target="_blank">Zwii</a>';
-		$items .= ' | <a href="' . helper::baseUrl() . 'sitemap">Plan du site</a>';
+		$items .= 'Motorisé par <a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+		$items .= ' | <a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan du site</a>';
 		if(
 			(
 				$this->getData(['theme', 'footer', 'loginLink'])
@@ -1774,7 +1845,7 @@ class layout extends common {
 			)
 			OR $this->getUrl(0) === 'theme'
 		) {
-			$items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '> | <a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '">Connexion</a></span>';
+			$items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '> | <a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
 		}
 		$items .= '</div>';
 		echo $items;
@@ -1813,12 +1884,12 @@ class layout extends common {
 			$items .= '<li>';
 			// Menu image
 
-			if ( $this->getData(['page',$parentPageId,'disable']) === true					
+			if ( $this->getData(['page',$parentPageId,'disable']) === true
 				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
 					{$items .= '<a href="#">';}
 		    else {
-				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';			}
+				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '" title="'.$this->getData(['page', $parentPageId, 'title']).'" ' . $active . $targetBlank . '>';			}
 
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
@@ -1827,52 +1898,52 @@ class layout extends common {
 				    break;
 				case 'text' :
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    break;				    
+				    break;
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
 				    $items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    }				
+				    }
 					break;
 				case 'icontext' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
-				    break;				
+				    break;
 		       }
 		       // Menu Image
-			
-			
-			
+
+
+
 			if($childrenPageIds) {
 				$items .= template::ico('down', 'left');
 			}
 			$items .= '</a>';
-		
-		
-			
+
+
+
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-			
+
 				// Menu Image
 
-				if ( $this->getData(['page',$childKey,'disable']) === true					
+				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
 						{$items .= '<a href="#">';}
@@ -1885,30 +1956,30 @@ class layout extends common {
 						break;
 					case 'text' :
 						$items .= $this->getData(['page', $childKey, 'title']);
-						break;				    
+						break;
 					case 'icon' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						} else {
 						$items .= $this->getData(['page', $parentPageId, 'title']);
 						}
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
 						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
-						}				
+						}
 						break;
 					case 'icontext' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						$items .= $this->getData(['page', $childKey, 'title']);
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
 						}
-						break;				
+						break;
 				}
 				$items .=  '</a></li>';
 				// Menu Image
@@ -1937,14 +2008,32 @@ class layout extends common {
 	 */
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
+		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
 	}
 
 	/**
 	 * Affiche la meta description
 	 */
 	public function showMetaDescription() {
-		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '">';
+		echo '<meta name="description" content="' . $this->core->output['metaDescription'] . '" />';
+		echo '<meta property="og:description" content="' . $this->core->output['metaDescription'] . '" />';
 	}
+
+	/**
+	 * Affiche le meta type
+	 */
+	public function showMetaType() {
+		echo '<meta property="og:type" content="website" />';
+	}
+
+	/**
+	 * Affiche la meta image (site screenshot)
+	 */
+	public function showMetaImage() {
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'/site/file/source/screenshot.png" />';
+	}
+
+
 
 	/**
 	 * Affiche la notification
@@ -2055,18 +2144,23 @@ class layout extends common {
 			switch($socialName) {
 				case 'facebookId':
 					$socialUrl = 'https://www.facebook.com/';
+					$title = 'Facebook';
 					break;
 				case 'googleplusId':
 					$socialUrl = 'https://plus.google.com/';
+					$title = 'Google +';
 					break;
 				case 'instagramId':
 					$socialUrl = 'https://www.instagram.com/';
+					$title = 'Instagram';
 					break;
 				case 'pinterestId':
 					$socialUrl = 'https://pinterest.com/';
+					$title = 'Pinterest';
 					break;
 				case 'twitterId':
 					$socialUrl = 'https://twitter.com/';
+					$title = 'Twitter';
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
@@ -2075,7 +2169,7 @@ class layout extends common {
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" target="_blank">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" title="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
 			}
 		}
 		if($socials !== '') {

@@ -10,6 +10,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
+ * @Edition  : 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
  */
 
 class theme extends common {
@@ -62,6 +63,12 @@ class theme extends common {
 		'Ubuntu' => 'Ubuntu',
 		'Vollkorn' => 'Vollkorn'
 	];
+	public static $footerblocks = [
+		'hide' => 'Masqué',
+		'left' => 'Bloc Gauche',
+		'center' => 'Bloc Central',
+		'right' => 'Bloc Droite'
+	];
 	public static $fontWeights = [
 		'normal' => 'Normal',
 		'bold' => 'Gras'
@@ -83,7 +90,7 @@ class theme extends common {
 		'1.8em' => 'Petite',
 		'2em' => 'Moyenne',
 		'2.2em' => 'Grande',
-		'2.4em' => 'Très grande'
+		'2.4vmax' => 'Très grande'
 	];
 	public static $headerHeights = [
 		'100px' => 'Très petite (100 pixels)',
@@ -266,7 +273,10 @@ class theme extends common {
 				'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
 				'text' => $this->getInput('themeFooterText', null),
 				'textAlign' => $this->getInput('themeFooterTextAlign'),
-				'textColor' => $this->getInput('themeFooterTextColor')
+				'textColor' => $this->getInput('themeFooterTextColor'),
+				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
+				'textPosition' => $this->getInput('themeFooterTextPosition'),
+				'socialsPosition' => $this->getInput('themeFooterSocialsPosition')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

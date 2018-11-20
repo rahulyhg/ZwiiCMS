@@ -32,7 +32,12 @@ class page extends common {
 		'icontext' => 'Icône et texte'
 	];
 	// menu image
-
+	// Position du module
+	public static $modulePosition = [
+	'bottom' => 'En bas',
+	'top' => 'En haut',
+	'free' => 'Libre'
+	];
 	/**
 	 * Création
 	 */
@@ -54,6 +59,7 @@ class page extends common {
 				'metaTitle' => '',
 				'moduleId' => '',
 				'parentPageId' => '',
+				'modulePosition' => 'bottom',
 				'position' => 0,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
@@ -183,6 +189,7 @@ class page extends common {
 						'metaDescription' => $this->getInput('pageEditMetaDescription', helper::FILTER_STRING_LONG),
 						'metaTitle' => $this->getInput('pageEditMetaTitle'),
 						'moduleId' => $this->getInput('pageEditModuleId'),
+						'modulePosition' => $this->getInput('configModulePosition'),
 						'parentPageId' => $this->getInput('pageEditParentPageId'),
 						'position' => $position,
 						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),

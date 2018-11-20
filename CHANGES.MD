@@ -1,12 +1,63 @@
-﻿# ChangeLog 
+# ChangeLog 
 
+## Version 8.4.6
+* corrections : 
+    - Encodage des dates dans la liste des articles news et blog
+    - Variable itemsperpage stockée dans le mauvais type
 
-## Préversion 8.3.13 :
+## Version 8.4.5
+* corrections :
+    - nettoyage du code core.php
+    - W3C ajout de balise title manquante
+    - Inversion de deux balises dans Socials
+
+## Version 8.4.4
+* Correction : 
+    - Valeur par défaut et d'update des éléments du footer dans les blocks 
+
+## Version 8.4.3
+* Correction : 
+    - URL incorrecte dans Metaimage
+    - Erreur dans la génération du sitemap
+    - Taille du texte de la bannnière maximale relative (vmax)
+    - Préfixe des en-têtes html pour OpenGraph
+    - Balise Titre dans Socials
+    - Conformité W3C des URL dans socials
+
+## Version 8.4.2
+* Correction :
+    - Modifications de la présentation des en-têtes d'articles de Blog et de News
+    - Format du mois au format long et en français
+
+## Version 8.4.1
+* Correction :
+    - Erreur de type empêchant l'affichage des articles du blog (nombre d'articles par page)
+
+## Version 8.4.0
+* Modifications :
+	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
+	- Pagination variable du nombres d'articles par page (news, blog et form)
+	- Position des modules Galerie et Form dans une page ; haut ; bas ou libre avec les doubles crochets insérés dans l'article []
+    - Prise en compte des balises OpenGraph obligatoires title , description, type et images
+    - Modification de la position des boutons retour et éditer lors de l'affichage d'un article si connecté
+    - Mise en forme de la composition des articles et des news 
+    - Suppression du message de l'édition des redirections
+
+* Corrections : 
+    - Accès aux pages désactivées par le sitemap
+    - Réduction du temps d'affichage des notifications
+    - Image responsive en en-tête de l'article d'un blog
+    - Mise à jour du gestionnaire de fichiers en version 9.13.1
+
+## version 8.3.13 :
 * Modifications : 
     - Bannière "responsive", nouvelles options de positionnement
     - Bouton Edit dans Blog
     - Options de position des menus selon la position de la bannière
-    - Mise à jour TinyMCE    
+    - Bouton Edition dans un article du blog
+    - Balise ALT dans les images du menu
+    - Correction RFM
+ 
 
 ## version 8.3.12 :
 * Modification : 
