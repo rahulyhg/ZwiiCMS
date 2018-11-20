@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.4.7
+* corrections :
+    - Chaine de mise à jour des variables internes 
+
 ## Version 8.4.6
 * corrections : 
     - Encodage des dates dans la liste des articles news et blog

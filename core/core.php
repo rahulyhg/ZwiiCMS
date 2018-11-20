@@ -894,10 +894,10 @@ class common {
 			$this->setData(['core', 'dataVersion', 826]);
 			$this->SaveData();
 		}
-		// Version 8.3.13
-		if($this->getData(['core', 'dataVersion']) < 8313) {
+		// Version 8.3.1
+		if($this->getData(['core', 'dataVersion']) < 831) {
 			$this->setData(['theme','header','imageContainer','auto']);
-			$this->setData(['core', 'dataVersion', 8313]);
+			$this->setData(['core', 'dataVersion', 831]);
 			$this->SaveData();
 		}
 		// Version 8.4.0
@@ -909,7 +909,6 @@ class common {
 			$this->setData(['core', 'dataVersion', 840]);
 			$this->SaveData();
 		}
-
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {
 			$this->setData(['theme','footer','socialsPosition','none']);
