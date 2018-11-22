@@ -345,9 +345,7 @@ $get_params = http_build_query($get_params);
 	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) { ?>
 		<script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
 	<?php }else{ ?>
-		// <script src="http://feather.aviary.com/imaging/v3/editor.js"></script>
-		<script src="editor.js"></script>
-		
+		<script src="http://feather.aviary.com/imaging/v3/editor.js"></script>
 	<?php }} ?>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
