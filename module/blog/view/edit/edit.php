@@ -59,7 +59,7 @@
 					'selected' => $this->getUser('id')
 				]); ?>
 				<?php echo template::date('blogEditPublishedOn', [
-					'help' => 'L\'article est consultable à partir du moment ou la date de publication est passée.',
+					'help' => 'L\'article est consultable à partir du moment où la date de publication est passée.',
 					'label' => 'Date de publication',
 					'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'publishedOn'])
 				]); ?>
@@ -67,7 +67,7 @@
 		</div>
 		<div class="col6">
 			<div class="block">
-				<h4>Options avancés</h4>
+				<h4>Options avancées</h4>
 				<?php echo template::checkbox('blogEditCloseComment', true, 'Fermer les commentaires', [
 					'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'closeComment'])
 				]); ?>

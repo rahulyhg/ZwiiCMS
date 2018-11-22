@@ -136,7 +136,7 @@
 * Correction : divers bugs mineurs
 
 ## 8.2.2
-* Ajout : options avancés des images dans TinyMCE
+* Ajout : options avancées des images dans TinyMCE
 * Ajout : effet de transition au survol des galeries photos
 * Ajout : mode maintenance activable depuis la page de configuration
 * Ajout : bordure autour de l'éditeur CSS dans la personnalisation avancée

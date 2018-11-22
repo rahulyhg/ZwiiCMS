@@ -56,7 +56,7 @@
 					'selected' => $this->getUser('id')
 				]); ?>
 				<?php echo template::date('blogAddPublishedOn', [
-					'help' => 'L\'article est consultable à partir du moment ou la date de publication est passée.',
+					'help' => 'L\'article est consultable à partir du moment où la date de publication est passée.',
 					'label' => 'Date de publication',
 					'value' => time()
 				]); ?>
@@ -64,7 +64,7 @@
 		</div>
 		<div class="col6">
 			<div class="block">
-				<h4>Options avancés</h4>
+				<h4>Options avancées</h4>
 				<?php echo template::checkbox('blogAddCloseComment', true, 'Fermer les commentaires'); ?>
 			</div>
 		</div>
