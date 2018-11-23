@@ -1,7 +1,15 @@
 # ChangeLog 
 
+## Version 8.4.9
+* Correction :
+    - Adresse d'une page inactive
+
+## version 8.4.8 
+* Correction : 
+    - Fautes de frappe
+
 ## Version 8.4.7
-* corrections :
+* correction :
     - Chaine de mise à jour des variables internes 
 
 ## Version 8.4.6

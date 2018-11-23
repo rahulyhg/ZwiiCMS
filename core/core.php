@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.8';
+	const ZWII_VERSION = '8.4.9';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1886,7 +1886,7 @@ class layout extends common {
 			if ( $this->getData(['page',$parentPageId,'disable']) === true
 				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
-					{$items .= '<a href="#">';}
+					{$items .= '<a href="'.$this->getUrl(1).'">';}
 		    else {
 				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '" title="'.$this->getData(['page', $parentPageId, 'title']).'" ' . $active . $targetBlank . '>';			}
 
@@ -1945,7 +1945,7 @@ class layout extends common {
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
-						{$items .= '<a href="#">';}
+						{$items .= '<a href="'.$this->getUrl(1).'">';}
 				else {
 					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
 
