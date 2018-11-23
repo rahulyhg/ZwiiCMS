@@ -117,7 +117,15 @@
 			$this->getData(['theme', 'menu', 'position']) === 'hide'
 			AND $this->getUrl(0) === 'theme'
 		)
-	): ?>
+		): ?>
+
+		<!-- modif bannière full responsive dans body-->
+		<?php if($this->getData(['theme', 'header', 'position']) == 'body') {
+				$themeHeaderImage = $this->getData(['theme', 'header', 'image']);
+				echo '<div class="responsive-banner"><a href="'.helper::baseUrl(false).'" title="Retour à l\'accueil"><img src="'.helper::baseUrl(false).'site/file/source/'.$themeHeaderImage.'" alt="Accueil"></a></div>';
+			} ?>
+		<!-- Fin modif -->
+
 		<!-- Menu dans le site après la bannière -->
 		<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div id="toggle"><?php echo template::ico('menu'); ?></div>
