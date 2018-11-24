@@ -163,7 +163,9 @@ class blog extends common {
 			self::$articles[] = [
 				$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'title']),
 				// date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
-				utf8_encode(strftime('%d %B %Y - %H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),
+				utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])))
+				.' à '.
+				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),				
 				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
 				template::button('blogConfigEdit' . $articleIds[$i], [
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i],
