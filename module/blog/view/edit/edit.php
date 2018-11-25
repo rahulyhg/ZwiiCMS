@@ -42,6 +42,13 @@
 							'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'picture'])
 						]); ?>
 					</div>
+					<div class="col6">
+					</div>
+					<div class="col6">							
+						<?php echo template::checkbox('blogEditHidePicture', true, 'Masquer l\'image dans l\'article', [
+							'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'hidePicture'])
+							]); ?>
+					</div>					
 				</div>
 			</div>
 		</div>

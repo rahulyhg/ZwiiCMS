@@ -178,12 +178,10 @@ class page extends common {
 				$this->setData([
 					'page',
 					$pageId,
-					[
-						// Menu image
+					[					
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 
-						// Menu image						
+						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 						
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'metaDescription' => $this->getInput('pageEditMetaDescription', helper::FILTER_STRING_LONG),

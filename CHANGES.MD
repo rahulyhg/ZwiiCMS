@@ -3,6 +3,8 @@
 ## Version 8.4.9
 * Correction :
     - Adresse d'une page inactive
+* Modification : 
+    - Blog : masquer une image dans l'article tout en conservant la miniature dans l'index
 
 ## version 8.4.8 
 * Correction : 

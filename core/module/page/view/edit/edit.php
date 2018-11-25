@@ -54,9 +54,6 @@
 						</div>
 					</div>
 				</div>
-				<!--
-				Menu Image
-                 		-->
 				<div class="row">
 					<div class="col6">
 										
@@ -73,12 +70,6 @@
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
 						]); ?>
 					</div>
-
-	
-					
-				<!--
-				Menu Image
-				-->
 				</div>
 			</div>
 		</div>
