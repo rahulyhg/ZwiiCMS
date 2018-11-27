@@ -311,6 +311,12 @@ header .container {
 	height: 100%;
 }
 
+ /* Bannière image reponsive */
+.responsive-banner img {
+	display:block; 
+	width:100%;
+}
+
 /* Menu */
 body > nav {
 	margin: 0 -10px;
