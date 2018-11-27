@@ -1038,25 +1038,6 @@ class core extends common {
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
-
-			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
-				switch($themeHeaderPosition = $this->getData(['theme', 'header', 'position'])) {
-					case'body':
-					
-					$css .= '/*@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}*/';
-					
-					$css .= '/*header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}*/';
-					break;
-					default:
-					
-					$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
-					
-					$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
-					break;
-					}
-				}
-
-
 			$colors = helper::colorVariants($this->getData(['theme', 'header', 'textColor']));
 			$css .= 'header span{color:' . $colors['normal'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'header', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'header', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'header', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'header', 'textTransform']) . '}';
 			// Menu
