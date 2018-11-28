@@ -31,12 +31,14 @@ class form extends common {
 	const TYPE_SELECT = 'select';
 	const TYPE_TEXT = 'text';
 	const TYPE_TEXTAREA = 'textarea';
+	const TYPE_DATETIME = "date";
 
 	public static $types = [
 		self::TYPE_TEXT => 'Champ texte',
 		self::TYPE_TEXTAREA => 'Grand champ texte',
 		self::TYPE_MAIL => 'Champ mail',
-		self::TYPE_SELECT => 'Sélection'
+		self::TYPE_SELECT => 'Sélection',
+		self::TYPE_DATETIME => 'Sélection date'
 	];
 
 	/**
@@ -88,7 +90,8 @@ class form extends common {
 		$this->addOutput([
 			'title' => 'Configuration du module',
 			'vendor' => [
-				'html-sortable'
+				'html-sortable',
+				'flatpickr'
 			],
 			'view' => 'config'
 		]);
@@ -178,6 +181,9 @@ class form extends common {
 					case self::TYPE_TEXTAREA:
 						$filter = helper::FILTER_STRING_LONG;
 						break;
+					case self::TYPE_DATE:
+						$filter = helper::FILTER_DATETIME;
+						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
 				}
@@ -230,7 +236,7 @@ class form extends common {
 		$this->addOutput([
 			'showBarEditButton' => true,
 			'showPageContent' => true,
-			'view' => 'index'
+			'view' => 'index',
 		]);
 	}
 

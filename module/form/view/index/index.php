@@ -27,6 +27,13 @@
 					'id' => 'formInput_' . $index,
 					'label' => $input['name']
 				]); ?>
+			<?php elseif($input['type'] === $module::TYPE_DATETIME): ?>
+				<?php echo template::date('formInput[' . $index . ']', [
+					'id' => 'formInput_' . $index,
+					'label' => $input['name'],
+					'value' => time(),
+					'vendor' => 'flatpickr'
+				]); ?>			
 			<?php endif; ?>
 		<?php endforeach; ?>
 		<?php if($this->getData(['module', $this->getUrl(0), 'config', 'capcha'])): ?>
