@@ -31,7 +31,6 @@
 				<?php echo template::date('formInput[' . $index . ']', [
 					'id' => 'formInput_' . $index,
 					'label' => $input['name'],
-					'value' => time(),
 					'vendor' => 'flatpickr'
 				]); ?>			
 			<?php endif; ?>

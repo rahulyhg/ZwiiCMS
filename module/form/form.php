@@ -182,7 +182,7 @@ class form extends common {
 						$filter = helper::FILTER_STRING_LONG;
 						break;
 					case self::TYPE_DATETIME:
-						$filter = helper::FILTER_DATETIME;
+						$filter = helper::FILTER_STRING_SHORT;
 						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
