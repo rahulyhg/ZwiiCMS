@@ -181,7 +181,7 @@ class form extends common {
 					case self::TYPE_TEXTAREA:
 						$filter = helper::FILTER_STRING_LONG;
 						break;
-					case self::TYPE_DATE:
+					case self::TYPE_DATETIME:
 						$filter = helper::FILTER_DATETIME;
 						break;
 					default:

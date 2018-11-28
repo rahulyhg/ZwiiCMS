@@ -404,7 +404,7 @@ class common {
 			'normalize',
 			'lity',
 			'filemanager',
-			// 'flatpickr', Désactivé par défaut
+			'flatpickr', 
 			// 'tinycolorpicker', Désactivé par défaut
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
