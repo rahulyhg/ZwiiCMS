@@ -24,7 +24,11 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.9';
+    const PLUGIN_ERROR = -1;
+    const PLUGIN_NOT_APPLICABLE = 0;
+    const PLUGIN_ACTIVATE = 1;
+    const PLUGIN_DEACTIVATE = 2;
+	const ZWII_VERSION = '9.0.0-Alpha';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -32,6 +36,7 @@ class common {
 		'install',
 		'maintenance',
 		'page',
+        'plugins',
 		'sitemap',
 		'theme',
 		'user'
@@ -1782,7 +1787,23 @@ class helper {
 		}
 		return $text;
 	}
-
+    
+    /**
+	 * Supprime un répertoire avec tous ses descendants
+	 * @param string $dir Répertoire racine à supprimer	 
+	 */
+    public static function rmdir_recursive($dir) {
+        $dir = trim($dir);
+        if(strlen($dir) > 1) {
+            $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+            $it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+            foreach($it as $file) {
+                if ($file->isDir()) rmdir($file->getPathname());
+                else unlink($file->getPathname());
+            }
+            rmdir($dir);
+        }
+    }
 }
 
 class layout extends common {
@@ -2101,6 +2122,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
+                $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" title="Gestion des plugins">' . template::ico('fa-puzzle-piece') . '</a></li>';
 				// menu image
 				if(helper::checkNewVersion()) {
 					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
@@ -2567,10 +2589,17 @@ class template {
 	 * @param string $margin Ajoute un margin autour de l'icône (choix : left, right, all)
 	 * @param bool $animate Ajoute une animation à l'icône
 	 * @param string $fontSize Taille de la police
+     * @param string $colorClass Classe de la couleur de l'icône
 	 * @return string
 	 */
-	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em') {
-		return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . '" style="font-size:' . $fontSize . '"></span>';
+	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em', $colorClass = '') {
+		if(substr( $ico, 0, 3 ) !== "fa-"){
+            // Utilisatin des icones zwiico        
+            return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
+        } else {
+            // Utilisation des icônes de fontawesome
+            return '<span class="fas ' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
+        }
 	}
 
 	/**

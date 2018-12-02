@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 9.0.0-Alpha
+* Ajout : icones de la librairie FontAwesome 5.5.0
+* Ajout : gestion des plugins
+
 ## Version 8.4.9
 * Correction :
     - Adresse d'une page inactive

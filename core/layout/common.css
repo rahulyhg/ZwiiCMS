@@ -723,6 +723,26 @@ label {
 .button.buttonRed:active {
 	background: #E3301E;
 }
+.button.buttonGreen {
+	background: #27AE60;
+	color: #FFF;
+}
+.button.buttonGreen:hover {
+	background: #19CC5F;
+}
+.button.buttonGreen:active {
+	background: #17C050;
+}
+.button.buttonOrange {
+	background: #F39C12;
+	color: #FFF;
+}
+.button.buttonOrange:hover {
+	background: #E59C11;
+}
+.button.buttonOrange:active {
+	background: #E39002;
+}
 
 /* Upload de fichiers */
 .inputFile {
@@ -1036,6 +1056,9 @@ th.col12 {
 .clearBoth {
 	clear: both;
 }
+.smallText {
+    font-size: 0.8em !important;
+}
 .colorGreen {
 	color: #27AE60;
 }
@@ -1044,4 +1067,7 @@ th.col12 {
 }
 .colorOrange {
 	color: #F39C12;
+}
+.colorGrey {
+	color: #9C9C9C;
 }
