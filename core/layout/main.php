@@ -243,5 +243,7 @@
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showAnalytics(); ?>
 <?php $layout->showScript(); ?>
+<script defer src="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/js/solid.min.js"></script>
+<script defer src="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/js/fontawesome.min.js"></script>
 </body>
 </html>
