@@ -1515,13 +1515,13 @@ class helper {
 	 * @return bool
 	 */
 	public static function checkNewVersion() {
+                $newVersion  = false;
 		if($version = @file_get_contents('http://zwiicms.com/version')) {
-			return (trim($version) !== common::ZWII_VERSION);
+                    if(version_compare(trim($version), common::ZWII_VERSION) === 1) $newVersion = true;
 		}
-		else {
-			return false;
-		}
+		return $newVersion;
 	}
+
 
 	/**
 	 * Génère des variations d'une couleur
