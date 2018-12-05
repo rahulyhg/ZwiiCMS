@@ -96,12 +96,12 @@ class news extends common {
 				self::$states[$this->getData(['module', $this->getUrl(0), $newsIds[$i], 'state'])],
 				template::button('newsConfigEdit' . $newsIds[$i], [
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $newsIds[$i],
-					'value' => template::ico('pencil')
+					'value' => template::ico('pencil-alt')
 				]),
 				template::button('newsConfigDelete' . $newsIds[$i], [
 					'class' => 'newsConfigDelete buttonRed',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i],
-					'value' => template::ico('cancel')
+					'value' => template::ico('times')
 				])
 			];
 		}

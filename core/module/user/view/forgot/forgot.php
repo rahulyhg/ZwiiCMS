@@ -7,7 +7,7 @@
 			<?php echo template::button('userForgotBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'user/login/' . $this->getUrl(2),
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>

@@ -22,7 +22,7 @@
 			</div>
 			<div class="col1">
 				<?php echo template::button('formConfigMoreToggle[]', [
-					'value' => template::ico('gear'),
+					'value' => template::ico('cogs'),
 					'class' => 'formConfigMoreToggle'
 				]); ?>
 			</div>
@@ -49,7 +49,7 @@
 			<?php echo template::button('formConfigBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'page/edit/' . $this->getUrl(0),
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>

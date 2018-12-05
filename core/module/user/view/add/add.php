@@ -4,7 +4,7 @@
 			<?php echo template::button('userAddBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'user',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>

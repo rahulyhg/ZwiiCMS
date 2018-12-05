@@ -10,6 +10,9 @@
 	<?php $layout->showMetaImage(); ?>		
 	<?php $layout->showFavicon(); ?>
 	<?php $layout->showVendor(); ?>
+        <link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+        <link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+        <link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file('site/data/theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file('site/data/custom.css'); ?>">
@@ -21,7 +24,7 @@
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'body-top' ): ?>
 	<!-- Menu dans le fond du site avant la bannière -->
 	<nav>
-		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="toggle"><?php echo template::ico('bars'); ?></div>
 		<div id="menu" class="
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-top'){echo 'container-large';}else{echo'container';}
 		?>">
@@ -64,7 +67,7 @@
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 	<!-- Menu dans le fond du site après la bannière -->
 	<nav>
-		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="toggle"><?php echo template::ico('bars'); ?></div>
 		<div id="menu" class="container">
 			<?php $layout->showMenu(); ?>
 		</div>
@@ -75,7 +78,7 @@
 	<?php if($this->getData(['theme', 'menu', 'position']) === 'site-first'): ?>
 		<!-- Menu dans le site avant la bannière -->
 		<nav>
-			<div id="toggle"><?php echo template::ico('menu'); ?></div>
+			<div id="toggle"><?php echo template::ico('bars'); ?></div>
 			<div id="menu" class="container">
 				<?php $layout->showMenu(); ?>
 			</div>
@@ -120,7 +123,7 @@
 	): ?>
 		<!-- Menu dans le site après la bannière -->
 		<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-			<div id="toggle"><?php echo template::ico('menu'); ?></div>
+			<div id="toggle"><?php echo template::ico('bars'); ?></div>
 			<div id="menu" class="container">
 				<?php $layout->showMenu(); ?>
 			</div>
@@ -136,6 +139,7 @@
 			AND $this->getUrl(0) === 'theme'
 		)
 	): ?>
+
 		<!-- Pied de page dans le site -->
 		
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
@@ -240,10 +244,8 @@
 	</footer>
 <?php endif; ?>
 <!-- Lien remonter en haut -->
-<div id="backToTop"><?php echo template::ico('up'); ?></div>
+<div id="backToTop"><?php echo template::ico('chevron-up'); ?></div>
 <?php $layout->showAnalytics(); ?>
 <?php $layout->showScript(); ?>
-<script defer src="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/js/solid.min.js"></script>
-<script defer src="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/js/fontawesome.min.js"></script>
 </body>
 </html>

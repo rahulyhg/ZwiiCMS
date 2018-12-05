@@ -25,7 +25,7 @@
 			<?php echo template::button('userLoginBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . str_replace('_', '/', str_replace('__', '#', $this->getUrl(2))),
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Annuler'
 			]); ?>
 		</div>

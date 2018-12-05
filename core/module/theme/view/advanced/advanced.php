@@ -4,7 +4,7 @@
 			<?php echo template::button('themeAdvancedBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'theme',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -12,7 +12,7 @@
 			<?php echo template::button('themeAdvancedReset', [
 				'href' => helper::baseUrl() . 'theme/reset',
 				'class' => 'buttonRed',
-				'ico' => 'cancel',
+				'ico' => 'times',
 				'value' => 'Réinitialiser'
 			]); ?>
 		</div>

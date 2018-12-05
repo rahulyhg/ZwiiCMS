@@ -3,7 +3,7 @@
 		<?php echo template::button('galleryGalleryBack', [
 			'class' => 'buttonGrey',
 			'href' => helper::baseUrl() . $this->getUrl(0),
-			'ico' => 'left',
+			'ico' => 'caret-left',
 			'value' => 'Retour'
 		]); ?>
 	</div>

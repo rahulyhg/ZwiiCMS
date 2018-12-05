@@ -11,7 +11,7 @@
 							<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>#comment">
 								<?php echo count($article['comment']); ?>
 							</a>
-							<?php echo template::ico('comment', 'left'); ?>
+							<?php echo template::ico('comment-alt', 'left'); ?>
 						</div>
 					</h4>
 					<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>" class="blogPicture">

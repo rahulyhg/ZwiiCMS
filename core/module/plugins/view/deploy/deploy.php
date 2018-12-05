@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col9 verticalAlignMiddle">
 		<div id="deployPluginProgress">
-			<?php echo template::ico('spin', '', true); ?>
+			<?php echo template::ico('spinner', '', true); ?>
 			<span class="deployPluginProgressText" data-id="1">1/5 : Préparation...</span>
                         <span class="deployPluginProgressText displayNone" data-id="2">2/5 : Téléchargement...</span>     
 			<span class="deployPluginProgressText displayNone" data-id="3">3/5 : Contrôle...</span>                        
@@ -11,7 +11,7 @@
 			<span class="deployPluginProgressText displayNone" data-id="5">5/5 : Installation...</span>
 		</div>
 		<div id="deployPluginError" class="displayNone">
-                    <span class="colorRed"><?php echo template::ico('cancel', ''); ?></span>
+                    <span class="colorRed"><?php echo template::ico('times', ''); ?></span>
                     Une erreur est survenue lors de l'étape <span id="deployPluginErrorStep" class="colorRed"></span>.<br/>
                     <span id="deployPluginDetailErrorStep" class="smallText colorRed"></span>
 		</div>

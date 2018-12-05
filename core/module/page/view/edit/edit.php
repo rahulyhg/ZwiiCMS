@@ -6,7 +6,7 @@
 			<?php echo template::button('pageEditBack', [
 				'class' => 'buttonGrey',
 				'href' => $href,
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -15,7 +15,7 @@
 				'class' => 'buttonRed',
 				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2),
 				'value' => 'Supprimer',
-				'ico' => 'cancel'
+				'ico' => 'times'
 			]); ?>
 		</div>
 		<div class="col2">
@@ -48,7 +48,7 @@
 								<?php echo template::button('pageEditModuleConfig', [
 									'disabled' => (bool) $this->getData(['page', $this->getUrl(2), 'moduleId']) === false,
 									'uniqueSubmission' => true,
-									'value' => template::ico('gear')
+									'value' => template::ico('cogs')
 								]); ?>
 							</div>
 						</div>

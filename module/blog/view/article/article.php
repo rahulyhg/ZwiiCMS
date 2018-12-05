@@ -108,7 +108,7 @@ code d'origine
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
-					'ico' => 'left',
+					'ico' => 'caret-left',
 					'value' => 'Retour'
 		]); ?>
     </div>
@@ -126,7 +126,7 @@ code d'origine
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
-					'ico' => 'left',
+					'ico' => 'caret-left',
 					'value' => 'Retour'
 		]); ?>
 	</div>

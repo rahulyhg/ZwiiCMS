@@ -55,12 +55,12 @@ class gallery extends common {
 					$gallery['config']['directory'],
 					template::button('galleryConfigEdit' . $galleryId, [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId,
-						'value' => template::ico('pencil')
+						'value' => template::ico('pencil-alt')
 					]),
 					template::button('galleryConfigDelete' . $galleryId, [
 						'class' => 'galleryConfigDelete buttonRed',
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $galleryId,
-						'value' => template::ico('cancel')
+						'value' => template::ico('times')
 					])
 				];
 			}

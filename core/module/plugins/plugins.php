@@ -61,7 +61,7 @@ class plugins extends common {
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                         'class' => 'pluginDelete buttonRed',
                         'href' => helper::baseUrl() . 'plugins/delete/' . $pluginId,
-                        'value' => template::ico('cancel')
+                        'value' => template::ico('times')
                     ]);
                     break;
 
@@ -77,7 +77,7 @@ class plugins extends common {
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                         'class' => 'pluginDelete buttonRed',
                         'href' => helper::baseUrl() . 'plugins/delete/' . $pluginId,
-                        'value' => template::ico('cancel')
+                        'value' => template::ico('times')
                     ]);
                     break;
 

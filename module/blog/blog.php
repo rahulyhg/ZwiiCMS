@@ -114,7 +114,7 @@ class blog extends common {
 				template::button('blogCommentDelete' . $commentIds[$i], [
 					'class' => 'blogCommentDelete buttonRed',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/comment-delete/' . $comment['articleId'] . '/' . $commentIds[$i],
-					'value' => template::ico('cancel')
+					'value' => template::ico('times')
 				])
 			];
 		}
@@ -170,12 +170,12 @@ class blog extends common {
 				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
 				template::button('blogConfigEdit' . $articleIds[$i], [
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i],
-					'value' => template::ico('pencil')
+					'value' => template::ico('pencil-alt')
 				]),
 				template::button('blogConfigDelete' . $articleIds[$i], [
 					'class' => 'blogConfigDelete buttonRed',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $articleIds[$i],
-					'value' => template::ico('cancel')
+					'value' => template::ico('times')
 				])
 			];
 		}

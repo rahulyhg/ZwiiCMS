@@ -3,13 +3,13 @@
 <div class="row">
 	<div class="col9 verticalAlignMiddle">
 		<div id="undeployPluginProgress">
-			<?php echo template::ico('spin', '', true); ?>
+			<?php echo template::ico('spinner', '', true); ?>
 			<span class="undeployPluginProgressText" data-id="1">1/3 : Contrôle...</span>
                         <span class="undeployPluginProgressText displayNone" data-id="2">2/3 : Sauvegarde...</span>                        
 			<span class="undeployPluginProgressText displayNone" data-id="3">3/3 : Supression du déploiement...</span>
 		</div>
 		<div id="undeployPluginError" class="displayNone">
-                    <span class="colorRed"><?php echo template::ico('cancel', ''); ?></span>
+                    <span class="colorRed"><?php echo template::ico('times', ''); ?></span>
                     Une erreur est survenue lors de l'étape <span id="undeployPluginErrorStep" class="colorRed"></span>.<br/>
                     <span id="undeployPluginDetailErrorStep" class="smallText colorRed"></span>
 		</div>

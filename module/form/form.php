@@ -121,7 +121,7 @@ class form extends common {
 					template::button('formDataDelete' . $dataIds[$i], [
 						'class' => 'formDataDelete buttonRed',
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i],
-						'value' => template::ico('cancel')
+						'value' => template::ico('times')
 					])
 				];
 			}

@@ -414,7 +414,7 @@ class common {
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
-			'zwiico'
+                        'fontawesome'
 		],
 		'view' => ''
 	];
@@ -1037,9 +1037,15 @@ class core extends common {
 					$css .= 'header{margin:20px 20px 0 20px}';
 				}
 			}
+
+                        // Suppression de l'unité Px pour éviter un erreur
+                        $headerHeight = $this->getData(['theme', 'header', 'height']);
+                        if(substr($headerHeight, -2) == 'px'){
+                            $headerHeight = substr($headerHeight, 0, strlen($headerHeight) - 2);
+                        }
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
-			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $headerHeight . 'px;line-height:' . $headerHeight . 'px;text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			                        
+			$css .= '@media (max-width: 767px) {header{height:' . $headerHeight/2 . 'px;line-height:' . $headerHeight/2 . 'px;}}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
@@ -1947,7 +1953,7 @@ class layout extends common {
 
 
 			if($childrenPageIds) {
-				$items .= template::ico('down', 'left');
+				$items .= template::ico('sort-down', 'left');
 			}
 			$items .= '</a>';
 
@@ -2078,7 +2084,7 @@ class layout extends common {
 			unset($_SESSION['ZWII_NOTIFICATION_OTHER']);
 		}
 		if(isset($notification) AND isset($notificationClass)) {
-			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('cancel') . '</span><div id="notificationProgress"></div></div>';
+			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('times') . '</span><div id="notificationProgress"></div></div>';
 		}
 	}
 
@@ -2109,28 +2115,28 @@ class layout extends common {
 					// Sur une page d'accueil
 					OR $this->getUrl(0) === ''
 				) {
-					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" title="Modifier la page">' . template::ico('pencil') . '</a></li>';
+					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" title="Modifier la page">' . template::ico('pencil-alt') . '</a></li>';
 				}
 			}
 			// Items de droite
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 
-				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/data.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/data.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
-                $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" title="Gestion des plugins">' . template::ico('fa-puzzle-piece') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('cogs') . '</a></li>';
+                                $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" title="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
 				// menu image
 				if(helper::checkNewVersion()) {
-					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
+					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('sync-alt colorRed') . '</a></li>';
 				}
 				// menu image
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id') . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
-			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
+			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('sign-out-alt') . '</a></li>';
 			// Barre de membre
 			echo '<div id="bar"><div class="container"><ul id="barLeft">' . $leftItems . '</ul><ul id="barRight">' . $rightItems . '</ul></div></div>';
 		}
@@ -2165,31 +2171,38 @@ class layout extends common {
 				case 'facebookId':
 					$socialUrl = 'https://www.facebook.com/';
 					$title = 'Facebook';
+                                        $ico = substr($socialName, 0, -2).'-f';
 					break;
 				case 'googleplusId':
 					$socialUrl = 'https://plus.google.com/';
 					$title = 'Google +';
+                                        $ico = "google-plus-g";
 					break;
 				case 'instagramId':
 					$socialUrl = 'https://www.instagram.com/';
 					$title = 'Instagram';
+                                        $ico = substr($socialName, 0, -2);
 					break;
 				case 'pinterestId':
 					$socialUrl = 'https://pinterest.com/';
 					$title = 'Pinterest';
+                                        $ico = substr($socialName, 0, -2).'-p';
 					break;
 				case 'twitterId':
 					$socialUrl = 'https://twitter.com/';
 					$title = 'Twitter';
+                                        $ico = substr($socialName, 0, -2);
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
+                                        $title = 'YouTube';
+                                        $ico = substr($socialName, 0, -2);
 					break;
 				default:
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" title="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" title="' . $title . '">' . template::ico($ico) . '</a>';
 			}
 		}
 		if($socials !== '') {
@@ -2512,7 +2525,7 @@ class template {
 		);
 		$html .= self::button($attributes['id'] . 'Delete', [
 			'class' => 'inputFileDelete',
-			'value' => self::ico('cancel')
+			'value' => self::ico('times')
 		]);
 		$html .= '</div>';
 		// Fin du wrapper
@@ -2553,7 +2566,7 @@ class template {
 	 * @return string
 	 */
 	public static function help($text) {
-		return '<span class="helpButton" title="' . $text . '">' . self::ico('help') . '</span>';
+		return '<span class="helpButton" title="' . $text . '">' . self::ico('question-circle') . '</span>';
 	}
 
 	/**
@@ -2589,17 +2602,15 @@ class template {
 	 * @param string $margin Ajoute un margin autour de l'icône (choix : left, right, all)
 	 * @param bool $animate Ajoute une animation à l'icône
 	 * @param string $fontSize Taille de la police
-     * @param string $colorClass Classe de la couleur de l'icône
+         * @param string $colorClass Classe de la couleur de l'icône
 	 * @return string
 	 */
-	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em', $colorClass = '') {
-		if(substr( $ico, 0, 3 ) !== "fa-"){
-            // Utilisatin des icones zwiico        
-            return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
-        } else {
-            // Utilisation des icônes de fontawesome
-            return '<span class="fas ' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
-        }
+	public static function ico($ico, $margin = '', $animate = false, $fontSize = '0.75em', $colorClass = '') {
+            $brands = array ("facebook-f", "google-plus-g", "instagram", "pinterest-p", "twitter", "youtube");
+            $iconFont = "fas";
+            if(in_array($ico, $brands)) $iconFont = "fab";
+
+            return '<span class="'.$iconFont.' fa-' . $ico . ($margin ? ' ico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';            
 	}
 
 	/**
@@ -2807,7 +2818,7 @@ class template {
 	 * @return string
 	 */
 	public static function speech($text) {
-		return '<div class="speech"><div class="speechBubble">' . $text . '</div>' . template::ico('mimi speechMimi', '', false, '7em') . '</div>';
+		return '<div class="speech"><div class="speechBubble">' . $text . '</div>' . template::ico('mimi speechMimi', '', false, '2.68em') . '</div>';
 	}
 
 	/**

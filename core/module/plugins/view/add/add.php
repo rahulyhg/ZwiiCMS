@@ -3,7 +3,7 @@
                 <?php echo template::button('pluginAddBack', [
                         'class' => 'buttonGrey',
                         'href' => helper::baseUrl() . 'plugins',
-                        'ico' => 'left',
+                        'ico' => 'caret-left',
                         'value' => 'Retour'
                 ]); ?>
         </div>
