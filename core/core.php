@@ -486,7 +486,7 @@ class common {
 		}
 		// Construit la liste des pages parents/enfants
 		if($this->hierarchy['all'] === []) {
-			$pages = helper::arrayCollumn($this->getData(['page']), 'position', 'SORT_ASC');
+			$pages = helper::arrayColumn($this->getData(['page']), 'position', 'VAL_SORT_ASC');
 			// Parents
 			foreach($pages as $pageId => $pagePosition) {
 				if(
@@ -1448,21 +1448,27 @@ class helper {
 	 * Retourne les valeurs d'une colonne du tableau de données
 	 * @param array $array Tableau cible
 	 * @param string $column Colonne à extraire
-	 * @param string $sort Type de tri à appliquer au tableau (SORT_ASC, SORT_DESC, ou null)
+	 * @param string $sort Type de tri à appliquer au tableau (VAL_SORT_ASC, VAL_SORT_DESC, KEY_SORT_ASC, KEY_SORT_DESC ou null)
 	 * @return array
 	 */
-	public static function arrayCollumn($array, $column, $sort = null) {
+	public static function arrayColumn($array, $column, $sort = null) {
 		$newArray = [];
 		if(empty($array) === false) {
 			$newArray = array_map(function($element) use($column) {
 				return $element[$column];
 			}, $array);
-			switch($sort) {
-				case 'SORT_ASC':
+			switch(strtoupper($sort)) {
+				case 'VAL_SORT_ASC':
 					asort($newArray);
 					break;
-				case 'SORT_DESC':
+				case 'VAL_SORT_DESC':
 					arsort($newArray);
+					break;
+                                case 'KEY_SORT_ASC':
+					ksort($newArray);
+					break;
+				case 'KEY_SORT_DESC':
+					krsort($newArray);
 					break;
 			}
 		}

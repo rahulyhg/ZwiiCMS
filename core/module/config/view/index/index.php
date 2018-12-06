@@ -18,7 +18,7 @@
 			<div class="block">
 				<h4>Informations générales</h4>
 
-				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+				<?php echo template::select('configHomePageId', helper::arrayColumn($this->getData(['page']), 'title', 'VAL_SORT_ASC'), [
 					'label' => 'Page d\'accueil',
 					'selected' => $this->getData(['config', 'homePageId'])
 				]); ?>

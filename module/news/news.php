@@ -58,8 +58,7 @@ class news extends common {
 			]);
 		}
 		// Liste des utilisateurs
-		self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort(self::$users);
+		self::$users = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 		foreach(self::$users as $userId => &$userFirstname) {
 			$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
 		}
@@ -80,7 +79,7 @@ class news extends common {
 	 */
 	public function config() {
 		// Ids des news par ordre de publication
-		$newsIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC'));
+		$newsIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC'));
 		// Pagination
 		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
@@ -173,8 +172,7 @@ class news extends common {
 				]);
 			}
 			// Liste des utilisateurs
-			self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-			ksort(self::$users);
+			self::$users = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 			foreach(self::$users as $userId => &$userFirstname) {
 				$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
 			}
@@ -196,8 +194,8 @@ class news extends common {
 	 */
 	public function index() {
 		// Ids des news par ordre de publication
-		$newsIdsPublishedOns = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC');
-		$newsIdsStates = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'state', 'SORT_DESC');
+		$newsIdsPublishedOns = helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC');
+		$newsIdsStates = helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'state', 'VAL_SORT_DESC');
 		$newsIds = [];
 		foreach($newsIdsPublishedOns as $newsId => $newsPublishedOn) {
 			if($newsPublishedOn <= time() AND $newsIdsStates[$newsId]) {

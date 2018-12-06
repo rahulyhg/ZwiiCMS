@@ -67,8 +67,7 @@ class blog extends common {
 			]);
 		}
 		// Liste des utilisateurs
-		self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort(self::$users);
+		self::$users = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 		foreach(self::$users as $userId => &$userFirstname) {
 			$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
 		}
@@ -97,7 +96,7 @@ class blog extends common {
 			$comments += $article['comment'];
 		}
 		// Ids des commentaires par ordre de création
-		$commentIds = array_keys(helper::arrayCollumn($comments, 'createdOn', 'SORT_DESC'));
+		$commentIds = array_keys(helper::arrayColumn($comments, 'createdOn', 'VAL_SORT_DESC'));
 		// Pagination
 		$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
@@ -153,7 +152,7 @@ class blog extends common {
 	 */
 	public function config() {
 		// Ids des articles par ordre de publication
-		$articleIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC'));
+		$articleIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC'));
 		// Pagination
 		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
 		// Liste des pages
@@ -254,8 +253,7 @@ class blog extends common {
 				]);
 			}
 			// Liste des utilisateurs
-			self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-			ksort(self::$users);
+			self::$users = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 			foreach(self::$users as $userId => &$userFirstname) {
 				$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
 			}
@@ -316,7 +314,7 @@ class blog extends common {
 					]);
 				}
 				// Ids des commentaires par ordre de publication
-				$commentIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']), 'createdOn', 'SORT_DESC'));
+				$commentIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']), 'createdOn', 'VAL_SORT_DESC'));
 				// Pagination
 				$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']),'#comment');
 				// Liste des pages
@@ -337,8 +335,8 @@ class blog extends common {
 		// Liste des articles
 		else {
 			// Ids des articles par ordre de publication
-			$articleIdsPublishedOns = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC');
-			$articleIdsStates = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'state', 'SORT_DESC');
+			$articleIdsPublishedOns = helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC');
+			$articleIdsStates = helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'state', 'VAL_SORT_DESC');
 			$articleIds = [];
 			foreach($articleIdsPublishedOns as $articleId => $articlePublishedOn) {
 				if($articlePublishedOn <= time() AND $articleIdsStates[$articleId]) {

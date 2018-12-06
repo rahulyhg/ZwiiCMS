@@ -96,6 +96,9 @@ class install extends common {
 			// Préparation
 			case 1:
 				$success = true;
+
+                                // TODO - Sauvegarder les éléments des plugins déployés afin de pouvoir les réactiver à la fin
+
 				// Copie du fichier de données
 				copy('site/data/data.json', 'site/backup/' . date('Y-m-d', time()) . '-update.json');
 				// Nettoyage des fichiers temporaires
@@ -179,6 +182,8 @@ class install extends common {
 				]);
 				break;
 		}
+
+                // TODO - Prévoir la réactivation des plugins qui étaient présents
 	}
 
 	/**

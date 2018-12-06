@@ -267,8 +267,7 @@ class user extends common {
 	 * Liste des utilisateurs
 	 */
 	public function index() {
-		$userIdsFirstnames = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort($userIdsFirstnames);
+		$userIdsFirstnames = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 		foreach($userIdsFirstnames as $userId => $userFirstname) {
 			self::$users[] = [
 				$userId,

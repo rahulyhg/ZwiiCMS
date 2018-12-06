@@ -34,8 +34,7 @@ class plugins extends common {
      */
     public function index() {
         // récupérer la liste des plugins déployés
-        $this->deployedPlugins = helper::arrayCollumn($this->getData(['plugins']), 'name');
-        ksort($this->deployedPlugins);
+        $this->deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
         foreach ($this->deployedPlugins as $pluginId => $pluginName) {
             $status = $this->getData(['plugins', $pluginId, 'status']);
             switch ($status) {
@@ -118,6 +117,7 @@ class plugins extends common {
      * Ajout
      */
     public function add() {
+        // TODO - Récupérer la liste des plugins déjà déployés
 
         // TODO - Récupération des plugins disponibles sur le partage et non encore déployés
         $this->notDeployedPlugins = array();
