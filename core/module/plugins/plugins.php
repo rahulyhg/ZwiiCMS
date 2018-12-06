@@ -45,7 +45,7 @@ class plugins extends common {
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
                                 'href' => helper::baseUrl() . 'plugins/undeploy/' . $pluginId,
-                                'value' => template::ico('fa-power-off')
+                                'value' => template::ico('power-off')
                     ]);
                     $deleteAction = "";
                     break;
@@ -71,7 +71,7 @@ class plugins extends common {
                     $specificAction = template::button('pluginsActivate' . $pluginId, [
                                 'class' => 'userDelete buttonGreen',
                                 'href' => helper::baseUrl() . 'plugins/activate/' . $pluginId,
-                                'value' => template::ico('fa-power-off"')
+                                'value' => template::ico('power-off"')
                     ]);
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                         'class' => 'pluginDelete buttonRed',
@@ -87,7 +87,7 @@ class plugins extends common {
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
                                 'href' => helper::baseUrl() . 'plugins/undeploy/' . $pluginId,
-                                'value' => template::ico('fa-power-off')
+                                'value' => template::ico('power-off')
                     ]);
                     $deleteAction = "";
                     break;
@@ -117,14 +117,48 @@ class plugins extends common {
      * Ajout
      */
     public function add() {
-        // TODO - Récupérer la liste des plugins déjà déployés
-
         // TODO - Récupération des plugins disponibles sur le partage et non encore déployés
-        $this->notDeployedPlugins = array();
+        $sharedPlugins = array();
+        
+        foreach ($sharedPlugins as $plugin) {
+            // TODO - Récupération des informations du plugin
+
+            // Pour les tests
+            /*
+                $off = true;
+                $pluginName = "Adhérent";
+                $pluginId = "group_adherent";
+                $auteur = "PeterRabbit";
+                $desc = "Ajout d'un groupe adhérent avec des droits restreints";
+                $ver = "1.0.0";
+            */
+
+            if($off){
+                $ico = template::ico('award', '', false, '1em', 'colorGreen');
+            } else {
+                $ico = template::ico('blind', '', false, '1em', 'colorOrange');
+            }
+
+            // Construction de la liste des plugins disponibles
+            if(!$this->getData(['plugins', $pluginId])) {
+                array_push($this->notDeployedPlugins,
+                    array(
+                        $ico . " " .$pluginName,
+                        $auteur,
+                        $desc,
+                        $ver,
+                        template::button('pluginDownload' . $pluginId, [
+                            'href' => helper::baseUrl() . 'plugins/deploy/' . $pluginId,
+                            'value' => template::ico('cloud-download-alt')
+                        ])
+                    )
+                );
+            }
+        }
 
         // Valeurs en sortie
         $this->addOutput([
-            'title' => 'Sélectionnez le plugin à ajouter à votre bibliothèque',
+            'title' => 'Téléchargez le plugin à ajouter à votre bibliothèque',
             'view' => 'add'
         ]);
     }
@@ -384,7 +418,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => null
+                            'data' => "Erreur lors de la sauvegarde des fichiers"
                         ]
                     ]);
                     break;
@@ -635,10 +669,19 @@ class plugins extends common {
      */
     private function backup($pluginId, $actionType) {
         // Copie du fichier de données
-        $success = copy('site/data/data.json', 'site/backup/' . $pluginId . '_' . date('Y-m-d', time()) . '_' . $actionType . '.json');
-        
-        // TODO - Effectuer une sauvegarde des fichiers qui vont être modifiés
+        $success = copy('site/data/data.json', 'site/backup/' . $pluginId . '_' . date('Y-m-d_H-i-s', time()) . '_' . $actionType . '.json');
 
+        // Effectuer une sauvegarde des fichiers qui vont être modifiés
+        $updatedFiles = $this->getData(['plugins', $pluginId, 'updated_files']);
+        foreach ($updatedFiles as $originalFile) {
+            // Effectuer une sauvegarde des fichiers modifier
+            $path_parts = pathinfo($originalFile);
+            $backupFile = $path_parts['dirname'].'/'.$pluginId.'_'.$path_parts['filename'].'_' . date('Y-m-d_H-i-s', time()) . '_' . $actionType . '.bck';
+            $success = copy ($originalFile, $backupFile);
+            if(!$success){
+                break;
+            }
+        }
         return $success;
     }
 

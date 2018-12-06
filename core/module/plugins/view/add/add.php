@@ -8,5 +8,4 @@
                 ]); ?>
         </div>
 </div>
-
 <?php echo template::table([1, 1, 5, 1, 1], $module->notDeployedPlugins, ['Nom', 'Auteur', 'Description', 'Version', '']); ?>

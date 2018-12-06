@@ -24,10 +24,10 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-    const PLUGIN_ERROR = -1;
-    const PLUGIN_NOT_APPLICABLE = 0;
-    const PLUGIN_ACTIVATE = 1;
-    const PLUGIN_DEACTIVATE = 2;
+        const PLUGIN_ERROR = -1;
+        const PLUGIN_NOT_APPLICABLE = 0;
+        const PLUGIN_ACTIVATE = 1;
+        const PLUGIN_DEACTIVATE = 2;
 	const ZWII_VERSION = '9.0.0-Alpha';
 
 	public static $actions = [];
@@ -2611,12 +2611,12 @@ class template {
          * @param string $colorClass Classe de la couleur de l'icône
 	 * @return string
 	 */
-	public static function ico($ico, $margin = '', $animate = false, $fontSize = '0.75em', $colorClass = '') {
+	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em', $colorClass = '') {
             $brands = array ("facebook-f", "google-plus-g", "instagram", "pinterest-p", "twitter", "youtube");
             $iconFont = "fas";
             if(in_array($ico, $brands)) $iconFont = "fab";
 
-            return '<span class="'.$iconFont.' fa-' . $ico . ($margin ? ' ico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';            
+            return '<span class="'.$iconFont.' fa-' . $ico . ($margin ? ' ico-margin-' . $margin : '') . ($animate ? ' fa-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
 	}
 
 	/**
@@ -2824,7 +2824,7 @@ class template {
 	 * @return string
 	 */
 	public static function speech($text) {
-		return '<div class="speech"><div class="speechBubble">' . $text . '</div>' . template::ico('mimi speechMimi', '', false, '2.68em') . '</div>';
+		return '<div class="speech"><div class="speechBubble">' . $text . '</div>' . template::ico('mimi speechMimi', '', false, '7em') . '</div>';
 	}
 
 	/**

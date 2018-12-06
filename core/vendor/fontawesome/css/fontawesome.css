@@ -3964,9 +3964,6 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f"; }
 
-.fa-mimi:before {
-  content: "\e811"; }
-
 .sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);
