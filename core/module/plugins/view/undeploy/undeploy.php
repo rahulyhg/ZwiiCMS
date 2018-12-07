@@ -4,9 +4,10 @@
 	<div class="col9 verticalAlignMiddle">
 		<div id="undeployPluginProgress">
 			<?php echo template::ico('spinner', '', true); ?>
-			<span class="undeployPluginProgressText" data-id="1">1/3 : Contrôle...</span>
-                        <span class="undeployPluginProgressText displayNone" data-id="2">2/3 : Sauvegarde...</span>                        
-			<span class="undeployPluginProgressText displayNone" data-id="3">3/3 : Supression du déploiement...</span>
+			<span class="undeployPluginProgressText" data-id="1">1/4 : Vérification de la procédure...</span>
+                        <span class="undeployPluginProgressText displayNone" data-id="2">2/4 : Contrôle...</span>
+                        <span class="undeployPluginProgressText displayNone" data-id="3">3/4 : Sauvegarde...</span>
+			<span class="undeployPluginProgressText displayNone" data-id="4">4/4 : Supression du déploiement...</span>
 		</div>
 		<div id="undeployPluginError" class="displayNone">
                     <span class="colorRed"><?php echo template::ico('times', ''); ?></span>

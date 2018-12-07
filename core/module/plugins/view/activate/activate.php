@@ -4,9 +4,10 @@
 	<div class="col9 verticalAlignMiddle">
 		<div id="activatePluginProgress">
 			<?php echo template::ico('spinner', '', true); ?>
-			<span class="activatePluginProgressText" data-id="1">1/3 : Contrôle...</span>
-                        <span class="activatePluginProgressText displayNone" data-id="2">2/3 : Sauvegarde...</span>
-			<span class="activatePluginProgressText displayNone" data-id="3">3/3 : Activation...</span>
+			<span class="activatePluginProgressText" data-id="1">1/4 : Vérification de la procédure...</span>
+                        <span class="activatePluginProgressText displayNone" data-id="2">2/4 : Contrôle...</span>
+                        <span class="activatePluginProgressText displayNone" data-id="3">3/4 : Sauvegarde...</span>
+			<span class="activatePluginProgressText displayNone" data-id="4">4/4 : Activation...</span>
 		</div>
 		<div id="activatePluginError" class="displayNone">
                     <span class="colorRed"><?php echo template::ico('times', ''); ?></span>

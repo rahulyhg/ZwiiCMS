@@ -169,10 +169,10 @@ class plugins extends common {
     public function delete() {
         // Accès refusé
         if (
-        // Le plugin n'existe pas
-                $this->getData(['plugins', $this->getUrl(2)]) === null
-                // Groupe insuffisant
-                AND ( $this->getUrl('group') < self::GROUP_ADMIN)
+            // Le plugin n'existe pas
+            $this->getData(['plugins', $this->getUrl(2)]) === null
+            // Groupe insuffisant
+            AND ( $this->getUrl('group') < self::GROUP_ADMIN)
         ) {
             // Valeurs en sortie
             $this->addOutput([
@@ -274,23 +274,27 @@ class plugins extends common {
 
                     if ($success) {                        
                         // Vérifier que le plugin est bien constitué :
+                        $manifestFile = 'site/plugins/'.$this->targetPluginId.'/MANIFEST.json';
+                        $deployFile = 'site/plugins/'.$this->targetPluginId.'/deploy/deploy.php';
+                        $undeployFile = 'site/plugins/'.$this->targetPluginId.'/undeploy/undeploy.php';
+
                         // 1- contient un fichier MANIFEST.json à la racine
-                        if (!file_exists('site/plugins/'.$this->targetPluginId.'/MANIFEST.json')){
+                        if (!file_exists($manifestFile)){
                             $success = false;
                             $errorMsg = "Fichier `MANIFEST.json` non trouvé";
                         }
                         // 2- contient un répertoire `deploy` avec un fichier `deploy.php`
-                        if ($success && !file_exists('site/plugins/'.$this->targetPluginId.'/deploy/deploy.php')){
+                        if ($success && !file_exists($deployFile)){
                             $success = false;
                             $errorMsg = "Fichier `deploy/deploy.php` non trouvé";
                         } 
                         
                         if($success){
-                            $deployFile = file_get_contents('site/plugins/'.$this->targetPluginId.'/deploy/deploy.php');
+                            $contentDeployFile = file_get_contents($deployFile);
                             
                             // a- le fichier `deploy.php` contient une fonction `checkBeforeDeploy` avec 3 paramètres passés par référence
                             $pattern = '/^[private|protected|public]*\s*function checkBeforeDeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                            if (preg_match($pattern, $deployFile) !== 1) {
+                            if (preg_match($pattern, $contentDeployFile) !== 1) {
                                 $success = false;
                                 $errorMsg = "[deploy/deploy.php] Fonction `checkBeforeDeploy` non présente ou non standard";                                                                
                             }
@@ -298,24 +302,24 @@ class plugins extends common {
                             if($success){
                                 // b- le fichier `deploy.php` contient une fonction `deploy` avec 3 paramètres passés par référence
                                 $pattern = '/^[private|protected|public]*\s*function deploy\(&\$.*, &\$.*, &\$.*\)/m';
-                                if (preg_match($pattern, $deployFile) !== 1) {
+                                if (preg_match($pattern, $contentDeployFile) !== 1) {
                                     $success = false;
                                     $errorMsg = "[deploy/deploy.php] Fonction `deploy` non présente ou non standard";                                                                
                                 }
                             }
                         }
-                            
+
                         // 3- contient un répertoire `undeploy` avec un fichier `undeploy.php`
-                        if ($success && !file_exists('site/plugins/'.$this->targetPluginId.'/undeploy/undeploy.php')){
+                        if ($success && !file_exists($undeployFile)){
                             $success = false;
                             $errorMsg = "Fichier `undeploy/undeploy.php` non trouvé";
                         }
                         if($success){
-                            $undeployFile = file_get_contents('site/plugins/'.$this->targetPluginId.'/undeploy/undeploy.php');
+                            $contentUndeployFile = file_get_contents($undeployFile);
                             
                             // a- le fichier `undeploy.php` contient une fonction `checkBeforeUndeploy` avec 3 paramètres passés par référence
                             $pattern = '/^[private|protected|public]*\s*function checkBeforeUndeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                            if (preg_match($pattern, $undeployFile) !== 1) {
+                            if (preg_match($pattern, $contentUndeployFile) !== 1) {
                                 $success = false;
                                 $errorMsg = "[undeploy/undeploy.php] Fonction `checkBeforeUndeploy` non présente ou non standard";                                                                
                             }
@@ -323,13 +327,18 @@ class plugins extends common {
                             if($success){
                                 // b- le fichier `undeploy.php` contient une fonction `undeploy` avec 3 paramètres passés par référence
                                 $pattern = '/^[private|protected|public]*\s*function undeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                                if (preg_match($pattern, $undeployFile) !== 1) {
+                                if (preg_match($pattern, $contentUndeployFile) !== 1) {
                                     $success = false;
                                     $errorMsg = "[undeploy/undeploy.php] Fonction `undeploy` non présente ou non standard";                                                                
                                 }
-                            }                            
+                            }
                         }
-                    }                    
+
+                        if($success){
+                            // Vérifier la syntaxe des fichiers .php
+                            $success = $this->checkPhpFiles($this->targetPluginId, 'deploy', $errorMsg);
+                        }
+                    }
                     
                     // Valeurs en sortie
                     $this->addOutput([
@@ -480,8 +489,25 @@ class plugins extends common {
         $this->targetPluginId = $this->getUrl(2);
         if(strlen($this->targetPluginId) > 0){
             switch ($this->getInput('step', helper::FILTER_INT)) {
-                // Contrôle
+                // Vérification de la procédure
                 case 1:
+                    $errorMsg = "";
+
+                    // Vérifier la syntaxe des fichiers .php
+                    $success = $this->checkPhpFiles($this->targetPluginId, 'undeploy', $errorMsg);
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Contrôle
+                case 2:
                     $errorMsg = "";
                     $success = $this->checkBefore($this->targetPluginId, 'undeploy', $errorMsg);
 
@@ -496,7 +522,7 @@ class plugins extends common {
                     break;
 
                 // Sauvegarde
-                case 2:
+                case 3:
                     $success = $this->backup($this->targetPluginId, "undeploy");
 
                     // Valeurs en sortie
@@ -510,7 +536,7 @@ class plugins extends common {
                     break;
 
                 // Undeploy
-                case 3:
+                case 4:
                     $errorMsg = "";
                     $success = $this->execute($this->targetPluginId, 'undeploy', $errorMsg);
 
@@ -566,8 +592,25 @@ class plugins extends common {
         $this->targetPluginId = $this->getUrl(2);
         if(strlen($this->targetPluginId) > 0){
             switch ($this->getInput('step', helper::FILTER_INT)) {
-                // Contrôle
                 case 1:
+                    $success = true;
+                    $errorMsg = "";
+
+                    // Vérifier la syntaxe des fichiers .php
+                    $success = $this->checkPhpFiles($this->targetPluginId, 'activate', $errorMsg);
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Contrôle
+                case 2:
                     $errorMsg = "";
                     $success = $this->checkBefore($this->targetPluginId, 'activate', $errorMsg);
 
@@ -582,7 +625,7 @@ class plugins extends common {
                     break;
 
                 // Sauvegarde
-                case 2:
+                case 3:
                     $success = $this->backup($this->targetPluginId, "activate");
 
                     // Valeurs en sortie
@@ -596,7 +639,7 @@ class plugins extends common {
                     break;
 
                 // Activation
-                case 3:
+                case 4:
                     $errorMsg = "";
                     $success = $this->execute($this->targetPluginId, 'activate', $errorMsg);
 
@@ -638,6 +681,10 @@ class plugins extends common {
 
     /*
      * Function d'appel des contrôles à effectuer pour les actions du plugin
+     * @param string $pluginId Identifiant du plugin
+     * @param string $actionType Type de l'action en cours (deploy, undeploy, activate)
+     * @param string $errorMsg Erreur de retour (par référence)
+     * @return boolean
      */
     private function checkBefore($pluginId, $actionType, &$errorMsg) {
         $success = true;
@@ -652,6 +699,10 @@ class plugins extends common {
 
     /*
      * Function d'appel des actions à effectuer pour le plugin
+     * @param string $pluginId Identifiant du plugin
+     * @param string $actionType Type de l'action en cours (deploy, undeploy, activate)
+     * @param string $errorMsg Erreur de retour (par référence)
+     * @return boolean
      */
     private function execute($pluginId, $actionType, &$errorMsg) {
         $success = true;
@@ -666,6 +717,9 @@ class plugins extends common {
 
     /*
      * Fonction de sauvegarde des données et des fichiers modifiés
+     * @param string $pluginId Identifiant du plugin
+     * @param string $actionType Type de l'action en cours (deploy, undeploy, activate)
+     * @return boolean
      */
     private function backup($pluginId, $actionType) {
         // Copie du fichier de données
@@ -687,6 +741,9 @@ class plugins extends common {
 
     /*
      * Fonction de changement d'état d'un plugin
+     * @param string $pluginId Identifiant du plugin
+     * @param string $newStatus Nouveau status du plugin
+     * @return null
      */
     private function changePluginStatus($pluginId, $newStatus) {
         $this->setData([
@@ -710,4 +767,41 @@ class plugins extends common {
         $this->saveData();
     }
 
+    /*
+     * Fonction de vérification de la syntaxe des fichiers php du plugin
+     * @param string $pluginId Identifiant du plugin
+     * @param string $actionType Type de l'action en cours (deploy, undeploy, activate)
+     * @param string $errorMsg Erreur de retour (par référence)
+     * @param string $dir Répertoire fils (pour la récursivité)
+     * @return boolean
+     */
+    private function checkPhpFiles($pluginId, $actionType, &$errorMsg, $dir=null) {
+        $success = true;
+        $pluginDir = 'site/plugins/'.$pluginId;
+        $pluginDir = ($dir ? $pluginDir . '/' . $dir : $pluginDir);
+        $objects = scandir($pluginDir);
+        foreach ($objects as $key => $value){
+            if (!in_array($value,array(".","..")))
+            {
+                if (is_dir($pluginDir . '/' . $value))
+                {
+                  $newDir = ($dir ? $dir . '/' . $value : $value);
+                  $success = $this->checkPhpFiles($pluginId, $actionType, $errorMsg, $newDir);
+                }else{
+                    $path = $pluginDir.'/'.$value;
+                    $path_parts = pathinfo($path);
+                    if(strtolower($path_parts['extension']) == 'php'){
+                        // Contrôler le fichier
+                        exec("C:\wamp64\bin\php\php7.1.9\php -l ".$path, $output, $ret);
+                        if ($ret == -1){
+                            $success = false;
+                            $errorMsg = $output[1];
+                        }
+                    }
+                }
+            }
+            if(!$success) break;
+        }
+        return $success;
+    }
 }

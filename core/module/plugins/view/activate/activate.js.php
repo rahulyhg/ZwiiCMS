@@ -20,7 +20,7 @@ function step(i, data) {
 				// Succès
 				if(result.success === true) {
 					// Fin du deploy
-					if(i === 3) {
+					if(i === 4) {
 						// Affiche le message de succès
 						$("#activatePluginSuccess").show();
 						// Déverrouille le bouton "Terminer"
