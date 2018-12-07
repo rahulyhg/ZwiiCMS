@@ -792,7 +792,7 @@ class plugins extends common {
                     $path_parts = pathinfo($path);
                     if(strtolower($path_parts['extension']) == 'php'){
                         // Contrôler le fichier
-                        exec("C:\wamp64\bin\php\php7.1.9\php -l ".$path, $output, $ret);
+                        exec("php -l ".$path, $output, $ret);
                         if ($ret == -1){
                             $success = false;
                             $errorMsg = $output[1];
