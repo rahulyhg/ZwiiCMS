@@ -14,14 +14,17 @@
  * Aperçu en direct
  */
 $("input, select").on("change", function() {
-	// Couleurs du menu
+	// Import des polices de caractères
+	var menuFont = $("#themeMenuFont").val();
+	var css = "@import url('https://fonts.googleapis.com/css?family=" + menuFont + "');";
 	var colors = core.colorVariants($("#themeMenuBackgroundColor").val());
-	var css = "nav,nav a{background-color:" + colors.normal + "}";
+	// Couleurs du menu
+	css += "nav,nav a{background-color:" + colors.normal + "}";
 	css += "nav a,#toggle span,nav a:hover{color:" + $("#themeMenuTextColor").val() + "}";
 	css += "nav a:hover{background-color:" + colors.darken + "}";
 	css += "nav a.active{background-color:" + colors.veryDarken + "}";
 	// Taille, hauteur, épaisseur et capitalisation de caractères du menu
-	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
+	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-family:'" + menuFont.replace(/\+/g, " ")  + "',sans-serif;font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
 	// Alignement du menu
 	css += "#menu{text-align:" + $("#themeMenuTextAlign").val() + "}";
 	// Marge

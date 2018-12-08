@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.4.9';
+	const ZWII_VERSION = '8.5.0';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -56,7 +56,7 @@ class common {
 			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
-			'ItemsperPage' => 10
+			'itemsperPage' => 10
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -345,6 +345,7 @@ class common {
 			],
 			'menu' => [
 				'backgroundColor' => 'rgba(74, 105, 189, 1)',
+				'font' => 'Oswald',				
 				'fontSize' => '1em',
 				'fontWeight' => 'normal',
 				'height' => '15px 10px',
@@ -906,7 +907,7 @@ class common {
 			$this->setData(['theme','footer','socialsPosition','1']);
 			$this->setData(['theme','footer','textPosition','2']);
 			$this->setData(['theme','footer','copyrightPosition','3']);
-			$this->setData(['config','ItemsperPage',10]);
+			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 840]);
 			$this->SaveData();
 		}
@@ -917,14 +918,19 @@ class common {
 			$this->setData(['theme','footer','copyrightPosition','center']);			
 			$this->setData(['core', 'dataVersion', 844]);
 			$this->SaveData();
-		}	
-		
+		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {
-			$this->setData(['config','ItemsperPage',10]);
+			$this->setData(['config','iItemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
 			$this->SaveData();
 		}		
+		// Version 8.5.0
+		if($this->getData(['core', 'dataVersion']) < 850) {
+			$this->setData(['theme','menu','font',10]);
+			$this->setData(['core', 'dataVersion', 850]);
+			$this->SaveData();
+		}	
 	}
 }
 
@@ -997,7 +1003,7 @@ class core extends common {
 			// Version
 			$css = '/*' . md5(json_encode($this->getData(['theme']))) . '*/';
 			// Import des polices de caractères
-			$css .= '@import url("https://fonts.googleapis.com/css?family=' . $this->getData(['theme', 'text', 'font']) . '|' . $this->getData(['theme', 'title', 'font']) . '|' . $this->getData(['theme', 'header', 'font']) . '");';
+			$css .= '@import url("https://fonts.googleapis.com/css?family=' . $this->getData(['theme', 'text', 'font']) . '|' . $this->getData(['theme', 'title', 'font']) . '|' . $this->getData(['theme', 'header', 'font']) .  '|' . $this->getData(['theme', 'menu', 'font']) . '");';
 			// Fond du site
 			$colors = helper::colorVariants($this->getData(['theme', 'body', 'backgroundColor']));
 			$css .= 'body{background-color:' . $colors['normal'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'text', 'font'])) . '",sans-serif}';
@@ -1058,7 +1064,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) . ';font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
+			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
@@ -1880,14 +1886,14 @@ class layout extends common {
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
 			// Mise en page de l'item
 			$items .= '<li>';
-			// Menu image
-
+			
 			if ( $this->getData(['page',$parentPageId,'disable']) === true
 				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
-					{$items .= '<a href="'.$this->getUrl(1).'">';}
-		    else {
-				$items .= '<a href="' . helper::baseUrl() . $parentPageId . '" title="'.$this->getData(['page', $parentPageId, 'title']).'" ' . $active . $targetBlank . '>';			}
+					{$items .= '<a href="'.$this->getUrl(1).'">';
+			} else {
+					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+			}
 
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
@@ -1906,22 +1912,13 @@ class layout extends common {
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
-				    $items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
+				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				   	 	$items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
-				    $items .= $this->getData(['page', $parentPageId, 'title']);
+				  	 	$items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 					break;
-				case 'icontext' :
-				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
-				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    } else {
-				    $items .= $this->getData(['page', $parentPageId, 'title']);
-				    }
-				    break;
 		       }
-		       // Menu Image
 
 
 

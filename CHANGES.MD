@@ -1,5 +1,12 @@
 # ChangeLog 
 
+## Version 8.5.0
+* Correction : 
+    - Suppression popup active par défaut dans le menu
+    - Suppression option de titre de page dans le menu Icone + Texte
+* Modification : 
+    - Thème du menu : sélection de la police de caractère
+
 ## Version 8.4.9
 * Correction :
     - Adresse d'une page inactive
@@ -17,7 +24,7 @@
 ## Version 8.4.6
 * corrections : 
     - Encodage des dates dans la liste des articles news et blog
-    - Variable itemsperpage stockée dans le mauvais type
+    - Variable itemsperPage stockée dans le mauvais type
 
 ## Version 8.4.5
 * corrections :

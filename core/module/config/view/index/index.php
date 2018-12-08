@@ -57,9 +57,9 @@
 				]); ?>
 			
 								
-				<?php echo template::select('ItemsperPage', $module::$ItemsList, [
+				<?php echo template::select('itemsperPage', $module::$ItemsList, [
 					'label' => 'Pagination Blog et News',
-					'selected' => $this->getData(['config', 'ItemsperPage']),
+					'selected' => $this->getData(['config', 'itemsperPage']),
 					'help' => 'Nombre d\'articles de blog ou de news par page'
 				]); ?>
 			</div>

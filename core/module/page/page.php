@@ -28,8 +28,7 @@ class page extends common {
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
-		'icontitle' => 'Icône et bulle',
-		'icontext' => 'Icône et texte'
+		'icontitle' => 'Icône et bulle'
 	];
 	// menu image
 	// Position du module
