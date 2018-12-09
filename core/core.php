@@ -345,7 +345,7 @@ class common {
 			],
 			'menu' => [
 				'backgroundColor' => 'rgba(74, 105, 189, 1)',
-				'font' => 'Oswald',				
+				'font' => 'Open+Sans',				
 				'fontSize' => '1em',
 				'fontWeight' => 'normal',
 				'height' => '15px 10px',
@@ -927,7 +927,7 @@ class common {
 		}		
 		// Version 8.5.0
 		if($this->getData(['core', 'dataVersion']) < 850) {
-			$this->setData(['theme','menu','font',10]);
+			$this->setData(['theme','menu','font','Open+Sans']);
 			$this->setData(['core', 'dataVersion', 850]);
 			$this->SaveData();
 		}	
