@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.5.1
+* Correction :
+    - Nom de variable incorrect
+
 ## Version 8.5.0
 * Correction : 
     - Suppression popup active par défaut dans le menu
