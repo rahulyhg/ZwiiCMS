@@ -921,7 +921,7 @@ class common {
 		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {
-			$this->setData(['config','iItemsperPage',10]);
+			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
 			$this->SaveData();
 		}		
