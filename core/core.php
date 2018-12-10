@@ -931,6 +931,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 850]);
 			$this->SaveData();
 		}	
+		// Version 8.5.1
+		if($this->getData(['core', 'dataVersion']) < 851) {
+			$this->setData(['config','itemsperPage',10]);
+			$this->deleteData(['config','ItemsperPage']);
+			$this->setData(['core', 'dataVersion', 851]);
+			$this->SaveData();
+		}		
 	}
 }
 
