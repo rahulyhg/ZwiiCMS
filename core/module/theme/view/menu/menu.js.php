@@ -68,6 +68,9 @@ $("input, select").on("change", function() {
 		case 'body-first':
 			$("nav").show().insertAfter("#bar");
 			break;
+		case 'body-top':
+			$("nav").show().insertAfter("#bar");
+			break;			
 		case 'body-second':
 			if(<?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>) {
 				$("nav").show().insertAfter("header");
