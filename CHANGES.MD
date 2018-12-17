@@ -1,5 +1,8 @@
 # ChangeLog 
 
+## Verison 8.5.2
+* Correction : 
+    - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
 ## Version 8.5.1
 * Correction :
     - Nom de variable incorrect
