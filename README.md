@@ -1,4 +1,4 @@
-# Zwii 8
+# Zwii 9 Beta
 
 Zwii est un CMS sans base de données (Flat-File) qui permet à ses utilisateurs de créer et gérer facilement un site web sans aucune connaissance en programmation.
 
@@ -51,6 +51,7 @@ Décompressez l'archive de Zwii sur votre serveur et c'est tout !
   [D] file                 Contient les fichiers envoyés sur le serveur depuis le gestionnaire de fichiers
     [D] source             Contient les fichiers
     [D] thumb              Contient les miniatures des fichiers de type image
+  [D] plugins              Contient les plugins déployés sur Zwii
   [D] tmp                  Contient les fichiers temporaire
 [F] index.php              Fichier d'initialisation de Zwii
 ```
