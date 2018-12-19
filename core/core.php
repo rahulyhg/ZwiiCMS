@@ -24,10 +24,18 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
+
         const PLUGIN_ERROR = -1;
         const PLUGIN_NOT_APPLICABLE = 0;
         const PLUGIN_ACTIVATE = 1;
         const PLUGIN_DEACTIVATE = 2;
+        const PLUGIN_ARCHIVE_MAX_SIZE = 1048576; // Max 1048576 octets = 1 Mo
+
+        const BACKUP_DIR = 'site/backup/';
+        const DATA_DIR = 'site/data/';
+        const FILE_DIR = 'site/file/';
+        const PLUGIN_DIR = 'site/plugins/';
+        const TEMP_DIR = 'site/tmp/';
 	const ZWII_VERSION = '9.0.0-Alpha';
 
 	public static $actions = [];
@@ -36,7 +44,7 @@ class common {
 		'install',
 		'maintenance',
 		'page',
-        'plugins',
+                'plugins',
 		'sitemap',
 		'theme',
 		'user'
@@ -241,7 +249,7 @@ class common {
 				'beaux-paysages' => [
 					'config' => [
 						'name' => 'Beaux paysages',
-						'directory' => 'site/file/source/galerie/landscape'
+						'directory' => self::FILE_DIR.'source/galerie/landscape'
 					],
 					'legend' => [
 						'desert.jpg' => 'Un désert',
@@ -252,7 +260,7 @@ class common {
 				'espace' => [
 					'config' => [
 						'name' => 'Espace',
-						'directory' => 'site/file/source/galerie/space'
+						'directory' => self::FILE_DIR.'source/galerie/space'
 					],
 					'legend' => [
 						'earth.jpg' => 'La Terre et la Lune',
@@ -458,16 +466,16 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 		// Génère le fichier de donnée
-		if(file_exists('site/data/data.json') === false) {
+		if(file_exists(self::DATA_DIR.'data.json') === false) {
 			$this->setData([$this->defaultData]);
 			$this->saveData();
-			chmod('site/data/data.json', 0755);
+			chmod(self::DATA_DIR.'data.json', 0755);
 		}
 		// Import des données
 		if($this->data === []) {
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents('site/data/data.json'), true)]);
+				$this->setData([json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)]);
 				if($this->data) {
 					break;
 				}
@@ -613,7 +621,7 @@ class common {
 	 * En local, copie du site décran de ZwiiCMS
 	 */	
 	public function makeImageTag () {
-		if (!file_exists('site/file/source/screenshot.png'))
+		if (!file_exists(self::FILE_DIR.'source/screenshot.png'))
 		{ 			
 			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
 				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
@@ -622,7 +630,7 @@ class common {
 				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
 				$data = 'data:image/jpeg;base64,'.$screenshot;
 				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-				file_put_contents( 'site/file/source/screenshot.png',$data);
+				file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
 			}
 		}
 	}
@@ -789,7 +797,7 @@ class common {
 	public function saveData() {
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/data.json', json_encode($this->getData()), LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'data.json', json_encode($this->getData()), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -805,34 +813,44 @@ class common {
 	 * @return bool
 	 */
 	public function sendMail($to, $subject, $content) {
-		// Layout
-		ob_start();
-		include 'core/layout/mail.php';
-		$layout = ob_get_clean();
-		// Mail
-		$mail = new PHPMailer;
-		$mail->CharSet = 'UTF-8';
-		$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-		$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-		$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
-		if(is_array($to)) {
-			foreach($to as $userMail) {
-				$mail->addAddress($userMail);
-			}
-		}
-		else {
-			$mail->addAddress($to);
-		}
-		$mail->isHTML(true);
-		$mail->Subject = $subject;
-		$mail->Body = $layout;
-		$mail->AltBody = strip_tags($content);
-		if($mail->send()) {
-			return true;
-		}
-		else {
-			return $mail->ErrorInfo;
-		}
+            // Utilisation de PHPMailer version 6.0.6
+            require "core/vendor/phpmailer/PHPMailer.php";
+            require "core/vendor/phpmailer/Exception.php";
+
+            // Layout
+            ob_start();
+            include 'core/layout/mail.php';
+            $layout = ob_get_clean();
+            // Mail
+            try{
+                $mail = new PHPMailer\PHPMailer\PHPMailer;
+                $mail->CharSet = 'UTF-8';
+                $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
+                $mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
+                $mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+                if(is_array($to)) {
+                        foreach($to as $userMail) {
+                                $mail->addAddress($userMail);
+                        }
+                }
+                else {
+                        $mail->addAddress($to);
+                }
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body = $layout;
+                $mail->AltBody = strip_tags($content);
+                if($mail->send()) {
+                        return true;
+                }
+                else {
+                        return $mail->ErrorInfo;
+                }
+            } catch (phpmailerException $e) {
+                return $e->errorMessage();
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
 	}
 
 	/**
@@ -950,7 +968,7 @@ class core extends common {
 		// Supprime les fichiers temporaires
 		$lastClearTmp = mktime(0, 0, 0);
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
-			$iterator = new DirectoryIterator('site/tmp/');
+			$iterator = new DirectoryIterator(self::TEMP_DIR);
 			foreach($iterator as $fileInfos) {
 				if($fileInfos->isFile() AND $fileInfos->getBasename() !== '.gitkeep') {
 					@unlink($fileInfos->getPathname());
@@ -969,13 +987,13 @@ class core extends common {
 			AND $this->getData(['user']) // Pas de backup pendant l'installation
 		) {
 			// Copie du fichier de données
-			copy('site/data/data.json', 'site/backup/' . date('Y-m-d', $lastBackup) . '.json');
+			copy(self::DATA_DIR.'data.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
 			// Date du dernier backup
 			$this->setData(['core', 'lastBackup', $lastBackup]);
 			// Enregistre les données
 			$this->saveData();
 			// Supprime les backups de plus de 30 jours
-			$iterator = new DirectoryIterator('site/backup/');
+			$iterator = new DirectoryIterator(self::BACKUP_DIR);
 			foreach($iterator as $fileInfos) {
 				if(
 					$fileInfos->isFile()
@@ -987,17 +1005,17 @@ class core extends common {
 			}
 		}
 		// Crée le fichier de personnalisation avancée
-		if(file_exists('site/data/custom.css') === false) {
-			file_put_contents('site/data/custom.css', file_get_contents('core/module/theme/resource/custom.css'));
-			chmod('site/data/custom.css', 0755);
+		if(file_exists(self::DATA_DIR.'custom.css') === false) {
+			file_put_contents(self::DATA_DIR.'custom.css', file_get_contents('core/module/theme/resource/custom.css'));
+			chmod(self::DATA_DIR.'custom.css', 0755);
 		}
 		// Crée le fichier de personnalisation
-		if(file_exists('site/data/theme.css') === false) {
-			file_put_contents('site/data/theme.css', '');
-			chmod('site/data/theme.css', 0755);
+		if(file_exists(self::DATA_DIR.'theme.css') === false) {
+			file_put_contents(self::DATA_DIR.'theme.css', '');
+			chmod(self::DATA_DIR.'theme.css', 0755);
 		}
 		// Check la version
-		$cssVersion = preg_split('/\*+/', file_get_contents('site/data/theme.css'));
+		$cssVersion = preg_split('/\*+/', file_get_contents(self::DATA_DIR.'theme.css'));
 		if(empty($cssVersion[1]) OR $cssVersion[1] !== md5(json_encode($this->getData(['theme'])))) {
 			// Version
 			$css = '/*' . md5(json_encode($this->getData(['theme']))) . '*/';
@@ -1082,7 +1100,7 @@ class core extends common {
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
 			// Enregistre la personnalisation
-			file_put_contents('site/data/theme.css', $css);
+			file_put_contents(self::DATA_DIR.'theme.css', $css);
 		}
 	}
 
@@ -1800,22 +1818,26 @@ class helper {
 		return $text;
 	}
     
-    /**
-	 * Supprime un répertoire avec tous ses descendants
-	 * @param string $dir Répertoire racine à supprimer	 
+        /**
+	 * Supprime un répertoire avec tous ses descendants ou un fichier
+	 * @param string $object Répertoire racine ou fichier à supprimer
 	 */
-    public static function rmdir_recursive($dir) {
-        $dir = trim($dir);
-        if(strlen($dir) > 1) {
-            $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-            foreach($it as $file) {
-                if ($file->isDir()) rmdir($file->getPathname());
-                else unlink($file->getPathname());
+        public static function rm_recursive($object) {
+            $object = trim($object);
+
+            if(strlen($object) > 1 && file_exists($object)) {
+                if (is_dir($object)) {
+                    $it = new RecursiveDirectoryIterator($object, FilesystemIterator::SKIP_DOTS);
+                    $it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+                    foreach($it as $file) {
+                        if ($file->isDir()) rmdir($file->getPathname());
+                        else unlink($file->getPathname());
+                    }
+                } else {
+                    if(file_exists($object)) unlink($object);
+                }
             }
-            rmdir($dir);
         }
-    }
 }
 
 class layout extends common {
@@ -1887,7 +1909,7 @@ class layout extends common {
 	 */
 	public function showFavicon() {
 		if($favicon = $this->getData(['config', 'favicon'])) {
-			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'site/file/source/' . $favicon . '">';
+			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $favicon . '">';
 		}
 	}
 
@@ -1932,14 +1954,14 @@ class layout extends common {
 				    break;
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
 				    $items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
@@ -1947,7 +1969,7 @@ class layout extends common {
 					break;
 				case 'icontext' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
@@ -1990,14 +2012,14 @@ class layout extends common {
 						break;
 					case 'icon' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						} else {
 						$items .= $this->getData(['page', $parentPageId, 'title']);
 						}
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
 						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2005,7 +2027,7 @@ class layout extends common {
 						break;
 					case 'icontext' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						$items .= $this->getData(['page', $childKey, 'title']);
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2061,7 +2083,7 @@ class layout extends common {
 	 * Affiche la meta image (site screenshot)
 	 */
 	public function showMetaImage() {
-		echo '<meta property="og:image" content="' . helper::baseUrl() .'/site/file/source/screenshot.png" />';
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'/'.self::FILE_DIR.'source/screenshot.png" />';
 	}
 
 
@@ -2128,7 +2150,7 @@ class layout extends common {
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 
-				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/data.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'data.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
@@ -2227,7 +2249,7 @@ class layout extends common {
 			$this->getUser('password') === $this->getInput('ZWII_USER_PASSWORD')
 			AND $this->getUser('group') >= self::GROUP_MODERATOR
 		) {
-			$vars .= 'var privateKey = ' . json_encode(md5_file('site/data/data.json')) . ';';
+			$vars .= 'var privateKey = ' . json_encode(md5_file(self::DATA_DIR.'data.json')) . ';';
 		}
 		echo '<script>' . helper::minifyJs($vars) . '</script>';
 		// Librairies
@@ -2267,6 +2289,7 @@ class layout extends common {
 }
 
 class template {
+        const DATA_DIR = 'site/data/'; // Pour éviter de faire un extend de la class common juste pour une constante, redéfinition de celle-ci
 
 	/**
 	 * Crée un bouton
@@ -2279,6 +2302,7 @@ class template {
 		$attributes = array_merge([
 			'class' => '',
 			'disabled' => false,
+                        'help' => '',
 			'href' => 'javascript:void(0);',
 			'ico' => '',
 			'id' => $nameId,
@@ -2287,13 +2311,14 @@ class template {
 			'uniqueSubmission' => false,
 			'value' => 'Bouton'
 		], $attributes);
-		// Retourne le html
+                // Retourne le html
 		return sprintf(
-			'<a %s class="button %s %s %s">%s</a>',
+			'<a %s class="button %s %s %s" %s>%s</a>',
 			helper::sprintAttributes($attributes, ['class', 'disabled', 'ico', 'value']),
 			$attributes['disabled'] ? 'disabled' : '',
 			$attributes['class'],
 			$attributes['uniqueSubmission'] ? 'uniqueSubmission' : '',
+                        ($attributes['help'] ? ' title=\''.$attributes['help'].'\'' : ''),
 			($attributes['ico'] ? template::ico($attributes['ico'], 'right') : '') . $attributes['value']
 		);
 	}
@@ -2515,7 +2540,7 @@ class template {
 					'?relative_url=1' .
 					'&field_id=' . $attributes['id'] .
 					'&type=' . $attributes['type'] .
-					'&akey=' . md5_file('site/data/data.json') .
+					'&akey=' . md5_file(self::DATA_DIR.'data.json') .
 					($attributes['extensions'] ? '&extensions=' . $attributes['extensions'] : '')
 				. '"
 				class="inputFile %s %s"

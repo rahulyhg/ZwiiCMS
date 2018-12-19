@@ -3,6 +3,13 @@
 ## Version 9.0.0-Alpha
 * Ajout : icones de la librairie FontAwesome 5.5.0
 * Ajout : gestion des plugins
+* Ajout : propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+* Mise à jour : Responsive FileManager version 9.14.0
+* Mise à jour : Flatpickr version 4.5.2
+* Mise à jour : Lity version 2.3.1
+* Mise à jour : Normalize.css version 8.0.1
+* Mise à jour : PHPMailer version 6.0.6
+* Mise à jour : Tippy version 3.3.0
 
 ## Version 8.4.9
 * Correction :

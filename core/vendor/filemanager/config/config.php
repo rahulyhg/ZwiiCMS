@@ -1,5 +1,5 @@
 <?php
-$version = "9.13.1";
+$version = "9.13.4";
 if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
@@ -30,7 +30,7 @@ setlocale(LC_CTYPE, 'fr_FR'); //correct transliteration
 */
 
 define('USE_ACCESS_KEYS', true); // TRUE or FALSE
-$privateKey = md5_file('../../../site/data/data.json');
+$privateKey = md5_file('../../../site/data/data.json'); // TODO - Voir comment utiliser la variable self::DATA_DIR
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +66,10 @@ $config = array(
 	| without final / (DON'T TOUCH)
 	|
 	*/
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('/core/vendor/filemanager', '', pathinfo($_SERVER['PHP_SELF'])['dirname']), ' /'),
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
+        /*
+         'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('/core/vendor/filemanager', '', pathinfo($_SERVER['PHP_SELF'])['dirname']), ' /'),
+         */
 	/*
 	|--------------------------------------------------------------------------
 	| path from base_url to base of upload folder
@@ -75,7 +78,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => '/site/file/source/',
+	'upload_dir' => '/site/file/source/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -84,7 +87,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../site/file/source/',
+	'current_path' => '../../../site/file/source/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
 
 	/*
 	|--------------------------------------------------------------------------
@@ -95,7 +98,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../../../site/file/thumb/',
+	'thumbs_base_path' => '../../../site/file/thumb/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
 
 
 	/*
@@ -198,7 +201,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 20000,
+	'MaxSizeUpload' => 1024,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -330,23 +333,28 @@ $config = array(
 	'rename_files'                            => true,
 	'rename_folders'                          => true,
 	'duplicate_files'                         => true,
+	'extract_files'                           => true,
 	'copy_cut_files'                          => true, // for copy/cut files
 	'copy_cut_dirs'                           => true, // for copy/cut directories
 	'chmod_files'                             => true, // change file permissions
 	'chmod_dirs'                              => true, // change folder permissions
 	'preview_text_files'                      => true, // eg.: txt, log etc.
 	'edit_text_files'                         => true, // eg.: txt, log etc.
-	'create_text_files'                       => true, // only create files with exts. defined in $editable_text_file_exts
+	'create_text_files'                       => true, // only create files with exts. defined in $config['editable_text_file_exts']
+	'download_files'			  => true, // allow download files or just preview
 
 	// you can preview these type of files if $preview_text_files is true
-	'previewable_text_file_exts'              => array( "bsh", "c","css", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh", "xhtml", "xml","xsl" ),
-	'previewable_text_file_exts_no_prettify'  => array( 'txt', 'log' ),
+	'previewable_text_file_exts'              => array( "bsh", "c","css", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh", "xhtml", "xml","xsl",'txt', 'log','' ),
 
 	// you can edit these type of files if $edit_text_files is true (only text based files)
-	// you can create these type of files if $create_text_files is true (only text based files)
+	// you can create these type of files if $config['create_text_files'] is true (only text based files)
 	// if you want you can add html,css etc.
 	// but for security reasons it's NOT RECOMMENDED!
-	'editable_text_file_exts'                 => array( 'txt', 'log', 'xml', 'html', 'css', 'htm', 'js' ),
+	'editable_text_file_exts'                 => array( 'txt', 'log', 'xml', 'html', 'css', 'htm', 'js','' ),
+
+	'jplayer_exts'                            => array("mp4","flv","webmv","webma","webm","m4a","m4v","ogv","oga","mp3","midi","mid","ogg","wav"),
+
+	'cad_exts'                                => array('dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'svg'),
 
 	// Preview with Google Documents
 	'googledoc_enabled'                       => true,
@@ -363,8 +371,8 @@ $config = array(
 	//**********************
 	//Allowed extensions (lowercase insert)
 	//**********************
-	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg', 'ico' ), //Images
-	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff'), //Files
+	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'ico' ), //Images
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff',''), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
@@ -374,14 +382,28 @@ $config = array(
 	//  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
 	//  otherwise check Allowed extensions configuration
 	//*********************
-	'ext_blacklist'							  => false, //['jpg'],
+	'ext_blacklist'							  => false,//['exe','bat','jpg'],
+
+
+	//Empty filename permits like .htaccess, .env, ...
+	'empty_filename'                          => false,
+
+	/*
+	|--------------------------------------------------------------------------
+	| accept files without extension
+	|--------------------------------------------------------------------------
+	|
+	| If you want to accept files without extension, remember to add '' extension on allowed extension
+	|
+	*/
+	'files_without_extension'	              => false,
 
 	/******************
 	* AVIARY config
 	*******************/
 	'aviary_active'                           => true,
 	'aviary_apiKey'                           => "2444282ef4344e3dacdedc7a78f8877d",
-	'aviary_language'                         => "fr",
+	'aviary_language'                         => "en",
 	'aviary_theme'                            => "light",
 	'aviary_tools'                            => "all",
 	'aviary_maxSize'                          => "1400",
@@ -422,8 +444,8 @@ $config = array(
 	'fixed_path_from_filemanager'             => array( '../test/', '../test1/' ), //fixed path of the image folder from the current position on upload folder
 	'fixed_image_creation_name_to_prepend'    => array( '', 'test_' ), //name to prepend on filename
 	'fixed_image_creation_to_append'          => array( '_test', '' ), //name to appendon filename
-	'fixed_image_creation_width'              => array( 300, 400 ), //width of image (you can leave empty if you set height)
-	'fixed_image_creation_height'             => array( 200, '' ), //height of image (you can leave empty if you set width)
+	'fixed_image_creation_width'              => array( 300, 400 ), //width of image
+	'fixed_image_creation_height'             => array( 200, 300 ), //height of image
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
@@ -443,8 +465,8 @@ $config = array(
 	'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
 	'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
 	'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
-	'relative_image_creation_width'           => array( 300, 400 ), //width of image (you can leave empty if you set height)
-	'relative_image_creation_height'          => array( 200, '' ), //height of image (you can leave empty if you set width)
+	'relative_image_creation_width'           => array( 300, 400 ), //width of image
+	'relative_image_creation_height'          => array( 200, 300 ), //height of image
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
@@ -480,4 +502,3 @@ return array_merge(
 		),
 	)
 );
-?>

@@ -15,7 +15,7 @@
 						</div>
 					</h4>
 					<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>" class="blogPicture">
-						<img src="<?php echo helper::baseUrl(false) . 'site/file/thumb/' . $article['picture']; ?>">
+						<img src="<?php echo (helper::baseUrl(false)).self::FILE_DIR; ?>thumb/' . $article['picture']; ?>">
 					</a>
 					<h2>
 						<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>">

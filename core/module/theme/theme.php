@@ -208,7 +208,7 @@ class theme extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Enregistre le CSS
-			file_put_contents('site/data/custom.css', $this->getInput('themeAdvancedCss', null));
+			file_put_contents(self::DATA_DIR.'custom.css', $this->getInput('themeAdvancedCss', null));
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',
@@ -388,7 +388,7 @@ class theme extends common {
 	 */
 	public function reset() {
 		// Supprime le fichier de personnalisation avancée
-		unlink('site/data/custom.css');
+		unlink(self::DATA_DIR.'custom.css');
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Personnalisation avancée réinitialisée',

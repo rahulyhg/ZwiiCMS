@@ -1,9 +1,9 @@
 <!--
 code d'origine	
-<div id="blogArticlePicture" style="background-image:url('<?php echo helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>');"></div>
+<div id="blogArticlePicture" style="background-image:url('<?php echo (helper::baseUrl(false)).self::FILE_DIR; ?>source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']); ?>');"></div>
 -->
 <?php if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'hidePicture']) == false) {
-	echo '<div><img src="'.helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']).'"></div>';
+	echo '<div><img src="'.helper::baseUrl(false) . self::FILE_DIR . 'source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']).'"></div>';
 }
 ?>
 <?php echo $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'content']); ?>

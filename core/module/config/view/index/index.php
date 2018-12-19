@@ -133,7 +133,7 @@
 				]); ?>
 				<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique des données', [
 					'checked' => $this->getData(['config', 'autoBackup']),
-					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier site/backup/. La sauvegarde est conservée 30 jours.'
+					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier '.self::BACKUP_DIR.'. La sauvegarde est conservée 30 jours.'
 				]); ?>
 				<div class="row">
 					<div class="col6">
@@ -156,7 +156,7 @@
 						-->						
 				</div>
 				<div class="col6">
-					<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+					<p><img src='<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>' />
 				</div>
 				<div class="col3">
 				</div>

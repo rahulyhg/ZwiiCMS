@@ -15,27 +15,27 @@ class plugins extends common {
 
     public static $actions = [
         'add' => self::GROUP_ADMIN,
-        'deploy' => self::GROUP_ADMIN,
-        'deploySteps' => self::GROUP_ADMIN,
+        'action' => self::GROUP_ADMIN,
+        'actionSteps' => self::GROUP_ADMIN,
         'delete' => self::GROUP_ADMIN,
-        'activate' => self::GROUP_ADMIN,
-        'activateSteps' => self::GROUP_ADMIN,
-        'undeploy' => self::GROUP_ADMIN,
-        'undeploySteps' => self::GROUP_ADMIN,
+        'upload' => self::GROUP_ADMIN,
         'index' => self::GROUP_ADMIN
     ];
     public $ihmPlugins = [];
-    public $deployedPlugins = [];
-    public $notDeployedPlugins = [];    
+    public $notDeployedPlugins = [];
+    public $actionType;
     public $targetPluginId;
 
     /**
      * Liste des plugins
      */
     public function index() {
+        // Si le répertoire plugin n'existe pas, le créer
+        if(!file_exists(self::PLUGIN_DIR)) mkdir(self::PLUGIN_DIR, 0755, true);
+
         // récupérer la liste des plugins déployés
-        $this->deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
-        foreach ($this->deployedPlugins as $pluginId => $pluginName) {
+        $deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
+        foreach ($deployedPlugins as $pluginId => $pluginName) {
             $status = $this->getData(['plugins', $pluginId, 'status']);
             switch ($status) {
                 case self::PLUGIN_ERROR:
@@ -44,14 +44,13 @@ class plugins extends common {
                     ]);
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
-                                'href' => helper::baseUrl() . 'plugins/undeploy/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/undeploy/' . $pluginId,
                                 'value' => template::ico('power-off')
                     ]);
                     $deleteAction = "";
                     break;
 
                 case self::PLUGIN_NOT_APPLICABLE:
-                    //exclamation-triangle 
                     $statusText = template::label("", "Non applicable", [
                                 'class' => 'colorGrey'
                     ]);
@@ -70,7 +69,7 @@ class plugins extends common {
                     ]);
                     $specificAction = template::button('pluginsActivate' . $pluginId, [
                                 'class' => 'userDelete buttonGreen',
-                                'href' => helper::baseUrl() . 'plugins/activate/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/activate/' . $pluginId,
                                 'value' => template::ico('power-off"')
                     ]);
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
@@ -86,7 +85,7 @@ class plugins extends common {
                     ]);
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
-                                'href' => helper::baseUrl() . 'plugins/undeploy/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/undeploy/' . $pluginId,
                                 'value' => template::ico('power-off')
                     ]);
                     $deleteAction = "";
@@ -118,11 +117,11 @@ class plugins extends common {
      */
     public function add() {
         // TODO - Récupération des plugins disponibles sur le partage et non encore déployés
+        // solution envisagée, scandir du répertoire et lire le fichier manifest (si existant) de chaque archives présentes
         $sharedPlugins = array();
         
         foreach ($sharedPlugins as $plugin) {
             // TODO - Récupération des informations du plugin
-
             // Pour les tests
             /*
                 $off = true;
@@ -148,7 +147,7 @@ class plugins extends common {
                         $desc,
                         $ver,
                         template::button('pluginDownload' . $pluginId, [
-                            'href' => helper::baseUrl() . 'plugins/deploy/' . $pluginId,
+                            'href' => helper::baseUrl() . 'plugins/action/deploy/' . $pluginId,
                             'value' => template::ico('cloud-download-alt')
                         ])
                     )
@@ -186,7 +185,7 @@ class plugins extends common {
                 $this->deleteData(['plugins', $this->getUrl(2)]);
             
                 // Suppression des fichiers du plugin
-                helper::rmdir_recursive('site/plugins/'.$this->getUrl(2));
+                helper::rm_recursive(self::PLUGIN_DIR.$this->getUrl(2));
 
                 // Valeurs en sortie
                 $this->addOutput([
@@ -203,455 +202,533 @@ class plugins extends common {
     }
 
     /**
-     * Déploiement
+     * Déploiement : New; Add; Activate; Deactivate
      */
-    public function deploy() {
-        $this->targetPluginId = $this->getUrl(2);
+    public function action() {
+        $this->actionType = $this->getUrl(2);
+        $this->targetPluginId = $this->getUrl(3);
+
+         switch ($this->actionType) {
+            case 'activate':
+                // **** Cas de l'activation d'un plugin déjà déployé
+                $titre = "Activation du plugin";
+                break;
+
+            case 'undeploy':
+                // **** Cas de la désactivation d'un plugin actif
+                $titre = "Désactivation du plugin";
+                break;
+
+            default:
+                // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                $titre = "Déploiement du plugin";
+         }
         // Valeurs en sortie
         $this->addOutput([
             'display' => self::DISPLAY_LAYOUT_LIGHT,
-            'title' => 'Déploiement du plugin',
-            'view' => 'deploy'
+            'title' => $titre,
+            'view' => 'action'
         ]);
     }
 
-    /**
-     * Étapes de déploiement
-     */
-    public function deploySteps() {
-        $this->targetPluginId = $this->getUrl(2);
-        if(strlen($this->targetPluginId) > 0){
-            switch ($this->getInput('step', helper::FILTER_INT)) {
-                // Préparation : suppression des fichiers
-                case 1:
-                    $success = true;
+    public function upload() {
+        $this->targetPluginId = 'unkown';
 
-                    // Nettoyage des fichiers temporaires               
-                    if (file_exists('site/tmp/'.$this->targetPluginId.'.tar.gz')) {
-                        $success = unlink('site/tmp/'.$this->targetPluginId.'.tar.gz');
-                    }
-                    if (file_exists('site/tmp/'.$this->targetPluginId.'.tar')) {
-                        $success = unlink('site/tmp/'.$this->targetPluginId.'.tar');
-                    }
+        // 1- Récupération des info du fichier
+        $uploadedFile = $_FILES['directUpload'];
 
-                    // Suppression du répertoire si existant
-                    $dirPlugin = 'site/plugins/'.$this->targetPluginId;
-                    if (file_exists($dirPlugin)) helper::rmdir_recursive($dirPlugin);
-                    
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => null
-                        ]
-                    ]);
-                    break;
+        // Effectuer les différents contrôle sur le fichier (extension, taille, etc...)
+        $success = true;
+        $errorMsg = "";
+        if ($uploadedFile['error'] != UPLOAD_ERR_OK) {
+            $success = false;
+            $errorMsg = "Erreur lors du transfert de l'archive";
+        } else {
+            if ($uploadedFile['size'] == 0){
+                $success = false;
+                $errorMsg = "L'archive n'a pa sété uploadée.";
+            } else {
+                if ($uploadedFile['size'] > self::PLUGIN_ARCHIVE_MAX_SIZE){
+                    $success = false;
+                    $errorMsg = "L'archive a une taille trop imortante.";
+                } else {
+                    $extensions_valides = array( 'zip' , 'tar' , 'gz');
+                    //1. strrchr renvoie l'extension avec le point (« . »).
+                    //2. substr(chaine,1) ignore le premier caractère de chaine.
+                    //3. strtolower met l'extension en minuscules.
+                    $extension_upload = strtolower(substr(strrchr($uploadedFile['name'], '.'),1));
+                    if (!in_array($extension_upload,$extensions_valides)){
+                        $success = false;
+                        $errorMsg = "L'extension du fichier n'est pas correcte";
+                    } else {
+                        helper::rm_recursive(self::TEMP_DIR.$uploadedFile['name']);
+                        if (move_uploaded_file($uploadedFile['tmp_name'], self::TEMP_DIR.$uploadedFile['name'])) {
+                            try {
+                                // Lecture de l'archive pour récupérer le contenu du Manifest.json
+                                $filesList = scandir('phar://'.self::TEMP_DIR.$uploadedFile['name']);
+                                if(count($filesList) > 0){
+                                    $manifest_json = file_get_contents('phar://'.self::TEMP_DIR.$uploadedFile['name'].'/MANIFEST.json');
+                                    if($manifest_json){
+                                        if(strlen($manifest_json) > 100){ // TODO - la taille de 100 est mise arbitrairement
+                                            $manifest_data = json_decode($manifest_json);
 
-                // Téléchargement
-                case 2:
-                    $success = true;
-                    $errorMsg = "";
+                                            // Lire les infos dans le Json
+                                            $code = $manifest_data->plugin->code;
+                                            $version = $manifest_data->plugin->version;
+                                            $zwiiVersion = $manifest_data->plugin->zwii_version;
 
-                    // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii
-                    $urlPlugin = ""; // A DEFINIR
-                    $success = (file_put_contents('site/tmp/'.$this->targetPluginId.'.tar.gz', file_get_contents($urlPlugin)) !== false);
+                                            // Vérifier si le plugin est déjà installé
+                                            $deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
+                                            foreach ($deployedPlugins as $pluginId => $pluginName) {
+                                                if($pluginId === $code) {
+                                                    if($version == $this->getData(['plugins', $pluginId, 'version'])){
+                                                        $success = false;
+                                                        $errorMsg = "Le plugin `".$pluginName."` est déjà présent en version ".$version;
+                                                    } else {
+                                                        $success = false;
+                                                        $errorMsg = "Veuillez désintaller le plugin `".$pluginName."` en version ".$this->getData(['plugins', $pluginId, 'version']) . " avant d'installer cette archive.";
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                            if($success){
+                                                // Vérifier que le plugin est compatible avec la version de Zwii
+                                                foreach ($zwiiVersion as $compatibleVersion) {
+                                                    if (strpos(self::ZWII_VERSION, $compatibleVersion) === 0){
+                                                        // La version de Zwii est compatible
+                                                        $success = true;
+                                                        break;
+                                                    } else {
+                                                        $success = false;
+                                                    }
+                                                }
+                                                if(!$success){
+                                                    $errorMsg = "Votre version de Zwii n'est pas compatible avec ce plugin";
+                                                } else {
+                                                    // Décompression de l'archive dans le dossier des plugins
+                                                    $this->targetPluginId = $code;
+                                                    if($extension_upload == 'gz') $extension_upload = 'tar.gz';
 
-                    if ($success) {
-                        // Décompression
-                        try {
-                            // Décompression dans le dossier de plugins
-                            $gz = new PharData('site/tmp/'.$this->targetPluginId.'.tar.gz');
-                            $gz->decompress();
-                            $tar = new PharData('site/tmp/'.$this->targetPluginId.'.tar');
-                            $tar->extractTo('site/plugins/' . $this->targetPluginId . '/', null, true);
-                        } catch (Exception $e) {
-                            $errorMsg = $e->getMessage();
-                            $success = false;
-                        }
-                    }
+                                                    if(self::TEMP_DIR.$uploadedFile['name'] !== self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload){
+                                                        // Avant de renommer l'archive, vérifier qu'il n'y a pas déjà un fichier avec le même nom
+                                                        // A ne faire que si l'archive ne porte pas le bon nom
+                                                        helper::rm_recursive(self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload);
 
-
-                    if ($success) {                        
-                        // Vérifier que le plugin est bien constitué :
-                        $manifestFile = 'site/plugins/'.$this->targetPluginId.'/MANIFEST.json';
-                        $deployFile = 'site/plugins/'.$this->targetPluginId.'/deploy/deploy.php';
-                        $undeployFile = 'site/plugins/'.$this->targetPluginId.'/undeploy/undeploy.php';
-
-                        // 1- contient un fichier MANIFEST.json à la racine
-                        if (!file_exists($manifestFile)){
-                            $success = false;
-                            $errorMsg = "Fichier `MANIFEST.json` non trouvé";
-                        }
-                        // 2- contient un répertoire `deploy` avec un fichier `deploy.php`
-                        if ($success && !file_exists($deployFile)){
-                            $success = false;
-                            $errorMsg = "Fichier `deploy/deploy.php` non trouvé";
-                        } 
-                        
-                        if($success){
-                            $contentDeployFile = file_get_contents($deployFile);
-                            
-                            // a- le fichier `deploy.php` contient une fonction `checkBeforeDeploy` avec 3 paramètres passés par référence
-                            $pattern = '/^[private|protected|public]*\s*function checkBeforeDeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                            if (preg_match($pattern, $contentDeployFile) !== 1) {
-                                $success = false;
-                                $errorMsg = "[deploy/deploy.php] Fonction `checkBeforeDeploy` non présente ou non standard";                                                                
-                            }
-                            
-                            if($success){
-                                // b- le fichier `deploy.php` contient une fonction `deploy` avec 3 paramètres passés par référence
-                                $pattern = '/^[private|protected|public]*\s*function deploy\(&\$.*, &\$.*, &\$.*\)/m';
-                                if (preg_match($pattern, $contentDeployFile) !== 1) {
-                                    $success = false;
-                                    $errorMsg = "[deploy/deploy.php] Fonction `deploy` non présente ou non standard";                                                                
-                                }
-                            }
-                        }
-
-                        // 3- contient un répertoire `undeploy` avec un fichier `undeploy.php`
-                        if ($success && !file_exists($undeployFile)){
-                            $success = false;
-                            $errorMsg = "Fichier `undeploy/undeploy.php` non trouvé";
-                        }
-                        if($success){
-                            $contentUndeployFile = file_get_contents($undeployFile);
-                            
-                            // a- le fichier `undeploy.php` contient une fonction `checkBeforeUndeploy` avec 3 paramètres passés par référence
-                            $pattern = '/^[private|protected|public]*\s*function checkBeforeUndeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                            if (preg_match($pattern, $contentUndeployFile) !== 1) {
-                                $success = false;
-                                $errorMsg = "[undeploy/undeploy.php] Fonction `checkBeforeUndeploy` non présente ou non standard";                                                                
-                            }
-                            
-                            if($success){
-                                // b- le fichier `undeploy.php` contient une fonction `undeploy` avec 3 paramètres passés par référence
-                                $pattern = '/^[private|protected|public]*\s*function undeploy\(&\$.*, &\$.*, &\$.*\)/m';
-                                if (preg_match($pattern, $contentUndeployFile) !== 1) {
-                                    $success = false;
-                                    $errorMsg = "[undeploy/undeploy.php] Fonction `undeploy` non présente ou non standard";                                                                
-                                }
-                            }
-                        }
-
-                        if($success){
-                            // Vérifier la syntaxe des fichiers .php
-                            $success = $this->checkPhpFiles($this->targetPluginId, 'deploy', $errorMsg);
-                        }
-                    }
-                    
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-
-                // Contrôle
-                case 3:                                
-                    $errorMsg = "";
-                    $success = $this->checkBefore($this->targetPluginId, 'deploy', $errorMsg);
-
-                    if ($success) {                        
-                        try {
-                            // Lire le fichier MANIFEST.json
-                            $manifest_json = file_get_contents('site/plugins/' . $this->targetPluginId . '/MANIFEST.json');
-                            if(strlen($manifest_json) > 100){
-                                $manifest_data = json_decode($manifest_json);
-
-                                // Lire les infos dans le Json                    
-                                $name = $manifest_data->plugin->name;
-                                $author = $manifest_data->plugin->author;
-                                $version = $manifest_data->plugin->version;
-                                $version_date = $manifest_data->plugin->version_date;
-                                $description = $manifest_data->plugin->description;
-                                $zwiiVersion = $manifest_data->plugin->zwii_version;
-                                $updaptedFiles = $manifest_data->plugin->updated_files;
-                                $addedFiles = $manifest_data->plugin->added_files;
-                                $updaptedDatas = $manifest_data->plugin->updated_datas;
-                                $addedDatas = $manifest_data->plugin->added_datas;
-
-                                // Ajout du plugin en base eavec status Désactivé
-                                if ($this->getData(['plugins', $this->targetPluginId])) {
-                                    $errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
-                                    $success = false;
+                                                        // Renommer l'archive afin que la suite du traitement soit identique au cas d'un plugin pris dans la bibliotèque
+                                                        if(!rename(self::TEMP_DIR.$uploadedFile['name'], self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload)){
+                                                            $success = false;
+                                                            $errorMsg = "Erreur lors du renommage de l'archive";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            $success = false;
+                                            $errorMsg = "Erreur dans le fichier MANIFEST.json";
+                                        }
+                                    } else {
+                                        $success = false;
+                                        $errorMsg = "Le fichier MANIFEST.json n'a pas été trouvé dans l'archive";
+                                    }
                                 } else {
-                                    $this->setData([
-                                        'plugins',
-                                        $this->targetPluginId,
-                                        [
-                                            'name' => $name,
-                                            'author' => $author,
-                                            'version' => $version,
-                                            'version_date' => $version_date,
-                                            'description' => $description,
-                                            'zwii_version' => $zwiiVersion,
-                                            'updated_files' => $updaptedFiles,
-                                            'added_files' => $addedFiles,
-                                            'updated_datas' => $updaptedDatas,
-                                            'added_datas' => $addedDatas,
-                                            'status' => self::PLUGIN_DEACTIVATE
-                                        ]
-                                    ]);
-                                    $this->saveData();
+                                    $success = false;
+                                    $errorMsg = "L'archive ne contient aucun fichier";
                                 }
-                            } else {
+                            } catch (Exception $e) {
+                                $errorMsg = $e->getMessage();
                                 $success = false;
-                                $errorMsg = "Erreur dans le fichier MANIFEST.json";
                             }
-                        } catch (Exception $e) {
-                            $errorMsg = $e->getMessage();
+                        } else {
                             $success = false;
-                        }                      
+                            $errorMsg = "Une erreur est survenue lors de la récupération du fichier.";
+                        }
                     }
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-
-                // Sauvegarde
-                case 4:                
-                    $success = $this->backup($this->targetPluginId, "deploy");
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => "Erreur lors de la sauvegarde des fichiers"
-                        ]
-                    ]);
-                    break;
-
-                // Installation
-                case 5:                
-                    $errorMsg = "";
-                    $success = $this->execute($this->targetPluginId, 'deploy', $errorMsg);
-
-                    // Changement statut du plugin
-                    if ($success) {
-                        // --> Activé
-                        $status = self::PLUGIN_ACTIVATE;
-                    } else {
-                        // --> Erreur
-                        $status = self::PLUGIN_ERROR;
-                    }
-                    $this->changePluginStatus($this->targetPluginId, $status);
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
+                }
             }
-        } else {
-            // Valeurs en sortie
-            $this->addOutput([
-                'display' => self::DISPLAY_JSON,
-                'content' => [
-                    'success' => false,
-                    'data' => "Identifiant du plugin non indiqué"
-                ]
-            ]);
         }
-    }
 
-    /**
-     * Undéploiement
-     */
-    public function undeploy() {
-        $this->targetPluginId = $this->getUrl(2);
         // Valeurs en sortie
+        $output = ($success)?$this->targetPluginId:$errorMsg;
         $this->addOutput([
-            'display' => self::DISPLAY_LAYOUT_LIGHT,
-            'title' => 'Suppression du déploiement du plugin',
-            'view' => 'undeploy'
+            'display' => self::DISPLAY_JSON,
+            'content' => [
+                'success' => $success,
+                'data' => $output
+            ],
+            'notification' => $errorMsg
         ]);
     }
 
     /**
-     * Étapes de suppression du déploiement
+     * Étapes de l'action : Deploy; Activate; Undeploy; Upload
      */
-    public function undeploySteps() {
-        $this->targetPluginId = $this->getUrl(2);
+    public function actionSteps() {
+        $this->actionType = $this->getUrl(2);
+        $this->targetPluginId = $this->getUrl(3);
+
         if(strlen($this->targetPluginId) > 0){
             switch ($this->getInput('step', helper::FILTER_INT)) {
-                // Vérification de la procédure
-                case 1:
-                    $errorMsg = "";
-
-                    // Vérifier la syntaxe des fichiers .php
-                    $success = $this->checkPhpFiles($this->targetPluginId, 'undeploy', $errorMsg);
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-
-                // Contrôle
-                case 2:
-                    $errorMsg = "";
-                    $success = $this->checkBefore($this->targetPluginId, 'undeploy', $errorMsg);
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-
-                // Sauvegarde
-                case 3:
-                    $success = $this->backup($this->targetPluginId, "undeploy");
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => null
-                        ]
-                    ]);
-                    break;
-
-                // Undeploy
-                case 4:
-                    $errorMsg = "";
-                    $success = $this->execute($this->targetPluginId, 'undeploy', $errorMsg);
-
-                    // Changement statut du plugin
-                    if ($success) {
-                        // --> Désactivé
-                        $status = self::PLUGIN_DEACTIVATE;
-                    } else {
-                        // --> Erreur
-                        $status = self::PLUGIN_ERROR;
-                    }                    
-                    $this->changePluginStatus($this->targetPluginId, $status);
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-            }
-        } else {
-            // Valeurs en sortie
-            $this->addOutput([
-                'display' => self::DISPLAY_JSON,
-                'content' => [
-                    'success' => false,
-                    'data' => "Identifiant du plugin non indiqué"
-                ]
-            ]);
-        }
-    }
-
-    /**
-     * Activation plugin déjà téléchargé
-     */
-    public function activate() {
-        $this->targetPluginId = $this->getUrl(2);
-        // Valeurs en sortie
-        $this->addOutput([
-            'display' => self::DISPLAY_LAYOUT_LIGHT,
-            'title' => 'Activation du plugin',
-            'view' => 'activate'
-        ]);
-    }
-
-    /**
-     * Étapes de l'activation
-     */
-    public function activateSteps() {
-        $this->targetPluginId = $this->getUrl(2);
-        if(strlen($this->targetPluginId) > 0){
-            switch ($this->getInput('step', helper::FILTER_INT)) {
+                // Etape 1
                 case 1:
                     $success = true;
                     $errorMsg = "";
 
-                    // Vérifier la syntaxe des fichiers .php
-                    $success = $this->checkPhpFiles($this->targetPluginId, 'activate', $errorMsg);
+                    switch ($this->actionType) {
+                        case 'activate':
+                            // **** Cas de l'activation d'un plugin déjà déployé
+                            // Vérifier la syntaxe des fichiers .php
+                            $success = $this->checkPhpFiles($this->targetPluginId, 'activate', $errorMsg);
+                            break;
 
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
+                        case 'undeploy':
+                            // **** Cas de la désactivation d'un plugin actif
+                            // Vérifier la syntaxe des fichiers .php
+                            $success = $this->checkPhpFiles($this->targetPluginId, 'undeploy', $errorMsg);
+                            break;
 
-                // Contrôle
-                case 2:
-                    $errorMsg = "";
-                    $success = $this->checkBefore($this->targetPluginId, 'activate', $errorMsg);
+                        default:
+                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                            if($this->actionType === 'deploy'){
+                                // Nettoyage des fichiers temporaires; à faire uniquement dans le cas du deploy
+                                foreach (glob(self::TEMP_DIR.$this->targetPluginId.".*") as $filename) {
+                                    helper::rm_recursive($filename);
+                                }
+                            }
 
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => $errorMsg
-                        ]
-                    ]);
-                    break;
-
-                // Sauvegarde
-                case 3:
-                    $success = $this->backup($this->targetPluginId, "activate");
-
-                    // Valeurs en sortie
-                    $this->addOutput([
-                        'display' => self::DISPLAY_JSON,
-                        'content' => [
-                            'success' => $success,
-                            'data' => null
-                        ]
-                    ]);
-                    break;
-
-                // Activation
-                case 4:
-                    $errorMsg = "";
-                    $success = $this->execute($this->targetPluginId, 'activate', $errorMsg);
-
-                    // Changement statut du plugin
-                    if ($success) {
-                        // --> Activé
-                        $status = self::PLUGIN_ACTIVATE;
-                    } else {
-                        // --> Erreur
-                        $status = self::PLUGIN_ERROR;
+                            // Suppression du répertoire du plugin si existant
+                            $dirPlugin = self::PLUGIN_DIR.$this->targetPluginId;
+                            if (file_exists($dirPlugin)) helper::rm_recursive($dirPlugin);
                     }
-                    $this->changePluginStatus($this->targetPluginId, $status);
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Etape 2
+                case 2:
+                    $success = true;
+                    $errorMsg = "";
+
+                    switch ($this->actionType) {
+                        case 'activate':
+                            // **** Cas de l'activation d'un plugin déjà déployé
+                            $success = $this->checkBefore($this->targetPluginId, 'activate', $errorMsg);
+                            break;
+
+                        case 'undeploy':
+                            // **** Cas de la désactivation d'un plugin actif
+                            $success = $this->checkBefore($this->targetPluginId, 'undeploy', $errorMsg);
+                            break;
+
+                        default:
+                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                            if($this->actionType === 'deploy'){
+                                // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
+                                $urlPlugin = ""; // A DEFINIR
+                                $success = (file_put_contents(self::TEMP_DIR.$this->targetPluginId.'.tar.gz', file_get_contents($urlPlugin)) !== false);
+                            }
+
+                            if ($success) {
+                                try {
+                                    // Décompression dans le dossier de plugins
+                                    // Normalement il n edoit y avoir qu'un seul fichier correspondant au plugin
+                                    $list = glob(self::TEMP_DIR.$this->targetPluginId.".*");
+                                    if(count($list) === 1){
+                                        $file = $list[0];
+
+                                        // Récupération de l'extension du fichier
+                                        //1. strrchr renvoie l'extension avec le point (« . »).
+                                        //2. substr(chaine,1) ignore le premier caractère de chaine.
+                                        //3. strtolower met l'extension en minuscules.
+                                        $extension = strtolower(substr(strrchr($file, '.'),1));
+                                        $targetDir = self::PLUGIN_DIR . $this->targetPluginId . '/';
+
+                                        switch ($extension){
+                                        case 'gz':
+                                            $gz = new PharData($file);
+                                            $tarFileName = substr($file, 0, strrpos($file, '.', -1));
+                                            helper::rm_recursive($tarFileName);
+                                            $gz->decompress();
+                                            unset($gz);
+                                            $tar = new PharData($tarFileName);
+                                            $tar->extractTo($targetDir, null, true);
+                                            unset($tar);
+                                            break;
+
+                                        case 'tar':
+                                            $tar = new PharData($file);
+                                            $tar->extractTo($targetDir, null, true);
+                                            unset($tar);
+                                            break;
+
+                                        case 'zip':
+                                            $zip = new PharData($file);
+                                            $zip->extractTo($targetDir, null, true);
+                                            unset($zip);
+                                            break;
+                                        }
+                                    } else {
+                                        $success = false;
+                                        $errorMsg = "[Nb = ".count($list)."] Impossible de trouver la bonne archive correspond au plugin {".$this->targetPluginId."} dans le répertoire ".self::TEMP_DIR.".";
+                                    }
+                                    foreach (glob(self::TEMP_DIR.$this->targetPluginId.".*") as $filename) {
+                                        helper::rm_recursive($filename);
+                                    }
+                                } catch (Exception $e) {
+                                    $errorMsg = $e->getMessage();
+                                    $success = false;
+                                }
+                            }
+                            
+                            if ($success) {
+                                // Vérifier que le plugin est bien constitué :
+                                $manifestFile = self::PLUGIN_DIR.$this->targetPluginId.'/MANIFEST.json';
+                                $deployFile = self::PLUGIN_DIR.$this->targetPluginId.'/deploy/deploy.php';
+                                $undeployFile = self::PLUGIN_DIR.$this->targetPluginId.'/undeploy/undeploy.php';
+
+                                // 1- contient un fichier MANIFEST.json à la racine
+                                if (!file_exists($manifestFile)){
+                                    $success = false;
+                                    $errorMsg = "Fichier `MANIFEST.json` non trouvé";
+                                }
+                                // 2- contient un répertoire `deploy` avec un fichier `deploy.php`
+                                if ($success && !file_exists($deployFile)){
+                                    $success = false;
+                                    $errorMsg = "Fichier `deploy/deploy.php` non trouvé";
+                                }
+
+                                if($success){
+                                    $contentDeployFile = file_get_contents($deployFile);
+
+                                    // a- le fichier `deploy.php` contient une fonction `checkBeforeDeploy` avec 3 paramètres passés par référence
+                                    $pattern = '/^[private|protected|public]*\s*function checkBeforeDeploy\(&\$.*, &\$.*, &\$.*\)/m';
+                                    if (preg_match($pattern, $contentDeployFile) !== 1) {
+                                        $success = false;
+                                        $errorMsg = "[deploy/deploy.php] Fonction `checkBeforeDeploy` non présente ou non standard";
+                                    }
+
+                                    if($success){
+                                        // b- le fichier `deploy.php` contient une fonction `deploy` avec 3 paramètres passés par référence
+                                        $pattern = '/^[private|protected|public]*\s*function deploy\(&\$.*, &\$.*, &\$.*\)/m';
+                                        if (preg_match($pattern, $contentDeployFile) !== 1) {
+                                            $success = false;
+                                            $errorMsg = "[deploy/deploy.php] Fonction `deploy` non présente ou non standard";
+                                        }
+                                    }
+                                }
+
+                                // 3- contient un répertoire `undeploy` avec un fichier `undeploy.php`
+                                if ($success && !file_exists($undeployFile)){
+                                    $success = false;
+                                    $errorMsg = "Fichier `undeploy/undeploy.php` non trouvé";
+                                }
+                                if($success){
+                                    $contentUndeployFile = file_get_contents($undeployFile);
+
+                                    // a- le fichier `undeploy.php` contient une fonction `checkBeforeUndeploy` avec 3 paramètres passés par référence
+                                    $pattern = '/^[private|protected|public]*\s*function checkBeforeUndeploy\(&\$.*, &\$.*, &\$.*\)/m';
+                                    if (preg_match($pattern, $contentUndeployFile) !== 1) {
+                                        $success = false;
+                                        $errorMsg = "[undeploy/undeploy.php] Fonction `checkBeforeUndeploy` non présente ou non standard";
+                                    }
+
+                                    if($success){
+                                        // b- le fichier `undeploy.php` contient une fonction `undeploy` avec 3 paramètres passés par référence
+                                        $pattern = '/^[private|protected|public]*\s*function undeploy\(&\$.*, &\$.*, &\$.*\)/m';
+                                        if (preg_match($pattern, $contentUndeployFile) !== 1) {
+                                            $success = false;
+                                            $errorMsg = "[undeploy/undeploy.php] Fonction `undeploy` non présente ou non standard";
+                                        }
+                                    }
+                                }
+
+                                if($success){
+                                    // Vérifier la syntaxe des fichiers .php
+                                    $success = $this->checkPhpFiles($this->targetPluginId, 'deploy', $errorMsg);
+                                }
+                            }
+                    }
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Etape 3
+                case 3:
+                    $success = true;
+                    $errorMsg = "";
+
+                    switch ($this->actionType) {
+                        case 'activate':
+                            // **** Cas de l'activation d'un plugin déjà déployé
+                            $success = $this->backup($this->targetPluginId, "activate");
+                            break;
+
+                        case 'undeploy':
+                            // **** Cas de la désactivation d'un plugin actif
+                            $success = $this->backup($this->targetPluginId, "undeploy");
+                            break;
+
+                        default:
+                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                            $success = $this->checkBefore($this->targetPluginId, 'deploy', $errorMsg);
+
+                            if ($success) {
+                                try {
+                                    // Lire le fichier MANIFEST.json
+                                    $manifest_json = file_get_contents(self::PLUGIN_DIR . $this->targetPluginId . '/MANIFEST.json');
+                                    if(strlen($manifest_json) > 100){
+                                        $manifest_data = json_decode($manifest_json);
+
+                                        // Lire les infos dans le Json
+                                        $name = $manifest_data->plugin->name;
+                                        $author = $manifest_data->plugin->author;
+                                        $version = $manifest_data->plugin->version;
+                                        $version_date = $manifest_data->plugin->version_date;
+                                        $description = $manifest_data->plugin->description;
+                                        $zwiiVersion = $manifest_data->plugin->zwii_version;
+                                        $updaptedFiles = $manifest_data->plugin->updated_files;
+                                        $addedFiles = $manifest_data->plugin->added_files;
+                                        $updaptedDatas = $manifest_data->plugin->updated_datas;
+                                        $addedDatas = $manifest_data->plugin->added_datas;
+
+                                        // Ajout du plugin en base eavec status Désactivé
+                                        if ($this->getData(['plugins', $this->targetPluginId])) {
+                                            $errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
+                                            $success = false;
+                                        } else {
+                                            $this->setData([
+                                                'plugins',
+                                                $this->targetPluginId,
+                                                [
+                                                    'name' => $name,
+                                                    'author' => $author,
+                                                    'version' => $version,
+                                                    'version_date' => $version_date,
+                                                    'description' => $description,
+                                                    'zwii_version' => $zwiiVersion,
+                                                    'updated_files' => $updaptedFiles,
+                                                    'added_files' => $addedFiles,
+                                                    'updated_datas' => $updaptedDatas,
+                                                    'added_datas' => $addedDatas,
+                                                    'status' => self::PLUGIN_DEACTIVATE
+                                                ]
+                                            ]);
+                                            $this->saveData();
+                                        }
+                                    } else {
+                                        $success = false;
+                                        $errorMsg = "Erreur dans le fichier MANIFEST.json";
+                                    }
+                                } catch (Exception $e) {
+                                    $errorMsg = $e->getMessage();
+                                    $success = false;
+                                }
+                            }
+                    }
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Etape 4
+                case 4:
+                    $success = true;
+                    $errorMsg = "";
+
+                    switch ($this->actionType) {
+                        case 'activate':
+                            // **** Cas de l'activation d'un plugin déjà déployé
+                            $success = $this->execute($this->targetPluginId, 'activate', $errorMsg);
+
+                            // Changement statut du plugin
+                            if ($success) {
+                                // --> Activé
+                                $status = self::PLUGIN_ACTIVATE;
+                            } else {
+                                // --> Erreur
+                                $status = self::PLUGIN_ERROR;
+                            }
+                            $this->changePluginStatus($this->targetPluginId, $status);
+                            break;
+
+                        case 'undeploy':
+                            // **** Cas de la désactivation d'un plugin actif
+                            $success = $this->execute($this->targetPluginId, 'undeploy', $errorMsg);
+
+                            // Changement statut du plugin
+                            if ($success) {
+                                // --> Désactivé
+                                $status = self::PLUGIN_DEACTIVATE;
+                            } else {
+                                // --> Erreur
+                                $status = self::PLUGIN_ERROR;
+                            }
+                            $this->changePluginStatus($this->targetPluginId, $status);
+                            break;
+
+                        default:
+                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                            $success = $this->backup($this->targetPluginId, "deploy");
+                            $errorMsg = "Erreur lors de la sauvegarde des fichiers";
+                    }
+
+                    // Valeurs en sortie
+                    $this->addOutput([
+                        'display' => self::DISPLAY_JSON,
+                        'content' => [
+                            'success' => $success,
+                            'data' => $errorMsg
+                        ]
+                    ]);
+                    break;
+
+                // Etape 5
+                case 5:
+                    $success = true;
+                    $errorMsg = "";
+
+                    switch ($this->actionType) {
+                        case 'activate':
+                            // **** Cas de l'activation d'un plugin déjà déployé
+                            break;
+
+                        case 'undeploy':
+                            // **** Cas de la désactivation d'un plugin actif
+                            break;
+
+                        default:
+                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
+                            $success = $this->execute($this->targetPluginId, 'deploy', $errorMsg);
+
+                            // Changement statut du plugin
+                            if ($success) {
+                                // --> Activé
+                                $status = self::PLUGIN_ACTIVATE;
+                            } else {
+                                // --> Erreur
+                                $status = self::PLUGIN_ERROR;
+                            }
+                            $this->changePluginStatus($this->targetPluginId, $status);
+                    }
 
                     // Valeurs en sortie
                     $this->addOutput([
@@ -674,6 +751,7 @@ class plugins extends common {
             ]);
         }
     }
+
 
     /* *********************************************************************** */
     /* Fonctions privées                                                       */
@@ -691,7 +769,7 @@ class plugins extends common {
 
         if ($actionType === 'activate') $actionType = 'deploy'; // dans le cas de l'activation, même contôler que pour 'deploy'
 
-        include_once 'site/plugins/' . $pluginId . '/' . $actionType . '/' . $actionType . '.php';
+        include_once self::PLUGIN_DIR . $pluginId . '/' . $actionType . '/' . $actionType . '.php';
         call_user_func_array('checkBefore' . ucfirst($actionType), array(&$this, &$success, &$errorMsg));
 
         return $success;
@@ -709,7 +787,7 @@ class plugins extends common {
 
         if ($actionType === 'activate') $actionType = 'deploy';   // dans le cas de l'activation, même actions que pour 'deploy'
 
-        include_once 'site/plugins/' . $pluginId . '/' . $actionType . '/' . $actionType . '.php';
+        include_once self::PLUGIN_DIR . $pluginId . '/' . $actionType . '/' . $actionType . '.php';
         call_user_func_array($actionType, array(&$this, &$success, &$errorMsg));
 
         return $success;
@@ -723,7 +801,7 @@ class plugins extends common {
      */
     private function backup($pluginId, $actionType) {
         // Copie du fichier de données
-        $success = copy('site/data/data.json', 'site/backup/' . $pluginId . '_' . date('Y-m-d_H-i-s', time()) . '_' . $actionType . '.json');
+        $success = copy(self::DATA_DIR.'data.json', self::BACKUP_DIR . $pluginId . '_' . date('Y-m-d_H-i-s', time()) . '_' . $actionType . '.json');
 
         // Effectuer une sauvegarde des fichiers qui vont être modifiés
         $updatedFiles = $this->getData(['plugins', $pluginId, 'updated_files']);
@@ -777,31 +855,33 @@ class plugins extends common {
      */
     private function checkPhpFiles($pluginId, $actionType, &$errorMsg, $dir=null) {
         $success = true;
-        $pluginDir = 'site/plugins/'.$pluginId;
+        $pluginDir = self::PLUGIN_DIR.$pluginId;
         $pluginDir = ($dir ? $pluginDir . '/' . $dir : $pluginDir);
-        $objects = scandir($pluginDir);
-        foreach ($objects as $key => $value){
-            if (!in_array($value,array(".","..")))
-            {
-                if (is_dir($pluginDir . '/' . $value))
+        if(file_exists($pluginDir)){
+            $objects = scandir($pluginDir);
+            foreach ($objects as $key => $value){
+                if (!in_array($value,array(".","..")))
                 {
-                  $newDir = ($dir ? $dir . '/' . $value : $value);
-                  $success = $this->checkPhpFiles($pluginId, $actionType, $errorMsg, $newDir);
-                }else{
-                    $path = $pluginDir.'/'.$value;
-                    $path_parts = pathinfo($path);
-                    if(strtolower($path_parts['extension']) == 'php'){
-                        // Contrôler le fichier
-                        exec("php -l ".$path, $output, $ret);
-                        if ($ret == -1){
-                            $success = false;
-                            $errorMsg = $output[1];
+                    if (is_dir($pluginDir . '/' . $value))
+                    {
+                      $newDir = ($dir ? $dir . '/' . $value : $value);
+                      $success = $this->checkPhpFiles($pluginId, $actionType, $errorMsg, $newDir);
+                    }else{
+                        $path = $pluginDir.'/'.$value;
+                        $path_parts = pathinfo($path);
+                        if(strtolower($path_parts['extension']) == 'php'){
+                            // Contrôler le fichier
+                            exec("php -l ".$path, $output, $ret);
+                            if ($ret == -1){
+                                $success = false;
+                                $errorMsg = $output[1];
+                            }
                         }
                     }
                 }
+                if(!$success) break;
             }
-            if(!$success) break;
-        }
+        } else $success = false;
         return $success;
     }
 }

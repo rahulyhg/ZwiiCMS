@@ -100,13 +100,13 @@ class install extends common {
                                 // TODO - Sauvegarder les éléments des plugins déployés afin de pouvoir les réactiver à la fin
 
 				// Copie du fichier de données
-				copy('site/data/data.json', 'site/backup/' . date('Y-m-d', time()) . '-update.json');
+				copy(self::DATA_DIR.'data.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-update.json');
 				// Nettoyage des fichiers temporaires
-				if(file_exists('site/tmp/update.tar.gz')) {
-					$success = unlink('site/tmp/update.tar.gz');
+				if(file_exists(self::TEMP_DIR.'update.tar.gz')) {
+					$success = unlink(self::TEMP_DIR.'update.tar.gz');
 				}
-				if(file_exists('site/tmp/update.tar')) {
-					$success = unlink('site/tmp/update.tar');
+				if(file_exists(self::TEMP_DIR.'update.tar')) {
+					$success = unlink(self::TEMP_DIR.'update.tar');
 				}
 				// Valeurs en sortie
 				$this->addOutput([
@@ -120,7 +120,7 @@ class install extends common {
 			// Téléchargement
 			case 2:
 				// Téléchargement depuis le serveur de Zwii
-				$success = (file_put_contents('site/tmp/update.tar.gz', file_get_contents('https://zwiicms.com/update.tar.gz')) !== false);
+				$success = (file_put_contents(self::TEMP_DIR.'update.tar.gz', file_get_contents('https://zwiicms.com/update.tar.gz')) !== false);
 				// Valeurs en sortie
 				$this->addOutput([
 					'display' => self::DISPLAY_JSON,
@@ -138,7 +138,7 @@ class install extends common {
 				// Décompression et installation
 				try {
 					// Décompression dans le dossier de fichier temporaires
-					$pharData = new PharData('site/tmp/update.tar.gz');
+					$pharData = new PharData(self::TEMP_DIR.'update.tar.gz');
 					$pharData->decompress();
 					// Installation
 					$pharData->extractTo(__DIR__ . '/../../../', null, true);

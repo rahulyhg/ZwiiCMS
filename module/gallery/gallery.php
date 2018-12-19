@@ -119,7 +119,7 @@ class gallery extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_JSON,
-			'content' => galleriesHelper::scanDir('site/file/source')
+			'content' => galleriesHelper::scanDir(self::FILE_DIR.'source')
 		]);
 	}
 
