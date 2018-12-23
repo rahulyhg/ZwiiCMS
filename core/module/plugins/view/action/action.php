@@ -25,7 +25,7 @@ switch ($actionType) {
         $actionsList[] = "Vérification de la procédure";
         $actionsList[] = "Contrôle";
         $actionsList[] = "Sauvegarde";
-        $actionsList[] = "Supression du déploiement";
+        $actionsList[] = "Suppression du déploiement";
         break;
 
     default:

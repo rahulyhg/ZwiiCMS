@@ -3039,3 +3039,138 @@ class template {
 	}
 
 }
+
+class ValidateJson {
+    public static $isValid = true;
+    public static $errorMsg = array();
+
+    /**
+     * Vérifie si le contenu d'un fichier Json correspond bien au schéma de référence
+     * @param string $json contenu du fichier Json à contrôler
+     * @param string $schema chemin du fichier correspond au schéma de référence
+    */
+    public static function check($json, $schema)
+    {
+        self::$isValid = true;
+        self::$errorMsg = array();
+        self::validate($json, $schema);
+    }
+
+    /**
+     * Retourne true si le json correspond bien au schéma, sinon false
+     * @return boolean
+    */
+    public static function isValid()
+    {
+        return self::$isValid;
+    }
+
+    /**
+     * Retourne les erreurs éventuelles
+     * @return array
+    */
+    public static function getErrors()
+    {
+        return self::$errorMsg;
+    }
+
+    /**
+     * Effectue la comparaison du fichier Json et du Schema de référence
+     * @param string $json contenu du fichier Json à contrôler
+     * @param string $schemaFile chemin du fichier correspond au schéma de référence
+    */
+    private static function validate($json, $schemaFile)
+    {
+        $json = json_decode($json);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            self::$isValid = false;
+            $error = "Problème pour lire le fichier Json";
+            if (function_exists('json_last_error_msg')) {
+                $error .= ' : ' . json_last_error_msg();
+            }
+            array_push(self::$errorMsg, $error);
+        } else {
+            $schemaContent = file_get_contents($schemaFile);
+            $schema = json_decode($schemaContent);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                self::$isValid = false;
+                $error = "Problème pour lire le schéma de référece {".$schemaFile."}";
+                if (function_exists('json_last_error_msg')) {
+                    $error .= ' : ' . json_last_error_msg();
+                }
+                array_push(self::$errorMsg, $error);
+            } else {
+                // Vérifier que le Json est conforme à la structure du modèle (schema)
+                foreach ($schema->properties as $key => $property) {
+                    $required = $property->required;
+                    $type = $property->type;
+                    $items_type = null;
+                    if(isset($property->items))
+                        $items_type = ($property->items->type ? $property->items->type : null);
+
+                    if(property_exists($json, $key)){
+                        // Récupérer la valeur
+                        $value = $json->{$key};
+
+                        // Vérification des types de données
+                       self::checkType($value, $type, $items_type);
+                    } else {
+                        if($required){
+                            // La propriété doit être présente dfans le Json
+                            self::$isValid = false;
+                            array_push(self::$errorMsg, "Propriété {".$key."} manquante");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Effectue la comparaison du type des différentes valeurs
+     * @param string $value valeur à vérifier
+     * @param string $type type attendu pour la valeur
+     * @param $items_type $type type attendu pour les valeurs contenu dans un tableau
+    */
+    private static function checkType($value, $type, $items_type = null){
+        switch (strtolower($type)) {
+            case "string":
+                if(!is_string($value)){
+                    self::$isValid = false;
+                    array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : String attendu");
+                }
+                break;
+
+            case "numeric":
+                if(!is_numeric($value)){
+                    self::$isValid = false;
+                    array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Numeric attendu");
+                }
+                break;
+
+             case "boolean":
+                if(!is_bool($value)){
+                    self::$isValid = false;
+                    array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Boolean attendu");
+                }
+                break;
+
+            case "array":
+                if(!is_array($value)){
+                    self::$isValid = false;
+                    array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Array attendu");
+                } else {
+                    // Vérifier que les éléments du tableau ont le bon format également
+                    foreach ($value as $arrValue) {
+                        self::checkType($arrValue, $items_type);
+                    }
+                }
+                break;
+
+            default:
+                self::$isValid = false;
+                array_push(self::$errorMsg, "Erreur dans le fichier modèle du Json. Contacter le support");
+                break;
+        }
+    }
+}

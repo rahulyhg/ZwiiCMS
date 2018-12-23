@@ -117,26 +117,42 @@ class plugins extends common {
      */
     public function add() {
         // TODO - Récupération des plugins disponibles sur le partage et non encore déployés
-        // solution envisagée, scandir du répertoire et lire le fichier manifest (si existant) de chaque archives présentes
+        // solution envisagée, Pouvoir interroger le serveur (via une api) pour avoir la liste des plugins disponibles
         $sharedPlugins = array();
+        /*
+        $url = 'http://forum.zwiicms.com/index.php?/files/files.xml';
+        //$pluginsList = file_get_contents($url);
+        $items = simplexml_load_file($url);
         
+        foreach ($items->channel->item as $item) {
+            array_push($sharedPlugins,
+                array(
+                    'id' => (string) $item->guid,
+                    'name' => (string) $item->title,
+                    'desc' => (string) $item->description,
+                    'link' => (string) $item->link
+                )
+            );
+        }
+        */
+
         foreach ($sharedPlugins as $plugin) {
             // TODO - Récupération des informations du plugin
             // Pour les tests
             /*
-                $off = true;
-                $pluginName = "Adhérent";
-                $pluginId = "group_adherent";
-                $auteur = "PeterRabbit";
-                $desc = "Ajout d'un groupe adhérent avec des droits restreints";
-                $ver = "1.0.0";
-            */
+            $pluginName = $plugin["name"];
+            $pluginId = $plugin["id"];
+            $auteur = "PeterRabbit";
+            $desc = $plugin["link"];
+            $ver = "1.0.0";
 
-            if($off){
+            $origin = 'official';
+            if($origin == 'official'){
                 $ico = template::ico('award', '', false, '1em', 'colorGreen');
             } else {
                 $ico = template::ico('blind', '', false, '1em', 'colorOrange');
             }
+            */
 
             // Construction de la liste des plugins disponibles
             if(!$this->getData(['plugins', $pluginId])) {
@@ -269,13 +285,29 @@ class plugins extends common {
                                 if(count($filesList) > 0){
                                     $manifest_json = file_get_contents('phar://'.self::TEMP_DIR.$uploadedFile['name'].'/MANIFEST.json');
                                     if($manifest_json){
-                                        if(strlen($manifest_json) > 100){ // TODO - la taille de 100 est mise arbitrairement
-                                            $manifest_data = json_decode($manifest_json);
-
+                                        // Vérifier la validité du fichier json
+                                        ValidateJson::check($manifest_json, 'core/module/plugins/schema.json');
+                                        if (!ValidateJson::isValid()) {
+                                            $success = false;
+                                            $errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";
+                                            $nbErrors = count(ValidateJson::getErrors());
+                                            for($i=0; $i < $nbErrors; $i++){
+                                                if($i===0){
+                                                    $errorMsg .= " (";
+                                                }
+                                                $errorMsg .= ValidateJson::getErrors()[$i];
+                                                if($i === ($nbErrors - 1)){
+                                                    $errorMsg .= ").";
+                                                } else {
+                                                    $errorMsg .= $error . " / ";
+                                                }
+                                            }
+                                        } else {
                                             // Lire les infos dans le Json
-                                            $code = $manifest_data->plugin->code;
-                                            $version = $manifest_data->plugin->version;
-                                            $zwiiVersion = $manifest_data->plugin->zwii_version;
+                                            $manifest_data = json_decode($manifest_json);
+                                            $code = $manifest_data->code;
+                                            $version = $manifest_data->version;
+                                            $zwiiVersion = $manifest_data->zwii_version;
 
                                             // Vérifier si le plugin est déjà installé
                                             $deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
@@ -291,40 +323,42 @@ class plugins extends common {
                                                     break;
                                                 }
                                             }
-                                            if($success){
-                                                // Vérifier que le plugin est compatible avec la version de Zwii
-                                                foreach ($zwiiVersion as $compatibleVersion) {
-                                                    if (strpos(self::ZWII_VERSION, $compatibleVersion) === 0){
-                                                        // La version de Zwii est compatible
-                                                        $success = true;
-                                                        break;
-                                                    } else {
-                                                        $success = false;
-                                                    }
-                                                }
-                                                if(!$success){
-                                                    $errorMsg = "Votre version de Zwii n'est pas compatible avec ce plugin";
+                                        }
+                                        if($success){
+                                            // Vérifier que le plugin est compatible avec la version de Zwii
+                                            foreach ($zwiiVersion as $compatibleVersion) {
+                                                if (strpos(self::ZWII_VERSION, $compatibleVersion) === 0){
+                                                    // La version de Zwii est compatible
+                                                    $success = true;
+                                                    break;
                                                 } else {
-                                                    // Décompression de l'archive dans le dossier des plugins
-                                                    $this->targetPluginId = $code;
-                                                    if($extension_upload == 'gz') $extension_upload = 'tar.gz';
+                                                    $success = false;
+                                                }
+                                            }
+                                            if(!$success){
+                                                $errorMsg = "Votre version de Zwii n'est pas compatible avec ce plugin";
+                                            } else {
+                                                $this->targetPluginId = $code;
+                                                if($extension_upload == 'gz') {
+                                                    $compressedFileName = substr($uploadedFile['name'], 0, strrpos($uploadedFile['name'], '.', -1));
+                                                    $ext = strtolower(substr(strrchr($compressedFileName, '.'),1));
+                                                    $extension_upload = $ext.".".$extension_upload;
+                                                }
 
-                                                    if(self::TEMP_DIR.$uploadedFile['name'] !== self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload){
-                                                        // Avant de renommer l'archive, vérifier qu'il n'y a pas déjà un fichier avec le même nom
-                                                        // A ne faire que si l'archive ne porte pas le bon nom
-                                                        helper::rm_recursive(self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload);
+                                                if(self::TEMP_DIR.$uploadedFile['name'] !== self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload){
+                                                    // Avant de renommer l'archive, vérifier qu'il n'y a pas déjà des fichiers pour le même plugin
+                                                    // Nettoyage des fichiers temporaires; à faire uniquement dans le cas du deploy
+                                                    foreach (glob(self::TEMP_DIR.$this->targetPluginId.".*") as $filename) {
+                                                        helper::rm_recursive($filename);
+                                                    }
 
-                                                        // Renommer l'archive afin que la suite du traitement soit identique au cas d'un plugin pris dans la bibliotèque
-                                                        if(!rename(self::TEMP_DIR.$uploadedFile['name'], self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload)){
-                                                            $success = false;
-                                                            $errorMsg = "Erreur lors du renommage de l'archive";
-                                                        }
+                                                    // Renommer l'archive afin que la suite du traitement soit identique au cas d'un plugin pris dans la bibliotèque
+                                                    if(!rename(self::TEMP_DIR.$uploadedFile['name'], self::TEMP_DIR.$this->targetPluginId.'.'.$extension_upload)){
+                                                        $success = false;
+                                                        $errorMsg = "Erreur lors du renommage de l'archive";
                                                     }
                                                 }
                                             }
-                                        } else {
-                                            $success = false;
-                                            $errorMsg = "Erreur dans le fichier MANIFEST.json";
                                         }
                                     } else {
                                         $success = false;
@@ -437,7 +471,7 @@ class plugins extends common {
                             if ($success) {
                                 try {
                                     // Décompression dans le dossier de plugins
-                                    // Normalement il n edoit y avoir qu'un seul fichier correspondant au plugin
+                                    // Normalement il ne doit y avoir qu'un seul fichier correspondant au plugin
                                     $list = glob(self::TEMP_DIR.$this->targetPluginId.".*");
                                     if(count($list) === 1){
                                         $file = $list[0];
@@ -451,14 +485,20 @@ class plugins extends common {
 
                                         switch ($extension){
                                         case 'gz':
-                                            $gz = new PharData($file);
-                                            $tarFileName = substr($file, 0, strrpos($file, '.', -1));
-                                            helper::rm_recursive($tarFileName);
-                                            $gz->decompress();
-                                            unset($gz);
-                                            $tar = new PharData($tarFileName);
-                                            $tar->extractTo($targetDir, null, true);
-                                            unset($tar);
+                                            $compressedFileName = substr($file, 0, strrpos($file, '.', -1));
+                                            helper::rm_recursive($compressedFileName);
+                                            $ext = strtolower(substr(strrchr($compressedFileName, '.'),1));
+                                            if($ext !== 'tar'){
+                                                $success = false;
+                                                $errorMsg = "L'extension {.".$ext.".gz} n'est pas gérée, impossible de décompresser le fichier {".$file."}.";
+                                            } else {
+                                                $gz = new PharData($file);
+                                                $gz->decompress();
+                                                unset($gz);
+                                                $tar = new PharData($compressedFileName);
+                                                $tar->extractTo($targetDir, null, true);
+                                                unset($tar);
+                                            }
                                             break;
 
                                         case 'tar':
@@ -468,8 +508,14 @@ class plugins extends common {
                                             break;
 
                                         case 'zip':
-                                            $zip = new PharData($file);
-                                            $zip->extractTo($targetDir, null, true);
+                                            $zip = new ZipArchive;
+                                            if ($zip->open($file) === TRUE) {
+                                                $zip->extractTo($targetDir);
+                                                $zip->close();
+                                            } else {
+                                                $success = false;
+                                                $errorMsg = "Erreur lors de la décompression de l'archive {".$file."}.";
+                                            }
                                             unset($zip);
                                             break;
                                         }
@@ -477,12 +523,13 @@ class plugins extends common {
                                         $success = false;
                                         $errorMsg = "[Nb = ".count($list)."] Impossible de trouver la bonne archive correspond au plugin {".$this->targetPluginId."} dans le répertoire ".self::TEMP_DIR.".";
                                     }
-                                    foreach (glob(self::TEMP_DIR.$this->targetPluginId.".*") as $filename) {
-                                        helper::rm_recursive($filename);
-                                    }
                                 } catch (Exception $e) {
                                     $errorMsg = $e->getMessage();
                                     $success = false;
+                                } finally {
+                                    foreach (glob(self::TEMP_DIR.$this->targetPluginId.".*") as $filename) {
+                                        helper::rm_recursive($filename);
+                                    }
                                 }
                             }
                             
@@ -589,35 +636,63 @@ class plugins extends common {
                                 try {
                                     // Lire le fichier MANIFEST.json
                                     $manifest_json = file_get_contents(self::PLUGIN_DIR . $this->targetPluginId . '/MANIFEST.json');
-                                    if(strlen($manifest_json) > 100){
+
+                                    // Vérifier la validité du fichier json
+                                    ValidateJson::check($manifest_json, 'core/module/plugins/schema.json');
+                                    if (!ValidateJson::isValid()) {
+                                        $success = false;
+                                        $errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";
+                                        $nbErrors = count(ValidateJson::getErrors());
+                                        for($i=0; $i < $nbErrors; $i++){
+                                            if($i===0){
+                                                $errorMsg .= " (";
+                                            }
+                                            $errorMsg .= ValidateJson::getErrors()[$i];
+                                            if($i === ($nbErrors - 1)){
+                                                $errorMsg .= ").";
+                                            } else {
+                                                $errorMsg .= $error . " / ";
+                                            }
+                                        }
+                                    } else {
                                         $manifest_data = json_decode($manifest_json);
 
                                         // Lire les infos dans le Json
-                                        $name = $manifest_data->plugin->name;
-                                        $author = $manifest_data->plugin->author;
-                                        $version = $manifest_data->plugin->version;
-                                        $version_date = $manifest_data->plugin->version_date;
-                                        $description = $manifest_data->plugin->description;
-                                        $zwiiVersion = $manifest_data->plugin->zwii_version;
-                                        $updaptedFiles = $manifest_data->plugin->updated_files;
-                                        $addedFiles = $manifest_data->plugin->added_files;
-                                        $updaptedDatas = $manifest_data->plugin->updated_datas;
-                                        $addedDatas = $manifest_data->plugin->added_datas;
+                                        $name = $manifest_data->name;
+                                        $author = $manifest_data->author;
+                                        $version = $manifest_data->version;
+                                        $version_date = $manifest_data->version_date;
+                                        $description = $manifest_data->description;
+                                        $support_url = $manifest_data->support_url;
+                                        $zwiiVersion = $manifest_data->zwii_version;
+                                        $updaptedFiles = $manifest_data->updated_files;
+                                        $addedFiles = $manifest_data->added_files;
+                                        $updaptedDatas = $manifest_data->updated_datas;
+                                        $addedDatas = $manifest_data->added_datas;
 
                                         // Ajout du plugin en base eavec status Désactivé
                                         if ($this->getData(['plugins', $this->targetPluginId])) {
                                             $errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
                                             $success = false;
                                         } else {
+                                            if($this->actionType === 'deploy'){
+                                                // Plugin provenant du site officiel
+                                                $origin = "official";
+                                            } else {
+                                                // Plugin venant d'une archive chargée en direct
+                                                $origin = "unknown";
+                                            }
                                             $this->setData([
                                                 'plugins',
                                                 $this->targetPluginId,
                                                 [
+                                                    'origin' => $origin,
                                                     'name' => $name,
                                                     'author' => $author,
                                                     'version' => $version,
                                                     'version_date' => $version_date,
                                                     'description' => $description,
+                                                    'support_url' => $support_url,
                                                     'zwii_version' => $zwiiVersion,
                                                     'updated_files' => $updaptedFiles,
                                                     'added_files' => $addedFiles,
@@ -628,9 +703,6 @@ class plugins extends common {
                                             ]);
                                             $this->saveData();
                                         }
-                                    } else {
-                                        $success = false;
-                                        $errorMsg = "Erreur dans le fichier MANIFEST.json";
                                     }
                                 } catch (Exception $e) {
                                     $errorMsg = $e->getMessage();
@@ -828,11 +900,13 @@ class plugins extends common {
             'plugins',
             $pluginId,
             [
+                'origin' => $this->getData(['plugins', $pluginId, 'origin']),
                 'name' => $this->getData(['plugins', $pluginId, 'name']),
                 'author' => $this->getData(['plugins', $pluginId, 'author']),
                 'version' => $this->getData(['plugins', $pluginId, 'version']),
                 'version_date' => $this->getData(['plugins', $pluginId, 'version_date']),
-                'description' => $this->getData(['plugins', $pluginId, 'description']),                                
+                'description' => $this->getData(['plugins', $pluginId, 'description']),
+                'support_url' => $this->getData(['plugins', $pluginId, 'support_url']),
                 'zwii_version' => $this->getData(['plugins', $pluginId, 'zwii_version']),
                 'updated_files' => $this->getData(['plugins', $pluginId, 'updated_files']),
                 'added_files' => $this->getData(['plugins', $pluginId, 'added_files']),
