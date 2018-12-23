@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.6.0';
+	const ZWII_VERSION = '9.0.0';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -294,7 +294,7 @@ class common {
 				]
 			]
 		],
-		'user' => [],
+		'user' => [],		
 		'theme' => [
 			'body' => [
 				'backgroundColor' => 'rgba(236, 239, 241, 1)',
@@ -453,17 +453,21 @@ class common {
 		if(isset($_COOKIE)) {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
+
 		// Génère le fichier de donnée
-		if(file_exists('site/data/data.json') === false) {
+		if(file_exists('site/data/data.json')  === false ||
+		   file_exists('site/data/theme.json') === false   ) {
 			$this->setData([$this->defaultData]);
 			$this->saveData();
 			chmod('site/data/data.json', 0755);
+			chmod('site/data/theme.json', 0755);			
 		}
+
 		// Import des données
 		if($this->data === []) {
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents('site/data/data.json'), true)]);
+				$this->setData([json_decode(file_get_contents('site/data/data.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
 				if($this->data) {
 					break;
 				}
@@ -473,7 +477,9 @@ class common {
 				// Pause de 10 millisecondes
 				usleep(10000);
 			}
+		
 		}
+
 		// Mise à jour
 		$this->update();
 		// Utilisateur connecté
@@ -783,9 +789,23 @@ class common {
 	 * Enregistre les données
 	 */
 	public function saveData() {
+
+		// Save config core page module et user
+		// 5 premières clés principales
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/data.json', json_encode($this->getData()), LOCK_EX) !== false) {
+			if(file_put_contents('site/data/data.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+				break;
+			}
+			// Pause de 10 millisecondes
+			usleep(10000);
+		}
+
+		// Save theme
+		// dernière clé principale
+		// Trois tentatives
+		for($i = 0; $i < 3; $i++) {
+			if(file_put_contents('site/data/theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -793,6 +813,8 @@ class common {
 		}
 	}
 
+
+	
 	/**
 	 * Envoi un mail
 	 * @param string|array $to Destinataire
@@ -937,7 +959,13 @@ class common {
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
 			$this->SaveData();
-		}		
+		}	
+		// Version 9.0.0
+		if($this->getData(['core', 'dataVersion']) < 900) {
+			
+			$this->setData(['core', 'dataVersion', 900]);
+			$this->SaveData();
+		}				
 	}
 }
 
@@ -2105,11 +2133,11 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
-				// menu image
-				if(helper::checkNewVersion()) {
-					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
-				}
-				// menu image
+				// UA
+				// if(helper::checkNewVersion()) {
+				//	$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
+				// }
+				// UA
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id') . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
