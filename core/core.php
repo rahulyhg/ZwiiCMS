@@ -452,7 +452,8 @@ class common {
 			chmod('site/data/theme.json', 0755);
 		} 
 
-		$this->importdata();
+		// Import des données d'un fichier data.json déjà présent
+		$this->importData();
 
 		// Import des données
 		if($this->data === []) {
@@ -539,7 +540,7 @@ class common {
 	
 	/**
 	 * Import des données du la version 8
-	 * 
+	 * Converti un fichier de données data.json puis le renomme
 	 */
 	public function importData() {
 		if(file_exists('site/data/data.json')) {
@@ -548,13 +549,20 @@ class common {
 				$tempData = [json_decode(file_get_contents('site/data/data.json'), true)];			
 				if($tempData) {
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/theme.json', json_encode($tempData), LOCK_EX) !== false) {
+						if(file_put_contents('site/data/theme.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
 						usleep(10000);
 					}
-					// Effacer ou renommer le fichier data.json
+					for($i = 0; $i < 3; $i++) {
+						if(file_put_contents('site/data/theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
+							break;
+						}
+						// Pause de 10 millisecondes
+						usleep(10000);
+					}					
+					rename ('site/data/data.json','site/data/imported_data.json');
 					break;
 				}
 				elseif($i === 2) {
