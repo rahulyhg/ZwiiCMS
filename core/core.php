@@ -65,11 +65,9 @@ class common {
 		],
 		'page' => [
 			'accueil' => [
-			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                // menu image
 				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a title=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -83,11 +81,9 @@ class common {
 				'title' => 'Accueil'
 			],
 			'enfant' => [
-			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                // menu image
 				'content' => "<p>Vous pouvez assigner des parents à vos pages afin de mieux organiser votre menu !</p>\r\n<div class=\"row\">\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n</div>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -101,11 +97,10 @@ class common {
 				'title' => 'Enfant'
 			],
 			'cachee' => [
-			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                // menu image
+
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -119,11 +114,9 @@ class common {
 				'title' => 'Cachée'
 			],
 			'blog' => [
-			    // menu image
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                // menu image
 				'content' => "<p>Cette page contient une instance du module de blog. Cliquez sur un article afin de le lire et de poster des commentaires.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -153,11 +146,9 @@ class common {
 				'title' => 'Galeries'
 			],
 			'site-de-zwii' => [
-			    
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                
 				'content' => "",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -171,11 +162,9 @@ class common {
 				'title' => 'Site de Zwii'
 			],
 			'contact' => [
-			    
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-                
 				'content' => "<p>Cette page contient un exemple de formulaire conçu à partir du module de génération de formulaires. Il est configuré pour envoyer les données saisies par mail aux administrateurs du site.</p>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -294,7 +283,7 @@ class common {
 				]
 			]
 		],
-		'user' => [],		
+		'user' => [],
 		'theme' => [
 			'body' => [
 				'backgroundColor' => 'rgba(236, 239, 241, 1)',
@@ -454,20 +443,22 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 
-		// Génère le fichier de donnée
-		if(file_exists('site/data/data.json')  === false ||
-		   file_exists('site/data/theme.json') === false   ) {
+		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
+		if(file_exists('site/data/core.json')   === false OR 
+		   file_exists('site/data/theme.json')  === false) {
 			$this->setData([$this->defaultData]);
 			$this->saveData();
-			chmod('site/data/data.json', 0755);
-			chmod('site/data/theme.json', 0755);			
-		}
+			chmod('site/data/core.json', 0755);
+			chmod('site/data/theme.json', 0755);
+		} 
+
+		$this->importdata();
 
 		// Import des données
 		if($this->data === []) {
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents('site/data/data.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
+				$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
 				if($this->data) {
 					break;
 				}
@@ -542,6 +533,37 @@ class common {
 			else {
 				$this->url = $this->getData(['config', 'homePageId']);
 			}
+		}
+	}
+
+	
+	/**
+	 * Import des données du la version 8
+	 * 
+	 */
+	public function importData() {
+		if(file_exists('site/data/data.json')) {
+			// Trois tentatives
+			for($i = 0; $i < 3; $i++) {
+				$tempData = [json_decode(file_get_contents('site/data/data.json'), true)];			
+				if($tempData) {
+					for($i = 0; $i < 3; $i++) {
+						if(file_put_contents('site/data/theme.json', json_encode($tempData), LOCK_EX) !== false) {
+							break;
+						}
+						// Pause de 10 millisecondes
+						usleep(10000);
+					}
+					// Effacer ou renommer le fichier data.json
+					break;
+				}
+				elseif($i === 2) {
+					exit('Unable to read data file.');
+				}
+				// Pause de 10 millisecondes
+				usleep(10000);
+			}
+		
 		}
 	}
 
@@ -794,7 +816,7 @@ class common {
 		// 5 premières clés principales
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/data.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+			if(file_put_contents('site/data/core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -1005,7 +1027,7 @@ class core extends common {
 			AND $this->getData(['user']) // Pas de backup pendant l'installation
 		) {
 			// Copie du fichier de données
-			copy('site/data/data.json', 'site/backup/' . date('Y-m-d', $lastBackup) . '.json');
+			copy('site/data/core.json', 'site/backup/' . date('Y-m-d', $lastBackup) . '.json');
 			// Date du dernier backup
 			$this->setData(['core', 'lastBackup', $lastBackup]);
 			// Enregistre les données
@@ -2127,16 +2149,17 @@ class layout extends common {
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 
-				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/data.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/core.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
-
-				if(helper::checkNewVersion()) {
-					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
-				}
+				// UA
+				// if(helper::checkNewVersion()) {
+				//	$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
+				// }
+				// UA
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id') . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
@@ -2217,7 +2240,7 @@ class layout extends common {
 			$this->getUser('password') === $this->getInput('ZWII_USER_PASSWORD')
 			AND $this->getUser('group') >= self::GROUP_MODERATOR
 		) {
-			$vars .= 'var privateKey = ' . json_encode(md5_file('site/data/data.json')) . ';';
+			$vars .= 'var privateKey = ' . json_encode(md5_file('site/data/core.json')) . ';';
 		}
 		echo '<script>' . helper::minifyJs($vars) . '</script>';
 		// Librairies
@@ -2505,7 +2528,7 @@ class template {
 					'?relative_url=1' .
 					'&field_id=' . $attributes['id'] .
 					'&type=' . $attributes['type'] .
-					'&akey=' . md5_file('site/data/data.json') .
+					'&akey=' . md5_file('site/data/core.json') .
 					($attributes['extensions'] ? '&extensions=' . $attributes['extensions'] : '')
 				. '"
 				class="inputFile %s %s"
