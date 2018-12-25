@@ -549,7 +549,7 @@ class common {
 				$tempData = [json_decode(file_get_contents('site/data/data.json'), true)];			
 				if($tempData) {
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/theme.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
+						if(file_put_contents('site/data/core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
