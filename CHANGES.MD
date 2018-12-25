@@ -1,6 +1,11 @@
 # ChangeLog 
 
-## Verison 8.5.2
+
+## Version 8.5.3
+* Modification :
+    - Capture image OpenGraph avec un bouton et non automatique
+
+## Version 8.5.2
 * Correction : 
     - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
 ## Version 8.5.1
