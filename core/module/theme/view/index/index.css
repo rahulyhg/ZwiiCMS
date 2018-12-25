@@ -21,6 +21,7 @@ footer {
 }
 #themeShowAll,
 #themeBack,
+#themeManage,
 #themeAdvanced {
 	position: relative;
 	z-index: 11;

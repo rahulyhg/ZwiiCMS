@@ -23,7 +23,10 @@ class theme extends common {
 		'index' => self::GROUP_ADMIN,
 		'menu' => self::GROUP_ADMIN,
 		'reset' => self::GROUP_ADMIN,
-		'site' => self::GROUP_ADMIN
+		'site' => self::GROUP_ADMIN,
+		'manage' => self::GROUP_ADMIN,
+		'themeEport' => self::GROUP_ADMIN,
+		'themeImport' => self::GROUP_ADMIN
 	];
 	public static $aligns = [
 		'left' => 'À gauche',
@@ -438,6 +441,48 @@ class theme extends common {
 			],
 			'view' => 'site'
 		]);
+	}
+
+	/**
+	 * Import du thème
+	 */
+	public function manage() {
+				// Valeurs en sortie
+				$this->addOutput([
+					'title' => 'Gestion des thèmes',
+					'view' => 'manage'
+				]);
+			}
+	
+
+	/**
+	 * Export du thème
+	 */
+	public function themeExport() {
+		// Creation du ZIP
+		$fileName = date('Theme Y-m-d-h-i-s', time()) . '.zip';
+		$zip = new ZipArchive();
+		if($zip->open('site/tmp/' . $fileName, ZipArchive::CREATE) === TRUE){
+			foreach('data/theme.json' as $file) {
+				$zip->addFile($file);
+			}
+		}
+		$zip->close();
+		// Téléchargement du ZIP
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Disposition: attachment; filename="' . $fileName . '"');
+		header('Content-Length: ' . filesize('site/tmp/' . $fileName));
+		readfile('site/tmp/' . $fileName);
+		// Valeurs en sortie
+		$this->addOutput([
+			'display' => self::DISPLAY_RAW
+		]);
+	}
+
+	/**
+	 * Import du thème
+	 */
+	public  function themeImport() {
 	}
 
 }
