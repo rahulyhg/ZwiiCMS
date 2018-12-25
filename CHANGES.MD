@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Préversion 9.0.0
+- Modification :
+    - Stockage distinct du thème et ddes autres données (core, config, page, module et users ) avec import des données d'une version 8
+
 ## Verison 8.5.2
 * Correction : 
     - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
