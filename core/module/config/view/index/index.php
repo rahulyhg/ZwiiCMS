@@ -1,4 +1,3 @@
-<?php $this->makeImageTag(); ?>
 <?php echo template::formOpen('configForm'); ?>
 	<div class="row">
 		<div class="col2">
@@ -136,7 +135,7 @@
 					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier site/backup/. La sauvegarde est conservée 30 jours.'
 				]); ?>
 				<div class="row">
-					<div class="col6">
+					<div class="col6 offset3">
 						<?php echo template::button('configExport', [
 							'href' => helper::baseUrl() . 'config/backup',
 							'value' => 'Exporter les données'
@@ -146,20 +145,18 @@
 			</div>
 			<div class="block">
 				<h4>Copie d'écran pour OpenGraph :</h4>
-				<div class="col3">		
-						<!--
-						Bouton inutile	
-						<?php echo template::button('configmetaImage', [
-							'href' => helper::baseUrl() . 'config/metaimage',
-							'value' => 'Rafraîchir la capture <br /> d\'écran du site'
-							]); ?>
-						-->						
+				<div clas='row'>
+					<div class="col6 offset3">
+						<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
 				</div>
-				<div class="col6">
-					<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
-				</div>
-				<div class="col3">
-				</div>
+				<div class='row'> 
+					<div class="col6 offset3">		
+							<?php echo template::button('configMetaImage', [
+								'href' => helper::baseUrl() . 'config/configMetaImage',
+								'value' => 'Rafraîchir la capture d\'écran'
+								]); ?>
+					</div>
+				</div>	
 				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>				
 			</div>
 		</div>
