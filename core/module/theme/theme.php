@@ -25,8 +25,8 @@ class theme extends common {
 		'reset' => self::GROUP_ADMIN,
 		'site' => self::GROUP_ADMIN,
 		'manage' => self::GROUP_ADMIN,
-		'themeExport' => self::GROUP_ADMIN,
-		'themeImport' => self::GROUP_ADMIN
+		'export' => self::GROUP_ADMIN,
+		'import' => self::GROUP_ADMIN		
 	];
 	public static $aligns = [
 		'left' => 'À gauche',
@@ -447,18 +447,18 @@ class theme extends common {
 	 * Import du thème
 	 */
 	public function manage() {
-				// Valeurs en sortie
-				$this->addOutput([
-					'title' => 'Gestion des thèmes',
-					'view' => 'manage'
-				]);
-			}
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Gestion des thèmes',
+			'view' => 'manage'
+		]);
+	}
 	
 
 	/**
 	 * Export du thème
 	 */
-	public function themeExport() {
+	public function export() {
 		// Creation du ZIP
 		$fileName = date('Theme Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
@@ -482,7 +482,7 @@ class theme extends common {
 	/**
 	 * Import du thème
 	 */
-	public  function themeImport() {
+	public  function import() {
 	}
 
 }
