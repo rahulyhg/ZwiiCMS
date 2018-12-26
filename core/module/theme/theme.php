@@ -26,7 +26,7 @@ class theme extends common {
 		'site' => self::GROUP_ADMIN,
 		'manage' => self::GROUP_ADMIN,
 		'export' => self::GROUP_ADMIN,
-		'import' => self::GROUP_ADMIN		
+		'import' => self::GROUP_ADMIN
 	];
 	public static $aligns = [
 		'left' => 'À gauche',
@@ -525,18 +525,27 @@ class theme extends common {
 				'state' => true
 			]);
 		}
-
-		echo 'site/file/source'.$zipFilename; 
-		echo "<p>";
-		echo $folderTemp;
 		// Création du ZIP
-		$this->create_zip($folderTemp, 'site/file/source'.$zipFilename);
-		die();
+		$zip = new ZipArchive();
+		$zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
+		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folderTemp), RecursiveIteratorIterator::LEAVES_ONLY);
+		foreach ($files as $name => $file)
+		{
+			if (!$file->isDir())
+			{
+				// Get real and relative path for current file
+				$filePath = $file->getRealPath();
+				$relativePath = substr($filePath, strlen($folderTemp)+3);				
+				// Add current file to archive
+				$zip->addFile($filePath, $relativePath);
+			}
+		}
+		$zip->close();
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $fileName . '"');
-		header('Content-Length: ' . filesize('site/tmp/' . $fileName));
-		readfile('site/tmp/' . $fileName);
+		header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+		header('Content-Length: ' . filesize('site/tmp/' . $zipFileName));
+		readfile('site/tmp/' . $zipFileName);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
@@ -551,29 +560,5 @@ class theme extends common {
 
 
 
-	// compress all files in the source directory to destination directory 
-	public function create_zip($files = array(), $dest = '', $overwrite = false) {
-		if (file_exists($dest) && !$overwrite) {
-			return false;
-		}
-		if (($files)) {
-			$zip = new ZipArchive();
-			if ($zip->open($dest, $overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
-				return false;
-			}
-			foreach ($files as $file) {
-				$zip->addFile($file, $file);
-			}
-			$zip->close();
-			return file_exists($dest);
-		} else {
-			return false;
-		}
-	}
 
-	public function addzip($source, $destination) {
-		$files_to_zip = glob($source . '/*');
-		create_zip($files_to_zip, $destination);
-	}
-	
 }
