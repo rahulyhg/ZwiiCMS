@@ -459,15 +459,79 @@ class theme extends common {
 	 * Export du thème
 	 */
 	public function export() {
-		// Creation du ZIP
-		$fileName = date('Theme Y-m-d-h-i-s', time()) . '.zip';
-		$zip = new ZipArchive();
-		if($zip->open('site/tmp/' . $fileName, ZipArchive::CREATE) === TRUE){
-			foreach('data/theme.json' as $file) {
-				$zip->addFile($file);
+		// Creation du dossier
+		$genRandom    =  date('dmYhms').'-'.rand(100,999);
+		$zipFilename   = $genRandom . '.zip';
+		$folderTemp   = 'site/tmp/theme-' . $genRandom . '/';
+		$folderSource = $folderTemp . 'site/file/source/';
+		$folderData   = $folderTemp . 'site/data/';
+		if (mkdir($folderTemp,0755,TRUE) and mkdir($folderData,0755,TRUE) AND mkdir($folderSource,0755,TRUE) ) {
+			// Dossier créé avec succès, copie du thème
+			if (copy( 'site/data/theme.json' , $folderData . 'theme.json')){
+				// Copie réalisée avec succès copie des images du thème
+				// Copie image de body
+				if ($this->getData(['theme','body','image']) !== '') {
+					if ( !mkdir ($folderSource . dirname($this->getData(['theme','body','image'])),0755,TRUE) OR
+						!copy('site/file/source/'.$this->getData(['theme','body','image']), $folderSource . $this->getData(['theme','body','image']))) {
+						// Erreur de copie des images
+						// Valeurs en sortie
+						$this->addOutput([
+							'notification' => 'Erreur lors de la création de l\'export',
+							'redirect' => helper::baseUrl() . 'theme/manage',
+							'state' => true
+						]);
+					}
+				}
+				// Copie image du header
+				if ($this->getData(['theme','header','image']) !== '') {
+					// Le dossier est-il créé ?
+					if (!file_exists($folderSource . dirname($this->getData(['theme','header','image'])))) {
+						if ( !mkdir ($folderSource . dirname($this->getData(['theme','header','image'])),0755,TRUE)) {
+							// Erreur création dossier
+							// Valeurs en sortie
+							$this->addOutput([
+								'notification' => 'Erreur lors de la création de l\'export',
+								'redirect' => helper::baseUrl() . 'theme/manage',
+								'state' => true
+							]);
+						}
+					}
+					if (!copy('site/file/source/'.$this->getData(['theme','header','image']), $folderSource . $this->getData(['theme','header','image']))) {
+						// Erreur de copie des images		
+						// Valeurs en sortie
+						$this->addOutput([
+							'notification' => 'Erreur lors de la création de l\'export',
+							'redirect' => helper::baseUrl() . 'theme/manage',
+							'state' => true
+						]);
+					}
+				}
 			}
+			else {
+				// Erreur de copy du thème
+				// Valeurs en sortie
+				$this->addOutput([
+					'notification' => 'Erreur lors de la création de l\'export',
+					'redirect' => helper::baseUrl() . 'theme/manage',
+					'state' => true
+				]);
+			}
+		} else {
+			// Erreur création du dossier temporaire
+			// Valeurs en sortie
+			$this->addOutput([
+				'notification' => 'Erreur lors de la création de l\'export',
+				'redirect' => helper::baseUrl() . 'theme/manage',
+				'state' => true
+			]);
 		}
-		$zip->close();
+
+		echo 'site/file/source'.$zipFilename; 
+		echo "<p>";
+		echo $folderTemp;
+		// Création du ZIP
+		$this->create_zip($folderTemp, 'site/file/source'.$zipFilename);
+		die();
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
@@ -485,4 +549,31 @@ class theme extends common {
 	public  function import() {
 	}
 
+
+
+	// compress all files in the source directory to destination directory 
+	public function create_zip($files = array(), $dest = '', $overwrite = false) {
+		if (file_exists($dest) && !$overwrite) {
+			return false;
+		}
+		if (($files)) {
+			$zip = new ZipArchive();
+			if ($zip->open($dest, $overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+				return false;
+			}
+			foreach ($files as $file) {
+				$zip->addFile($file, $file);
+			}
+			$zip->close();
+			return file_exists($dest);
+		} else {
+			return false;
+		}
+	}
+
+	public function addzip($source, $destination) {
+		$files_to_zip = glob($source . '/*');
+		create_zip($files_to_zip, $destination);
+	}
+	
 }
