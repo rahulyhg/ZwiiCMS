@@ -542,10 +542,13 @@ class theme extends common {
 		}
 		$zip->close();
 		// Téléchargement du ZIP
+
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
-		header('Content-Length: ' . filesize('site/tmp/' . $zipFileName));
-		readfile('site/tmp/' . $zipFileName);
+		header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
+		header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
+		readfile('site/tmp/' . $zipFilename);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
