@@ -447,6 +447,33 @@ class theme extends common {
 	 * Import du thème
 	 */
 	public function manage() {
+		if($this->isPost() ) {
+				if ($this->getInput('themeManageImport') !== '') {
+					if ($this->import($this->getInput('themeManageImport'))) {
+						// import ok
+						$this->addOutput([
+							'notification' => 'Thème ' . $this->getInput('themeManageImport'). ' importé',
+							'redirect' => helper::baseUrl() . 'theme',
+							'state' => true
+						]);
+					} else {
+						$this->addOutput([
+							'notification' => 'Archive incorrecte',
+							'redirect' => helper::baseUrl() . 'theme',
+							'state' => true
+						]);
+					}					
+				} else {
+					$this->addOutput([
+						'notification' => 'Error ',
+						'redirect' => helper::baseUrl() . 'theme',
+						'state' => true
+					]);
+
+				}
+
+
+		}
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Gestion des thèmes',
@@ -561,6 +588,7 @@ class theme extends common {
 	 * Import du thème
 	 */
 	public  function import() {
+		
 	}
 
 
