@@ -549,6 +549,8 @@ class theme extends common {
 		header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
 		header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
 		readfile('site/tmp/' . $zipFilename);
+		unlink ('site/tmp/' . $zipFilename);
+		rmdir  ($folderTemp);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
