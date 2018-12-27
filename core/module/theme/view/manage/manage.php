@@ -1,11 +1,11 @@
 <?php ?>
 	<div class="col2">
-		<?php echo template::button('themeBack', [
-			'class' => 'buttonGrey',
-			'href' => helper::baseUrl(false),
-			'ico' => 'home',
-			'value' => 'Accueil'
-		]); ?>	
+		<?php echo template::button('themeFooterBack', [
+					'class' => 'buttonGrey',
+					'href' => helper::baseUrl() . 'theme',
+					'ico' => 'left',
+					'value' => 'Retour'
+				]); ?>
 	</div>
 	<div class="row">
 		<div class="col6">
