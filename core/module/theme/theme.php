@@ -542,13 +542,13 @@ class theme extends common {
 		}
 		$zip->close();
 		// Téléchargement du ZIP
-
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
 		header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
 		readfile('site/tmp/' . $zipFilename);
+		// Nettoyage du dossier
 		unlink ('site/tmp/' . $zipFilename);
 		rmdir  ($folderTemp);
 		// Valeurs en sortie
