@@ -192,11 +192,11 @@ core.start = function() {
 			// Disparition de la notification
 			notificationTimer = setTimeout(function() {
 				$("#notification").fadeOut();
-			}, 1500);
+			}, 2000);
 			// Barre de progression
 			$("#notificationProgress").animate({
 				"width": "0%"
-			}, 1500, "linear");
+			}, 2000, "linear");
 		})
 		.trigger("mouseleave");
 	$("#notificationClose").on("click", function() {
