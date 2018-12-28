@@ -449,8 +449,13 @@ class theme extends common {
 	 */
 	public function manage() {
 		if($this->isPost() ) {
-			$archive =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
-			
+			$zipFilename =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
+			$zip = new ZipArchive();
+			if ($zip->open($zipFilename) === TRUE) {
+				echo $zip->extractTo('site/');
+				die();
+				$zip->close();
+			}
 		}
 		// Valeurs en sortie
 		$this->addOutput([
