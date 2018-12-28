@@ -26,7 +26,6 @@ class theme extends common {
 		'site' => self::GROUP_ADMIN,
 		'manage' => self::GROUP_ADMIN,
 		'export' => self::GROUP_ADMIN,
-		'import' => self::GROUP_ADMIN,
 		'save' => self::GROUP_ADMIN
 	];
 	public static $aligns = [
@@ -450,12 +449,18 @@ class theme extends common {
 	public function manage() {
 		if($this->isPost() ) {
 			$zipFilename =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
+
 			$zip = new ZipArchive();
-			if ($zip->open($zipFilename) === TRUE) {
-				echo $zip->extractTo('site/');
-				die();
+			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
+				$zip->extractTo('.');
 				$zip->close();
-			}
+			} 
+			// Valeurs en sortie
+			$this->addOutput([
+				'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
+				'redirect' => helper::baseUrl() . 'theme',
+				'state' => true
+			]);
 		}
 		// Valeurs en sortie
 		$this->addOutput([
@@ -533,15 +538,5 @@ class theme extends common {
 			'state' => true
 		]);
 	}	
-
-	/**
-	 * Import du thème
-	 */
-	public  function import() {
-		
-	}
-
-
-
 
 }
