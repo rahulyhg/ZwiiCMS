@@ -47,7 +47,8 @@ Décompressez l'archive de Zwii sur votre serveur et c'est tout !
 [D] site                   Contient les données du site
   [D] backup               Contient les 30 dernière sauvegardes automatiques du fichier data.json
   [D] data                 Contient les fichiers de données
-    [F] data.json          Fichier de données
+    [F] core.json          Fichier de données
+    [F] theme.json         Fichier du thème
     [F] custom.css         Feuille de style de la personnalisation avancée
     [F] theme.css          Thème stocké dans le fichier data.json compilé en CSS
   [D] file                 Contient les fichiers envoyés sur le serveur depuis le gestionnaire de fichiers
