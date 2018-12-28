@@ -26,14 +26,23 @@
 		</div>
 		<div class="col6">
 			<div class="block">
-			<h4>Exporter les données du thème</h4>
-				<div class="col5 offset3">
+			<h4>Enregistrer les données du thème</h4>
+			<div class="row">
+				<div class="col5 offset1">
+						<?php echo template::button('themeSave', [
+							'href' => helper::baseUrl() . 'theme/save',
+							'value' => 'Sauvegarder le thème dans les fichiers'
+						]); ?>
+				</div>
+				<div class="col5">
 					<?php echo template::button('themeExport', [
 						'href' => helper::baseUrl() . 'theme/export',
-						'value' => 'Générer une archive ZIP'
+						'value' => 'Télécharger une archive du thème'
 					]); ?>
 				</div>
-				<p \>L'archive ZIP contient la structure du thème avec l'arborescence complète à copier dans le dossier site. Les images sont comprises dans l'archive.	
+			</div>
+			L'archive ZIP contient la structure du thème avec l'arborescence complète à copier dans le dossier site. Les images sont comprises dans l'archive.	
+			<p \>Le nom du thème est généré à partir du groupe date heure et d'un nombre aléatoire.
 			</div>
 		</div>
 	</div>	

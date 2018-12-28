@@ -26,7 +26,8 @@ class theme extends common {
 		'site' => self::GROUP_ADMIN,
 		'manage' => self::GROUP_ADMIN,
 		'export' => self::GROUP_ADMIN,
-		'import' => self::GROUP_ADMIN
+		'import' => self::GROUP_ADMIN,
+		'save' => self::GROUP_ADMIN
 	];
 	public static $aligns = [
 		'left' => 'À gauche',
@@ -449,9 +450,7 @@ class theme extends common {
 	public function manage() {
 		if($this->isPost() ) {
 			$archive =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
-			echo $archive;
-
-			// import ok
+			
 		}
 		// Valeurs en sortie
 		$this->addOutput([
@@ -465,6 +464,42 @@ class theme extends common {
 	 * Export du thème
 	 */
 	public function export() {
+		// Creation du dossier
+			$zipFilename    =  'theme-'.date('dmYhms').'-'.rand(100,999).'.zip';
+			$zip = new ZipArchive();
+			if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
+				$zip->addFile('site/data/theme.json','site/data/theme.json');
+				if ($this->getData(['theme','body','image']) !== '' ) {
+				$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
+							'site/file/source/'.$this->getData(['theme','body','image'])
+							);
+				}
+				if ($this->getData(['theme','header','image']) !== '' ) {			
+				$zip->addFile('site/file/source/'.$this->getData(['theme','header','image']),
+							'site/file/source/'.$this->getData(['theme','header','image'])
+							);
+				}
+				$ret = $zip->close();
+			}
+			// Téléchargement du ZIP
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
+			header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
+			readfile('site/tmp/' . $zipFilename);
+			// Nettoyage du dossier
+			unlink ('site/tmp/' . $zipFilename);
+			// Valeurs en sortie
+			$this->addOutput([
+				'display' => self::DISPLAY_RAW
+			]);
+	}
+
+	/**
+	 * Export du thème
+	 */
+	public function save() {
 		// Creation du dossier
 		$zipFilename    =  'theme-'.date('dmYhms').'-'.rand(100,999).'.zip';
 		$zip = new ZipArchive();
@@ -483,19 +518,16 @@ class theme extends common {
 			$ret = $zip->close();
 		}
 		// Téléchargement du ZIP
-		header('Content-Description: File Transfer');
-		header('Content-Type: application/octet-stream');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
-		header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
-		readfile('site/tmp/' . $zipFilename);
+		copy ('site/tmp/' . $zipFilename , 'site/file/source/' . $zipFilename);
 		// Nettoyage du dossier
 		unlink ('site/tmp/' . $zipFilename);
 		// Valeurs en sortie
 		$this->addOutput([
-			'display' => self::DISPLAY_RAW
+			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
+			'redirect' => helper::baseUrl() . 'theme/manage',
+			'state' => true
 		]);
-	}
+	}	
 
 	/**
 	 * Import du thème
