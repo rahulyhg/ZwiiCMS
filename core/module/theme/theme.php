@@ -448,31 +448,10 @@ class theme extends common {
 	 */
 	public function manage() {
 		if($this->isPost() ) {
-				if ($this->getInput('themeManageImport') !== '') {
-					if ($this->import($this->getInput('themeManageImport'))) {
-						// import ok
-						$this->addOutput([
-							'notification' => 'Thème ' . $this->getInput('themeManageImport'). ' importé',
-							'redirect' => helper::baseUrl() . 'theme',
-							'state' => true
-						]);
-					} else {
-						$this->addOutput([
-							'notification' => 'Archive incorrecte',
-							'redirect' => helper::baseUrl() . 'theme',
-							'state' => true
-						]);
-					}					
-				} else {
-					$this->addOutput([
-						'notification' => 'Error ',
-						'redirect' => helper::baseUrl() . 'theme',
-						'state' => true
-					]);
+			$archive =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
+			echo $archive;
 
-				}
-
-
+			// import ok
 		}
 		// Valeurs en sortie
 		$this->addOutput([
@@ -487,87 +466,22 @@ class theme extends common {
 	 */
 	public function export() {
 		// Creation du dossier
-		$genRandom    =  date('dmYhms').'-'.rand(100,999);
-		$zipFilename   = $genRandom . '.zip';
-		$folderTemp   = 'site/tmp/theme-' . $genRandom . '/';
-		$folderSource = $folderTemp . 'site/file/source/';
-		$folderData   = $folderTemp . 'site/data/';
-		if (mkdir($folderTemp,0755,TRUE) and mkdir($folderData,0755,TRUE) AND mkdir($folderSource,0755,TRUE) ) {
-			// Dossier créé avec succès, copie du thème
-			if (copy( 'site/data/theme.json' , $folderData . 'theme.json')){
-				// Copie réalisée avec succès copie des images du thème
-				// Copie image de body
-				if ($this->getData(['theme','body','image']) !== '') {
-					if ( !mkdir ($folderSource . dirname($this->getData(['theme','body','image'])),0755,TRUE) OR
-						!copy('site/file/source/'.$this->getData(['theme','body','image']), $folderSource . $this->getData(['theme','body','image']))) {
-						// Erreur de copie des images
-						// Valeurs en sortie
-						$this->addOutput([
-							'notification' => 'Erreur lors de la création de l\'export',
-							'redirect' => helper::baseUrl() . 'theme/manage',
-							'state' => true
-						]);
-					}
-				}
-				// Copie image du header
-				if ($this->getData(['theme','header','image']) !== '') {
-					// Le dossier est-il créé ?
-					if (!file_exists($folderSource . dirname($this->getData(['theme','header','image'])))) {
-						if ( !mkdir ($folderSource . dirname($this->getData(['theme','header','image'])),0755,TRUE)) {
-							// Erreur création dossier
-							// Valeurs en sortie
-							$this->addOutput([
-								'notification' => 'Erreur lors de la création de l\'export',
-								'redirect' => helper::baseUrl() . 'theme/manage',
-								'state' => true
-							]);
-						}
-					}
-					if (!copy('site/file/source/'.$this->getData(['theme','header','image']), $folderSource . $this->getData(['theme','header','image']))) {
-						// Erreur de copie des images		
-						// Valeurs en sortie
-						$this->addOutput([
-							'notification' => 'Erreur lors de la création de l\'export',
-							'redirect' => helper::baseUrl() . 'theme/manage',
-							'state' => true
-						]);
-					}
-				}
-			}
-			else {
-				// Erreur de copy du thème
-				// Valeurs en sortie
-				$this->addOutput([
-					'notification' => 'Erreur lors de la création de l\'export',
-					'redirect' => helper::baseUrl() . 'theme/manage',
-					'state' => true
-				]);
-			}
-		} else {
-			// Erreur création du dossier temporaire
-			// Valeurs en sortie
-			$this->addOutput([
-				'notification' => 'Erreur lors de la création de l\'export',
-				'redirect' => helper::baseUrl() . 'theme/manage',
-				'state' => true
-			]);
-		}
-		// Création du ZIP
+		$zipFilename    =  'theme-'.date('dmYhms').'-'.rand(100,999).'.zip';
 		$zip = new ZipArchive();
-		$zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
-		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folderTemp), RecursiveIteratorIterator::LEAVES_ONLY);
-		foreach ($files as $name => $file)
-		{
-			if (!$file->isDir())
-			{
-				// Get real and relative path for current file
-				$filePath = $file->getRealPath();
-				$relativePath = substr($filePath, strlen($folderTemp)+3);				
-				// Add current file to archive
-				$zip->addFile($filePath, $relativePath);
+		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
+			$zip->addFile('site/data/theme.json','site/data/theme.json');
+			if ($this->getData(['theme','body','image']) !== '' ) {
+			$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
+						'site/file/source/'.$this->getData(['theme','body','image'])
+						);
 			}
+			if ($this->getData(['theme','header','image']) !== '' ) {			
+			$zip->addFile('site/file/source/'.$this->getData(['theme','header','image']),
+						  'site/file/source/'.$this->getData(['theme','header','image'])
+						);
+			}
+			$ret = $zip->close();
 		}
-		$zip->close();
 		// Téléchargement du ZIP
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
@@ -577,7 +491,6 @@ class theme extends common {
 		readfile('site/tmp/' . $zipFilename);
 		// Nettoyage du dossier
 		unlink ('site/tmp/' . $zipFilename);
-		rmdir  ($folderTemp);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
