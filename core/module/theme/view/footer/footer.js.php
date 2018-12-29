@@ -65,16 +65,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerText").hide();
 				break;
 			case 'left':
-				$("#footerText").show().appendTo("#bodyLeft");			
-				$("#footerText").show().appendTo("#siteLeft");
+				$("#footerText").show().appendTo("#footerbodyLeft");			
+				$("#footerText").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
-				$("#footerText").show().appendTo("#bodyCenter");
-				$("#footerText").show().appendTo("#siteCenter");
+				$("#footerText").show().appendTo("#footerbodyCenter");
+				$("#footerText").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
-				$("#footerText").show().appendTo("#bodyRight");
-				$("#footerText").show().appendTo("#siteRight");				
+				$("#footerText").show().appendTo("#footerbodyRight");
+				$("#footerText").show().appendTo("#footersiteRight");				
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -82,16 +82,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
-				$("#footerSocials").show().appendTo("#bodyLeft");			
-				$("#footerSocials").show().appendTo("#siteLeft");
+				$("#footerSocials").show().appendTo("#footerbodyLeft");			
+				$("#footerSocials").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
-				$("#footerSocials").show().appendTo("#bodyCenter");
-				$("#footerSocials").show().appendTo("#siteCenter");
+				$("#footerSocials").show().appendTo("#footerbodyCenter");
+				$("#footerSocials").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
-				$("#footerSocials").show().appendTo("#bodyRight");
-				$("#footerSocials").show().appendTo("#siteRight");				
+				$("#footerSocials").show().appendTo("#footerbodyRight");
+				$("#footerSocials").show().appendTo("#footersiteRight");				
 				break;
 	}
 		switch($("#themeFooterCopyrightPosition").val()) {
@@ -99,16 +99,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerCopyright").hide();
 				break;		
 			case 'left':
-				$("#footerCopyright").show().appendTo("#bodyLeft");			
-				$("#footerCopyright").show().appendTo("#siteLeft");
+				$("#footerCopyright").show().appendTo("#footerbodyLeft");			
+				$("#footerCopyright").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
-				$("#footerCopyright").show().appendTo("#bodyCenter");
-				$("#footerCopyright").show().appendTo("#siteCenter");
+				$("#footerCopyright").show().appendTo("#footerbodyCenter");
+				$("#footerCopyright").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
-				$("#footerCopyright").show().appendTo("#bodyRight");
-				$("#footerCopyright").show().appendTo("#siteRight");				
+				$("#footerCopyright").show().appendTo("#footerbodyRight");
+				$("#footerCopyright").show().appendTo("#footersiteRight");				
 				break;
 	}
 }).trigger("change");

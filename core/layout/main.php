@@ -140,8 +140,8 @@
 		
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div class="container">
-				<div class="row">
-					<div class="col4" id="siteLeft"> <!-- bloc gauche -->						
+				<div class="row" id="footer">
+					<div class="col4" id="footersiteLeft"> <!-- bloc gauche -->						
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 								$layout->showFooterText();} 
@@ -155,7 +155,7 @@
 								$layout->showCopyright(); } 
 						?>	
 					</div>
-					<div class="col4" id="siteCenter"> <!-- bloc central -->						
+					<div class="col4" id="footersiteCenter"> <!-- bloc central -->						
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 								$layout->showFooterText(); } 
@@ -169,7 +169,7 @@
 								$layout->showCopyright(); } 
 						?>	
 					</div>				
-					<div class="col4" id="siteRight"> <!-- bloc droite -->						
+					<div class="col4" id="footersiteRight"> <!-- bloc droite -->						
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 								$layout->showFooterText(); } 
@@ -192,8 +192,8 @@
 	<!-- Pied de page dans le fond du site -->
 	<footer>
 		<div class="container-large">
-			<div class="row">
-				<div class="col4" id="bodyLeft"> <!-- bloc gauche -->						
+			<div class="row" id="footer">
+				<div class="col4" id="footerbodyLeft"> <!-- bloc gauche -->						
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 							$layout->showFooterText(); } 
@@ -207,7 +207,7 @@
 							$layout->showCopyright(); } 
 					?>	
 				</div>
-				<div class="col4" id="bodyCenter"> <!-- bloc central -->						
+				<div class="col4" id="footerbodyCenter"> <!-- bloc central -->						
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 							$layout->showFooterText(); } 
@@ -221,7 +221,7 @@
 							$layout->showCopyright(); } 
 					?>	
 				</div>				
-				<div class="col4" id="bodyRight"> <!-- bloc droite -->						
+				<div class="col4" id="footerbodyRight"> <!-- bloc droite -->						
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 							$layout->showFooterText(); } 
