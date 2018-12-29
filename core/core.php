@@ -456,20 +456,8 @@ class common {
 		$this->importData();
 
 		// Import des données
-		if($this->data === []) {
-			// Trois tentatives
-			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
-				if($this->data) {
-					break;
-				}
-				elseif($i === 2) {
-					exit('Unable to read data file.');
-				}
-				// Pause de 10 millisecondes
-				usleep(10000);
-			}
-		
+		if($this->data === [])  {
+			$this->readData();
 		}
 
 		// Mise à jour
@@ -537,7 +525,23 @@ class common {
 		}
 	}
 
-	
+	public function readData() {
+		if($this->data === []) {
+			// Trois tentatives
+			for($i = 0; $i < 3; $i++) {
+				$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
+				if($this->data) {
+					break;
+				}
+				elseif($i === 2) {
+					exit('Unable to read data file.');
+				}
+				// Pause de 10 millisecondes
+				usleep(10000);
+			}
+		}
+	}
+
 	/**
 	 * Import des données du la version 8
 	 * Converti un fichier de données data.json puis le renomme

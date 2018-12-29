@@ -452,21 +452,31 @@ class theme extends common {
 
 			$zip = new ZipArchive();
 			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
+				unlink('site/data/theme.json');
 				$zip->extractTo('.');
 				$zip->close();
-			} 
+				// Import du thème
+				$this->readData();			
 			// Valeurs en sortie
 			$this->addOutput([
-				'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
+				'notification' => 'Le thème <b>'.$zipFilename.'</b> a été importé',
 				'redirect' => helper::baseUrl() . 'theme',
 				'state' => true
 			]);
+			} else {
+				$this->addOutput([
+					'notification' => 'Erreur avec le thème <b>'.$zipFilename,
+					'redirect' => helper::baseUrl() . 'theme/manage'
+				]);
+			}
 		}
+	
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Gestion des thèmes',
 			'view' => 'manage'
 		]);
+	
 	}
 	
 
