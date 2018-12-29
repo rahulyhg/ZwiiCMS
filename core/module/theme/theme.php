@@ -452,11 +452,11 @@ class theme extends common {
 
 			$zip = new ZipArchive();
 			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
-				unlink('site/data/theme.json');
 				$zip->extractTo('.');
 				$zip->close();
+				file_put_contents('site/data/custom.css', file_get_contents('core/module/theme/resource/custom.css'));
 				// Import du thème
-				$this->readData();			
+				die();			
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Le thème <b>'.$zipFilename.'</b> a été importé',
@@ -489,6 +489,8 @@ class theme extends common {
 			$zip = new ZipArchive();
 			if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
 				$zip->addFile('site/data/theme.json','site/data/theme.json');
+				$zip->addFile('site/data/theme.json','site/data/theme.css');
+				$zip->addFile('site/data/theme.json','site/data/custom.css');
 				if ($this->getData(['theme','body','image']) !== '' ) {
 				$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
 							'site/file/source/'.$this->getData(['theme','body','image'])
@@ -525,6 +527,8 @@ class theme extends common {
 		$zip = new ZipArchive();
 		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
 			$zip->addFile('site/data/theme.json','site/data/theme.json');
+			$zip->addFile('site/data/theme.json','site/data/theme.css');
+			$zip->addFile('site/data/theme.json','site/data/custom.css');			
 			if ($this->getData(['theme','body','image']) !== '' ) {
 			$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
 						'site/file/source/'.$this->getData(['theme','body','image'])
