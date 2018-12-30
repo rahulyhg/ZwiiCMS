@@ -268,6 +268,10 @@ class config extends common {
 				'state' => true
 			]);
 		}
+		// Initialisation du screen 
+		if (!file_exists('site/file/source/screenshot.png')) {
+			$this->configMetaImage();
+		}
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Configuration',
