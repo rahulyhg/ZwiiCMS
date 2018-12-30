@@ -2,7 +2,21 @@
 
 ## Préversion 9.0.0
 - Modification :
-    - Stockage distinct du thème et ddes autres données (core, config, page, module et users ) avec import des données d'une version 8
+    - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
+
+## Verison 8.5.3
+* Modification :
+    - Config bouton de génération de la capture de l'écran OpenGraph
+* Correction :
+    - Appel de la génération de la capture d'écran OpenGraph quand le fichier est absent
+    - CSS pour le footer des blocs et non des éléments
+        - #footersite, #footerbody : bloc footer dans et hors site
+        - #footersite, #footerbody a : liens du bloc footer  dans et hors site
+        - Bloc des colonnes dasn et hors site :
+            - #footersiteLeft, #footerbodyLef
+            - #footersiteCenter, #footerbodyCenter
+            - #footersiteRight, #footerbodyRight   
+
 
 ## Verison 8.5.2
 * Correction : 
