@@ -526,19 +526,17 @@ class common {
 	}
 
 	public function readData() {
-		if($this->data === []) {
-			// Trois tentatives
-			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
-				if($this->data) {
-					break;
-				}
-				elseif($i === 2) {
-					exit('Unable to read data file.');
-				}
-				// Pause de 10 millisecondes
-				usleep(10000);
+		// Trois tentatives
+		for($i = 0; $i < 3; $i++) {
+			$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
+			if($this->data) {
+				break;
 			}
+			elseif($i === 2) {
+				exit('Unable to read data file.');
+			}
+			// Pause de 10 millisecondes
+			usleep(10000);
 		}
 	}
 
@@ -1244,11 +1242,9 @@ class core extends common {
 				'content' => $this->getData(['page', $this->getUrl(0), 'content']),
 				'metaDescription' => $this->getData(['page', $this->getUrl(0), 'metaDescription']),
 				'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
-				// Menu image
 				'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 				'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
 				'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
-				// Menu Image
 			]);
 		}
 		// Importe le module
@@ -1260,11 +1256,9 @@ class core extends common {
 					'title' => $this->getData(['page', $this->getUrl(0), 'title']),
 					'metaDescription' => $this->getData(['page', $this->getUrl(0), 'metaDescription']),
 					'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
-					// Menu image
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
 		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
-					// Menu image
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
 			}

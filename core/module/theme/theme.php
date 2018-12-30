@@ -454,14 +454,9 @@ class theme extends common {
 			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
 				$zip->extractTo('.');
 				$zip->close();
-				file_put_contents('site/data/custom.css', file_get_contents('core/module/theme/resource/custom.css'));
-				// Import du thème
-				die();			
 			// Valeurs en sortie
 			$this->addOutput([
-				'notification' => 'Le thème <b>'.$zipFilename.'</b> a été importé',
-				'redirect' => helper::baseUrl() . 'theme',
-				'state' => true
+				'redirect' => helper::baseUrl() . 'theme'
 			]);
 			} else {
 				$this->addOutput([
