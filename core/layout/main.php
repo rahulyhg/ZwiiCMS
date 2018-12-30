@@ -140,7 +140,7 @@
 		
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div class="container">
-				<div class="row" id="footer">
+				<div class="row" id="footersite">
 					<div class="col4" id="footersiteLeft"> <!-- bloc gauche -->						
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
@@ -192,7 +192,7 @@
 	<!-- Pied de page dans le fond du site -->
 	<footer>
 		<div class="container-large">
-			<div class="row" id="footer">
+			<div class="row" id="footerbody">
 				<div class="col4" id="footerbodyLeft"> <!-- bloc gauche -->						
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {

@@ -40,23 +40,23 @@ nav a.active {
 }
 
 /* Bas de page */
-footer {
+#footersite, #footerbody {
 }
 
 /* Liens du bas de page */
-footer a {
+#footersite, #footerbody a {
 }
 
-/* Réseaux sociaux dans le bas de page */
-#footerSocials {
+/* footer bloc gauche */
+#footersiteLeft, #footerbodyLeft  {
 }
 
-/* Texte libre dans le bas de page */
-#footerText {
+/* footer bloc central */
+#footersiteCenter, #footerbodyCenter {
 }
 
-/* Copyright dans le bas de page */
-#footerCopyright {
+/* footer bloc droite */
+#footersiteRight, #footerbodyRight {
 }
 
 /**
