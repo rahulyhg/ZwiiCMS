@@ -26,3 +26,4 @@ site/*
 #Visual Code
 .vscode
 
+site/data/custom.css

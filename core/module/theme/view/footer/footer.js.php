@@ -65,16 +65,10 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerText").hide();
 				break;
 			case 'left':
-				$("#footerText").show().appendTo("#bodyLeft");			
-				$("#footerText").show().appendTo("#siteLeft");
 				break;
 			case 'center':
-				$("#footerText").show().appendTo("#bodyCenter");
-				$("#footerText").show().appendTo("#siteCenter");
 				break;
 			case 'right':
-				$("#footerText").show().appendTo("#bodyRight");
-				$("#footerText").show().appendTo("#siteRight");				
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -82,16 +76,10 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
-				$("#footerSocials").show().appendTo("#bodyLeft");			
-				$("#footerSocials").show().appendTo("#siteLeft");
 				break;
 			case 'center':
-				$("#footerSocials").show().appendTo("#bodyCenter");
-				$("#footerSocials").show().appendTo("#siteCenter");
 				break;
 			case 'right':
-				$("#footerSocials").show().appendTo("#bodyRight");
-				$("#footerSocials").show().appendTo("#siteRight");				
 				break;
 	}
 		switch($("#themeFooterCopyrightPosition").val()) {
@@ -99,16 +87,10 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerCopyright").hide();
 				break;		
 			case 'left':
-				$("#footerCopyright").show().appendTo("#bodyLeft");			
-				$("#footerCopyright").show().appendTo("#siteLeft");
 				break;
 			case 'center':
-				$("#footerCopyright").show().appendTo("#bodyCenter");
-				$("#footerCopyright").show().appendTo("#siteCenter");
 				break;
 			case 'right':
-				$("#footerCopyright").show().appendTo("#bodyRight");
-				$("#footerCopyright").show().appendTo("#siteRight");				
 				break;
 	}
 }).trigger("change");
