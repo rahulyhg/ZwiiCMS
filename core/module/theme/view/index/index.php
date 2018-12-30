@@ -5,7 +5,7 @@
 ): ?>
 	<?php echo template::speech('Cliquez sur une zone afin d\'accéder à ses options de personnalisation. Vous pouvez également afficher les zones cachées à l\'aide du bouton ci-dessous.'); ?>
 	<div class="row">
-		<div class="col2 offset2">
+		<div class="col3">
 			<?php echo template::button('themeBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl(false),
@@ -13,21 +13,21 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
-		<div class="col2">
+		<div class="col3">
 			<?php echo template::button('themeManage', [				
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
-				'value' => 'Importer/Exporter'
+				'value' => 'Gestion des thèmes'
 			]); ?>
 		</div>	
-		<div class="col2">
+		<div class="col3">
 			<?php echo template::button('themeAdvanced', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
 				'value' => 'Mode avancé',
 				'ico' => 'code'
 			]); ?>
 		</div>
-		<div class="col2">
+		<div class="col3">
 			<?php echo template::button('themeShowAll', [
 				'ico' => 'eye',
 				'value' => 'Zones cachées'
@@ -37,7 +37,7 @@
 <?php else: ?>
 	<?php echo template::speech('Cliquez sur une zone afin d\'accéder à ses options de personnalisation.'); ?>
 	<div class="row">
-		<div class="col2 offset3">
+		<div class="col3 offset2">
 			<?php echo template::button('themeBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl(false),
@@ -45,14 +45,14 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
-		<div class="col2">
+		<div class="col3">
 			<?php echo template::button('themeManage', [				
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
-				'value' => 'Importer/Exporter'
+				'value' => 'Gestion des thèmes'
 			]); ?>
 		</div>
-		<div class="col2">
+		<div class="col3">
 			<?php echo template::button('themeAdvanced', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
 				'value' => 'Mode avancé',
