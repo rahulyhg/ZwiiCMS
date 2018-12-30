@@ -5,10 +5,6 @@
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
 
 ## Verison 8.5.3
-=======
-
-## Version 8.5.3
->>>>>>> master
 * Modification :
     - Config bouton de génération de la capture de l'écran OpenGraph
 * Correction :
@@ -23,11 +19,6 @@
 
 
 ## Verison 8.5.2
-=======
-            - #footersiteRight, #footerbodyRight            
-         
-## Version 8.5.2
->>>>>>> master
 * Correction : 
     - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
     

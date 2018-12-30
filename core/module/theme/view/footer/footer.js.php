@@ -65,10 +65,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerText").hide();
 				break;
 			case 'left':
+				$("#footerText").show().appendTo("#footerbodyLeft");			
+				$("#footerText").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
+				$("#footerText").show().appendTo("#footerbodyCenter");
+				$("#footerText").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
+				$("#footerText").show().appendTo("#footerbodyRight");
+				$("#footerText").show().appendTo("#footersiteRight");				
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -76,10 +82,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
+				$("#footerSocials").show().appendTo("#footerbodyLeft");			
+				$("#footerSocials").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
+				$("#footerSocials").show().appendTo("#footerbodyCenter");
+				$("#footerSocials").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
+				$("#footerSocials").show().appendTo("#footerbodyRight");
+				$("#footerSocials").show().appendTo("#footersiteRight");				
 				break;
 	}
 		switch($("#themeFooterCopyrightPosition").val()) {
@@ -87,10 +99,16 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerCopyright").hide();
 				break;		
 			case 'left':
+				$("#footerCopyright").show().appendTo("#footerbodyLeft");			
+				$("#footerCopyright").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
+				$("#footerCopyright").show().appendTo("#footerbodyCenter");
+				$("#footerCopyright").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
+				$("#footerCopyright").show().appendTo("#footerbodyRight");
+				$("#footerCopyright").show().appendTo("#footersiteRight");				
 				break;
 	}
 }).trigger("change");
