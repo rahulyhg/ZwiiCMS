@@ -131,4 +131,31 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="block">
+			<h4>Mise en page</h4>
+			<div class='row'>	
+				<div class="col3">
+					<?php echo template::select('themeSiteBlocks', $module::$siteBlocks, [
+										'label' => 'Colonnes',
+										'selected' => $this->getData(['theme', 'site', 'blocks'])
+							]); ?>
+				</div>
+			</div>
+			<div class='row'>
+				<div class="col6">
+					<?php echo template::textarea('themeSiteContentright', [
+							'class' => 'editorWysiwyg',
+							'value' => $this->getData(['theme', 'site', 'contentRight'])
+						]); ?>
+				</div>
+				<div class="col6">						
+					<?php echo template::textarea('themeSiteContentleft', [
+							'class' => 'editorWysiwyg',
+							'value' => $this->getData(['theme', 'site', 'contentLeft'])
+					]); ?>
+				</div>	
+			</div>
+		</div>
+	</div>
 <?php echo template::formClose(); ?>

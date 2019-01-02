@@ -349,7 +349,8 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '1170px'
+				'width' => '1170px',
+				'blocks' => '100'
 			],
 			'text' => [
 				'font' => 'Open+Sans',
@@ -994,7 +995,9 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
-			
+			$this->setData(['theme', 'site', 'blocks','100']);
+			$this->setData(['theme', 'site', 'contentLeft','']);
+			$this->setData(['theme', 'site', 'contentRight','']);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				

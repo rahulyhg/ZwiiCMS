@@ -201,8 +201,17 @@ class theme extends common {
 		'contain' => 'Image entière',		
 		'cover' => 'Largeur adaptée au fond',
 		'100% 100%' => 'Taille adaptée au fond'
-
 	];
+
+	public static $siteBlocks = [
+		'100' => 'Une colonne',
+		'33-66' => 'Deux colonnes : 1/3 - 2/3',		
+		'66-33' => 'Deux colonnes : 2/3 - 1/3',
+		'25-75' => 'Deux colonnes : 1/4 - 3/4',
+		'75-25' => 'Deux colonnes : 3/4 - 1/2',
+		'25-50-25' => 'Trois colonnes : 1/4 - 1/2 - 1/4'
+	];
+
 
 	/**
 	 * Mode avancé
@@ -424,7 +433,11 @@ class theme extends common {
 				'backgroundColor' => $this->getInput('themeSiteBackgroundColor'),
 				'radius' => $this->getInput('themeSiteRadius'),
 				'shadow' => $this->getInput('themeSiteShadow'),
-				'width' => $this->getInput('themeSiteWidth')
+				'width' => $this->getInput('themeSiteWidth'),
+				'blocks' => $this->getInput('themeSiteBlocks'),
+				'contentLeft' => (empty($this->getInput('themeSiteContentleft', null)) ? "<p></p>" : $this->getInput('themeSiteContentleft', null)),
+				'contentRight' => (empty($this->getInput('themeSiteContentright', null)) ? "<p></p>" : $this->getInput('themeSiteContentright', null))
+				
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -437,7 +450,8 @@ class theme extends common {
 		$this->addOutput([
 			'title' => 'Personnalisation du site',
 			'vendor' => [
-				'tinycolorpicker'
+				'tinycolorpicker',
+				'tinymce'
 			],
 			'view' => 'site'
 		]);

@@ -24,19 +24,18 @@ class page extends common {
 	];
 	public static $moduleIds = [];
 
-	// Menu image
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
 		'icontitle' => 'Icône et bulle'
 	];
-	// menu image
 	// Position du module
 	public static $modulePosition = [
 	'bottom' => 'En bas',
 	'top' => 'En haut',
 	'free' => 'Libre'
 	];
+	
 	/**
 	 * Création
 	 */
@@ -46,12 +45,10 @@ class page extends common {
 		$this->setData([
 			'page',
 			$pageId,
-			[
-				//  Menu icon				
+			[		
 				'typeMenu' => 'text',
 				'iconUrl' => '',
-                'disable' => false,				
-				// Menu icon				
+                'disable' => false,								
 				'content' => 'Contenu de votre nouvelle page.',
 				'hideTitle' => false,
 				'metaDescription' => '',
