@@ -118,6 +118,8 @@
 	<!-- Corps -->
 	<?php if ($this->getUrl(0) === 'theme' OR
 		$this->getUrl(0) === 'config' OR
+		$this->getUrl(0) === 'install' OR
+		$this->getUrl(0) === 'maintenance' OR
 		$this->getUrl(0) === 'user'  ) { ?> <!-- Pas de multi colonne-->
 			<section><?php $layout->showContent(); ?></section>
 		<?php } else {
@@ -143,10 +145,10 @@
 		}	
 		?>
 		<section>
-		<div class="row">
-		<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>"><?php echo $this->getData(['theme','block','contentLeft']);?></div> <?php endif; ?>
-		<div class="<?php echo $content; ?>"><?php $layout->showContent(); ?></div>
-		<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>"><?php echo $this->getData(['theme','block','contentRight']);?></div> <?php endif; ?>		
+			<div class="row">
+				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>"><?php echo $this->getData(['theme','block','contentLeft']);?></div> <?php endif; ?>
+				<div class="<?php echo $content; ?>"><?php $layout->showContent(); ?></div>
+				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>"><?php echo $this->getData(['theme','block','contentRight']);?></div> <?php endif; ?>		
 		</div>
 		</section>
 	<?php } ?>
