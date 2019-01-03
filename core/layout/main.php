@@ -33,11 +33,9 @@
 <?php if($this->getData(['theme', 'header', 'position']) === 'body'): ?>
 	<!-- Bannière dans le fond du site -->
 
-	<!-- menu image -->
 	<?php	
 	if ($this->getData(['theme','header','linkHome'])){
 	echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-	<!-- menu image -->
 
 	<header>
 		<?php if(
@@ -45,22 +43,16 @@
 			// Affiche toujours le titre de la bannière pour l'édition du thème
 			OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 		): ?>
-
-
 			<div class="container">
 				<span><?php echo $this->getData(['config', 'title']); ?></span>
 			</div>
-	
-
 		<?php endif; ?>
-	</header>
-	<!-- menu image -->			
+	</header>		
 	<?php
 	if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
-	?>
-	<!-- menu image -->		
-
+	?>	
 <?php endif; ?>
+
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 	<!-- Menu dans le fond du site après la bannière -->
 	<nav>
@@ -90,12 +82,9 @@
 		)
 	): ?>
 		<!-- Bannière dans le site -->
-
-		<!-- menu image -->
 		<?php	
 		if ($this->getData(['theme','header','linkHome'])){
 		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-		<!-- menu image -->
 		<header <?php if($this->getData(['theme', 'header', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<?php if(
 				$this->getData(['theme', 'header', 'textHide']) === false
@@ -127,7 +116,29 @@
 		</nav>
 	<?php endif; ?>
 	<!-- Corps -->
-	<section><?php $layout->showContent(); ?></section>
+	<?php
+		switch($this->getData(['theme','site','blocks'])) {
+			case '33-66' :
+			break;
+			case '25-75' :
+			break;
+			case '25-50-25' :
+			break;
+		}
+	?>
+	<section><div class="col6 offset4"><?php $layout->showContent(); ?></div></section>
+	<?php
+		switch($this->getData(['theme','site','blocks'])) {
+			case '66-33' :
+			break;
+			case '75-25' :
+			break;
+			case '25-50-25' :
+			break;
+		}
+	?>
+
+	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'
 		// Affiche toujours le pied de page pour l'édition du thème

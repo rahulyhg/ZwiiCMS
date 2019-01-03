@@ -57,7 +57,7 @@ class common {
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10,
-			'contenLeft' => '',
+			'contentLeft' => '',
 			'contentRight' => ''
 		],
 		'core' => [
