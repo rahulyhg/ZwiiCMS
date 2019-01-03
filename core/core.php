@@ -56,7 +56,9 @@ class common {
 			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
-			'itemsperPage' => 10
+			'itemsperPage' => 10,
+			'contenLeft' => '',
+			'contentRight' => ''
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -996,8 +998,8 @@ class common {
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
 			$this->setData(['theme', 'site', 'blocks','100']);
-			$this->setData(['theme', 'site', 'contentLeft','']);
-			$this->setData(['theme', 'site', 'contentRight','']);
+			$this->setData(['config', 'contentLeft','']);
+			$this->setData(['config', 'contentRight','']);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				

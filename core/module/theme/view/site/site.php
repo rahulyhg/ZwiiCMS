@@ -144,15 +144,15 @@
 			</div>
 			<div class='row'>
 				<div class="col6">
-					<?php echo template::textarea('themeSiteContentright', [
+					<?php echo template::textarea('configContentright', [
 							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['theme', 'site', 'contentRight'])
+							'value' => $this->getData(['config', 'contentRight'])
 						]); ?>
 				</div>
 				<div class="col6">						
-					<?php echo template::textarea('themeSiteContentleft', [
+					<?php echo template::textarea('configContentleft', [
 							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['theme', 'site', 'contentLeft'])
+							'value' => $this->getData(['config', 'contentLeft'])
 					]); ?>
 				</div>	
 			</div>

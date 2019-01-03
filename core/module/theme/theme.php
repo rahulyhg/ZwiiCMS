@@ -435,9 +435,10 @@ class theme extends common {
 				'shadow' => $this->getInput('themeSiteShadow'),
 				'width' => $this->getInput('themeSiteWidth'),
 				'blocks' => $this->getInput('themeSiteBlocks'),
-				'contentLeft' => (empty($this->getInput('themeSiteContentleft', null)) ? "<p></p>" : $this->getInput('themeSiteContentleft', null)),
-				'contentRight' => (empty($this->getInput('themeSiteContentright', null)) ? "<p></p>" : $this->getInput('themeSiteContentright', null))
-				
+			]]);
+			$this->setData(['config', [	
+				'contentLeft' => (empty($this->getInput('configContentleft', null)) ? "<p></p>" : $this->getInput('configContentleft', null)),
+				'contentRight' => (empty($this->getInput('configContentright', null)) ? "<p></p>" : $this->getInput('configContentright', null))
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
