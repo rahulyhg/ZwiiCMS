@@ -1,5 +1,8 @@
 # ChangeLog 
 
+## Version 8.5.4
+* Correction : 
+    - Faille CSRF lors de l'effacement d'une page
 
 ## Version 8.5.3
 * Modification :
