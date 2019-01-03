@@ -109,6 +109,11 @@ class page extends common {
 					'state' => true
 				]);
 			}
+		} else {
+			// Valeurs en sortie
+			$this->addOutput([
+				'access' => false
+			]);
 		}
 	}
 
