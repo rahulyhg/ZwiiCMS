@@ -116,28 +116,40 @@
 		</nav>
 	<?php endif; ?>
 	<!-- Corps -->
-	<?php
-		switch($this->getData(['theme','site','blocks'])) {
-			case '33-66' :
+	<?php if ($this->getUrl(0) === 'theme' OR
+		$this->getUrl(0) === 'config' OR
+		$this->getUrl(0) === 'user'  ) { ?> <!-- Pas de multi colonne-->
+			<section><?php $layout->showContent(); ?></section>
+		<?php } else {
+		$blocks = explode('-',$this->getData(['theme','site','blocks']));
+		$blockleft=$blockright="";
+		switch (sizeof($blocks)) {
+			case 1 :  // une colonne
+				$content    = 'col'. $blocks[0] ;
+				break;			
+			case 2 :  // 2 blocks 
+				if ($blocks[0] < $blocks[1]) { // détermine la position de la colonne
+					$blockright = 'col'. $blocks[0];
+					$content    = 'col'. $blocks[1] ;
+				} else {
+					$content    = 'col' . $blocks[0];
+					$blockleft  = 'col' . $blocks[1];						
+				}
 			break;
-			case '25-75' :
-			break;
-			case '25-50-25' :
-			break;
-		}
-	?>
-	<section><div class="col6 offset4"><?php $layout->showContent(); ?></div></section>
-	<?php
-		switch($this->getData(['theme','site','blocks'])) {
-			case '66-33' :
-			break;
-			case '75-25' :
-			break;
-			case '25-50-25' :
-			break;
-		}
-	?>
-
+			case 3 :  // 3 blocks
+					$blockleft  = 'col' . $blocks[0];
+					$content    = 'col' . $blocks[1];
+					$blockright = 'col' . $blocks[2];					
+		}	
+		?>
+		<section>
+		<div class="row">
+		<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>"><?php echo $this->getData(['theme','block','contentLeft']);?></div> <?php endif; ?>
+		<div class="<?php echo $content; ?>"><?php $layout->showContent(); ?></div>
+		<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>"><?php echo $this->getData(['theme','block','contentRight']);?></div> <?php endif; ?>		
+		</div>
+		</section>
+	<?php } ?>
 	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'

@@ -143,17 +143,17 @@
 				</div>
 			</div>
 			<div class='row'>
-				<div class="col6">
-					<?php echo template::textarea('configContentright', [
+			<div class="col6">						
+					<?php echo template::textarea('themeBlockContentLeft', [
 							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['config', 'contentRight'])
-						]); ?>
-				</div>
-				<div class="col6">						
-					<?php echo template::textarea('configContentleft', [
-							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['config', 'contentLeft'])
+							'value' => $this->getData(['theme','block', 'contentLeft'])
 					]); ?>
+				</div>			
+				<div class="col6">
+					<?php echo template::textarea('themeBlockContentRight', [
+							'class' => 'editorWysiwyg',
+							'value' => $this->getData(['theme','block', 'contentRight'])
+						]); ?>
 				</div>	
 			</div>
 		</div>

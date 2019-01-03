@@ -204,12 +204,12 @@ class theme extends common {
 	];
 
 	public static $siteBlocks = [
-		'100' => 'Une colonne',
-		'33-66' => 'Deux colonnes : 1/3 - 2/3',		
-		'66-33' => 'Deux colonnes : 2/3 - 1/3',
-		'25-75' => 'Deux colonnes : 1/4 - 3/4',
-		'75-25' => 'Deux colonnes : 3/4 - 1/2',
-		'25-50-25' => 'Trois colonnes : 1/4 - 1/2 - 1/4'
+		'12' => 'Une colonne',
+		'4-8' => 'Deux colonnes : 1/3 - 2/3',		
+		'8-4' => 'Deux colonnes : 2/3 - 1/3',
+		'3-9' => 'Deux colonnes : 1/4 - 3/4',
+		'9-3' => 'Deux colonnes : 3/4 - 1/2',
+		'3-6-3' => 'Trois colonnes : 1/4 - 1/2 - 1/4'
 	];
 
 
@@ -434,11 +434,11 @@ class theme extends common {
 				'radius' => $this->getInput('themeSiteRadius'),
 				'shadow' => $this->getInput('themeSiteShadow'),
 				'width' => $this->getInput('themeSiteWidth'),
-				'blocks' => $this->getInput('themeSiteBlocks'),
+				'blocks' => $this->getInput('themeSiteBlocks')
 			]]);
-			$this->setData(['config', [	
-				'contentLeft' => (empty($this->getInput('configContentleft', null)) ? "<p></p>" : $this->getInput('configContentleft', null)),
-				'contentRight' => (empty($this->getInput('configContentright', null)) ? "<p></p>" : $this->getInput('configContentright', null))
+			$this->setData(['theme','block', [	
+				'contentLeft' => (empty($this->getInput('themeBlockContentLeft', null)) ? "<p></p>" : $this->getInput('themeBlockContentLeft', null)),
+				'contentRight' => (empty($this->getInput('themeBlockContentRight', null)) ? "<p></p>" : $this->getInput('themeBlockContentRight', null))
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
