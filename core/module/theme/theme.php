@@ -204,12 +204,12 @@ class theme extends common {
 	];
 
 	public static $siteBlocks = [
-		'12' => 'Une colonne',
-		'4-8' => 'Deux colonnes : 1/3 - 2/3',		
-		'8-4' => 'Deux colonnes : 2/3 - 1/3',
-		'3-9' => 'Deux colonnes : 1/4 - 3/4',
-		'9-3' => 'Deux colonnes : 3/4 - 1/2',
-		'3-6-3' => 'Trois colonnes : 1/4 - 1/2 - 1/4'
+		'12' => 'Un seul bloc, uniquement le site',
+		'4-8' => 'Deux blocs : 1/3 - 2/3',		
+		'8-4' => 'Deux blocs : 2/3 - 1/3',
+		'3-9' => 'Deux blocs : 1/4 - 3/4',
+		'9-3' => 'Deux blocs : 3/4 - 1/2',
+		'3-6-3' => 'Trois blocs : 1/4 - 1/2 - 1/4'
 	];
 
 

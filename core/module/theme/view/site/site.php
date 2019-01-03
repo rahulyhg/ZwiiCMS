@@ -133,24 +133,27 @@
 	</div>
 	<div class="row">
 		<div class="block">
-			<h4>Mise en page</h4>
+			<h4>Mise en page </h4>
 			<div class='row'>	
 				<div class="col3">
 					<?php echo template::select('themeSiteBlocks', $module::$siteBlocks, [
-										'label' => 'Colonnes',
-										'selected' => $this->getData(['theme', 'site', 'blocks'])
-							]); ?>
+							'label' => 'Répartition des blocs :',
+							'help' => 'Le bloc la plus large abrite le contenu du site',
+							'selected' => $this->getData(['theme', 'site', 'blocks'])
+					]); ?>
 				</div>
 			</div>
 			<div class='row'>
-			<div class="col6">						
+				<div class="col6">						
 					<?php echo template::textarea('themeBlockContentLeft', [
+							'label' => 'Contenu du bloc à gauche :',
 							'class' => 'editorWysiwyg',
 							'value' => $this->getData(['theme','block', 'contentLeft'])
 					]); ?>
 				</div>			
 				<div class="col6">
 					<?php echo template::textarea('themeBlockContentRight', [
+							'label' => 'Contenu du bloc à droite :',
 							'class' => 'editorWysiwyg',
 							'value' => $this->getData(['theme','block', 'contentRight'])
 						]); ?>

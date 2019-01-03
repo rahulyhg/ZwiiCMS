@@ -131,11 +131,11 @@
 				break;			
 			case 2 :  // 2 blocks 
 				if ($blocks[0] < $blocks[1]) { // détermine la position de la colonne
-					$blockright = 'col'. $blocks[0];
+					$blockleft = 'col'. $blocks[0];
 					$content    = 'col'. $blocks[1] ;
 				} else {
 					$content    = 'col' . $blocks[0];
-					$blockleft  = 'col' . $blocks[1];						
+					$blockright  = 'col' . $blocks[1];						
 				}
 			break;
 			case 3 :  // 3 blocks
