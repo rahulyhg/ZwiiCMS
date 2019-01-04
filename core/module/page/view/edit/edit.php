@@ -13,7 +13,7 @@
 		<div class="col2 offset6">
 			<?php echo template::button('pageEditDelete', [
 				'class' => 'buttonRed',
-				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2),
+				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2) . '&csrf=' . $_SESSION['csrf'],
 				'value' => 'Supprimer',
 				'ico' => 'cancel'
 			]); ?>
