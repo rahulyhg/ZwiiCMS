@@ -178,7 +178,7 @@ class common {
 				'title' => 'Contact'
 			],
 			'blockRight' => [
-			    'typeMenu' => 'text',
+			    'typeMenu' => '',
                 'iconUrl' => '',
                 'disable' => false,
 				'content' => '<p>Bloc à droite du site</p>',
@@ -194,7 +194,7 @@ class common {
 				'title' => 'blockRight'
 			],
 			'blockLeft' => [
-			    'typeMenu' => 'text',
+			    'typeMenu' => '',
                 'iconUrl' => '',
                 'disable' => false,
 				'content' => '<p>Bloc à gauche du site</p>',
@@ -2032,8 +2032,6 @@ class layout extends common {
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
 
-				// Menu Image
-
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
@@ -2166,15 +2164,15 @@ class layout extends common {
 				$leftItems .= '<option value="">Choisissez une page</option>';
 				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
 				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
-					if ($this->getData(['page', $parentPageId]) === 'blockLeft' 
-					    OR $this->getData(['page', $parentPageId]) === 'blockRight') { continue; }
+					if ($parentPageId === 'blockLeft' 
+					    OR $parentPageId === 'blockRight') { continue; }
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
 				}
 				$leftItems .= '<option value="">-------------------</option>';				
-				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">Edition des blocs</option>';				
+				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des blocs</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(
