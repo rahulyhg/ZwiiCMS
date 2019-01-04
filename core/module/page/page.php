@@ -75,7 +75,6 @@ class page extends common {
 	 * Suppression
 	 */
 	public function delete() {
-		if($this->isPost()) {
 			// La page n'existe pas
 			if($this->getData(['page', $this->getUrl(2)]) === null) {
 				// Valeurs en sortie
@@ -110,12 +109,6 @@ class page extends common {
 					'state' => true
 				]);
 			}
-		} else {
-			// Valeurs en sortie
-			$this->addOutput([
-				'access' => false
-			]);
-		}
 	}
 
 

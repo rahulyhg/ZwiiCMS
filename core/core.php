@@ -176,6 +176,38 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact'
+			],
+			'blockRight' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à droite du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockRight'
+			],
+			'blockLeft' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à gauche du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockLeft'
 			]
 		],
 		'module' => [
@@ -996,8 +1028,6 @@ class common {
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
 			$this->setData(['theme', 'site', 'blocks','100']);
-			$this->setData(['page', 'blockLeft', 'content','']);
-			$this->setData(['page', 'blockRight', 'content','']);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				
@@ -2136,8 +2166,8 @@ class layout extends common {
 				$leftItems .= '<option value="">Choisissez une page</option>';
 				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
 				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
-					if ($this->getData(['page', $parentPageId, 'title']) === 'blockLeft' 
-					    OR $this->getData(['page', $parentPageId, 'title']) === 'blockRight') { continue; }
+					if ($this->getData(['page', $parentPageId]) === 'blockLeft' 
+					    OR $this->getData(['page', $parentPageId]) === 'blockRight') { continue; }
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
