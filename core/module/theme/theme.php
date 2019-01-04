@@ -436,10 +436,6 @@ class theme extends common {
 				'width' => $this->getInput('themeSiteWidth'),
 				'blocks' => $this->getInput('themeSiteBlocks')
 			]]);
-			$this->setData(['theme','block', [	
-				'contentLeft' => (empty($this->getInput('themeBlockContentLeft', null)) ? "<p></p>" : $this->getInput('themeBlockContentLeft', null)),
-				'contentRight' => (empty($this->getInput('themeBlockContentRight', null)) ? "<p></p>" : $this->getInput('themeBlockContentRight', null))
-			]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',

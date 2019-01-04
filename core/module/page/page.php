@@ -17,7 +17,8 @@ class page extends common {
 	public static $actions = [
 		'add' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'edit' => self::GROUP_MODERATOR
+		'edit' => self::GROUP_MODERATOR,
+		'block' => self::GROUP_ADMIN
 	];
 	public static $pagesNoParentId = [
 		'' => 'Aucune'
@@ -31,9 +32,9 @@ class page extends common {
 	];
 	// Position du module
 	public static $modulePosition = [
-	'bottom' => 'En bas',
-	'top' => 'En haut',
-	'free' => 'Libre'
+		'bottom' => 'En bas',
+		'top' => 'En haut',
+		'free' => 'Libre'
 	];
 	
 	/**
@@ -116,6 +117,66 @@ class page extends common {
 			]);
 		}
 	}
+
+
+	/**
+	 * Édition des blocs
+	 */
+	public function block () {
+		if($this->isPost()) {
+			$this->setData([
+				'page',
+				'blockLeft', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockLeft',
+					'content' => (empty($this->getInput('pageBlockLeftContent', null)) ? "<p></p>" : $this->getInput('pageBlockLeftContent', null))]
+			]);
+			$this->setData([
+				'page',
+				'blockRight', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockRight',
+					'content' => (empty($this->getInput('pageBlockRightContent', null)) ? "<p></p>" : $this->getInput('pageBlockRightContent', null))]
+			]);		
+			$this->addOutput([
+				'redirect' => helper::baseUrl(),
+				'notification' => 'Modifications enregistrées',
+				'state' => true
+			]);
+		}
+
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Édition des blocs',
+			'vendor' => [
+				'tinymce'
+			],
+			'view' => 'block'
+		]);
+	}
+	
 
 	/**
 	 * Édition

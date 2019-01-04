@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col4">
+					<div class="col4 offset2">
 						<?php echo template::text('themeButtonBackgroundColor', [
 							'class' => 'colorPicker',
 							'label' => 'Boutons',
@@ -79,6 +79,15 @@
 						<?php echo template::select('themeSiteShadow', $module::$shadows, [
 							'label' => 'Ombre sur les bords du site',
 							'selected' => $this->getData(['theme', 'site', 'shadow'])
+						]); ?>
+					</div>
+				</div>
+				<div class='row'>	
+					<div class="col4 offset4">
+						<?php echo template::select('themeSiteBlocks', $module::$siteBlocks, [
+								'label' => 'Répartition des blocs :',
+								'help' => 'Pour éditer le contenu des blocs, sélectionnez \'Édition des blocs\' dans la liste des pages.',
+								'selected' => $this->getData(['theme', 'site', 'blocks'])
 						]); ?>
 					</div>
 				</div>
@@ -128,36 +137,6 @@
 						]); ?>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="block">
-			<h4>Mise en page </h4>
-			<div class='row'>	
-				<div class="col3">
-					<?php echo template::select('themeSiteBlocks', $module::$siteBlocks, [
-							'label' => 'Répartition des blocs :',
-							'help' => 'Le bloc la plus large abrite le contenu du site',
-							'selected' => $this->getData(['theme', 'site', 'blocks'])
-					]); ?>
-				</div>
-			</div>
-			<div class='row'>
-				<div class="col6">						
-					<?php echo template::textarea('themeBlockContentLeft', [
-							'label' => 'Contenu du bloc à gauche :',
-							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['theme','block', 'contentLeft'])
-					]); ?>
-				</div>			
-				<div class="col6">
-					<?php echo template::textarea('themeBlockContentRight', [
-							'label' => 'Contenu du bloc à droite :',
-							'class' => 'editorWysiwyg',
-							'value' => $this->getData(['theme','block', 'contentRight'])
-						]); ?>
-				</div>	
 			</div>
 		</div>
 	</div>
