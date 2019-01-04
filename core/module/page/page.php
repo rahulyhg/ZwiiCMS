@@ -75,42 +75,51 @@ class page extends common {
 	 * Suppression
 	 */
 	public function delete() {
-			// La page n'existe pas
-			if($this->getData(['page', $this->getUrl(2)]) === null) {
-				// Valeurs en sortie
-				$this->addOutput([
-					'access' => false
-				]);
-			}
-			// Impossible de supprimer la page d'accueil
-			elseif($this->getUrl(2) === $this->getData(['config', 'homePageId'])) {
-				// Valeurs en sortie
-				$this->addOutput([
-					'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
-					'notification' => 'Impossible de supprimer la page d\'accueil'
-				]);
-			}
-			// Impossible de supprimer une page contenant des enfants
-			elseif($this->getHierarchy($this->getUrl(2))) {
-				// Valeurs en sortie
-				$this->addOutput([
-					'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
-					'notification' => 'Impossible de supprimer une page contenant des enfants'
-				]);
-			}
-			// Suppression
-			else {
-				$this->deleteData(['page', $this->getUrl(2)]);
-				$this->deleteData(['module', $this->getUrl(2)]);
-				// Valeurs en sortie
-				$this->addOutput([
-					'redirect' => helper::baseUrl(false),
-					'notification' => 'Page supprimée',
-					'state' => true
-				]);
-			}
+		// $url prend l'adresse sans le token
+		$url = explode('&',$this->getUrl(2));
+		// La page n'existe pas
+		if($this->getData(['page', $url[0]]) === null) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'access' => false
+			]);
+		}
+		// Impossible de supprimer la page d'accueil
+		elseif($url[0] === $this->getData(['config', 'homePageId'])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Impossible de supprimer la page d\'accueil'
+			]);
+		}
+		// Jeton incorrect
+		elseif($_GET['csrf'] !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Suppression non autorisée'
+			]);
+		}
+		// Impossible de supprimer une page contenant des enfants
+		elseif($this->getHierarchy($url[0])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Impossible de supprimer une page contenant des enfants'
+			]);
+		}
+		// Suppression
+		else {
+			$this->deleteData(['page', $url[0]]);
+			$this->deleteData(['module', $url[0]]);
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl(false),
+				'notification' => 'Page supprimée',
+				'state' => true
+			]);
+		}
 	}
-
 
 	/**
 	 * Édition des blocs
