@@ -176,6 +176,38 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact'
+			],
+			'blockRight' => [
+			    'typeMenu' => '',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à droite du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockRight'
+			],
+			'blockLeft' => [
+			    'typeMenu' => '',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à gauche du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockLeft'
 			]
 		],
 		'module' => [
@@ -349,7 +381,8 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '1170px'
+				'width' => '1170px',
+				'blocks' => '100'
 			],
 			'text' => [
 				'font' => 'Open+Sans',
@@ -994,7 +1027,7 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
-			
+			$this->setData(['theme', 'site', 'blocks','100']);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				
@@ -1999,8 +2032,6 @@ class layout extends common {
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
 
-				// Menu Image
-
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
@@ -2131,13 +2162,17 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				$leftItems .= '<li><select id="barSelectPage">';
 				$leftItems .= '<option value="">Choisissez une page</option>';
-				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
 				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
+					if ($parentPageId === 'blockLeft' 
+					    OR $parentPageId === 'blockRight') { continue; }
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
 				}
+				$leftItems .= '<option value="">-------------------</option>';				
+				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des blocs</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(

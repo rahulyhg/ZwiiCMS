@@ -17,26 +17,26 @@ class page extends common {
 	public static $actions = [
 		'add' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'edit' => self::GROUP_MODERATOR
+		'edit' => self::GROUP_MODERATOR,
+		'block' => self::GROUP_ADMIN
 	];
 	public static $pagesNoParentId = [
 		'' => 'Aucune'
 	];
 	public static $moduleIds = [];
 
-	// Menu image
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
 		'icontitle' => 'Icône et bulle'
 	];
-	// menu image
 	// Position du module
 	public static $modulePosition = [
-	'bottom' => 'En bas',
-	'top' => 'En haut',
-	'free' => 'Libre'
+		'bottom' => 'En bas',
+		'top' => 'En haut',
+		'free' => 'Libre'
 	];
+	
 	/**
 	 * Création
 	 */
@@ -46,12 +46,10 @@ class page extends common {
 		$this->setData([
 			'page',
 			$pageId,
-			[
-				//  Menu icon				
+			[		
 				'typeMenu' => 'text',
 				'iconUrl' => '',
-                'disable' => false,				
-				// Menu icon				
+                'disable' => false,								
 				'content' => 'Contenu de votre nouvelle page.',
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -77,7 +75,6 @@ class page extends common {
 	 * Suppression
 	 */
 	public function delete() {
-		if($this->isPost()) {
 			// La page n'existe pas
 			if($this->getData(['page', $this->getUrl(2)]) === null) {
 				// Valeurs en sortie
@@ -112,13 +109,67 @@ class page extends common {
 					'state' => true
 				]);
 			}
-		} else {
-			// Valeurs en sortie
+	}
+
+
+	/**
+	 * Édition des blocs
+	 */
+	public function block () {
+		if($this->isPost()) {
+			$this->setData([
+				'page',
+				'blockLeft', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockLeft',
+					'content' => (empty($this->getInput('pageBlockLeftContent', null)) ? "<p></p>" : $this->getInput('pageBlockLeftContent', null))]
+			]);
+			$this->setData([
+				'page',
+				'blockRight', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockRight',
+					'content' => (empty($this->getInput('pageBlockRightContent', null)) ? "<p></p>" : $this->getInput('pageBlockRightContent', null))]
+			]);		
 			$this->addOutput([
-				'access' => false
+				'redirect' => helper::baseUrl(),
+				'notification' => 'Modifications enregistrées',
+				'state' => true
 			]);
 		}
+
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Édition des blocs',
+			'vendor' => [
+				'tinymce'
+			],
+			'view' => 'block'
+		]);
 	}
+	
 
 	/**
 	 * Édition

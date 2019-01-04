@@ -33,11 +33,9 @@
 <?php if($this->getData(['theme', 'header', 'position']) === 'body'): ?>
 	<!-- Bannière dans le fond du site -->
 
-	<!-- menu image -->
 	<?php	
 	if ($this->getData(['theme','header','linkHome'])){
 	echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-	<!-- menu image -->
 
 	<header>
 		<?php if(
@@ -45,22 +43,16 @@
 			// Affiche toujours le titre de la bannière pour l'édition du thème
 			OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 		): ?>
-
-
 			<div class="container">
 				<span><?php echo $this->getData(['config', 'title']); ?></span>
 			</div>
-	
-
 		<?php endif; ?>
-	</header>
-	<!-- menu image -->			
+	</header>		
 	<?php
 	if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
-	?>
-	<!-- menu image -->		
-
+	?>	
 <?php endif; ?>
+
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 	<!-- Menu dans le fond du site après la bannière -->
 	<nav>
@@ -90,12 +82,9 @@
 		)
 	): ?>
 		<!-- Bannière dans le site -->
-
-		<!-- menu image -->
 		<?php	
 		if ($this->getData(['theme','header','linkHome'])){
 		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-		<!-- menu image -->
 		<header <?php if($this->getData(['theme', 'header', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<?php if(
 				$this->getData(['theme', 'header', 'textHide']) === false
@@ -127,7 +116,44 @@
 		</nav>
 	<?php endif; ?>
 	<!-- Corps -->
-	<section><?php $layout->showContent(); ?></section>
+	<?php if ($this->getUrl(0) === 'theme' OR
+		$this->getUrl(0) === 'config' OR
+		$this->getUrl(0) === 'install' OR
+		$this->getUrl(0) === 'maintenance' OR
+		$this->getUrl(0) === 'page' OR
+		$this->getUrl(0) === 'user'  ) { ?> <!-- Pas de multi colonne-->
+			<section><?php $layout->showContent(); ?></section>
+		<?php } else {
+		$blocks = explode('-',$this->getData(['theme','site','blocks']));
+		$blockleft=$blockright="";
+		switch (sizeof($blocks)) {
+			case 1 :  // une colonne
+				$content    = 'col'. $blocks[0] ;
+				break;			
+			case 2 :  // 2 blocks 
+				if ($blocks[0] < $blocks[1]) { // détermine la position de la colonne
+					$blockleft = 'col'. $blocks[0];
+					$content    = 'col'. $blocks[1] ;
+				} else {
+					$content    = 'col' . $blocks[0];
+					$blockright  = 'col' . $blocks[1];						
+				}
+			break;
+			case 3 :  // 3 blocks
+					$blockleft  = 'col' . $blocks[0];
+					$content    = 'col' . $blocks[1];
+					$blockright = 'col' . $blocks[2];					
+		}	
+		?>
+		<section>
+			<div class="row">
+				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
+				<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
+				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>		
+		</div>
+		</section>
+	<?php } ?>
+	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'
 		// Affiche toujours le pied de page pour l'édition du thème
