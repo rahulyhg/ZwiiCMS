@@ -146,9 +146,9 @@
 		?>
 		<section>
 			<div class="row">
-				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>"><?php echo $this->getData(['theme','block','contentLeft']);?></div> <?php endif; ?>
-				<div class="<?php echo $content; ?>"><?php $layout->showContent(); ?></div>
-				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>"><?php echo $this->getData(['theme','block','contentRight']);?></div> <?php endif; ?>		
+				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['theme','block','contentLeft']);?></div> <?php endif; ?>
+				<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
+				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['theme','block','contentRight']);?></div> <?php endif; ?>		
 		</div>
 		</section>
 	<?php } ?>
