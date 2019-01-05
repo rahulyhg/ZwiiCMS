@@ -95,7 +95,8 @@ class page extends common {
 			]);
 		}
 		// Jeton incorrect
-		elseif($_GET['csrf'] !== $_SESSION['csrf']) {
+		elseif(!isset ($_GET['csrf']) AND
+			$_GET['csrf'] !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
