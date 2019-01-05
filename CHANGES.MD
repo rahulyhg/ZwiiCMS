@@ -6,6 +6,8 @@
     - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
     - Importer un thème à partir des fichiers
     - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
+- Correction : 
+    - Faille CSRF lors de l'effacement d'une page
 
 ## Verison 8.5.3
 * Modification :
