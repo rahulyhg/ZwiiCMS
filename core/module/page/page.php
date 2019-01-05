@@ -93,7 +93,7 @@ class page extends common {
 			]);
 		}
 		// Jeton incorrect
-		elseif(isset ($_GET['csrf']) AND
+		elseif(!isset ($_GET['csrf']) AND
 			$_GET['csrf'] !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
