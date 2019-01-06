@@ -8,7 +8,7 @@
     },
     "name": {
       "type": "string",
-      "required": true      
+      "required": true
     },
     "author": {
       "type": "string",
@@ -16,26 +16,26 @@
     },
     "version": {
       "type": "string",
-      "required": true      
+      "required": true
     },
     "version_date": {
       "type": "string",
-      "required": true      
+      "required": true
     },
     "zwii_version": {
       "type": "array",
       "required": true,
       "items": {
         "type": "string"
-      }      
+      }
     },
     "description": {
       "type": "string",
-      "required": true      
+      "required": true
     },
     "support_url": {
       "type": "string",
-      "required": true      
+      "required": true
     },
     "updated_files": {
       "type": "array",

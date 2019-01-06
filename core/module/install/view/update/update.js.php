@@ -19,7 +19,7 @@ function step(i, data) {
 				// Succès
 				if(result.success === true) {
 					// Fin de la mise à jour
-					if(i === 4) {
+					if(i === 5) {
 						// Affiche le message de succès
 						$("#installUpdateSuccess").show();
 						// Déverrouille le bouton "Terminer"

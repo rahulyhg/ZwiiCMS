@@ -24,17 +24,9 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-
-        const PLUGIN_ERROR = -1;
-        const PLUGIN_NOT_APPLICABLE = 0;
-        const PLUGIN_ACTIVATE = 1;
-        const PLUGIN_DEACTIVATE = 2;
-        const PLUGIN_ARCHIVE_MAX_SIZE = 1048576; // Max 1048576 octets = 1 Mo
-
         const BACKUP_DIR = 'site/backup/';
         const DATA_DIR = 'site/data/';
         const FILE_DIR = 'site/file/';
-        const PLUGIN_DIR = 'site/plugins/';
         const TEMP_DIR = 'site/tmp/';
 	const ZWII_VERSION = '9.0.0-Alpha';
 
@@ -44,7 +36,7 @@ class common {
 		'install',
 		'maintenance',
 		'page',
-                'plugins',
+                'pluginManager',
 		'sitemap',
 		'theme',
 		'user'
@@ -2156,7 +2148,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('cogs') . '</a></li>';
-                                $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" title="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
+                                $rightItems .= '<li><a href="' . helper::baseUrl() . 'pluginManager" title="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
 				// menu image
 				if(helper::checkNewVersion()) {
 					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('sync-alt colorRed') . '</a></li>';

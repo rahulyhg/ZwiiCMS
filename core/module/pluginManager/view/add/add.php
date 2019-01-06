@@ -2,7 +2,7 @@
     <div class="col2">
         <?php echo template::button('pluginAddBack', [
             'class' => 'buttonGrey',
-            'href' => helper::baseUrl() . 'plugins',
+            'href' => helper::baseUrl() . 'pluginManager',
             'ico' => 'caret-left',
             'value' => 'Retour'
         ]); ?>

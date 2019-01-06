@@ -9,7 +9,7 @@
     </div>
     <div class="col2 offset8">
         <?php echo template::button('pluginAdd', [
-                'href' => helper::baseUrl() . 'plugins/add',
+                'href' => helper::baseUrl() . 'pluginManager/add',
                 'ico' => 'plus',
                 'value' => 'Plugin'
         ]); ?>
