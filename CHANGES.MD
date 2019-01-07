@@ -10,12 +10,12 @@
 * Correction :
     - Appel de la génération de la capture d'écran OpenGraph quand le fichier est absent
     - CSS pour le footer des blocs et non des éléments
-        - #footersite, #footerbody : bloc footer dans et hors site
-        - #footersite, #footerbody a : liens du bloc footer  dans et hors site
+        - \#footersite, \#footerbody : bloc footer dans et hors site
+        - \#footersite, \#footerbody a : liens du bloc footer  dans et hors site
         - Bloc des colonnes dans et hors site :
-            - #footersiteLeft, #footerbodyLef
-            - #footersiteCenter, #footerbodyCenter
-            - #footersiteRight, #footerbodyRight            
+            - \#footersiteLeft, \#footerbodyLef
+            - \#footersiteCenter, \#footerbodyCenter
+            - \#footersiteRight, \#footerbodyRight              
          
 ## Version 8.5.2
 * Correction : 
