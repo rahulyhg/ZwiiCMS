@@ -1,5 +1,12 @@
 # ChangeLog 
 
+## Version 8.5.5
+* Correction : 
+    - Faille CSRF lors de l'effacement d'un membre
+    - Faille CSRF lors de l'effacement d'une galerie
+    - Faille CSRF lors de l'effacement d'un article de blog    
+    - Faille CSRF lors de l'effacement d'un article de news
+
 ## Version 8.5.4
 * Correction : 
     - Faille CSRF lors de l'effacement d'une page

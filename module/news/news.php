@@ -100,7 +100,7 @@ class news extends common {
 				]),
 				template::button('newsConfigDelete' . $newsIds[$i], [
 					'class' => 'newsConfigDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i]. '&csrf=' . $_SESSION['csrf'],
 					'value' => template::ico('cancel')
 				])
 			];
@@ -116,16 +116,33 @@ class news extends common {
 	 * Suppression
 	 */
 	public function delete() {
+		// $url prend l'adresse sans le token
+		$url = explode('&',$this->getUrl(2));			
 		// La news n'existe pas
-		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
+		if($this->getData(['module', $this->getUrl(0), $url[0]]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif(!isset($_GET['csrf'])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl(). $this->getUrl(0) . '/config',
+				'notification' => 'Jeton invalide'
+			]);
+		}
+		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Suppression non autorisée'
+			]);
+		}			
 		// Suppression
 		else {
-			$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
+			$this->deleteData(['module', $this->getUrl(0), $url[0]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
