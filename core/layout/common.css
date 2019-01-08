@@ -423,6 +423,15 @@ footer .col4 {
 footer #footerSocials {
 	font-size: 1.0em;
 }
+
+footer #footerSocials {
+	font-size: 1.0em;
+}
+
+footer #footerCopyright, #footerText {
+	font-size: 0.8em;
+}
+
 footer #footerSocials span {
 	color: #FFF;
 	padding: 9px;
