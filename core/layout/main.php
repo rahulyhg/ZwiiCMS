@@ -116,12 +116,9 @@
 		</nav>
 	<?php endif; ?>
 	<!-- Corps -->
-	<?php if ($this->getUrl(0) === 'theme' OR
-		$this->getUrl(0) === 'config' OR
-		$this->getUrl(0) === 'install' OR
-		$this->getUrl(0) === 'maintenance' OR
-		$this->getUrl(0) === 'page' OR
-		$this->getUrl(0) === 'user'  ) { ?> <!-- Pas de multi colonne-->
+	<?php if ( is_null($this->getData(['page',$this->getUrl(0)])) OR
+			   is_null($this->getData(['module',$this->getUrl(0)])) OR
+			   $this->getUrl(1)  !== '' ) { ?> <!-- Multi colonne uniquement pour les pages -->
 			<section><?php $layout->showContent(); ?></section>
 		<?php } else {
 		$blocks = explode('-',$this->getData(['theme','site','blocks']));
@@ -150,7 +147,7 @@
 				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
 				<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
 				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>		
-		</div>
+			</div>
 		</section>
 	<?php } ?>
 	<!-- footer -->
