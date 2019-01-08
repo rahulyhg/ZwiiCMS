@@ -48,15 +48,15 @@ footer a {
 }
 
 /* footer bloc gauche */
-#footersiteLeft, #footerbodyLeft  {
+footer #footersiteLeft, #footerbodyLeft  {
 }
 
 /* footer bloc central */
-#footersiteCenter, #footerbodyCenter {
+footer #footersiteCenter, #footerbodyCenter {
 }
 
 /* footer bloc droite */
-#footersiteRight, #footerbodyRight {
+footer #footersiteRight, #footerbodyRight {
 }
 
 /**
