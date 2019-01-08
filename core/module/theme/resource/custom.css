@@ -40,23 +40,26 @@ nav a.active {
 }
 
 /* Bas de page */
-#footersite, #footerbody {
+footer {
+}
+
+footer #footersite, #footerbody {
 }
 
 /* Liens du bas de page */
-#footersite, #footerbody a {
+footer #footersite, #footerbody a {
 }
 
 /* footer bloc gauche */
-#footersiteLeft, #footerbodyLeft  {
+footer #footersiteLeft, #footerbodyLeft  {
 }
 
 /* footer bloc central */
-#footersiteCenter, #footerbodyCenter {
+footer #footersiteCenter, #footerbodyCenter {
 }
 
 /* footer bloc droite */
-#footersiteRight, #footerbodyRight {
+footer #footersiteRight, #footerbodyRight {
 }
 
 /**

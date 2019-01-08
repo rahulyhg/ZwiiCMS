@@ -415,6 +415,13 @@ footer {
 	padding: 10px 20px;
     vertical-align:middle;
 }
+footer #footerSocials {
+	font-size: 1.0em;
+}
+
+footer #footerCopyright, #footerText {
+	font-size: 0.8em;
+}
 
 footer .col4 {
 	vertical-align: middle;
