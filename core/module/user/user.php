@@ -88,10 +88,13 @@ class user extends common {
 	 * Suppression
 	 */
 	public function delete() {
+		//
+		// $url prend l'adresse sans le token
+		$url = explode('&',$this->getUrl(2));
 		// Accès refusé
 		if(
 			// L'utilisateur n'existe pas
-			$this->getData(['user', $this->getUrl(2)]) === null
+			$this->getData(['user', $url[0]]) === null
 			// Groupe insuffisant
 			AND ($this->getUrl('group') < self::GROUP_MODERATOR)
 		) {
@@ -100,8 +103,23 @@ class user extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif(!isset($_GET['csrf'])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Jeton invalide'
+			]);
+		}
+		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Suppression non autorisée'
+			]);
+		}			
 		// Bloque la suppression de son propre compte
-		elseif($this->getUser('id') === $this->getUrl(2)) {
+		elseif($this->getUser('id') === $url[0]) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
@@ -110,7 +128,7 @@ class user extends common {
 		}
 		// Suppression
 		else {
-			$this->deleteData(['user', $this->getUrl(2)]);
+			$this->deleteData(['user', $url[0]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
@@ -280,7 +298,7 @@ class user extends common {
 				]),
 				template::button('userDelete' . $userId, [
 					'class' => 'userDelete buttonRed',
-					'href' => helper::baseUrl() . 'user/delete/' . $userId,
+					'href' => helper::baseUrl() . 'user/delete/' . $userId. '&csrf=' . $_SESSION['csrf'],
 					'value' => template::ico('cancel')
 				])
 			];

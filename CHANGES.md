@@ -8,6 +8,9 @@
     - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
 - Correction : 
     - Faille CSRF lors de l'effacement d'une page
+    - Faille CSRF lors de l'effacement d'une galerie
+    - Faille CSRF lors de l'effacement d'un article de blog 
+    - Faille CSRF lors de l'effacement d'un article de news    
 
 ## Verison 8.5.3
 * Modification :
