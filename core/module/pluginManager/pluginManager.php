@@ -14,9 +14,8 @@
 // Inclusion de la classe spécifique à la gestion des plugins
 require_once 'core/core-plugins.php';
 
-class pluginManager extends plugin {
+class pluginManager extends common {
 
-    public $pluginClass;
     public static $actions = [
         'add' => self::GROUP_ADMIN,
         'action' => self::GROUP_ADMIN,
@@ -27,23 +26,23 @@ class pluginManager extends plugin {
     ];
     public $ihmPlugins = [];
     public $notDeployedPlugins = [];
-    public $actionType;
-    public $targetPluginId;
+    public $actionType = "";
+    public $targetPluginId = "";
 
     /**
      * Liste des plugins
      */
     public function index() {
         // Si le répertoire plugin n'existe pas, le créer
-        if (!file_exists(self::PLUGIN_DIR))
-            mkdir(self::PLUGIN_DIR, 0755, true);
+        if (!file_exists(CorePlugins::PLUGIN_DIR))
+            mkdir(CorePlugins::PLUGIN_DIR, 0755, true);
 
         // récupérer la liste des plugins déployés
         $deployedPlugins = helper::arrayColumn(self::getData(['plugins']), 'name', 'KEY_SORT_ASC');
         foreach ($deployedPlugins as $pluginId => $pluginName) {
             $status = self::getData(['plugins', $pluginId, 'status']);
             switch ($status) {
-                case Plugin::ON_ERROR:
+                case CorePlugins::ON_ERROR:
                     $statusText = template::label("", "En erreur", [
                                 'class' => 'colorRed'
                     ]);
@@ -52,10 +51,14 @@ class pluginManager extends plugin {
                                 'href' => helper::baseUrl() . 'pluginManager/action/undeploy/' . $pluginId,
                                 'value' => template::ico('power-off')
                     ]);
-                    $deleteAction = "";
+                    $deleteAction = template::button('pluginDelete' . $pluginId, [
+                                'class' => 'pluginDelete buttonRed',
+                                'href' => helper::baseUrl() . 'pluginManager/delete/' . $pluginId,
+                                'value' => template::ico('times')
+                    ]);
                     break;
 
-                case Plugin::IS_NOT_APPLICABLE:
+                case CorePlugins::IS_NOT_APPLICABLE:
                     $statusText = template::label("", "Non applicable", [
                                 'class' => 'colorGrey'
                     ]);
@@ -68,7 +71,7 @@ class pluginManager extends plugin {
                     ]);
                     break;
 
-                case Plugin::IS_DEACTIVATE:
+                case CorePlugins::IS_DEACTIVATE:
                     $statusText = template::label("", "Désactivé", [
                                 'class' => 'colorOrange'
                     ]);
@@ -84,7 +87,7 @@ class pluginManager extends plugin {
                     ]);
                     break;
 
-                case Plugin::IS_ACTIVATE:
+                case CorePlugins::IS_ACTIVATE:
                     $statusText = template::label("", "Activé", [
                                 'class' => 'colorGreen'
                     ]);
@@ -210,7 +213,7 @@ class pluginManager extends plugin {
 
                 $updatedFiles = self::getData(['plugins', $this->targetPluginId, 'updated_files']);
                 foreach ($updatedFiles as $originalFile) {
-                    // Effectuer une sauvegarde des fichiers modifier
+                    // Effectuer une sauvegarde des fichiers à modifier
                     $path_parts = pathinfo($originalFile);
 
                     foreach (glob($path_parts['dirname'] . '/' . $this->targetPluginId . '_' . $path_parts['filename'] . '_*_*.bck') as $filename) {
@@ -219,7 +222,7 @@ class pluginManager extends plugin {
                 }
 
                 // Suppression des fichiers du plugin
-                helper::rm_recursive(self::PLUGIN_DIR . $this->targetPluginId);
+                helper::rm_recursive(CorePlugins::PLUGIN_DIR . $this->targetPluginId);
 
                 // Suppression en base du plugin
                 self::deleteData(['plugins', $this->targetPluginId]);
@@ -239,7 +242,7 @@ class pluginManager extends plugin {
     }
 
     /**
-     * Déploiement : New; Add; Activate; Deactivate
+     * Déploiement : Deploy; Upload; Activate; Deactivate
      */
     public function action() {
         $this->actionType = self::getUrl(2);
@@ -274,7 +277,7 @@ class pluginManager extends plugin {
         // 1- Récupération des info du fichier
         $uploadedFile = $_FILES['directUpload'];
 
-        // Effectuer les différents contrôle sur le fichier (extension, taille, etc...)
+        // Effectuer les différents contrôles sur le fichier (extension, taille, etc...)
         $success = true;
         $errorMsg = "";
         if ($uploadedFile['error'] != UPLOAD_ERR_OK) {
@@ -285,14 +288,12 @@ class pluginManager extends plugin {
                 $success = false;
                 $errorMsg = "L'archive n'a pa sété uploadée.";
             } else {
-                if ($uploadedFile['size'] > self::ARCHIVE_MAX_SIZE) {
+                if ($uploadedFile['size'] > CorePlugins::ARCHIVE_MAX_SIZE) {
                     $success = false;
                     $errorMsg = "L'archive a une taille trop imortante.";
                 } else {
                     $extensions_valides = array('zip', 'tar', 'gz');
-                    //1. strrchr renvoie l'extension avec le point (« . »).
-                    //2. substr(chaine,1) ignore le premier caractère de chaine.
-                    //3. strtolower met l'extension en minuscules.
+                    // Récupération de l'extension de l'archive
                     $extension_upload = strtolower(substr(strrchr($uploadedFile['name'], '.'), 1));
                     if (!in_array($extension_upload, $extensions_valides)) {
                         $success = false;
@@ -422,38 +423,37 @@ class pluginManager extends plugin {
         $this->targetPluginId = self::getUrl(3);
 
         if (strlen($this->targetPluginId) > 0) {
+            $corePlugin = new CorePlugins($this);
+            $corePlugin->setIdPlugin($this->targetPluginId);
+            $corePlugin->setActionType($this->actionType);
+
             switch (self::getInput('step', helper::FILTER_INT)) {
                 // Etape 1
                 case 1:
                     $success = true;
                     $errorMsg = "";
 
-                    switch ($this->actionType) {
-                        case 'activate':
-                            // **** Cas de l'activation d'un plugin déjà déployé
-                            // Vérifier la syntaxe des fichiers .php
-                            $success = self::checkPhpFiles($this->targetPluginId, 'activate', $errorMsg);
-                            break;
 
-                        case 'undeploy':
-                            // **** Cas de la désactivation d'un plugin actif
-                            // Vérifier la syntaxe des fichiers .php
-                            $success = self::checkPhpFiles($this->targetPluginId, 'undeploy', $errorMsg);
+                    switch ($this->actionType) {
+                        case 'deploy':
+                            // Nettoyage des fichiers temporaires; à faire uniquement dans le cas du deploy
+                            foreach (glob(self::TEMP_DIR . $this->targetPluginId . ".*") as $filename) {
+                                helper::rm_recursive($filename);
+                            }
+                        // Pas de "break", pour effectuer également le code de la partie "upload"
+
+                        case 'upload':
+                            // Suppression du répertoire du plugin si existant
+                            $dirPlugin = CorePlugins::PLUGIN_DIR . $this->targetPluginId;
+                            if (file_exists($dirPlugin)) {
+                                helper::rm_recursive($dirPlugin);
+                            }
                             break;
 
                         default:
-                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
-                            if ($this->actionType === 'deploy') {
-                                // Nettoyage des fichiers temporaires; à faire uniquement dans le cas du deploy
-                                foreach (glob(self::TEMP_DIR . $this->targetPluginId . ".*") as $filename) {
-                                    helper::rm_recursive($filename);
-                                }
-                            }
-
-                            // Suppression du répertoire du plugin si existant
-                            $dirPlugin = self::PLUGIN_DIR . $this->targetPluginId;
-                            if (file_exists($dirPlugin))
-                                helper::rm_recursive($dirPlugin);
+                            // **** Cas de l'activation/désactivation d'un plugin déjà déployé
+                            // Vérifier la syntaxe des fichiers .php
+                            $success = $corePlugin->checkPhpFiles($errorMsg);
                     }
 
                     // Valeurs en sortie
@@ -472,25 +472,14 @@ class pluginManager extends plugin {
                     $errorMsg = "";
 
                     switch ($this->actionType) {
-                        case 'activate':
-                            // **** Cas de l'activation d'un plugin déjà déployé
-                            $success = self::checkBefore($this->targetPluginId, 'activate', $errorMsg);
-                            break;
+                        case 'deploy':
+                            // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
+                            $urlPlugin = ""; // A DEFINIR
+                            $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.tar.gz', file_get_contents($urlPlugin)) !== false);
+                        // Pas de "break", pour effectuer également le code de la partie "upload"
 
-                        case 'undeploy':
-                            // **** Cas de la désactivation d'un plugin actif
-                            $success = self::checkBefore($this->targetPluginId, 'undeploy', $errorMsg);
-                            break;
-
-                        default:
-                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
-                            if ($this->actionType === 'deploy') {
-                                // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
-                                $urlPlugin = ""; // A DEFINIR
-                                $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.tar.gz', file_get_contents($urlPlugin)) !== false);
-                            }
-
-                            if ($success) {
+                        case 'upload':
+                            if ($success) { // Nécessaire dans le cas où on est dans une action "deploy"
                                 try {
                                     // Décompression dans le dossier de plugins
                                     // Normalement il ne doit y avoir qu'un seul fichier correspondant au plugin
@@ -499,11 +488,8 @@ class pluginManager extends plugin {
                                         $file = $list[0];
 
                                         // Récupération de l'extension du fichier
-                                        //1. strrchr renvoie l'extension avec le point (« . »).
-                                        //2. substr(chaine,1) ignore le premier caractère de chaine.
-                                        //3. strtolower met l'extension en minuscules.
                                         $extension = strtolower(substr(strrchr($file, '.'), 1));
-                                        $targetDir = self::PLUGIN_DIR . $this->targetPluginId . '/';
+                                        $targetDir = CorePlugins::PLUGIN_DIR . $this->targetPluginId . '/';
 
                                         switch ($extension) {
                                             case 'gz':
@@ -557,8 +543,14 @@ class pluginManager extends plugin {
 
                             if ($success) {
                                 // Vérifier que le plugin est bien constitué :
-                                $success = self::checkPluginStructure($this->targetPluginId, $errorMsg);
+                                $success = $corePlugin->checkPluginStructure($errorMsg);
                             }
+                            break;
+
+
+                        default:
+                            // **** Cas de l'activation/désactivation d'un plugin déjà déployé
+                            $success = $corePlugin->checkBefore($errorMsg);
                     }
 
                     // Valeurs en sortie
@@ -577,24 +569,14 @@ class pluginManager extends plugin {
                     $errorMsg = "";
 
                     switch ($this->actionType) {
-                        case 'activate':
-                            // **** Cas de l'activation d'un plugin déjà déployé
-                            $success = self::backup($this->targetPluginId, "activate");
-                            break;
-
-                        case 'undeploy':
-                            // **** Cas de la désactivation d'un plugin actif
-                            $success = self::backup($this->targetPluginId, "undeploy");
-                            break;
-
-                        default:
-                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
-                            $success = self::checkBefore($this->targetPluginId, 'deploy', $errorMsg);
+                        case 'deploy':
+                        case 'upload':
+                            $success = $corePlugin->checkBefore($errorMsg);
 
                             if ($success) {
                                 try {
                                     // Lire le fichier MANIFEST.json
-                                    $manifest_json = file_get_contents(self::PLUGIN_DIR . $this->targetPluginId . '/MANIFEST.json');
+                                    $manifest_json = file_get_contents(CorePlugins::PLUGIN_DIR . $this->targetPluginId . '/MANIFEST.json');
                                     $manifest_data = json_decode($manifest_json);
 
                                     // Lire les infos dans le Json
@@ -610,7 +592,7 @@ class pluginManager extends plugin {
                                     $updaptedDatas = $manifest_data->updated_datas;
                                     $addedDatas = $manifest_data->added_datas;
 
-                                    // Ajout du plugin en base eavec status Désactivé
+                                    // Ajout du plugin en base avec status Désactivé
                                     if (self::getData(['plugins', $this->targetPluginId])) {
                                         $errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
                                         $success = false;
@@ -638,7 +620,7 @@ class pluginManager extends plugin {
                                                 'added_files' => $addedFiles,
                                                 'updated_datas' => $updaptedDatas,
                                                 'added_datas' => $addedDatas,
-                                                'status' => self::IS_DEACTIVATE
+                                                'status' => CorePlugins::IS_DEACTIVATE
                                             ]
                                         ]);
                                         self::saveData();
@@ -649,6 +631,12 @@ class pluginManager extends plugin {
                                     $success = false;
                                 }
                             }
+                            break;
+
+
+                        default:
+                            // **** Cas de l'activation/désactivation d'un plugin déjà déployé
+                            $success = $corePlugin->backup();
                     }
 
                     // Valeurs en sortie
@@ -667,40 +655,24 @@ class pluginManager extends plugin {
                     $errorMsg = "";
 
                     switch ($this->actionType) {
-                        case 'activate':
-                            // **** Cas de l'activation d'un plugin déjà déployé
-                            $success = self::execute($this->targetPluginId, 'activate', $errorMsg);
-
-                            // Changement statut du plugin
-                            if ($success) {
-                                // --> Activé
-                                $status = self::IS_ACTIVATE;
-                            } else {
-                                // --> Erreur
-                                $status = self::ON_ERROR;
-                            }
-                            self::changePluginStatus($this->targetPluginId, $status);
-                            break;
-
-                        case 'undeploy':
-                            // **** Cas de la désactivation d'un plugin actif
-                            $success = self::execute($this->targetPluginId, 'undeploy', $errorMsg);
-
-                            // Changement statut du plugin
-                            if ($success) {
-                                // --> Désactivé
-                                $status = self::IS_DEACTIVATE;
-                            } else {
-                                // --> Erreur
-                                $status = self::ON_ERROR;
-                            }
-                            self::changePluginStatus($this->targetPluginId, $status);
+                        case 'deploy':
+                        case 'upload':
+                            $success = $corePlugin->backup();
+                            $errorMsg = "Erreur lors de la sauvegarde des fichiers";
                             break;
 
                         default:
-                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
-                            $success = self::backup($this->targetPluginId, "deploy");
-                            $errorMsg = "Erreur lors de la sauvegarde des fichiers";
+                            // **** Cas de l'activation/désactivation d'un plugin déjà déployé
+                            $success = $corePlugin->execute($errorMsg);
+
+                            // Changement statut du plugin
+                            if ($success) {
+                                $status = ($this->actionType === 'activate') ? CorePlugins::IS_ACTIVATE : CorePlugins::IS_DEACTIVATE;
+                            } else {
+                                // --> Erreur
+                                $status = CorePlugins::ON_ERROR;
+                            }
+                            $corePlugin->changePluginStatus($status);
                     }
 
                     // Valeurs en sortie
@@ -719,27 +691,23 @@ class pluginManager extends plugin {
                     $errorMsg = "";
 
                     switch ($this->actionType) {
-                        case 'activate':
-                            // **** Cas de l'activation d'un plugin déjà déployé
-                            break;
-
-                        case 'undeploy':
-                            // **** Cas de la désactivation d'un plugin actif
-                            break;
-
-                        default:
-                            // **** Cas de l'ajout d'un plugin via la bibliothèque (deploy) ou via une archive locale (upload)
-                            $success = self::execute($this->targetPluginId, 'deploy', $errorMsg);
+                        case 'deploy':
+                        case 'upload':
+                            $success = $corePlugin->execute($errorMsg);
 
                             // Changement statut du plugin
                             if ($success) {
                                 // --> Activé
-                                $status = self::IS_ACTIVATE;
+                                $status = CorePlugins::IS_ACTIVATE;
                             } else {
                                 // --> Erreur
-                                $status = self::ON_ERROR;
+                                $status = CorePlugins::ON_ERROR;
                             }
-                            self::changePluginStatus($this->targetPluginId, $status);
+                            $corePlugin->changePluginStatus($status);
+
+
+                        default:
+                        // **** Cas de l'activation/désactivation d'un plugin déjà déployé
                     }
 
                     // Valeurs en sortie

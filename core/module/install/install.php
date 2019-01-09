@@ -11,10 +11,11 @@
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
+
 // Inclusion de la classe spécifique à la gestion des plugins
 require_once 'core/core-plugins.php';
 
-class install extends plugin {
+class install extends common {
 
     public static $actions = [
         'index' => self::GROUP_VISITOR,
@@ -179,41 +180,44 @@ class install extends plugin {
 
             // Re-déploiement des éventuels plugins
             case 5:
+                $corePlugin = new CorePlugins($this);
+                $corePlugin->setActionType("deploy");
                 $errorMsg = "";
 
                 // Récupération des plugins qui étaient activés avant mise à jour
                 $deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
                 foreach ($deployedPlugins as $pluginId => $pluginName) {
+                    $corePlugin->setIdPlugin($pluginId);
                     $status = $this->getData(['plugins', $pluginId, 'status']);
-                    if ($status == plugin::IS_ACTIVATE) {
+                    if ($status == CorePlugins::IS_ACTIVATE) {
                         // Il faut tenter de réinstaller le plugin
                         $success = true;
                         $status = "";
 
                         // 1- Vérifier que le plugin est correctement constitué
-                        $success = plugin::checkPluginStructure($pluginId, $msg);
+                        $success = $corePlugin->checkPluginStructure($msg);
 
                         if ($success) {
                             // 2- Vérifier que le plugin peut-être déployé
-                            $success = self::checkBefore($pluginId, 'deploy', $msg);
+                            $success = $corePlugin->checkBefore($msg);
                         } else {
-                            $status = plugin::IS_NOT_APPLICABLE;
+                            $status = CorePlugins::IS_NOT_APPLICABLE;
                         }
 
                         if ($success) {
                             // 3- Déployer le plugin
-                            $success = self::backup($pluginId, "deploy");
-                            $success = self::execute($pluginId, 'deploy', $errorMsg);
+                            $success = $corePlugin->backup();
+                            $success = $corePlugin->execute($msg);
                             if (!$success) {
-                                $status = plugin::ON_ERROR;
+                                $status = CorePlugins::ON_ERROR;
                             }
                         } else {
-                            $status = plugin::IS_NOT_APPLICABLE;
+                            $status = CorePlugins::IS_NOT_APPLICABLE;
                         }
 
                         if (!$success) {
                             // Désactiver le plugin en base mais pas générer d'erreur, juste un warning
-                            plugin::changePluginStatus($pluginId, plugin::IS_NOT_APPLICABLE);
+                            $corePlugin->changePluginStatus(CorePlugins::IS_NOT_APPLICABLE);
                             $errorMsg .= "Le plugin {" . $pluginId . "} ne peut pas être déployé sur cette nouvelle version. ";
                             $success = true;
                         }
