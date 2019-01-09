@@ -115,10 +115,12 @@
 			</div>
 		</nav>
 	<?php endif; ?>
-	<!-- Corps -->
-	<?php if ( is_null($this->getData(['page',$this->getUrl(0)])) OR
-			   is_null($this->getData(['module',$this->getUrl(0)])) OR
-			   $this->getUrl(1)  !== '' ) { ?> <!-- Multi colonne uniquement pour les pages -->
+	<!-- corps  -->
+	<?php if ( $this->getData(['page',$this->getUrl(0)]) === NULL OR
+			   $this->getData(['module',$this->getUrl(0)]) === NULL OR
+			   $this->getUrl(0) === 'page' OR 			   
+			   $this->getUrl(1) === 'config' 
+			 )  { ?> <!-- Multi colonne uniquement pour les pages du site hors config, theme etc.-->
 			<section><?php $layout->showContent(); ?></section>
 		<?php } else {
 		$blocks = explode('-',$this->getData(['theme','site','blocks']));
