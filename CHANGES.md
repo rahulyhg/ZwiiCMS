@@ -6,6 +6,7 @@
     - Faille CSRF lors de l'effacement d'une galerie
     - Faille CSRF lors de l'effacement d'un article de blog    
     - Faille CSRF lors de l'effacement d'un article de news
+    - Taille de la police dans le footer impossible à modifier
 
 ## Version 8.5.4
 * Correction : 
