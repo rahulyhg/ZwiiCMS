@@ -13,11 +13,9 @@ site/file/source/*
 site/file/thumb/*
 
 
-﻿# Fichiers de données
-site/*
-
 # Dossiers vides dans GitHub
 !.gitkeep
+.gitignore
 
 # PHPStorm
 .idea/
@@ -25,4 +23,7 @@ site/*
 
 #Visual Code
 .vscode
+
+#FreeFile
+sync.ffs_db
 
