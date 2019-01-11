@@ -381,7 +381,7 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '1170px',
+				'width' => '960px',
 				'blocks' => '100'
 			],
 			'text' => [
@@ -1932,12 +1932,12 @@ class layout extends common {
 	}
 
 	/**
-	 * Affiche le coyright
+	 * Affiche le cooyright
 	 */
 	public function showCopyright() {
 		$items = '<div id="footerCopyright">';
-		$items .= 'Motorisé par <a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
-		$items .= ' | <a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan du site</a>';
+		$items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="ZwiiCMS sans base de données, très léger et performant">Zwii</a>';
+		$items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		if(
 			(
 				$this->getData(['theme', 'footer', 'loginLink'])
