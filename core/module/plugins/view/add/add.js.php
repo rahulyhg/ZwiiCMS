@@ -33,7 +33,7 @@ function uploadFile() {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo helper::baseUrl(false); ?>?pluginManager/upload",
+        url: "<?php echo helper::baseUrl(false); ?>?plugins/upload",
         data: formData,
         dataType: 'json',
         processData: false,
@@ -45,15 +45,15 @@ function uploadFile() {
             if($("#uploadSpinner")) $("#uploadSpinner").remove();
             if(result){
                 if(result.success == false){
-                    location.href="<?php echo helper::baseUrl(false); ?>?pluginManager/add";
+                    location.href="<?php echo helper::baseUrl(false); ?>?plugins/add";
                 } else {
-                    location.href="<?php echo helper::baseUrl(false); ?>?pluginManager/action/upload/"+result.data;
+                    location.href="<?php echo helper::baseUrl(false); ?>?plugins/action/upload/"+result.data;
                 }
             }
         },
         error: function(xhr, status){
             if($("#uploadSpinner")) $("#uploadSpinner").remove();
-            location.href="<?php echo helper::baseUrl(false); ?>?pluginManager/add";
+            location.href="<?php echo helper::baseUrl(false); ?>?plugins/add";
         }
     });
 }

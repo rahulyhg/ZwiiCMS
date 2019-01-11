@@ -14,7 +14,7 @@
 // Inclusion de la classe spécifique à la gestion des plugins
 require_once 'core/core-plugins.php';
 
-class pluginManager extends common {
+class plugins extends common {
 
     public static $actions = [
         'add' => self::GROUP_ADMIN,
@@ -48,12 +48,12 @@ class pluginManager extends common {
                     ]);
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
-                                'href' => helper::baseUrl() . 'pluginManager/action/undeploy/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/undeploy/' . $pluginId,
                                 'value' => template::ico('power-off')
                     ]);
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                                 'class' => 'pluginDelete buttonRed',
-                                'href' => helper::baseUrl() . 'pluginManager/delete/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/delete/' . $pluginId,
                                 'value' => template::ico('times')
                     ]);
                     break;
@@ -66,7 +66,7 @@ class pluginManager extends common {
 
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                                 'class' => 'pluginDelete buttonRed',
-                                'href' => helper::baseUrl() . 'pluginManager/delete/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/delete/' . $pluginId,
                                 'value' => template::ico('times')
                     ]);
                     break;
@@ -77,12 +77,12 @@ class pluginManager extends common {
                     ]);
                     $specificAction = template::button('pluginsActivate' . $pluginId, [
                                 'class' => 'userDelete buttonGreen',
-                                'href' => helper::baseUrl() . 'pluginManager/action/activate/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/activate/' . $pluginId,
                                 'value' => template::ico('power-off"')
                     ]);
                     $deleteAction = template::button('pluginDelete' . $pluginId, [
                                 'class' => 'pluginDelete buttonRed',
-                                'href' => helper::baseUrl() . 'pluginManager/delete/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/delete/' . $pluginId,
                                 'value' => template::ico('times')
                     ]);
                     break;
@@ -93,7 +93,7 @@ class pluginManager extends common {
                     ]);
                     $specificAction = template::button('pluginsDeactivate' . $pluginId, [
                                 'class' => 'userDelete buttonOrange',
-                                'href' => helper::baseUrl() . 'pluginManager/action/undeploy/' . $pluginId,
+                                'href' => helper::baseUrl() . 'plugins/action/undeploy/' . $pluginId,
                                 'value' => template::ico('power-off')
                     ]);
                     $deleteAction = "";
@@ -170,7 +170,7 @@ class pluginManager extends common {
                     $desc,
                     $ver,
                     template::button('pluginDownload' . $pluginId, [
-                        'href' => helper::baseUrl() . 'pluginManager/action/deploy/' . $pluginId,
+                        'href' => helper::baseUrl() . 'plugins/action/deploy/' . $pluginId,
                         'value' => template::ico('cloud-download-alt')
                     ])
                         )
@@ -229,13 +229,13 @@ class pluginManager extends common {
 
                 // Valeurs en sortie
                 self::addOutput([
-                    'redirect' => helper::baseUrl() . 'pluginManager',
+                    'redirect' => helper::baseUrl() . 'plugins',
                     'notification' => 'Plugin supprimé',
                     'state' => true
                 ]);
             } else {
                 self::addOutput([
-                    'redirect' => helper::baseUrl() . 'pluginManager'
+                    'redirect' => helper::baseUrl() . 'plugins'
                 ]);
             }
         }
@@ -308,7 +308,7 @@ class pluginManager extends common {
                                     $manifest_json = file_get_contents('phar://' . self::TEMP_DIR . $uploadedFile['name'] . '/MANIFEST.json');
                                     if ($manifest_json) {
                                         // Vérifier la validité du fichier json
-                                        ValidateJson::check($manifest_json, 'core/module/pluginManager/schema.json');
+                                        ValidateJson::check($manifest_json, 'core/module/plugins/schema.json');
                                         if (!ValidateJson::isValid()) {
                                             $success = false;
                                             $errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";

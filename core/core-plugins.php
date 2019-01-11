@@ -70,7 +70,7 @@ class CorePlugins {
         } else {
             // Vérification de la structure du fichier json            
             $manifest_json = file_get_contents($manifestFile);
-            ValidateJson::check($manifest_json, 'core/module/pluginManager/schema.json');
+            ValidateJson::check($manifest_json, 'core/module/plugins/schema.json');
             if (!ValidateJson::isValid()) {
                 $success = false;
                 $errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";

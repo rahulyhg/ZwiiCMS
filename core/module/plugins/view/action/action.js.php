@@ -27,7 +27,7 @@ function step(i, data) {
 	// Requête ajax
 	$.ajax({
 		type: "POST",
-		url: "<?php echo helper::baseUrl(false); ?>?pluginManager/actionSteps/<?php echo ($module->actionType).'/'.($module->targetPluginId); ?>",
+		url: "<?php echo helper::baseUrl(false); ?>?plugins/actionSteps/<?php echo ($module->actionType).'/'.($module->targetPluginId); ?>",
 		data: {
 			step: i,
 			data: data

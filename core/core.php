@@ -36,7 +36,7 @@ class common {
 		'install',
 		'maintenance',
 		'page',
-                'pluginManager',
+                'plugins',
 		'sitemap',
 		'theme',
 		'user'
@@ -806,8 +806,8 @@ class common {
 	 */
 	public function sendMail($to, $subject, $content) {
             // Utilisation de PHPMailer version 6.0.6
-            require "core/vendor/phpmailer/PHPMailer.php";
-            require "core/vendor/phpmailer/Exception.php";
+            require "core/vendor/phpmailer/phpmailer.php";
+            require "core/vendor/phpmailer/exception.php";
 
             // Layout
             ob_start();
@@ -2148,7 +2148,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('cogs') . '</a></li>';
-                                $rightItems .= '<li><a href="' . helper::baseUrl() . 'pluginManager" title="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
+                                $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" title="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
 				// menu image
 				if(helper::checkNewVersion()) {
 					$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('sync-alt colorRed') . '</a></li>';
