@@ -6,11 +6,14 @@
     - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
     - Importer un thème à partir des fichiers
     - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
+    - Pas de bloc pour les écrans de configuration.
+    - Changement du libellé Modérateur devient Editeur 
 - Correction : 
     - Faille CSRF lors de l'effacement d'une page
     - Faille CSRF lors de l'effacement d'une galerie
     - Faille CSRF lors de l'effacement d'un article de blog 
-    - Faille CSRF lors de l'effacement d'un article de news    
+    - Faille CSRF lors de l'effacement d'un article de news 
+    - Faille CSRF lors de l'effacement d'un membre   
 
 ## Verison 8.5.3
 * Modification :
