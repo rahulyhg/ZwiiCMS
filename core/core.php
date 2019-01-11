@@ -24,7 +24,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '8.5.5';
+	const ZWII_VERSION = '8.5.6';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -360,7 +360,7 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '750px'
+				'width' => '960px'
 			],
 			'text' => [
 				'font' => 'Open+Sans',
