@@ -115,14 +115,19 @@
 			</div>
 		</nav>
 	<?php endif; ?>
-	<!-- corps  -->
-	<?php if ( $this->getData(['page',$this->getUrl(0)]) === NULL OR
-			   $this->getData(['module',$this->getUrl(0)]) === NULL OR
-			   $this->getUrl(0) === 'page' OR 			   
-			   $this->getUrl(1) === 'config' 
-			 )  { ?> <!-- Multi colonne uniquement pour les pages du site hors config, theme etc.-->
+	<?php 
+	    // Multi colonne uniquement pour les pages du site hors config, theme etc..
+		if ( 	
+			$this->getUrl(0) === 'user' OR
+			$this->getUrl(0) === 'theme' OR
+			$this->getUrl(0) === 'config' OR			
+			$this->getUrl(0) === 'page' OR
+			$this->getUrl(1) === 'config' OR
+			$this->getUrl(1) === 'edit'	
+			 )  { ?>
 			<section><?php $layout->showContent(); ?></section>
 		<?php } else {
+		// multi-colonnes
 		$blocks = explode('-',$this->getData(['theme','site','blocks']));
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
