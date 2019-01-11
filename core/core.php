@@ -440,24 +440,24 @@ class common {
 		self::GROUP_BANNED => 'Banni',
 		self::GROUP_VISITOR => 'Visiteur',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupEdits = [
 		self::GROUP_BANNED => 'Banni',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupNews = [
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupPublics = [
 		self::GROUP_VISITOR => 'Visiteur',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $timezone;
