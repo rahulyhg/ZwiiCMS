@@ -1931,25 +1931,25 @@ class layout extends common {
 		echo $this->core->output['content'];
 	}
 
-	/**
-	 * Affiche le cooyright
-	 */
-	public function showCopyright() {
-		$items = '<div id="footerCopyright">';
-		$items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="ZwiiCMS sans base de données, très léger et performant">Zwii</a>';
-		$items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
-		if(
-			(
-				$this->getData(['theme', 'footer', 'loginLink'])
-				AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
-			)
-			OR $this->getUrl(0) === 'theme'
-		) {
-			$items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '> | <a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
-		}
-		$items .= '</div>';
-		echo $items;
-	}
+/**
+     * Affiche le copyright
+     */
+    public function showCopyright() {
+        $items = '<div id="footerCopyright">';
+        $items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+        if(
+            (
+                $this->getData(['theme', 'footer', 'loginLink'])
+                AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
+            )
+            OR $this->getUrl(0) === 'theme'
+        ) {
+            $items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
+        }
+        $items .= '</div>';
+        echo $items;
+    }
 
 	/**
 	 * Affiche le favicon
