@@ -176,6 +176,38 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact'
+			],
+			'blockRight' => [
+			    'typeMenu' => '',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à droite du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockRight'
+			],
+			'blockLeft' => [
+			    'typeMenu' => '',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Bloc à gauche du site</p>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => '',
+				'parentPageId' => '',
+				'position' => 0,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'blockLeft'
 			]
 		],
 		'module' => [
@@ -349,7 +381,8 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '1170px'
+				'width' => '960px',
+				'blocks' => '100'
 			],
 			'text' => [
 				'font' => 'Open+Sans',
@@ -407,24 +440,24 @@ class common {
 		self::GROUP_BANNED => 'Banni',
 		self::GROUP_VISITOR => 'Visiteur',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupEdits = [
 		self::GROUP_BANNED => 'Banni',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupNews = [
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $groupPublics = [
 		self::GROUP_VISITOR => 'Visiteur',
 		self::GROUP_MEMBER => 'Membre',
-		self::GROUP_MODERATOR => 'Modérateur',
+		self::GROUP_MODERATOR => 'Éditeur',
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $timezone;
@@ -994,7 +1027,7 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
-			
+			$this->setData(['theme', 'site', 'blocks','100']);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				
@@ -1898,25 +1931,25 @@ class layout extends common {
 		echo $this->core->output['content'];
 	}
 
-	/**
-	 * Affiche le coyright
-	 */
-	public function showCopyright() {
-		$items = '<div id="footerCopyright">';
-		$items .= 'Motorisé par <a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
-		$items .= ' | <a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan du site</a>';
-		if(
-			(
-				$this->getData(['theme', 'footer', 'loginLink'])
-				AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
-			)
-			OR $this->getUrl(0) === 'theme'
-		) {
-			$items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '> | <a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
-		}
-		$items .= '</div>';
-		echo $items;
-	}
+/**
+     * Affiche le copyright
+     */
+    public function showCopyright() {
+        $items = '<div id="footerCopyright">';
+        $items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+        if(
+            (
+                $this->getData(['theme', 'footer', 'loginLink'])
+                AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
+            )
+            OR $this->getUrl(0) === 'theme'
+        ) {
+            $items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
+        }
+        $items .= '</div>';
+        echo $items;
+    }
 
 	/**
 	 * Affiche le favicon
@@ -1998,8 +2031,6 @@ class layout extends common {
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-
-				// Menu Image
 
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
@@ -2131,13 +2162,17 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				$leftItems .= '<li><select id="barSelectPage">';
 				$leftItems .= '<option value="">Choisissez une page</option>';
-				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
 				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
+					if ($parentPageId === 'blockLeft' 
+					    OR $parentPageId === 'blockRight') { continue; }
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
 				}
+				$leftItems .= '<option value="">-------------------</option>';				
+				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des blocs</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(

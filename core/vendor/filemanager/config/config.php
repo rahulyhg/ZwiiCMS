@@ -1,5 +1,5 @@
 <?php
-$version = "9.13.1";
+$version = "9.13.4";
 if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
@@ -8,7 +8,7 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
-date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/Paris');
 setlocale(LC_CTYPE, 'fr_FR'); //correct transliteration
 
 /*
@@ -149,14 +149,14 @@ $config = array(
 	|--------------------------------------------------------------------------
 	| The user can delete multiple files, select all files , deselect all files
 	*/
-	'multiple_selection' => false,
+	'multiple_selection' => true,
 	/*
 	|
 	| The user can have a select button that pass a json to external input or pass the first file selected to editor
 	| If you use responsivefilemanager tinymce extension can copy into editor multiple object like images, videos, audios, links in the same time
 	|
 	 */
-	'multiple_selection_action_button' => false,
+	'multiple_selection_action_button' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -330,23 +330,28 @@ $config = array(
 	'rename_files'                            => true,
 	'rename_folders'                          => true,
 	'duplicate_files'                         => true,
+	'extract_files'                           => true,
 	'copy_cut_files'                          => true, // for copy/cut files
 	'copy_cut_dirs'                           => true, // for copy/cut directories
 	'chmod_files'                             => true, // change file permissions
 	'chmod_dirs'                              => true, // change folder permissions
 	'preview_text_files'                      => true, // eg.: txt, log etc.
 	'edit_text_files'                         => true, // eg.: txt, log etc.
-	'create_text_files'                       => true, // only create files with exts. defined in $editable_text_file_exts
+	'create_text_files'                       => true, // only create files with exts. defined in $config['editable_text_file_exts']
+	'download_files'			  => true, // allow download files or just preview
 
 	// you can preview these type of files if $preview_text_files is true
-	'previewable_text_file_exts'              => array( "bsh", "c","css", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh", "xhtml", "xml","xsl" ),
-	'previewable_text_file_exts_no_prettify'  => array( 'txt', 'log' ),
+	'previewable_text_file_exts'              => array( "bsh", "c","css", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh", "xhtml", "xml","xsl",'txt', 'log','' ),
 
 	// you can edit these type of files if $edit_text_files is true (only text based files)
-	// you can create these type of files if $create_text_files is true (only text based files)
+	// you can create these type of files if $config['create_text_files'] is true (only text based files)
 	// if you want you can add html,css etc.
 	// but for security reasons it's NOT RECOMMENDED!
-	'editable_text_file_exts'                 => array( 'txt', 'log', 'xml', 'html', 'css', 'htm', 'js' ),
+	'editable_text_file_exts'                 => array( 'txt', 'log', 'xml', 'html', 'css', 'htm', 'js','' ),
+
+	'jplayer_exts'                            => array("mp4","flv","webmv","webma","webm","m4a","m4v","ogv","oga","mp3","midi","mid","ogg","wav"),
+
+	'cad_exts'                                => array('dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'svg'),
 
 	// Preview with Google Documents
 	'googledoc_enabled'                       => true,
@@ -363,8 +368,8 @@ $config = array(
 	//**********************
 	//Allowed extensions (lowercase insert)
 	//**********************
-	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg', 'ico' ), //Images
-	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff'), //Files
+	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff','svg', 'ico' ), //Images
+	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff',''), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
 	'ext_misc'                                => array( 'zip', 'rar', 'gz', 'tar', 'iso', 'dmg' ), //Archives
@@ -374,7 +379,21 @@ $config = array(
 	//  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
 	//  otherwise check Allowed extensions configuration
 	//*********************
-	'ext_blacklist'							  => false, //['jpg'],
+	'ext_blacklist'							  => false,//['exe','bat','jpg'],
+
+
+	//Empty filename permits like .htaccess, .env, ...
+	'empty_filename'                          => false,
+
+	/*
+	|--------------------------------------------------------------------------
+	| accept files without extension
+	|--------------------------------------------------------------------------
+	|
+	| If you want to accept files without extension, remember to add '' extension on allowed extension
+	|
+	*/
+	'files_without_extension'	              => false,
 
 	/******************
 	* AVIARY config
@@ -480,4 +499,3 @@ return array_merge(
 		),
 	)
 );
-?>

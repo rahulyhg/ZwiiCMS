@@ -5,6 +5,15 @@
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
     - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
     - Importer un thème à partir des fichiers
+    - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
+    - Pas de bloc pour les écrans de configuration.
+    - Changement du libellé Modérateur devient Editeur 
+- Correction : 
+    - Faille CSRF lors de l'effacement d'une page
+    - Faille CSRF lors de l'effacement d'une galerie
+    - Faille CSRF lors de l'effacement d'un article de blog 
+    - Faille CSRF lors de l'effacement d'un article de news 
+    - Faille CSRF lors de l'effacement d'un membre   
 
 ## Verison 8.5.3
 * Modification :
@@ -12,12 +21,12 @@
 * Correction :
     - Appel de la génération de la capture d'écran OpenGraph quand le fichier est absent
     - CSS pour le footer des blocs et non des éléments
-        - #footersite, #footerbody : bloc footer dans et hors site
-        - #footersite, #footerbody a : liens du bloc footer  dans et hors site
+        - \#footersite, \#footerbody : bloc footer dans et hors site
+        - \#footersite, \#footerbody a : liens du bloc footer  dans et hors site
         - Bloc des colonnes dans et hors site :
-            - #footersiteLeft, #footerbodyLef
-            - #footersiteCenter, #footerbodyCenter
-            - #footersiteRight, #footerbodyRight   
+            - \#footersiteLeft, \#footerbodyLef
+            - \#footersiteCenter, \#footerbodyCenter
+            - \#footersiteRight, \#footerbodyRight   
 
 
 ## Verison 8.5.2

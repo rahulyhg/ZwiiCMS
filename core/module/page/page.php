@@ -17,26 +17,26 @@ class page extends common {
 	public static $actions = [
 		'add' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'edit' => self::GROUP_MODERATOR
+		'edit' => self::GROUP_MODERATOR,
+		'block' => self::GROUP_ADMIN
 	];
 	public static $pagesNoParentId = [
 		'' => 'Aucune'
 	];
 	public static $moduleIds = [];
 
-	// Menu image
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
 		'icontitle' => 'Icône et bulle'
 	];
-	// menu image
 	// Position du module
 	public static $modulePosition = [
-	'bottom' => 'En bas',
-	'top' => 'En haut',
-	'free' => 'Libre'
+		'bottom' => 'En bas',
+		'top' => 'En haut',
+		'free' => 'Libre'
 	];
+	
 	/**
 	 * Création
 	 */
@@ -46,12 +46,10 @@ class page extends common {
 		$this->setData([
 			'page',
 			$pageId,
-			[
-				//  Menu icon				
+			[		
 				'typeMenu' => 'text',
 				'iconUrl' => '',
-                'disable' => false,				
-				// Menu icon				
+                'disable' => false,								
 				'content' => 'Contenu de votre nouvelle page.',
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -77,33 +75,50 @@ class page extends common {
 	 * Suppression
 	 */
 	public function delete() {
+		// $url prend l'adresse sans le token
+		$url = explode('&',$this->getUrl(2));
 		// La page n'existe pas
-		if($this->getData(['page', $this->getUrl(2)]) === null) {
+		if($this->getData(['page', $url[0]]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
 			]);
 		}
 		// Impossible de supprimer la page d'accueil
-		elseif($this->getUrl(2) === $this->getData(['config', 'homePageId'])) {
+		elseif($url[0] === $this->getData(['config', 'homePageId'])) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
 				'notification' => 'Impossible de supprimer la page d\'accueil'
 			]);
 		}
-		// Impossible de supprimer une page contenant des enfants
-		elseif($this->getHierarchy($this->getUrl(2))) {
+		// Jeton incorrect
+		elseif(!isset($_GET['csrf'])) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Jeton invalide'
+			]);
+		}
+		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Suppression non autorisée'
+			]);
+		}
+		// Impossible de supprimer une page contenant des enfants
+		elseif($this->getHierarchy($url[0])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
 				'notification' => 'Impossible de supprimer une page contenant des enfants'
 			]);
 		}
 		// Suppression
 		else {
-			$this->deleteData(['page', $this->getUrl(2)]);
-			$this->deleteData(['module', $this->getUrl(2)]);
+			$this->deleteData(['page', $url[0]]);
+			$this->deleteData(['module', $url[0]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl(false),
@@ -112,6 +127,65 @@ class page extends common {
 			]);
 		}
 	}
+
+	/**
+	 * Édition des blocs
+	 */
+	public function block () {
+		if($this->isPost()) {
+			$this->setData([
+				'page',
+				'blockLeft', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockLeft',
+					'content' => (empty($this->getInput('pageBlockLeftContent', null)) ? "<p></p>" : $this->getInput('pageBlockLeftContent', null))]
+			]);
+			$this->setData([
+				'page',
+				'blockRight', [
+					'typeMenu' => 'text',
+					'iconUrl' => '',
+					'disable' => true,								
+					'hideTitle' => false,
+					'metaDescription' => '',
+					'metaTitle' => '',
+					'moduleId' => '',
+					'parentPageId' => '',
+					'modulePosition' => 'bottom',
+					'position' => 0,
+					'group' => self::GROUP_VISITOR,
+					'targetBlank' => false,
+					'title' => 'blockRight',
+					'content' => (empty($this->getInput('pageBlockRightContent', null)) ? "<p></p>" : $this->getInput('pageBlockRightContent', null))]
+			]);		
+			$this->addOutput([
+				'redirect' => helper::baseUrl(),
+				'notification' => 'Modifications enregistrées',
+				'state' => true
+			]);
+		}
+
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Édition des blocs',
+			'vendor' => [
+				'tinymce'
+			],
+			'view' => 'block'
+		]);
+	}
+	
 
 	/**
 	 * Édition

@@ -13,7 +13,7 @@
 		<div class="col2 offset6">
 			<?php echo template::button('pageEditDelete', [
 				'class' => 'buttonRed',
-				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2),
+				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2) . '&csrf=' . $_SESSION['csrf'],
 				'value' => 'Supprimer',
 				'ico' => 'cancel'
 			]); ?>
@@ -55,8 +55,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">
-										
+					<div class="col6">							
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
 								'help' => 'Sélectionnez le type de menu.',
 								'label' => 'Type de menu',
@@ -64,7 +63,6 @@
 						]); ?>
 					</div>
 					<div class="col6">
-
 						<?php echo template::file('pageIconUrl', [
 							'label' => 'Icône',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
