@@ -367,6 +367,7 @@ class user extends common {
 	public function logout() {
 		helper::deleteCookie('ZWII_USER_ID');
 		helper::deleteCookie('ZWII_USER_PASSWORD');
+		session_destroy();
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Déconnexion réussie',
