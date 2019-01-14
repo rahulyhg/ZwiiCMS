@@ -203,15 +203,6 @@ class theme extends common {
 		'100% 100%' => 'Taille adaptée au fond'
 	];
 
-	public static $siteBlocks = [
-		'12' => 'Un seul bloc, uniquement le site',
-		'4-8' => 'Deux blocs : 1/3 - 2/3',		
-		'8-4' => 'Deux blocs : 2/3 - 1/3',
-		'3-9' => 'Deux blocs : 1/4 - 3/4',
-		'9-3' => 'Deux blocs : 3/4 - 1/2',
-		'3-6-3' => 'Trois blocs : 1/4 - 1/2 - 1/4'
-	];
-
 
 	/**
 	 * Mode avancé
@@ -433,8 +424,7 @@ class theme extends common {
 				'backgroundColor' => $this->getInput('themeSiteBackgroundColor'),
 				'radius' => $this->getInput('themeSiteRadius'),
 				'shadow' => $this->getInput('themeSiteShadow'),
-				'width' => $this->getInput('themeSiteWidth'),
-				'blocks' => $this->getInput('themeSiteBlocks')
+				'width' => $this->getInput('themeSiteWidth')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

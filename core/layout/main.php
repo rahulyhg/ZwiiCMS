@@ -116,19 +116,10 @@
 		</nav>
 	<?php endif; ?>
 	<?php 
-	    // Multi colonne uniquement pour les pages du site hors config, theme etc..
-		if ( 	
-			$this->getUrl(0) === 'user' OR
-			$this->getUrl(0) === 'theme' OR
-			$this->getUrl(0) === 'config' OR			
-			$this->getUrl(0) === 'page' OR
-			$this->getUrl(1) === 'config' OR
-			$this->getUrl(1) === 'edit'	
-			 )  { ?>
-			<section><?php $layout->showContent(); ?></section>
-		<?php } else {
 		// multi-colonnes
-		$blocks = explode('-',$this->getData(['theme','site','blocks']));
+		// Récupérer la config de la page courante
+		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'blocks']));
+		// Initialiser
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
 			case 1 :  // une colonne
@@ -146,8 +137,8 @@
 			case 3 :  // 3 blocks
 					$blockleft  = 'col' . $blocks[0];
 					$content    = 'col' . $blocks[1];
-					$blockright = 'col' . $blocks[2];					
-		}	
+					$blockright = 'col' . $blocks[2];	
+		}					
 		?>
 		<section>
 			<div class="row">
@@ -156,7 +147,6 @@
 				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>		
 			</div>
 		</section>
-	<?php } ?>
 	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'

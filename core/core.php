@@ -78,7 +78,8 @@ class common {
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Accueil'
+				'title' => 'Accueil',
+				'blocks' => '100'
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
@@ -94,7 +95,8 @@ class common {
 				'position' => 1,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Enfant'
+				'title' => 'Enfant',
+				'blocks' => '100'
 			],
 			'cachee' => [
 			    'typeMenu' => 'text',
@@ -111,7 +113,8 @@ class common {
 				'position' => 2,
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
-				'title' => 'Cachée'
+				'title' => 'Cachée',
+				'blocks' => '100'
 			],
 			'blog' => [
 			    'typeMenu' => 'text',
@@ -127,7 +130,8 @@ class common {
 				'position' => 3,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Blog'
+				'title' => 'Blog',
+				'blocks' => '100'
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -143,7 +147,8 @@ class common {
 				'position' => 4,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Galeries'
+				'title' => 'Galeries',
+				'blocks' => '100'
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -159,7 +164,8 @@ class common {
 				'position' => 5,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => true,
-				'title' => 'Site de Zwii'
+				'title' => 'Site de Zwii',
+				'blocks' => '100'
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -175,7 +181,8 @@ class common {
 				'position' => 6,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Contact'
+				'title' => 'Contact',
+				'blocks' => '100'
 			],
 			'blockRight' => [
 			    'typeMenu' => '',
@@ -381,8 +388,7 @@ class common {
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'radius' => '0',
 				'shadow' => '0',
-				'width' => '960px',
-				'blocks' => '100'
+				'width' => '960px'
 			],
 			'text' => [
 				'font' => 'Open+Sans',

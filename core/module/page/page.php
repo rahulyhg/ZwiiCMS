@@ -36,6 +36,14 @@ class page extends common {
 		'top' => 'En haut',
 		'free' => 'Libre'
 	];
+	public static $pageBlocks = [
+		'12' => 'Un seul bloc, uniquement le site',
+		'4-8' => 'Deux blocs : 1/3 - 2/3',		
+		'8-4' => 'Deux blocs : 2/3 - 1/3',
+		'3-9' => 'Deux blocs : 1/4 - 3/4',
+		'9-3' => 'Deux blocs : 3/4 - 1/2',
+		'3-6-3' => 'Trois blocs : 1/4 - 1/2 - 1/4'
+	];
 	
 	/**
 	 * Création
@@ -60,7 +68,8 @@ class page extends common {
 				'position' => 0,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => $pageTitle
+				'title' => $pageTitle,
+				'blocks' => '100'
 			]
 		]);
 		// Valeurs en sortie
@@ -265,7 +274,8 @@ class page extends common {
 						'position' => $position,
 						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
-						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true)
+						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
+						'blocks' => $this->getinput('pageEditBlocks'),
 					]
 				]);
 				// Redirection vers la configuration

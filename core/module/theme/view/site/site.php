@@ -82,15 +82,6 @@
 						]); ?>
 					</div>
 				</div>
-				<div class='row'>	
-					<div class="col4 offset4">
-						<?php echo template::select('themeSiteBlocks', $module::$siteBlocks, [
-								'label' => 'Répartition des blocs :',
-								'help' => 'Pour éditer le contenu des blocs, sélectionnez \'Édition des blocs\' dans la liste des pages.',
-								'selected' => $this->getData(['theme', 'site', 'blocks'])
-						]); ?>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

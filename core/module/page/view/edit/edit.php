@@ -96,11 +96,14 @@
 				<?php echo template::checkbox('pageEditTargetBlank', true, 'Ouvrir dans un nouvel onglet', [
 					'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
 				]); ?>
-				<!-- menu image -->
 				<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
 					'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
-				]); ?>								
-				<!-- menu image -->
+				]); ?>
+				<?php echo template::select('pageEditBlocks', $module::$pageBlocks, [
+						'label' => 'Gabarits :',
+						'help' => 'Pour éditer le contenu des blocs, sélectionnez \'Édition des blocs\' dans la liste des pages.',
+						'selected' => $this->getData(['page', $this->getUrl(2) , 'blocks'])
+				]); ?>				
 			</div>
 		</div>
 		<div class="col6">
