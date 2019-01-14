@@ -1,5 +1,11 @@
 # ChangeLog 
 
+## Version 8.5.6
+* Correction : 
+    - Destruction de la session au logout
+* Modification : 
+    - Mise à jour RFM 9.14
+
 ## Version 8.5.5
 * Correction : 
     - Faille CSRF lors de l'effacement d'un membre
