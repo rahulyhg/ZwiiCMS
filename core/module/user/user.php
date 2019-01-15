@@ -40,7 +40,7 @@ class user extends common {
 			// Double vérification pour le mot de passe
 			if($this->getInput('userAddPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('userAddConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 				self::$inputNotices['userAddConfirmPassword'] = 'Incorrect';
-			}
+			}		
 			// Crée l'utilisateur
 			$userFirstname = $this->getInput('userAddFirstname', helper::FILTER_STRING_SHORT, true);
 			$userLastname = $this->getInput('userAddLastname', helper::FILTER_STRING_SHORT, true);
@@ -88,13 +88,10 @@ class user extends common {
 	 * Suppression
 	 */
 	public function delete() {
-		//
-		// $url prend l'adresse sans le token
-		$url = explode('&',$this->getUrl(2));
 		// Accès refusé
 		if(
 			// L'utilisateur n'existe pas
-			$this->getData(['user', $url[0]]) === null
+			$this->getData(['user', $this->getUrl(2)]) === null
 			// Groupe insuffisant
 			AND ($this->getUrl('group') < self::GROUP_MODERATOR)
 		) {
@@ -104,22 +101,22 @@ class user extends common {
 			]);
 		}
 		// Jeton incorrect
-		elseif(!isset($_GET['csrf'])) {
+		elseif(!$this->getUrl(3)) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Jeton invalide'
 			]);
 		}
-		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Suppression non autorisée'
 			]);
-		}			
+		}		
 		// Bloque la suppression de son propre compte
-		elseif($this->getUser('id') === $url[0]) {
+		elseif($this->getUser('id') === $this->getUrl(2)) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
@@ -128,7 +125,7 @@ class user extends common {
 		}
 		// Suppression
 		else {
-			$this->deleteData(['user', $url[0]]);
+			$this->deleteData(['user', $this->getUrl(2)]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
@@ -162,6 +159,21 @@ class user extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		if(!$this->getUrl(4)) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Jeton invalide'
+			]);
+		}
+		elseif ($this->getUrl(4) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Suppression non autorisée'
+			]);
+		}		
 		// Accès autorisé
 		else {
 			// Soumission du formulaire
@@ -293,12 +305,12 @@ class user extends common {
 				$userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']),
 				self::$groups[$this->getData(['user', $userId, 'group'])],
 				template::button('userEdit' . $userId, [
-					'href' => helper::baseUrl() . 'user/edit/' . $userId . '/back',
+					'href' => helper::baseUrl() . 'user/edit/' . $userId . '/back/'. $_SESSION['csrf'],
 					'value' => template::ico('pencil')
 				]),
 				template::button('userDelete' . $userId, [
 					'class' => 'userDelete buttonRed',
-					'href' => helper::baseUrl() . 'user/delete/' . $userId. '&csrf=' . $_SESSION['csrf'],
+					'href' => helper::baseUrl() . 'user/delete/' . $userId. '/' . $_SESSION['csrf'],
 					'value' => template::ico('cancel')
 				])
 			];
