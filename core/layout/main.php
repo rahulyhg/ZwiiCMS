@@ -33,11 +33,9 @@
 <?php if($this->getData(['theme', 'header', 'position']) === 'body'): ?>
 	<!-- Bannière dans le fond du site -->
 
-	<!-- menu image -->
 	<?php	
 	if ($this->getData(['theme','header','linkHome'])){
 	echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-	<!-- menu image -->
 
 	<header>
 		<?php if(
@@ -54,11 +52,9 @@
 
 		<?php endif; ?>
 	</header>
-	<!-- menu image -->			
 	<?php
 	if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
-	?>
-	<!-- menu image -->		
+	?>	
 
 <?php endif; ?>
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>

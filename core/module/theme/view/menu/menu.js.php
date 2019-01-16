@@ -70,6 +70,8 @@ $("input, select").on("change", function() {
 			break;
 		case 'body-top':
 			$("nav").show().insertAfter("#bar");
+			$("#menu").removeClass('container');
+			$("#menu").addClass('container-large');
 			break;			
 		case 'body-second':
 			if(<?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>) {
