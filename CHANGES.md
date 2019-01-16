@@ -10,11 +10,8 @@
     - Changement du libellé Modérateur devient Editeur 
     - Destruction de la session au logout
 - Correction : 
-    - Faille CSRF lors de l'effacement d'une page
-    - Faille CSRF lors de l'effacement d'une galerie
-    - Faille CSRF lors de l'effacement d'un article de blog 
-    - Faille CSRF lors de l'effacement d'un article de news 
-    - Faille CSRF lors de l'effacement d'un membre
+    - Contremesure faille CSRF
+    - Thème aperçu menu au-dessus du site
      
 
 ## Verison 8.5.3
