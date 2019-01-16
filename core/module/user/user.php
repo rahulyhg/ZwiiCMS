@@ -101,18 +101,11 @@ class user extends common {
 			]);
 		}
 		// Jeton incorrect
-		elseif(!$this->getUrl(3)) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Jeton invalide'
-			]);
-		}
 		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Suppression non autorisée'
+				'notification' => 'Action non autorisée'
 			]);
 		}		
 		// Bloque la suppression de son propre compte
@@ -167,11 +160,11 @@ class user extends common {
 				'notification' => 'Jeton invalide'
 			]);
 		}
-		elseif ($this->getUrl(4) !== $_SESSION['csrf']) {
+		if ($this->getUrl(4) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Suppression non autorisée'
+				'notification' => 'Action  non autorisée'
 			]);
 		}		
 		// Accès autorisé
