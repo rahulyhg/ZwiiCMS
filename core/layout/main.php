@@ -32,7 +32,6 @@
 <?php endif; ?>
 <?php if($this->getData(['theme', 'header', 'position']) === 'body'): ?>
 	<!-- Bannière dans le fond du site -->
-
 	<?php	
 	if ($this->getData(['theme','header','linkHome'])){
 	echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
@@ -116,14 +115,14 @@
 		</nav>
 	<?php endif; ?>
 	<?php 
-		// multi-colonnes
+		// Gabarit :
 		// Récupérer la config de la page courante
 		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'blocks']));
 		// Initialiser
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
 			case 1 :  // une colonne
-				$content    = 'col'. $blocks[0] ;
+				$content    = 'col'. $blocks[0] ; 
 				break;			
 			case 2 :  // 2 blocks 
 				if ($blocks[0] < $blocks[1]) { // détermine la position de la colonne
@@ -138,15 +137,19 @@
 					$blockleft  = 'col' . $blocks[0];
 					$content    = 'col' . $blocks[1];
 					$blockright = 'col' . $blocks[2];	
-		}					
-		?>
-		<section>
+		}
+
+		if (sizeof($blocks) === 1 ) {
+			?><section><?php $layout->showContent();?></section><?php
+		} else {
+			?>
 			<div class="row">
-				<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
-				<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
-				<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>		
-			</div>
-		</section>
+			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
+			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
+			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>	
+		    </div></section> 
+		<?php } ?>
+		
 	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'
