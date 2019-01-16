@@ -160,19 +160,11 @@ class user extends common {
 				'notification' => 'Jeton invalide'
 			]);
 		}
-<<<<<<< HEAD
-		elseif ($this->getUrl(4) !== $_SESSION['csrf']) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Suppression non autorisée'
-=======
 		if ($this->getUrl(4) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Action  non autorisée'
->>>>>>> master_v8
 			]);
 		}		
 		// Accès autorisé
