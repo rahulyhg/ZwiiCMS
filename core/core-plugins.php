@@ -173,34 +173,38 @@ class CorePlugins {
      */
     public function checkPhpFiles(&$errorMsg, $dir = null) {
         $success = true;
-        $pluginDir = self::PLUGIN_DIR . $this->idPlugin;
-        $pluginDir = ($dir ? $pluginDir . '/' . $dir : $pluginDir);
-        if (file_exists($pluginDir)) {
-            $objects = scandir($pluginDir);
-            foreach ($objects as $key => $value) {
-                if (!in_array($value, array(".", ".."))) {
-                    if (is_dir($pluginDir . '/' . $value)) {
-                        $newDir = ($dir ? $dir . '/' . $value : $value);
-                        $success = $this->checkPhpFiles($errorMsg, $newDir);
-                    } else {
-                        $path = $pluginDir . '/' . $value;
-                        $path_parts = pathinfo($path);
-                        if (strtolower($path_parts['extension']) == 'php') {
-                            // Contrôler le fichier
-                            exec("php -l " . $path, $output, $ret);
-                            if ($ret == -1) {
-                                $success = false;
-                                $errorMsg = $output[1];
+        if(helper::isFunctionEnabled("exec")){
+            $pluginDir = self::PLUGIN_DIR . $this->idPlugin;
+            $pluginDir = ($dir ? $pluginDir . '/' . $dir : $pluginDir);
+            if (file_exists($pluginDir)) {
+                $objects = scandir($pluginDir);
+                foreach ($objects as $key => $value) {
+                    if (!in_array($value, array(".", ".."))) {
+                        if (is_dir($pluginDir . '/' . $value)) {
+                            $newDir = ($dir ? $dir . '/' . $value : $value);
+                            $success = $this->checkPhpFiles($errorMsg, $newDir);
+                        } else {
+                            $path = $pluginDir . '/' . $value;
+                            $path_parts = pathinfo($path);
+                            if (strtolower($path_parts['extension']) == 'php') {
+                                // Contrôler le fichier
+                                $output = "";
+                                $ret = 0;
+                                exec("php -l " . $path, $output, $ret);
+                                if ($ret == -1) {
+                                    $success = false;
+                                    $errorMsg = $output[1];
+                                }
                             }
                         }
                     }
+                    if (!$success) {
+                        break;
+                    }
                 }
-                if (!$success) {
-                    break;
-                }
+            } else {
+                $success = false;
             }
-        } else {
-            $success = false;
         }
         return $success;
     }

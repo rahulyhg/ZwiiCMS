@@ -41,6 +41,11 @@ function step(i, data) {
 					if(i === <?php echo $nbSteps; ?>) {
 						// Affiche le message de succès
 						$("#actionPluginSuccess").show();
+                                                // Affiche un warning si besoin
+                                                if(result.data != undefined){
+                                                    $("#actionPluginDetailWarning").text(result.data);
+                                                    $("#actionPluginWarning").show();
+                                                }
 						// Déverrouille le bouton "Terminer"
 						$("#actionPluginEnd").removeClass("disabled");
 						// Cache le texte de progression

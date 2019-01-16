@@ -1830,6 +1830,20 @@ class helper {
                 }
             }
         }
+
+        /**
+	 * Détermine si une fonction PHP est disponible sur l'hébergement
+         * @param string $function Nom de la fonction à vérifier
+	 * @return boolean
+	 */
+        public static function isFunctionEnabled($function) {
+            $enabled = false;
+            if(function_exists($function)){
+                $disabled = explode(',', ini_get('disable_functions'));
+                $enabled = !in_array($function, $disabled);
+            }
+            return $enabled;
+        }
 }
 
 class layout extends common {

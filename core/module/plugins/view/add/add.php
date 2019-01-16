@@ -18,4 +18,9 @@
         <?php echo template::formClose(); ?>
     </div>
 </div>
-<?php echo template::table([1, 1, 5, 1, 1], $module->notDeployedPlugins, ['Nom', 'Auteur', 'Description', 'Version', '']); ?>
+<?php
+if(!helper::isFunctionEnabled("exec")){
+    echo "<span class=\"smallText colorRed\" title=\"<span class='colorRed'>Attention</span>, lors de l'ajout, le contrôle des fichiers PHP du plugin ne pourra pas être effectué.\">".template::ico("exclamation-circle", null, false, null, 'colorRed')." Fonction exec non disponible sur l'hébergement.</span>";
+}
+echo template::table([1, 1, 5, 1, 1], $module->notDeployedPlugins, ['Nom', 'Auteur', 'Description', 'Version', '']); 
+?>

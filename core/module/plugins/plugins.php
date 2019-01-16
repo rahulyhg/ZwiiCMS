@@ -673,6 +673,10 @@ class plugins extends common {
                                 $status = CorePlugins::ON_ERROR;
                             }
                             $corePlugin->changePluginStatus($status);
+
+                            if($success && !helper::isFunctionEnabled("exec")){
+                                $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
+                            }
                     }
 
                     // Valeurs en sortie
@@ -705,6 +709,9 @@ class plugins extends common {
                             }
                             $corePlugin->changePluginStatus($status);
 
+                            if($success && !helper::isFunctionEnabled("exec")){
+                                $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
+                            }
 
                         default:
                         // **** Cas de l'activation/désactivation d'un plugin déjà déployé

@@ -69,6 +69,9 @@ switch ($actionType) {
 			<?php echo template::ico('check', ''); ?>
 			<?php echo $successMsg; ?>
 		</div>
+                <div id="actionPluginWarning" class="displayNone">
+                    <span id="actionPluginDetailWarning" class="smallText colorOrange"></span>
+		</div>
 	</div>
 	<div class="col3 verticalAlignMiddle">
 		<?php echo template::button('actionPluginEnd', [
