@@ -115,7 +115,7 @@ code d'origine
     <div class="col2 offset8">
  		<?php echo template::button('blogEdit', [
 					'class' => 'buttonBlue',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $this->getUrl(1),
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $this->getUrl(1) . '/' . $_SESSION['csrf'],
 					'value' => 'Editer'
 		]); ?>
     </div>
