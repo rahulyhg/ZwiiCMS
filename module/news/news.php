@@ -95,12 +95,12 @@ class news extends common {
 				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $newsIds[$i], 'publishedOn']))),				
 				self::$states[$this->getData(['module', $this->getUrl(0), $newsIds[$i], 'state'])],
 				template::button('newsConfigEdit' . $newsIds[$i], [
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $newsIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $newsIds[$i]. '/' . $_SESSION['csrf'],
 					'value' => template::ico('pencil')
 				]),
 				template::button('newsConfigDelete' . $newsIds[$i], [
 					'class' => 'newsConfigDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i]. '&csrf=' . $_SESSION['csrf'],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('cancel')
 				])
 			];
@@ -115,34 +115,25 @@ class news extends common {
 	/**
 	 * Suppression
 	 */
-	public function delete() {
-		// $url prend l'adresse sans le token
-		$url = explode('&',$this->getUrl(2));			
+	public function delete() {			
 		// La news n'existe pas
-		if($this->getData(['module', $this->getUrl(0), $url[0]]) === null) {
+		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
 			]);
 		}
 		// Jeton incorrect
-		elseif(!isset($_GET['csrf'])) {
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl(). $this->getUrl(0) . '/config',
-				'notification' => 'Jeton invalide'
-			]);
-		}
-		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
-				'notification' => 'Suppression non autorisée'
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/config',
+				'notification' => 'Action non autorisée'
 			]);
 		}			
 		// Suppression
 		else {
-			$this->deleteData(['module', $this->getUrl(0), $url[0]]);
+			$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
@@ -156,6 +147,14 @@ class news extends common {
 	 * Édition
 	 */
 	public function edit() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Action  non autorisée'
+			]);
+		}			
 		// La news n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
