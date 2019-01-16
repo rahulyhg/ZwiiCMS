@@ -3,8 +3,10 @@
 ## Version 8.5.6
 * Correction : 
     - Destruction de la session au logout
+    - Thème : aperçu de la modification de la barre de menu au-dessus du site
 * Modification : 
     - Mise à jour RFM 9.14
+    - Amélioration de la contre mesure CRSF
 
 ## Version 8.5.5
 * Correction : 
