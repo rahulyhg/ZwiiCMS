@@ -8,11 +8,26 @@
     - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
     - Pas de bloc pour les écrans de configuration.
     - Changement du libellé Modérateur devient Editeur 
-    - Destruction de la session au logout
-- Correction : 
-    - Contremesure faille CSRF
-    - Thème aperçu menu au-dessus du site
      
+## Version 8.5.6
+* Correction : 
+    - Destruction de la session au logout
+    - Thème : aperçu de la modification de la barre de menu au-dessus du site
+* Modification : 
+    - Mise à jour RFM 9.14
+    - Amélioration de la contre mesure CRSF
+
+## Version 8.5.5
+* Correction : 
+    - Faille CSRF lors de l'effacement d'un membre
+    - Faille CSRF lors de l'effacement d'une galerie
+    - Faille CSRF lors de l'effacement d'un article de blog    
+    - Faille CSRF lors de l'effacement d'un article de news
+    - Taille de la police dans le footer impossible à modifier
+
+## Version 8.5.4
+* Correction : 
+    - Faille CSRF lors de l'effacement d'une page
 
 ## Verison 8.5.3
 * Modification :

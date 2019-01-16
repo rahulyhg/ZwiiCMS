@@ -1,5 +1,4 @@
-﻿<<<<<<< HEAD
-# Fichiers temporaires
+﻿# Fichiers temporaires
 site/tmp/*
 
 # Sauvegardes
@@ -13,11 +12,9 @@ site/file/source/*
 site/file/thumb/*
 
 
-﻿# Fichiers de données
-site/*
-
 # Dossiers vides dans GitHub
 !.gitkeep
+.gitignore
 
 # PHPStorm
 .idea/
@@ -26,4 +23,8 @@ site/*
 #Visual Code
 .vscode
 
+
 site/data/custom.css
+#FreeFile
+sync.ffs_db
+
