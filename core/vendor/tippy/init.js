@@ -2,21 +2,16 @@
  * Initialisation de Tippy
  */
 $(document).ready(function() {
-    var el = document.getElementById("foo"); 
+    // Toute les infobulles auront une flèche
+    tippy.setDefaults({
+        arrow: true,
+    });
     
-	// Tooltip des aides
-	tippy(".helpButton", {
-		arrow: true,
-		placement: "right",
-        content(reference) {            
-            return reference.title;
-        }
-	});
-	// Tooltip des attributs title
-	tippy("[title]", {
-		arrow: true,
-        content(reference) {            
-            return reference.title;
-        }
-	});
+    // Pour les infobulles d'aide, le text est positionné à droite
+    tippy(".helpButton", {
+        placement: "right"
+    });
+
+    // afficher les infobules si l'attribut data-tippy-content est présent
+    tippy('[data-tippy-content]');
 });

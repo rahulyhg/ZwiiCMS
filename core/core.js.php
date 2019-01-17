@@ -290,7 +290,7 @@ core.start = function() {
 			.prop("disabled", true)
 			.empty()
 			.append(
-				$("<span>").addClass("fa-spinner animate-spin")
+				$("<span>").addClass("fas fa-spinner fa-spin")
 			)
 	});
 	/**
