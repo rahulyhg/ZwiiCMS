@@ -12,9 +12,9 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-			<h4>Importer les données du thème</h4>
+			<h4>Importer</h4>
 					<?php echo template::file('themeManageImport', [
-							'label' => 'Archive à importer',
+							'label' => 'Archive',
 							'type' => 2
 					]); ?>
 					<div class="col5 offset3">
@@ -26,23 +26,23 @@
 		</div>
 		<div class="col6">
 			<div class="block">
-			<h4>Enregistrer les données du thème</h4>
+			<h4>Exporter</h4>
 			<div class="row">
 				<div class="col5 offset1">
 						<?php echo template::button('themeSave', [
 							'href' => helper::baseUrl() . 'theme/save',
-							'value' => 'Sauvegarder le thème dans les fichiers'
+							'value' => 'Sauvegarder'
 						]); ?>
 				</div>
 				<div class="col5">
 					<?php echo template::button('themeExport', [
 						'href' => helper::baseUrl() . 'theme/export',
-						'value' => 'Télécharger une archive du thème'
+						'value' => 'Télécharger'
 					]); ?>
 				</div>
 			</div>
-			L'archive ZIP contient la structure du thème avec l'arborescence complète à copier dans le dossier site. Les images sont comprises dans l'archive.	
-			<p \>Le nom du thème est généré à partir du groupe date heure et d'un nombre aléatoire.
+			L'archive ZIP contient un dossier "site" à copier à la racine du répertoire d'installation de ZwiiCMS. Il comprend les données du thème et les images qu'il utilise le cas échéant.
+    		<p \>Le nom du thème est généré automatiquement à partir de la date et de l'heure de son enregistrement et d'un nombre aléatoire.
 			</div>
 		</div>
 	</div>	

@@ -480,25 +480,8 @@ class theme extends common {
 	 * Export du thème
 	 */
 	public function export() {
-		// Creation du dossier
-			$zipFilename    =  'theme-'.date('dmYhms').'-'.rand(100,999).'.zip';
-			$zip = new ZipArchive();
-			if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
-				$zip->addFile('site/data/theme.json','site/data/theme.json');
-				$zip->addFile('site/data/theme.json','site/data/theme.css');
-				$zip->addFile('site/data/theme.json','site/data/custom.css');
-				if ($this->getData(['theme','body','image']) !== '' ) {
-				$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
-							'site/file/source/'.$this->getData(['theme','body','image'])
-							);
-				}
-				if ($this->getData(['theme','header','image']) !== '' ) {			
-				$zip->addFile('site/file/source/'.$this->getData(['theme','header','image']),
-							'site/file/source/'.$this->getData(['theme','header','image'])
-							);
-				}
-				$ret = $zip->close();
-			}
+		// Make zip
+			$zipFilename = $this->makezip();			
 			// Téléchargement du ZIP
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/octet-stream');
@@ -508,18 +491,33 @@ class theme extends common {
 			readfile('site/tmp/' . $zipFilename);
 			// Nettoyage du dossier
 			unlink ('site/tmp/' . $zipFilename);
-			// Valeurs en sortie
-			$this->addOutput([
-				'display' => self::DISPLAY_RAW
-			]);
+			die();
 	}
 
 	/**
 	 * Export du thème
 	 */
 	public function save() {
+		// Make zip
+		$zipFilename = $this->makezip();
+		// Téléchargement du ZIP
+		copy ('site/tmp/' . $zipFilename , 'site/file/source/' . $zipFilename);
+		// Nettoyage du dossier
+		unlink ('site/tmp/' . $zipFilename);
+		// Valeurs en sortie
+		$this->addOutput([
+			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
+			'redirect' => helper::baseUrl() . 'theme/manage',
+			'state' => true
+		]);
+	}
+
+	/**
+	 * construction du zip
+	 */
+	public function makezip() {
 		// Creation du dossier
-		$zipFilename    =  'theme-'.date('dmYhms').'-'.rand(100,999).'.zip';
+		$zipFilename  =  'theme-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.zip';
 		$zip = new ZipArchive();
 		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
 			$zip->addFile('site/data/theme.json','site/data/theme.json');
@@ -537,16 +535,7 @@ class theme extends common {
 			}
 			$ret = $zip->close();
 		}
-		// Téléchargement du ZIP
-		copy ('site/tmp/' . $zipFilename , 'site/file/source/' . $zipFilename);
-		// Nettoyage du dossier
-		unlink ('site/tmp/' . $zipFilename);
-		// Valeurs en sortie
-		$this->addOutput([
-			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
-			'redirect' => helper::baseUrl() . 'theme/manage',
-			'state' => true
-		]);
-	}	
+		return ($zipFilename);
+	}
 
 }
