@@ -16,6 +16,7 @@
 * Modification : 
     - Mise à jour RFM 9.14
     - Amélioration de la contre mesure CRSF
+    - Libellé dans TinyMCE (gabarit)
 
 ## Version 8.5.5
 * Correction : 
