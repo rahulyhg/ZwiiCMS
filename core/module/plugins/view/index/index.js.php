@@ -15,7 +15,7 @@
  */
 $(".pluginDelete").on("click", function() {
 	var _this = $(this);
-	return core.confirm("Êtes-vous sûr de vouloir supprimer ce plugin ?", function() {
+	return core.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce plugin ?", function() {
 		$(location).attr("href", _this.attr("href"));
 	});
 });

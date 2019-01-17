@@ -11,8 +11,8 @@
         <?php echo template::formOpen('directUploadForm'); ?>
             <?php echo template::button('directUploadButton', [
                 'ico' => 'plus',
-                'value' => 'Archive locale',
-                'help'  => 'Uploader une archive pour déployer directement un plugin.'
+                'value' => 'Uploader l\'archive',
+                'help'  => 'Uploader une archive pour installer directement un plugin.'
             ]); ?>
             <input type="file" style="display:none;" id="directUpload" name="directUpload" size="1048576"> <!--max 1048576 octets = 1 Mo-->
         <?php echo template::formClose(); ?>
@@ -20,7 +20,7 @@
 </div>
 <?php
 if(!helper::isFunctionEnabled("exec")){
-    echo "<span class=\"smallText colorRed\" data-tippy-content=\"<span class='colorRed'>Attention</span>, lors de l'ajout, le contrôle des fichiers PHP du plugin ne pourra pas être effectué.\">".template::ico("exclamation-circle", null, false, null, 'colorRed')." Fonction exec non disponible sur l'hébergement.</span>";
+    echo "<span class=\"smallText colorRed\" data-tippy-content=\"<span class='colorRed'>Attention</span>, lors de l'installation, le contrôle des fichiers PHP du plugin ne pourra pas être effectué.\">".template::ico("exclamation-circle", null, false, null, 'colorRed')." Fonction <span style=\"font-weight:bold;\">exec</span> non disponible sur l'hébergement.</span>";
 }
 echo template::table([1, 1, 5, 1, 1], $module->notDeployedPlugins, ['Nom', 'Auteur', 'Description', 'Version', '']); 
 ?>

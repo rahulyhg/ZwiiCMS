@@ -5,34 +5,34 @@ $pluginId = $module->targetPluginId;
 $actionsList = [];
 switch ($actionType) {
     case 'activate':
-        $titre = "Activation du plugin " . $module->targetPluginId . ".";
-        $ssTitre = "la bonne activation";
-        $successMsg = "Activation terminée avec succès.";
+        $titre = "Installation du plugin " . $module->targetPluginId . ".";
+        $ssTitre = "la bonne installation";
+        $successMsg = "Installation terminée avec succès.";
 
         // Liste de sactions à réaliser
         $actionsList[] = "Vérification de la procédure";
         $actionsList[] = "Contrôle";
         $actionsList[] = "Sauvegarde";
-	$actionsList[] = "Activation";
+	$actionsList[] = "Installation";
         break;
 
     case 'undeploy':
-        $titre = "Suppression du déploiement du plugin " . $module->targetPluginId . ".";
-        $ssTitre = "la bonne suppression";
-        $successMsg = "Suppression du déploiement terminée avec succès.";
+        $titre = "Désinstallation du plugin " . $module->targetPluginId . ".";
+        $ssTitre = "la bonne désinstallation";
+        $successMsg = "Désinstallation du plugin terminée avec succès.";
 
         // Liste de sactions à réaliser
         $actionsList[] = "Vérification de la procédure";
         $actionsList[] = "Contrôle";
         $actionsList[] = "Sauvegarde";
-        $actionsList[] = "Suppression du déploiement";
+        $actionsList[] = "Désinstallation";
         break;
 
     default:
         // Cas du action/deploy et action/upload
-        $titre = "Déploiement du plugin " . $module->targetPluginId . ".";
-        $ssTitre = "le bon déploiement";
-        $successMsg = "Déploiement terminé avec succès.";
+        $titre = "Installation du plugin " . $module->targetPluginId . ".";
+        $ssTitre = "la bonnne installation";
+        $successMsg = "Installation terminée avec succès.";
 
         // Liste de sactions à réaliser
         $actionsList[] = "Préparation";

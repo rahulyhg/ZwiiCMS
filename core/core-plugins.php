@@ -66,7 +66,7 @@ class CorePlugins {
         // 1- contient un fichier MANIFEST.json (valide) à la racine
         if (!file_exists($manifestFile)) {
             $success = false;
-            $errorMsg = "Fichier `MANIFEST.json` non trouvé";
+            $errorMsg = "Fichier `MANIFEST.json` non trouvé.";
         } else {
             // Vérification de la structure du fichier json            
             $manifest_json = file_get_contents($manifestFile);
@@ -92,7 +92,7 @@ class CorePlugins {
         // 2- contient un répertoire `deploy` avec un fichier `deploy.php`
         if ($success && !file_exists($deployFile)) {
             $success = false;
-            $errorMsg = "Fichier `deploy/deploy.php` non trouvé";
+            $errorMsg = "Fichier `deploy/deploy.php` non trouvé.";
         }
 
         if ($success) {
@@ -110,7 +110,7 @@ class CorePlugins {
                 $pattern = '/^[private|protected|public]*\s*function deploy\(&\$.*, &\$.*, &\$.*\)/m';
                 if (preg_match($pattern, $contentDeployFile) !== 1) {
                     $success = false;
-                    $errorMsg = "[deploy/deploy.php] Fonction `deploy` non présente ou non standard";
+                    $errorMsg = "[deploy/deploy.php] Fonction `deploy` non présente ou non standard.";
                 }
             }
         }
@@ -127,7 +127,7 @@ class CorePlugins {
             $pattern = '/^[private|protected|public]*\s*function checkBeforeUndeploy\(&\$.*, &\$.*, &\$.*\)/m';
             if (preg_match($pattern, $contentUndeployFile) !== 1) {
                 $success = false;
-                $errorMsg = "[undeploy/undeploy.php] Fonction `checkBeforeUndeploy` non présente ou non standard";
+                $errorMsg = "[undeploy/undeploy.php] Fonction `checkBeforeUndeploy` non présente ou non standard.";
             }
 
             if ($success) {
@@ -135,7 +135,7 @@ class CorePlugins {
                 $pattern = '/^[private|protected|public]*\s*function undeploy\(&\$.*, &\$.*, &\$.*\)/m';
                 if (preg_match($pattern, $contentUndeployFile) !== 1) {
                     $success = false;
-                    $errorMsg = "[undeploy/undeploy.php] Fonction `undeploy` non présente ou non standard";
+                    $errorMsg = "[undeploy/undeploy.php] Fonction `undeploy` non présente ou non standard.";
                 }
             }
         }
