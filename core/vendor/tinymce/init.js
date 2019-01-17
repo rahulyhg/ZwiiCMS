@@ -89,37 +89,37 @@ tinymce.init({
 			description: "Bloc de texte avec un titre."
 		},
 		{
-			title: "Colonnes symétriques : 6 - 6",
+			title: "Grille symétrique : 6 - 6",
 			url: baseUrl + "core/vendor/tinymce/templates/col6.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes symétriques : 4 - 4 - 4",
+			title: "Grille symétrique : 4 - 4 - 4",
 			url: baseUrl + "core/vendor/tinymce/templates/col4.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes symétriques : 3 - 3 - 3 - 3",
+			title: "Grille symétrique : 3 - 3 - 3 - 3",
 			url: baseUrl + "core/vendor/tinymce/templates/col3.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 4 - 8",
+			title: "Grille asymétrique : 4 - 8",
 			url: baseUrl + "core/vendor/tinymce/templates/col4-8.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 8 - 4",
+			title: "Grille asymétrique : 8 - 4",
 			url: baseUrl + "core/vendor/tinymce/templates/col8-4.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 2 - 10",
+			title: "Grille asymétrique : 2 - 10",
 			url: baseUrl + "core/vendor/tinymce/templates/col2-10.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 10 - 2",
+			title: "Grille asymétrique : 10 - 2",
 			url: baseUrl + "core/vendor/tinymce/templates/col10-2.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		}
