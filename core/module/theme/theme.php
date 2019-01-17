@@ -501,7 +501,8 @@ class theme extends common {
 		// Make zip
 		$zipFilename = $this->makezip();
 		// Téléchargement du ZIP
-		copy ('site/tmp/' . $zipFilename , 'site/file/source/' . $zipFilename);
+		mkdir('site/file/source/theme');
+		copy ('site/tmp/' . $zipFilename , 'site/file/source/theme/' . $zipFilename);
 		// Nettoyage du dossier
 		unlink ('site/tmp/' . $zipFilename);
 		// Valeurs en sortie
