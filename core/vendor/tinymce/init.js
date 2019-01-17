@@ -109,7 +109,11 @@ tinymce.init({
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
+<<<<<<< HEAD
 			title: "Grille asymétrique : 8 - 4",
+=======
+			title: "Grille asymétriqu : 8 - 4",
+>>>>>>> cc760c73edadd1bbdea16b9dcb87e6425ece22fc
 			url: baseUrl + "core/vendor/tinymce/templates/col8-4.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
