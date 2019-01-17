@@ -149,7 +149,7 @@ $config = array(
 	|--------------------------------------------------------------------------
 	| The user can delete multiple files, select all files , deselect all files
 	*/
-	'multiple_selection' => true,
+	'multiple_selection' => false,
 	/*
 	|
 	| The user can have a select button that pass a json to external input or pass the first file selected to editor
