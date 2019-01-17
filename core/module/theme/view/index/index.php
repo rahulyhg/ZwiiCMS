@@ -17,7 +17,7 @@
 			<?php echo template::button('themeManage', [				
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
-				'value' => 'Gestion des thèmes'
+				'value' => 'Thèmes'
 			]); ?>
 		</div>	
 		<div class="col2">
@@ -49,7 +49,7 @@
 			<?php echo template::button('themeManage', [				
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
-				'value' => 'Gestion des thèmes'
+				'value' => 'Thèmes'
 			]); ?>
 		</div>
 		<div class="col2">
