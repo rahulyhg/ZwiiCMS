@@ -79,7 +79,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Accueil',
-				'blocks' => '100'
+				'blocks' => '9-3'
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
@@ -96,13 +96,12 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Enfant',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
 			'cachee' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
 				'metaDescription' => '',
@@ -114,8 +113,25 @@ class common {
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
 				'title' => 'Cachée',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
+			'gabarit' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => "<p>Cette page est constituée d'un gabarit. </p><p>Plusieurs grilles sont disponibles dans les paramètres des pages.</p><p>La configuration des blocs de gauche et de droite s'effectue à l'aide de la fonction Edition des blocs dans la liste des pages.</p>",
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'parentPageId' => '',
+				'modulePosition' => 'bottom',
+				'position' => 3,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'Gabarit',
+				'blocks' => '3-6-3'
+			],			
 			'blog' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
@@ -124,14 +140,14 @@ class common {
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
-				'moduleId' => 'blog',
+				'moduleId' => '',
 				'modulePosition' => 'bottom',
 				'parentPageId' => '',
-				'position' => 3,
+				'position' => 4,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Blog',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -144,11 +160,11 @@ class common {
 				'moduleId' => 'gallery',
 				'modulePosition' => 'bottom',
 				'parentPageId' => '',
-				'position' => 4,
+				'position' => 5,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Galeries',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -161,11 +177,11 @@ class common {
 				'moduleId' => 'redirection',
 				'modulePosition' => 'bottom',
 				'parentPageId' => '',
-				'position' => 5,
+				'position' => 6,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => true,
 				'title' => 'Site de Zwii',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -178,17 +194,17 @@ class common {
 				'moduleId' => 'form',
 				'modulePosition' => 'bottom',
 				'parentPageId' => '',
-				'position' => 6,
+				'position' => 7,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact',
-				'blocks' => '100'
+				'blocks' => '12'
 			],
 			'blockRight' => [
 			    'typeMenu' => '',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => '<p>Bloc à droite du site</p>',
+				'content' => '<div class="block"><h4>ZwiiCMS</h4><p style="text-align: center;"><a href="https://www.zwiicms.com" target="_blank" rel="noopener"><img src="/ZwiiCMS-dev/site/file/source/screenshot.png" alt="" width="320" height="179" /></a></p></div>',
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
