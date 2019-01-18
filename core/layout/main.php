@@ -106,14 +106,16 @@
 			AND $this->getUrl(0) === 'theme'
 		)
 	): ?>
-		<!-- Menu dans le site après la bannière -->
-		<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-			<div id="toggle"><?php echo template::ico('menu'); ?></div>
-			<div id="menu" class="container">
-				<?php $layout->showMenu(); ?>
-			</div>
-		</nav>
+	<!-- Menu dans le site après la bannière -->
+	<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
+		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="menu" class="container">
+			<?php $layout->showMenu(); ?>
+		</div>
+	</nav>
 	<?php endif; ?>
+	<!-- Corps de page -->
+	<section>
 	<?php 
 		// Gabarit :
 		// Récupérer la config de la page courante
@@ -140,16 +142,16 @@
 		}
 
 		if (sizeof($blocks) === 1 ) {
-			?><section><?php $layout->showContent();?></section><?php
+			?><?php $layout->showContent();?><?php
 		} else {
-			?>
-			<div class="row">
+		?>
+		<div class="row">
 			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
 			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
 			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>	
-		    </div></section> 
+		</div>
 		<?php } ?>
-		
+	</section>
 	<!-- footer -->
 	<?php if(
 		$this->getData(['theme', 'footer', 'position']) === 'site'
