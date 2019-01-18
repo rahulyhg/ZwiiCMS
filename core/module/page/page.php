@@ -41,7 +41,7 @@ class page extends common {
 		'4-8' => 'Deux blocs : 1/3 - 2/3',		
 		'8-4' => 'Deux blocs : 2/3 - 1/3',
 		'3-9' => 'Deux blocs : 1/4 - 3/4',
-		'9-3' => 'Deux blocs : 3/4 - 1/2',
+		'9-3' => 'Deux blocs : 3/4 - 1/4',
 		'3-6-3' => 'Trois blocs : 1/4 - 1/2 - 1/4'
 	];
 	
