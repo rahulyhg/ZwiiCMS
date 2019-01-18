@@ -5,8 +5,7 @@
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
     - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
     - Importer un thème à partir des fichiers
-    - Deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétage est dans le thème, mais les contenus sont stockés dans les pages.
-    - Pas de bloc pour les écrans de configuration.
+    - Gabarits de pages : deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétrage est dans le thème, mais les contenus sont stockés dans les pages.
     - Changement du libellé Modérateur devient Editeur 
      
 ## Version 8.5.6
