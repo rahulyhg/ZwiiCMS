@@ -7,6 +7,9 @@
     - Importer un thème à partir des fichiers
     - Gabarits de pages : deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétrage est dans le thème, mais les contenus sont stockés dans les pages.
     - Changement du libellé Modérateur devient Editeur 
+    - VisualBlocks dans TinyMCE
+Mises à jour : 
+    - TinyColoPicker
      
 ## Version 8.5.6
 * Correction : 
