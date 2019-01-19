@@ -191,11 +191,6 @@ class theme extends common {
 		'100%' => 'Fluide (100%)'
 	];
 
-	public static $menuWide = [
-		'container' => 'sur la largeur du site',
-		'container-large' => 'sur la largeur de la page'
-	];
-
 	public static $headerWide = [
 		'auto' => 'Automatique',
 		'contain' => 'Image entière',		
