@@ -70,6 +70,16 @@ footer #footersiteCenter, #footerbodyCenter {
 footer #footersiteRight, #footerbodyRight {
 }
 
+/* footer bloc de chaque des éléments */
+#footerText {
+}
+#footerSocials {
+}
+#footerCopyright {
+}
+
+
+
 /**
  * Éléments de contenu
  */
