@@ -47,7 +47,7 @@ class common {
 			'maintenance' => false,
 			'metaDescription' => 'Zwii est un CMS sans base de données qui permet à ses utilisateurs de créer et gérer facilement un site web sans aucune connaissance en programmation.',
 			'social' => [
-				'facebookId' => '',
+				'facebookId' => 'ZwiiCMS',
 				'googleplusId' => '',
 				'instagramId' => '',
 				'pinterestId' => '',
@@ -353,18 +353,18 @@ class common {
 			],
 			'footer' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
-				'copyrightAlign' => 'center',
 				'height' => '10px',
 				'loginLink' => true,
 				'margin' => false,
 				'position' => 'site',
-				'socialsAlign' => 'center',
-				'text' => '',
-				'textAlign' => 'center',
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'copyrightPosition' => 'center',
-				'textPosition' => 'hide',
-				'socialsPosition' => 'hide'
+				'copyrightAlign' => 'center',
+				'text' => 'Pied de page personnalisé',				
+				'textPosition' => 'left',
+				'textAlign' => 'left',				
+				'socialsPosition' => 'right',
+				'socialsAlign' => 'right'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -1022,8 +1022,8 @@ class common {
 		}
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {
-			$this->setData(['theme','footer','socialsPosition','none']);
-			$this->setData(['theme','footer','textPosition','none']);			
+			$this->setData(['theme','footer','socialsPosition','right']);
+			$this->setData(['theme','footer','textPosition','left']);			
 			$this->setData(['theme','footer','copyrightPosition','center']);			
 			$this->setData(['core', 'dataVersion', 844]);
 			$this->SaveData();
