@@ -153,13 +153,6 @@ class user extends common {
 			]);
 		}
 		// Jeton incorrect
-		if(!$this->getUrl(4)) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Jeton invalide'
-			]);
-		}
 		if ($this->getUrl(4) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
