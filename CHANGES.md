@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.5.7
+* Correction : 
+    - Message d'erreur ecran modification du compte
+
 ## Version 8.5.6
 * Correction : 
     - Destruction de la session au logout
