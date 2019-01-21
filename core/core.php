@@ -115,21 +115,21 @@ class common {
 				'title' => 'Cachée',
 				'blocks' => '12'
 			],
-			'gabarit' => [
+			'mise_en_page' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => "<p>Cette page est constituée d'un gabarit. </p><p>Plusieurs grilles sont disponibles dans les paramètres des pages.</p><p>La configuration des blocs de gauche et de droite s'effectue à l'aide de la fonction Edition des blocs dans la liste des pages.</p>",
+				'content' => " Il est désormais possible d'ajouter un ou deux blocs latéraux aux pages de votre site.<p \>Cette mise en page peut être uniforme ou spécifique à certaines pages en fonction de vos goûts ou de vos besoins.<p \>Les gabarits sont disponibles dans les paramètres des pages.<p \>L'édition des blocs est accessible depuis la liste des pages.",
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
-				'parentPageId' => '',
+				'parentPageId' => 'accueil',
 				'modulePosition' => 'bottom',
 				'position' => 3,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Gabarit',
+				'title' => 'Mise en page',
 				'blocks' => '3-6-3'
 			],			
 			'blog' => [
@@ -2194,7 +2194,7 @@ class layout extends common {
 					}
 				}
 				$leftItems .= '<option value="">-------------------</option>';				
-				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des blocs</option>';				
+				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des bandeaux</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(

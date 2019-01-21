@@ -187,7 +187,7 @@ class page extends common {
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Édition des blocs',
+			'title' => 'Édition des bandeaux',
 			'vendor' => [
 				'tinymce'
 			],

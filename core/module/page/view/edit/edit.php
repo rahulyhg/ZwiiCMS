@@ -99,9 +99,12 @@
 				<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
 					'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
 				]); ?>
+			</div>
+			<div class="block">
+				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlocks', $module::$pageBlocks, [
-						'label' => 'Gabarits :',
-						'help' => 'Pour éditer le contenu des blocs, sélectionnez \'Édition des blocs\' dans la liste des pages.',
+						'label' => 'Gabarit :',
+						'help' => 'Pour éditer le contenu des bandeaux, sélectionnez \'Édition des bandeaux\' dans la liste des pages.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'blocks'])
 				]); ?>				
 			</div>
