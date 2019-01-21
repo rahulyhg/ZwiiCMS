@@ -10,6 +10,10 @@
     - VisualBlocks dans TinyMCE
 Mises à jour : 
     - TinyColoPicker
+
+## Version 8.5.7
+* Correction : 
+    - Message d'erreur ecran modification du compte    
      
 ## Version 8.5.6
 * Correction : 
