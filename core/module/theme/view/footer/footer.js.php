@@ -22,7 +22,9 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container > div{padding:0}";	
 	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
@@ -55,24 +57,22 @@ $("input, select").on("change", function() {
 	}
 });
 
-// Position dans les blocs FT
-
+// Position dans les blocs
 // Bloc texte personnalisé
-
 $("#themeFooterForm").on("change",function() {
 	switch($("#themeFooterTextPosition").val()) {
 			case 'hide':
 				$("#footerText").hide();
 				break;
 			case 'left':
-				$("#footerText").show().appendTo("#footerbodyLeft");			
+				$("#footerText").show().appendTo("#footerbodyLeft");
 				$("#footerText").show().appendTo("#footersiteLeft");
 				break;
-			case 'center':
+			case 'center':			
 				$("#footerText").show().appendTo("#footerbodyCenter");
 				$("#footerText").show().appendTo("#footersiteCenter");
 				break;
-			case 'right':
+			case 'right':			
 				$("#footerText").show().appendTo("#footerbodyRight");
 				$("#footerText").show().appendTo("#footersiteRight");				
 				break;
@@ -82,7 +82,7 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
-				$("#footerSocials").show().appendTo("#footerbodyLeft");			
+				$("#footerSocials").show().appendTo("#footerbodyLeft");	
 				$("#footerSocials").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
@@ -90,6 +90,7 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
+				console.log("right");
 				$("#footerSocials").show().appendTo("#footerbodyRight");
 				$("#footerSocials").show().appendTo("#footersiteRight");				
 				break;
@@ -112,8 +113,6 @@ $("#themeFooterForm").on("change",function() {
 				break;
 	}
 }).trigger("change");
-
-
 // Fin Position dans les blocs
 
 
@@ -128,10 +127,12 @@ $("#themeFooterLoginLink").on("change", function() {
 		$("#footerLoginLink").hide();
 	}
 }).trigger("change");
+
 // Aperçu du texte
 $("#themeFooterText").on("change keydown keyup", function() {
 	$("#footerText").html($(this).val());
 });
+
 // Affiche / Cache les options de la position
 $("#themeFooterPosition").on("change", function() {
 	if($(this).val() === 'site') {

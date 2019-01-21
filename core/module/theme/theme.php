@@ -77,11 +77,11 @@ class theme extends common {
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'5px' => 'Très petite',
-		'10px' => 'Petite',
-		'20px' => 'Moyenne',
-		'30px' => 'Grande',
-		'40px' => 'Très grande'
+		'0px' => 'Très petite',
+		'5px' => 'Petite',
+		'10px' => 'Moyenne',
+		'15px' => 'Grande',
+		'20px' => 'Très grande'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',
@@ -189,11 +189,6 @@ class theme extends common {
 		'960px' => 'Moyenne (960 pixels)',
 		'1170px' => 'Grande (1170 pixels)',
 		'100%' => 'Fluide (100%)'
-	];
-
-	public static $menuWide = [
-		'container' => 'sur la largeur du site',
-		'container-large' => 'sur la largeur de la page'
 	];
 
 	public static $headerWide = [

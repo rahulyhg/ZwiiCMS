@@ -15,7 +15,7 @@ body {
 #site {
 }
 
-/* Blocs dans le site */
+/* Grille du site */
 #contentleft {
 }
 #contentright {
@@ -69,6 +69,16 @@ footer #footersiteCenter, #footerbodyCenter {
 /* footer bloc droite */
 footer #footersiteRight, #footerbodyRight {
 }
+
+/* footer bloc de chaque élément */
+#footerText {
+}
+#footerSocials {
+}
+#footerCopyright {
+}
+
+
 
 /**
  * Éléments de contenu
