@@ -10,12 +10,7 @@
     - VisualBlocks dans TinyMCE
 Mises à jour : 
     - TinyColoPicker
-    - contrôle CSRF de l'accès à l'utilisateur connecté
-
-
-## Version 8.5.7
-* Correction : 
-    - Message d'erreur ecran modification du compte    
+    - contrôle CSRF de l'accès à l'utilisateur connecté 
      
 ## Version 8.5.6
 * Correction : 
