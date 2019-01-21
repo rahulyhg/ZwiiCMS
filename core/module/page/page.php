@@ -37,12 +37,12 @@ class page extends common {
 		'free' => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12' => 'Un seul bloc, uniquement le site',
-		'4-8' => 'Deux blocs : 1/3 - 2/3',		
-		'8-4' => 'Deux blocs : 2/3 - 1/3',
-		'3-9' => 'Deux blocs : 1/4 - 3/4',
-		'9-3' => 'Deux blocs : 3/4 - 1/4',
-		'3-6-3' => 'Trois blocs : 1/4 - 1/2 - 1/4'
+		'12' => 'Page sans bandeau',
+		'4-8' => 'Bandeau 1/3 - Page 2/3',		
+		'8-4' => 'Page 2/3    - Bandeau 1/3',
+		'3-9' => 'Bandeau 1/4 - Page 3/4',
+		'9-3' => 'Page 3/4    - Bandeau 1/4',
+		'3-6-3' => 'Bandeau 1/4 - Page 1/2 - Bandeau 1/4'
 	];
 	
 	/**
