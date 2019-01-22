@@ -204,7 +204,7 @@ class common {
 			    'typeMenu' => '',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => '<div class="block"><h4>ZwiiCMS</h4><p style="text-align: center;"><a href="https://www.zwiicms.com" target="_blank" rel="noopener"><h3>Le CMS sans base de donn&eacute;es avec un installation simple et rapide.</h3></a></p></div>',
+				'content' => '<div class="block"><h4>ZwiiCMS</h4><p style="text-align: center;"><a href="https://www.zwiicms.com" target="_blank" rel="noopener"><h3>Le CMS sans base de donn&eacute;es grâce à une installation simple et rapide.</h3></a></p></div>',
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
