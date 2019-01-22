@@ -7,9 +7,25 @@ tinymce.init({
 	// Langue
 	language: "fr_FR",
 	// Plugins
-	plugins: "advlist anchor autolink autoresize autosave code codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
+	plugins: "advlist anchor autolink autoresize autosave codemirror codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
 	// Contenu de la barre d'outils
 	toolbar: "restoredraft | undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code visualblocks fullscreen",
+	// CodeMirror
+	codemirror: {
+		indentOnInit: true, // Whether or not to indent code on init.
+		fullscreen: false,   // Default setting is false
+		path: 'codemirror', // Path to CodeMirror distribution
+		config: {           // CodeMirror config object
+			mode: 'application/x-httpd-php',
+			lineNumbers: true
+		},
+		width: 800,         // Default value is 800
+		height: 500,        // Default value is 550
+		jsFiles: [          // Additional JS files to load
+			'mode/clike/clike.js',
+			'mode/php/php.js'
+		]
+	}, 
 	// Contenu du menu contextuel
 	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
