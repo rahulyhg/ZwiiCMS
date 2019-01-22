@@ -37,12 +37,12 @@ class page extends common {
 		'free' => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12' => 'Page sans bandeau',
-		'4-8' => 'Bandeau 1/3 - Page 2/3',		
-		'8-4' => 'Page 2/3    - Bandeau 1/3',
-		'3-9' => 'Bandeau 1/4 - Page 3/4',
-		'9-3' => 'Page 3/4    - Bandeau 1/4',
-		'3-6-3' => 'Bandeau 1/4 - Page 1/2 - Bandeau 1/4'
+		'12' => 'Pleine page',
+		'4-8' => 'Encart 1/3 - Page 2/3',		
+		'8-4' => 'Page 2/3    - Encart 1/3',
+		'3-9' => 'Encart 1/4 - Page 3/4',
+		'9-3' => 'Page 3/4    - Encart 1/4',
+		'3-6-3' => 'Encart 1/4 - Page 1/2 - Encart 1/4'
 	];
 	
 	/**
@@ -187,7 +187,7 @@ class page extends common {
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Édition des bandeaux',
+			'title' => 'Édition des encarts',
 			'vendor' => [
 				'tinymce'
 			],
