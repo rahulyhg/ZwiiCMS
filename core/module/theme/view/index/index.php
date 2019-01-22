@@ -23,7 +23,7 @@
 		<div class="col2">
 			<?php echo template::button('themeAdvanced', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
-				'value' => 'Mode avancé',
+				'value' => 'Éditeur CSS',
 				'ico' => 'code'
 			]); ?>
 		</div>
@@ -55,7 +55,7 @@
 		<div class="col2">
 			<?php echo template::button('themeAdvanced', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
-				'value' => 'Mode avancé',
+				'value' => 'Éditeur CSS',
 				'ico' => 'code'
 			]); ?>
 		</div>

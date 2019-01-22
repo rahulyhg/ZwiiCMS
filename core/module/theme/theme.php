@@ -9,8 +9,9 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
- * @link http://zwiicms.com/
- * @Edition  : 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
+ * @link http://zwiicms.com/  
+ * @copyright  :  Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  */
 
 class theme extends common {
@@ -216,7 +217,7 @@ class theme extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Personnalisation avancée',
+			'title' => 'Éditeur CSS',
 			'vendor' => [
 				'codemirror'
 			],
