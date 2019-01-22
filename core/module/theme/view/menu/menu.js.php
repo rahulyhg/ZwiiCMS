@@ -67,6 +67,8 @@ $("input, select").on("change", function() {
 			break;
 		case 'body-first':
 			$("nav").show().insertAfter("#bar");
+			$("#menu").removeClass('container-large');
+			$("#menu").addClass('container');
 			break;
 		case 'body-top':
 			$("nav").show().insertAfter("#bar");
