@@ -136,14 +136,14 @@ class theme extends common {
 	public static $menuPositionsSite = [		
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
-		'body-top' => 'Au-dessus et en-dehors du site',	
+		'top' => 'Au-dessus et en-dehors du site',	
 		'hide' => 'Caché'
 
 	];
 	public static $menuPositionsBody = [
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
-		'body-top' => 'Au-dessus et en-dehors du site',		
+		'top' => 'Au-dessus et en-dehors du site',		
 		'hide' => 'Caché'
 
 	];	
@@ -317,7 +317,39 @@ class theme extends common {
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
-
+			// Modification de la position du menu selon la position de la bannière
+			switch ($this->getInput('themeHeaderPosition')) {
+				case 'site' :
+					$this->setData(['theme', 'menu',
+						['position' => str_replace ('site','body',$this->getData(['theme','menu','position'])) ],				
+						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
+						'font' => $this->getData('themeMenuFont'),				
+						'fontSize' => $this->getData('themeMenuFontSize'),
+						'fontWeight' => $this->getData('themeMenuFontWeight'),
+						'height' => $this->getData('themeMenuHeight'),
+						'loginLink' => $this->getData('themeMenuLoginLink'),
+						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
+						'textAlign' => $this->getData('themeMenuTextAlign'),
+						'textColor' => $this->getData('themeMenuTextColor'),
+						'textTransform' => $this->getData('themeMenuTextTransform'),
+					]);
+				break;
+				case 'body' :
+					$this->setData(['theme', 'menu',
+						['position' => str_replace ('body','site',$this->getData(['theme','menu','position'])) ],				
+						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
+						'font' => $this->getData('themeMenuFont'),				
+						'fontSize' => $this->getData('themeMenuFontSize'),
+						'fontWeight' => $this->getData('themeMenuFontWeight'),
+						'height' => $this->getData('themeMenuHeight'),
+						'loginLink' => $this->getData('themeMenuLoginLink'),
+						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
+						'textAlign' => $this->getData('themeMenuTextAlign'),
+						'textColor' => $this->getData('themeMenuTextColor'),
+						'textTransform' => $this->getData('themeMenuTextTransform'),
+					]);						
+				break;
+			}
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',

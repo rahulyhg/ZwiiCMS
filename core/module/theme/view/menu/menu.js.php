@@ -49,6 +49,7 @@ $("input, select").on("change", function() {
 		.attr("id", "themePreview")
 		.text(css)
 		.appendTo("head");
+
 	// Position du menu
 	switch($("#themeMenuPosition").val()) {
 		case 'hide':
@@ -69,11 +70,6 @@ $("input, select").on("change", function() {
 			$("nav").show().insertAfter("#bar");
 			$("#menu").removeClass('container-large');
 			$("#menu").addClass('container');
-			break;
-		case 'body-top':
-			$("nav").show().insertAfter("#bar");
-			$("#menu").removeClass('container');
-			$("#menu").addClass('container-large');
 			break;			
 		case 'body-second':
 			if(<?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>) {
@@ -83,6 +79,11 @@ $("input, select").on("change", function() {
 				$("nav").show().insertAfter("#bar");
 			}
 			break;
+		case 'top':
+			$("nav").show().insertAfter("#bar");
+			$("#menu").removeClass('container');
+			$("#menu").addClass('container-large');
+			break;			
 	}
 });
 // Lien de connexion (addClass() et removeClass() au lieu de hide() et show() car ils ne conservent pas le display-inline: block; de #themeMenuLoginLink)

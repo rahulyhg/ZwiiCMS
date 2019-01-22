@@ -77,6 +77,9 @@ $("input, select").on("change", function() {
 			else {
 				$("header").show().insertAfter("#bar");
 			}
+			if(<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'top'); ?>) {
+				$("header").show().insertAfter("nav");
+			}
 			break;
 	}
 	// Ajout du css au DOM
