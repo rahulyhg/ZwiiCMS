@@ -104,7 +104,7 @@
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlocks', $module::$pageBlocks, [
 						'label' => 'Gabarit :',
-						'help' => 'Pour éditer le contenu des bandeaux, sélectionnez \'Édition des bandeaux\' dans la liste des pages.',
+						'help' => 'Pour éditer le contenu des encarts, sélectionnez \'Édition des encarts\' dans la liste des pages.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'blocks'])
 				]); ?>				
 			</div>
