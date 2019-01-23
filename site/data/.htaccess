@@ -1,5 +1,16 @@
-﻿# Bloque l'accès aux données
-<Files *.json>
+﻿//Bloque l'accès aux données
+<Files core.json>
 	Order deny,allow
 	Deny from all
 </Files>
+<Files data_imported.json>
+	Order deny,allow
+	Deny from all
+</Files>
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+//Prevent directory listings
+Options All -Indexes
