@@ -10,7 +10,8 @@
     - VisualBlocks dans TinyMCE
     - CodeMirror dans TinyMCE
 Correctif : 
-    - contrôle CSRF de la configuration du compte connecté     
+    - contrôle CSRF de la configuration du compte connecté
+    -  Problème dans data/.htaccess
 Mise à jour : 
     - TinyColoPicker
 
