@@ -32,13 +32,15 @@ class form extends common {
 	const TYPE_TEXT = 'text';
 	const TYPE_TEXTAREA = 'textarea';
 	const TYPE_DATETIME = "date";
+	CONST TYPE_CHECKBOX = "checkbox";
 
 	public static $types = [
 		self::TYPE_TEXT => 'Champ texte',
 		self::TYPE_TEXTAREA => 'Grand champ texte',
 		self::TYPE_MAIL => 'Champ mail',
 		self::TYPE_SELECT => 'Sélection',
-		self::TYPE_DATETIME => 'Date'
+		self::TYPE_DATETIME => 'Date',
+		self::TYPE_CHECKBOX => 'Case à cocher'
 	];
 
 	/**
@@ -183,6 +185,9 @@ class form extends common {
 						break;
 					case self::TYPE_DATETIME: 
 						$filter = helper::FILTER_STRING_SHORT; // Mettre TYPE_DATETIME pour récupérer un TIMESTAMP
+						break;
+					CASE self::TYPE_CHECKBOX: 
+						$filter = helper::FILTER_BOOLEAN;
 						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
