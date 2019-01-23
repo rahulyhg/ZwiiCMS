@@ -81,7 +81,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Accueil',
-				'blocks' => '9-3'
+				'blocks' => '100'
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
