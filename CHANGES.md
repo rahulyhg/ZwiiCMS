@@ -9,6 +9,7 @@
     - Changement du libellé Modérateur devient Editeur 
     - VisualBlocks dans TinyMCE
     - CodeMirror dans TinyMCE
+    - Case à cocher dans les formulaires
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     -  Problème dans data/.htaccess
