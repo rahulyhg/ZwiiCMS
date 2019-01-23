@@ -8,8 +8,10 @@
     - Gabarits de pages : deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétrage est dans le thème, mais les contenus sont stockés dans les pages.
     - Changement du libellé Modérateur devient Editeur 
     - VisualBlocks dans TinyMCE
+    - CodeMirror dans TinyMCE
+Correctif : 
     - contrôle CSRF de la configuratin du compte connecté     
-Mises à jour : 
+Mise à jour : 
     - TinyColoPicker
 
      
