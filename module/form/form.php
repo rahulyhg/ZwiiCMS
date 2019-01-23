@@ -8,6 +8,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -18,7 +20,9 @@ class form extends common {
 		'config' => self::GROUP_MODERATOR,
 		'data' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'index' => self::GROUP_VISITOR
+		'index' => self::GROUP_VISITOR,
+		'export2csv' => self::GROUP_MODERATOR,
+		'output2csv' => self::GROUP_MODERATOR
 	];
 
 	public static $data = [];
@@ -134,6 +138,34 @@ class form extends common {
 			'view' => 'data'
 		]);
 	}
+
+	/**
+	 * Export CSV
+	 * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ 	 * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+	 */
+	public function export2csv() {
+		$data = $this->getData(['module', $this->getUrl(0), 'data']);
+		if ($data !== []) {
+			$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
+			if (!file_exists('site/file/source/data')) {
+				mkdir('site/file/source/data');
+			}
+			$fp = fopen('site/file/source/data/'.$csvfilename, 'w');
+			fputcsv($fp, array_keys($data[1]), ';','"');
+			foreach ($data as $fields) {
+				fputcsv($fp, $fields, ';','"');
+			}
+			fclose($fp);
+			// Valeurs en sortie
+			$this->addOutput([
+				'notification' => ' Export  CSV effectué dans :<br />'.$csvfilename,
+				'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
+				'state' => true
+			]);
+		}
+	}
+
 
 	/**
 	 * Suppression
