@@ -512,7 +512,7 @@ class common {
 		// Import des données d'un fichier data.json déjà présent
 		$this->importData();
 
-		// Import des données
+		// Import des données d'une version précédente
 		if($this->data === [])  {
 			$this->readData();
 		}
@@ -582,6 +582,10 @@ class common {
 		}
 	}
 
+	/**
+	 * Lecture des fichiers de données
+	 * 
+	 */
 	public function readData() {
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
@@ -598,7 +602,7 @@ class common {
 	}
 
 	/**
-	 * Import des données du la version 8
+	 * Import des données de la version 8
 	 * Converti un fichier de données data.json puis le renomme
 	 */
 	public function importData() {
@@ -875,7 +879,7 @@ class common {
 	}
 
 	/**
-	 * Enregistre les données
+	 * Enregistre les données dans deux fichiers séparés
 	 */
 	public function saveData() {
 
