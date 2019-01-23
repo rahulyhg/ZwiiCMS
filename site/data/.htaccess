@@ -1,5 +1,4 @@
-﻿//Bloque l'accès aux données
-<Files core.json>
+﻿<Files core.json>
 	Order deny,allow
 	Deny from all
 </Files>
@@ -8,9 +7,6 @@
 	Deny from all
 </Files>
 <Files .htaccess>
-order allow,deny
-deny from all
+	order allow,deny
+	deny from all
 </Files>
-
-//Prevent directory listings
-Options All -Indexes
