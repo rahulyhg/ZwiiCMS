@@ -3,7 +3,7 @@
 	Order deny,allow
 	Deny from all
 </Files>
-# Bloque l'accès aux données
+# Bloque l'accès htaccess
 <Files .htaccess>
 	Order deny,allow
 	Deny from all
