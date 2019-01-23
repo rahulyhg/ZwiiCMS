@@ -512,7 +512,7 @@ class common {
 		// Import des données d'un fichier data.json déjà présent
 		$this->importData();
 
-		// Import des données d'une version précédente
+		// Import des données d'une version 8
 		if($this->data === [])  {
 			$this->readData();
 		}
