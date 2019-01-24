@@ -226,7 +226,7 @@ td > .col12 {
 .container-large-fixed {
 	width: 100%;
 	position:fixed;
-	z-index: 100;
+	z-index: 50;
   }
 
 /* Barre de membre */
@@ -236,6 +236,25 @@ td > .col12 {
 	margin: 0 -10px;
 	text-align: right;
 }
+/* Barre pour les membres */
+#bar #barMember {
+	float: right;
+	font-size: .8em;
+	position: fixed;
+	z-index: 60;
+	right: 10px;
+	top: 10px;;
+	padding: 5px;
+	background: rgba(33, 34, 35, .8);
+	color: #FFF;
+	height: 55px;
+	-webkit-transition: background.3s ease-out;
+	transition: background .3s ease-out;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+/* fin barre pour les membres */
 #bar:after {
 	content: " ";
 	clear: both;

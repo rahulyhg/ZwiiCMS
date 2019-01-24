@@ -2234,8 +2234,12 @@ class layout extends common {
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
-			// Barre de membre
-			echo '<div id="bar"><div class="container"><ul id="barLeft">' . $leftItems . '</ul><ul id="barRight">' . $rightItems . '</ul></div></div>';
+			// Barre de membre pleine ou limitée selon les droits de l'utilisateur
+			if($this->getUser('group') === self::GROUP_MEMBER) {
+				echo '<div id="bar"><ul id="barMember">' . $rightItems . '</ul></div>';
+			} else {
+				echo '<div id="bar"><div class="container"><ul id="barLeft">' . $leftItems . '</ul><ul id="barRight">' . $rightItems . '</ul></div></div>';
+			}
 		}
 	}
 
