@@ -500,6 +500,13 @@ class common {
 		if(isset($_COOKIE)) {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
+		// Import des données d'un fichier data.json déjà présent
+		$this->importData();
+
+		// Import des données d'une version 8
+		if($this->data === [])  {
+			$this->readData();
+		}
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
 		if(file_exists('site/data/core.json')   === false OR 
@@ -510,13 +517,6 @@ class common {
 			chmod('site/data/theme.json', 0755);
 		} 
 
-		// Import des données d'un fichier data.json déjà présent
-		$this->importData();
-
-		// Import des données d'une version 8
-		if($this->data === [])  {
-			$this->readData();
-		}
 
 		// Mise à jour
 		$this->update();
