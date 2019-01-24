@@ -341,7 +341,7 @@ class common {
 			]
 		],
 		'user' => [],
-		'theme' => [
+		'theme' =>  [
 			'body' => [
 				'backgroundColor' => 'rgba(236, 239, 241, 1)',
 				'image' => '',
@@ -419,7 +419,8 @@ class common {
 				'fontWeight' => 'normal',
 				'textColor' => 'rgba(74, 105, 189, 1)',
 				'textTransform' => 'none'
-			]
+			],
+			'themeVersion' => 0,
 		]
 	];
 	private $hierarchy = [
@@ -508,6 +509,10 @@ class common {
 			$this->readData();
 		}
 
+		// Mise à jour
+		$this->update();
+				
+
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
 		if(file_exists('site/data/core.json')   === false OR 
 		   file_exists('site/data/theme.json')  === false) {
@@ -517,9 +522,6 @@ class common {
 			chmod('site/data/theme.json', 0755);
 		} 
 
-
-		// Mise à jour
-		$this->update();
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
@@ -1018,6 +1020,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 831]);
 			$this->SaveData();
 		}
+		// Versions intermédiaires
+		// Erreur de nommage
+		if($this->getData(['core', 'dataVersion']) >= 8311) {
+			$this->setData(['core', 'dataVersion', 831]);
+			$this->SaveData();
+		}
+
 		// Version 8.4.0
 		if($this->getData(['core', 'dataVersion']) < 840) {
 			$this->setData(['theme','footer','socialsPosition','1']);
@@ -1057,7 +1066,11 @@ class common {
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
 			$this->setData(['theme', 'site', 'blocks','100']);
+			if ($this->getData(['theme','menu','position']) === 'body-top') {
+				$this->setData(['theme','menu','position','top']);
+			}
 			$this->setData(['theme', 'menu','fixed',false]);
+			$this->setData(['theme', 'themeVersion', 900]);			
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				
