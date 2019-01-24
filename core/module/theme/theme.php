@@ -489,7 +489,7 @@ class theme extends common {
 			]);
 			} else {
 				$this->addOutput([
-					'notification' => 'Erreur avec le thème <b>'.$zipFilename,
+					'notification' => 'Erreur avec le thème <b>'.$zipFilename.'</b>',
 					'redirect' => helper::baseUrl() . 'theme/manage'
 				]);
 			}
