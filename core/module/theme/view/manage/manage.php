@@ -31,12 +31,14 @@
 				<div class="col5 offset1">
 						<?php echo template::button('themeSave', [
 							'href' => helper::baseUrl() . 'theme/save',
+							'ico' => 'download',
 							'value' => 'Sauvegarder'
 						]); ?>
 				</div>
 				<div class="col5">
 					<?php echo template::button('themeExport', [
 						'href' => helper::baseUrl() . 'theme/export',
+						'ico' => 'download',
 						'value' => 'Télécharger'
 					]); ?>
 				</div>
