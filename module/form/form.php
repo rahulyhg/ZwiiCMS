@@ -163,6 +163,11 @@ class form extends common {
 				'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
 				'state' => true
 			]);
+		} else {
+			$this->addOutput([
+				'notification' => 'Aucune donnée à exporter',
+				'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data'
+			]);
 		}
 	}
 
