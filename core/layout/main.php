@@ -20,7 +20,15 @@
 <?php $layout->showNotification(); ?>
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'top' ): ?>
 	<!-- Menu dans le fond du site avant la bannière -->
-	<nav>
+	<nav
+	<?php 
+	// Détermine si le menu est fixe en haut de page lorsque l'utilisateur n'est pas connecté
+	if($this->getData(['theme', 'menu', 'position']) === 'top' &&
+	    $this->getData(['theme', 'menu', 'fixed']) === true &&
+		$this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
+
+			 	{echo 'id="navfixed"';} ?>
+	>
 		<div id="toggle"><?php echo template::ico('menu'); ?></div>
 		<div id="menu" class="
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}

@@ -223,6 +223,12 @@ td > .col12 {
 	width: 100%;
 }
 
+.container-large-fixed {
+	width: 100%;
+	position:fixed;
+	z-index: 100;
+  }
+
 /* Barre de membre */
 #bar {
 	background: #212223;
@@ -316,6 +322,14 @@ body > nav {
 	margin: 0 -10px;
 }
 /* Items du menu */
+
+/* Barre de navigation fixe quand le menu est en-dehors du site */ 
+#navfixed {
+	position: fixed;
+	top:0;
+	width:100%;
+	z-index:100;
+}
 nav a > img {
 	margin: -4px 0;
 	vertical-align: middle;

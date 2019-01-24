@@ -400,7 +400,8 @@ class common {
 				'position' => 'site-second',
 				'textAlign' => 'left',
 				'textColor' => 'rgba(255, 255, 255, 1)',
-				'textTransform' => 'none'
+				'textTransform' => 'none',
+				'fixed' => false
 			],
 			'site' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -1056,6 +1057,7 @@ class common {
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
 			$this->setData(['theme', 'site', 'blocks','100']);
+			$this->setData(['theme', 'menu','fixed',false]);
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				

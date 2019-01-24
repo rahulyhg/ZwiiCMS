@@ -105,6 +105,12 @@
 								'checked' => $this->getData(['theme', 'menu', 'margin'])
 							]); ?>
 				</div>
+				<div id="themeMenuPositionFixed" class="displayNone">
+							<?php echo template::checkbox('themeMenuFixed', true, 'Menu fixe', [
+								'checked' => $this->getData(['theme', 'menu', 'fixed'])
+							]); ?>
+				</div>
+								
 			</div>			
 		</div>
 	</div>

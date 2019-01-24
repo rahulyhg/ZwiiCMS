@@ -137,16 +137,14 @@ class theme extends common {
 	public static $menuPositionsSite = [		
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
-		'top' => 'Au-dessus et en-dehors du site',	
+		'top' => 'En-dehors du site',	
 		'hide' => 'Caché'
-
 	];
 	public static $menuPositionsBody = [
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
 		'top' => 'Au-dessus et en-dehors du site',		
 		'hide' => 'Caché'
-
 	];	
 	public static $radius = [
 		'0' => 'Aucun',
@@ -397,6 +395,7 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
+				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)			
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

@@ -106,3 +106,14 @@ $("#themeMenuPosition").on("change", function() {
 		});
 	}
 }).trigger("change");
+// Affiche / Cache les options du menu fixe
+$("#themeMenuPosition").on("change", function() {
+	if($(this).val() === 'top') {
+		$("#themeMenuPositionFixed").slideDown();	
+	}
+	else {
+		$("#themeMenuPositionFixed").slideUp(function() {
+			$("#themeMenuFixed").prop("checked", false).trigger("change");
+		});
+	}
+}).trigger("change");
