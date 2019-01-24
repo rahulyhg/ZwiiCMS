@@ -10,6 +10,7 @@
     - VisualBlocks dans TinyMCE
     - CodeMirror dans TinyMCE
     - Case à cocher dans les formulaires
+    - Option de position fixe du menu type Facebook
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     -  Problème dans data/.htaccess
