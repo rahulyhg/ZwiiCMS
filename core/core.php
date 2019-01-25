@@ -1023,7 +1023,7 @@ class common {
 		// Versions intermédiaires
 		// Erreur de nommage
 		if($this->getData(['core', 'dataVersion']) >= 8311) {
-			$this->setData(['core', 'dataVersion', 831]);
+			$this->setData(['core', 'dataVersion', 832]);
 			$this->SaveData();
 		}
 
