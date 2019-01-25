@@ -8,6 +8,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -892,6 +894,12 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 831) {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 831]);
+			$this->SaveData();
+		}
+ 		// Versions intermédiaires
+		// Erreur de nommage
+		if($this->getData(['core', 'dataVersion']) >= 8311) {
+			$this->setData(['core', 'dataVersion', 832]);
 			$this->SaveData();
 		}
 		// Version 8.4.0
