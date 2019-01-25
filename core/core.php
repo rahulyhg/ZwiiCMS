@@ -1651,17 +1651,27 @@ class helper {
 	}
 
 	/**
+	 * Renvoie le numéro de version de Zwii est en ligne
+	 * @return string
+	 */
+	public static function getOnlineVersion() {
+		return (@file_get_contents('http://zwiicms.com/update/version'));
+	}
+
+
+	/**
 	 * Check si une nouvelle version de Zwii est disponible
 	 * @return bool
 	 */
 	public static function checkNewVersion() {
-		if($version = @file_get_contents('http://zwiicms.com/version')) {
+		if($version = helper::getOnlineVersion()) {
 			return (trim($version) !== common::ZWII_VERSION);
 		}
 		else {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Génère des variations d'une couleur
@@ -2239,11 +2249,11 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
-				// Mise à jour bloquée
-				// if(helper::checkNewVersion()) {
-				// $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii">' . template::ico('update colorRed') . '</a></li>';
-				// }
-				// Mise à jour bloquée
+				// Mise à jour automatique
+				 if(helper::checkNewVersion()) {
+				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
+				 }
+				// Mise à jour automatique
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
