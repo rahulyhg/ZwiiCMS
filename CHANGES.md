@@ -12,6 +12,8 @@
     - Case à cocher dans les formulaires
     - Option de position fixe du menu type Facebook
     - Mini barre pour les membres simples
+    - Activation de la procédure d'update en ligne
+    - Update : affichage de la version proposée dans la popup de mise à jour
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
