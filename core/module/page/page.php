@@ -187,7 +187,7 @@ class page extends common {
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Édition des barre latérales',
+			'title' => 'Édition des barres latérales',
 			'vendor' => [
 				'tinymce'
 			],
