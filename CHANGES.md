@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 8.5.8
+* Correction :
+    - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+
 ## Version 8.5.7
 * Correction : 
     - Message d'erreur ecran modification du compte
