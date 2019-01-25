@@ -2225,7 +2225,7 @@ class layout extends common {
 					}
 				}
 				$leftItems .= '<option value="">-------------------</option>';				
-				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des encarts</option>';				
+				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des barre latérales</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(

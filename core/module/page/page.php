@@ -38,11 +38,11 @@ class page extends common {
 	];
 	public static $pageBlocks = [
 		'12' => 'Pleine page',
-		'4-8' => 'Encart 1/3 - Page 2/3',		
-		'8-4' => 'Page 2/3    - Encart 1/3',
-		'3-9' => 'Encart 1/4 - Page 3/4',
-		'9-3' => 'Page 3/4    - Encart 1/4',
-		'3-6-3' => 'Encart 1/4 - Page 1/2 - Encart 1/4'
+		'4-8' => 'Barre latérale 1/3 - Page 2/3',		
+		'8-4' => 'Page 2/3    - Barre latérale 1/3',
+		'3-9' => 'Barre latérale 1/4 - Page 3/4',
+		'9-3' => 'Page 3/4    - Barre latérale 1/4',
+		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
 	];
 	
 	/**
@@ -187,7 +187,7 @@ class page extends common {
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Édition des encarts',
+			'title' => 'Édition des barre latérales',
 			'vendor' => [
 				'tinymce'
 			],

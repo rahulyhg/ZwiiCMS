@@ -17,14 +17,14 @@
 <div class='row'>
 	<div class="col6">						
 		<?php echo template::textarea('pageBlockLeftContent', [
-				'label' => 'Encart de gauche :',
+				'label' => 'Barre latérale de gauche :',
 				'class' => 'editorWysiwyg',
 				'value' => $this->getData(['page','blockLeft', 'content'])
 		]); ?>
 	</div>			
 	<div class="col6">
 		<?php echo template::textarea('pageBlockRightContent', [
-				'label' => 'Encart de droite :',
+				'label' => 'Barre latérale de droite :',
 				'class' => 'editorWysiwyg',
 				'value' => $this->getData(['page','blockRight', 'content'])
 			]); ?>
