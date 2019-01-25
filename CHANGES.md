@@ -14,7 +14,8 @@
     - Mini barre pour les membres simples
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
-    -  Problème dans data/.htaccess
+    - Problème dans data/.htaccess
+    - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
 Mise à jour : 
     - TinyColoPicker
 
