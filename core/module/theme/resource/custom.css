@@ -79,7 +79,6 @@ footer #footersiteRight, #footerbodyRight {
 }
 
 
-
 /**
  * Éléments de contenu
  */
@@ -145,3 +144,13 @@ input[type='password']:hover,
 select:hover,
 textarea:hover {
 }
+
+/* iframe du module core */
+
+iframe {
+    height: 100%;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+  }
