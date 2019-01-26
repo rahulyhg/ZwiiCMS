@@ -198,12 +198,12 @@ class form extends common {
 			if (count($data) > 0 ) {
 				// Suppression multiple
 				for ($i = 1; $i <= count($data) ; $i++) {
-					$this->deleteData(['module', $this->getUrl(0), 'data', $i]);
+					echo $this->deleteData(['module', $this->getUrl(0), 'data', $i]);
 				}
 				// Valeurs en sortie
 				$this->addOutput([
 					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
-					'notification' => 'Toutes les données ont été supprimées',
+					'notification' => 'Données supprimées',
 					'state' => true
 				]);
 			} else {
