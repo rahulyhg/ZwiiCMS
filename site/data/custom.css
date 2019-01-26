@@ -15,6 +15,14 @@ body {
 #site {
 }
 
+/* Grille du site */
+#contentleft {
+}
+#contentright {
+}
+#contentsite {
+}
+
 /* Bannière */
 header {
 }
@@ -43,8 +51,11 @@ nav a.active {
 footer {
 }
 
+footer #footersite, #footerbody {
+}
+
 /* Liens du bas de page */
-footer a {
+footer #footersite, #footerbody a {
 }
 
 /* footer bloc gauche */
@@ -58,6 +69,16 @@ footer #footersiteCenter, #footerbodyCenter {
 /* footer bloc droite */
 footer #footersiteRight, #footerbodyRight {
 }
+
+/* footer bloc de chaque élément */
+#footerText {
+}
+#footerSocials {
+}
+#footerCopyright {
+}
+
+
 
 /**
  * Éléments de contenu

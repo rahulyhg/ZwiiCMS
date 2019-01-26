@@ -18,7 +18,7 @@
             - Case à cocher dans les formulaires
             - Bouton d'export au format CSV
             - Bouton effacer toutes les données
-            - Correction faille CSRF
+            - Correction faille CSRF dans Data
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
