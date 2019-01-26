@@ -19,3 +19,13 @@ $(".formDataDelete").on("click", function() {
 		$(location).attr("href", _this.attr("href"));
 	});
 });
+
+/**
+ * Confirmation de suppression de toutes les donénes
+ */
+$(".formDataDeleteAll").on("click", function() {
+	var _this = $(this);
+	return core.confirm("Êtes-vous sûr de vouloir supprimer toutes les données ?", function() {
+		$(location).attr("href", _this.attr("href"));
+	});
+});

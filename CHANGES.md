@@ -3,17 +3,22 @@
 ## Préversion 9.0.0
 - Modification :
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
-    - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
-    - Importer un thème à partir des fichiers
-    - Gabarits de pages : deux blocs (colonnes) à droite ou à gauche contenant des informations fixes, le paramétrage est dans le thème, mais les contenus sont stockés dans les pages.
+    - gestion des thèmes :
+        - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
+        - Importer un thème à partir des fichiers
+    - Option de position fixe du menu type Facebook        
+    - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
     - Changement du libellé Modérateur devient Editeur 
-    - VisualBlocks dans TinyMCE
-    - CodeMirror dans TinyMCE
-    - Case à cocher dans les formulaires
-    - Option de position fixe du menu type Facebook
+    - Editeur :     
+        - VisualBlocks dans TinyMCE
+        - CodeMirror dans TinyMCE
     - Mini barre pour les membres simples
-    - Activation de la procédure d'update en ligne
     - Update : affichage de la version proposée dans la popup de mise à jour
+    - Module Formulaire :
+            - Case à cocher dans les formulaires
+            - Bouton d'export au format CSV
+            - Bouton effacer toutes les données
+            - Correction faille CSRF
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
