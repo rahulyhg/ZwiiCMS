@@ -1,5 +1,11 @@
 # ChangeLog 
 
+## Version 8.5.9
+* Correction :
+    - Module Form : faille CSRF gestion data
+* Modification : 
+    - Module Form : Bouton tout effacer
+    
 ## Version 8.5.8
 * Correction :
     - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
