@@ -20,6 +20,7 @@ class form extends common {
 		'config' => self::GROUP_MODERATOR,
 		'data' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
+		'deleteall' => self::GROUP_MODERATOR,
 		'index' => self::GROUP_VISITOR,
 		'export2csv' => self::GROUP_MODERATOR,
 		'output2csv' => self::GROUP_MODERATOR
@@ -126,7 +127,7 @@ class form extends common {
 					$content,
 					template::button('formDataDelete' . $dataIds[$i], [
 						'class' => 'formDataDelete buttonRed',
-						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i],
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i]  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('cancel')
 					])
 				];
@@ -145,33 +146,77 @@ class form extends common {
  	 * @copyright Copyright (C) 2018-2019, Frédéric Tempez
 	 */
 	public function export2csv() {
-		$data = $this->getData(['module', $this->getUrl(0), 'data']);
-		if ($data !== []) {
-			$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
-			if (!file_exists('site/file/source/data')) {
-				mkdir('site/file/source/data');
-			}
-			$fp = fopen('site/file/source/data/'.$csvfilename, 'w');
-			fputcsv($fp, array_keys($data[1]), ';','"');
-			foreach ($data as $fields) {
-				fputcsv($fp, $fields, ';','"');
-			}
-			fclose($fp);
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'notification' => ' Export  CSV effectué dans :<br />'.$csvfilename,
-				'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
-				'state' => true
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
 			]);
 		} else {
-			$this->addOutput([
-				'notification' => 'Aucune donnée à exporter',
-				'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data'
-			]);
+			$data = $this->getData(['module', $this->getUrl(0), 'data']);
+			if ($data !== []) {
+				$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
+				if (!file_exists('site/file/source/data')) {
+					mkdir('site/file/source/data');
+				}
+				$fp = fopen('site/file/source/data/'.$csvfilename, 'w');
+				fputcsv($fp, array_keys($data[1]), ';','"');
+				foreach ($data as $fields) {
+					fputcsv($fp, $fields, ';','"');
+				}
+				fclose($fp);
+				// Valeurs en sortie
+				$this->addOutput([
+					'notification' => ' Export  CSV effectué dans :<br />'.$csvfilename,
+					'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
+					'state' => true
+				]);
+			} else {
+				$this->addOutput([
+					'notification' => 'Aucune donnée à exporter',
+					'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data'
+				]);
+			}
 		}
 	}
 
 
+	/**
+	 * Suppression
+	 */
+	public function deleteall() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
+			]);
+		} else {	
+			$data = ($this->getData(['module', $this->getUrl(0), 'data']));
+			if (count($data) > 0 ) {
+				// Suppression multiple
+				for ($i = 1; $i <= count($data) ; $i++) {
+					$this->deleteData(['module', $this->getUrl(0), 'data', $i]);
+				}
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
+					'notification' => 'Toutes les données ont été supprimées',
+					'state' => true
+				]);
+			} else {
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
+					'notification' => 'Aucune donnée à supprimer'
+				]);
+			}
+		}
+	}
+
+	
 	/**
 	 * Suppression
 	 */
@@ -183,6 +228,14 @@ class form extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
+			]);
+		}	
 		// Suppression
 		else {
 			$this->deleteData(['module', $this->getUrl(0), 'data', $this->getUrl(2)]);
@@ -194,6 +247,9 @@ class form extends common {
 			]);
 		}
 	}
+
+
+
 
 	/**
 	 * Accueil
