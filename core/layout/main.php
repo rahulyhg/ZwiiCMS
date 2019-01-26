@@ -148,8 +148,10 @@
 					$content    = 'col' . $blocks[1];
 					$blockright = 'col' . $blocks[2];	
 		}
-
-		if (sizeof($blocks) === 1 ) {
+		if (sizeof($blocks) === 1 ||
+		   ($this->getData(['page', $this->getUrl(2), 'moduleId']) == '' &&
+		   $this->getUrl(1) == 'config')
+		   ) {
 			?><?php $layout->showContent();?><?php
 		} else {
 		?>
