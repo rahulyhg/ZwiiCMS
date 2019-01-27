@@ -19,6 +19,7 @@
             - Bouton d'export au format CSV
             - Bouton effacer toutes les données
             - Correction faille CSRF dans Data
+    - Module Code en test
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
