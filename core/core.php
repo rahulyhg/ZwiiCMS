@@ -1972,16 +1972,25 @@ class layout extends common {
 	 * Affiche le contenu
 	 */
 	public function showContent() {
-		if(
-			$this->core->output['title']
-			AND (
-				$this->getData(['page', $this->getUrl(0)]) === null
-				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
-			)
-		) {
-			echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+		// Exception pour le module code
+		if ($this->getData(['page', $this->getUrl(0), 'moduleId']) == 'code'&&
+		    $this->getUrl(1) !== 'config') {	
+			$this->core->output['title'];
+			//$this->core->output[include('site/file/source/' . $this->getdata(['module',$this->getUrl(0),'file']))];
+			echo include('site/file/source/' . $this->getdata(['module',$this->getUrl(0),'file']));
+		} else {
+			// Fin de l'exception
+			if(
+				$this->core->output['title']
+				AND (
+					$this->getData(['page', $this->getUrl(0)]) === null
+					OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
+				)
+			) {
+				echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			}
+			echo $this->core->output['content'];
 		}
-		echo $this->core->output['content'];
 	}
 
 /**

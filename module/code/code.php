@@ -63,11 +63,7 @@ class code extends common {
 			$this->setData(['module', $this->getUrl(0), 'count', helper::filter($this->getData(['module', $this->getUrl(0), 'count']) + 1, helper::FILTER_INT)]);
 			// Valeurs en sortie
 			$this->addOutput([
-				'content' => '<iframe name="modulecodefile" src="' . 
-							   helper::baseUrl(false) . 
-							   'site/file/source/' . 
-							   $this->getData(['module', $this->getUrl(0), 'file']) . 
-							   '"></iframe>' ,
+				'content' => $this->getData(['module', $this->getUrl(0), 'file']),
 				'state' => true
 			]);
 		}
