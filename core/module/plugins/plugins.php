@@ -124,53 +124,25 @@ class plugins extends common {
      * Ajout
      */
     public function add() {
-        // TODO - Récupération des plugins disponibles sur le partage et non encore déployés
-        // solution envisagée, Pouvoir interroger le serveur (via une api) pour avoir la liste des plugins disponibles
-        $sharedPlugins = array();
-        /*
-          $url = 'http://forum.zwiicms.com/index.php?/files/files.xml';
-          //$pluginsList = file_get_contents($url);
-          $items = simplexml_load_file($url);
-
-          foreach ($items->channel->item as $item) {
-          array_push($sharedPlugins,
-          array(
-          'id' => (string) $item->guid,
-          'name' => (string) $item->title,
-          'desc' => (string) $item->description,
-          'link' => (string) $item->link
-          )
-          );
-          }
-         */
+        // Récupération des plugins disponibles sur le partage et non encore déployés
+        $sharedPlugins = $this->getPluginDatas();
 
         foreach ($sharedPlugins as $plugin) {
-            // TODO - Récupération des informations du plugin
-            // Pour les tests
-            /*
-              $pluginName = $plugin["name"];
-              $pluginId = $plugin["id"];
-              $auteur = "PeterRabbit";
-              $desc = $plugin["link"];
-              $ver = "1.0.0";
-
-              $origin = 'official';
-              if($origin == 'official'){
-              $ico = template::ico('award', '', false, '1em', 'colorGreen');
-              } else {
-              $ico = template::ico('blind', '', false, '1em', 'colorOrange');
-              }
-             */
+            if ($plugin['origin'] == 'official') {
+                $ico = template::ico('award', '', false, '1em', 'colorGreen');
+            } else {
+                $ico = template::ico('blind', '', false, '1em', 'colorOrange');
+            }
 
             // Construction de la liste des plugins disponibles
-            if (!self::getData(['plugins', $pluginId])) {
+            if (!self::getData(['plugins', $plugin['id']])) {
                 array_push($this->notDeployedPlugins, array(
-                    $ico . " " . $pluginName,
-                    $auteur,
-                    $desc,
-                    $ver,
-                    template::button('pluginDownload' . $pluginId, [
-                        'href' => helper::baseUrl() . 'plugins/action/deploy/' . $pluginId,
+                    $ico . " " . $plugin['name'],
+                    $plugin['author'],
+                    substr($plugin['desc'], 0, 50) . " ...",
+                    $plugin['version'],
+                    template::button('pluginDownload' . $plugin['id'], [
+                        'href' => helper::baseUrl() . 'plugins/action/deploy/' . $plugin['id'],
                         'value' => template::ico('cloud-download-alt')
                     ])
                         )
@@ -183,6 +155,46 @@ class plugins extends common {
             'title' => 'Installer un plugin',
             'view' => 'add'
         ]);
+    }
+
+    /**
+     * Récupération des données d'un plugin ou de tous les plugins de l'espace partagé
+     * @param String $pluginId id du plugin
+     * @return array
+     */
+    private function getPluginDatas($pluginId = null) {
+        $sharedPlugins = Array();
+
+        // Flux RSS donnant l'ensemble des plugins de l'espace partagé
+        $modules = json_decode(file_get_contents('http://forum.zwiicms.com/modules.php'));
+
+        //foreach ($items->channel->item as $item) {
+        foreach ($modules as $module) {
+            $link = $module->url;
+            $downloadLink = "http://forum.zwiicms.com/files/file/" . $link . "/?do=download";
+
+
+            $ret = preg_match('#[0-9]+-(.+)#', $link, $matches);
+            if ($ret === 1) {
+                if (is_null($pluginId) || $matches[1] === $pluginId) {
+                    array_push($sharedPlugins, array(
+                        'id' => (string) $matches[1],
+                        'name' => (string) $module->name,
+                        'desc' => (string) $module->description,
+                        'link' => (string) $downloadLink,
+                        'author' => (string) $module->author,
+                        'version' => (string) $module->version,
+                        'origin' => "official"
+                            )
+                    );
+
+                    if ($matches[1] === $pluginId) {
+                        break;
+                    }
+                }
+            }
+        }
+        return $sharedPlugins;
     }
 
     /**
@@ -474,8 +486,13 @@ class plugins extends common {
                     switch ($this->actionType) {
                         case 'deploy':
                             // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
-                            $urlPlugin = ""; // A DEFINIR
-                            $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.tar.gz', file_get_contents($urlPlugin)) !== false);
+                            $sharedPlugins = $this->getPluginDatas($this->targetPluginId);
+                            if (count($sharedPlugins) == 1 && strlen($sharedPlugins[0]["link"]) > 0) {
+                                $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.zip', file_get_contents($sharedPlugins[0]["link"])) !== false);
+                            } else {
+                                $errorMsg = "URL de téléchargement non trouvé pour ce plugin.";
+                                $success = false;
+                            }
                         // Pas de "break", pour effectuer également le code de la partie "upload"
 
                         case 'upload':
@@ -674,7 +691,7 @@ class plugins extends common {
                             }
                             $corePlugin->changePluginStatus($status);
 
-                            if($success && !helper::isFunctionEnabled("exec")){
+                            if ($success && !helper::isFunctionEnabled("exec")) {
                                 $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
                             }
                     }
@@ -709,7 +726,7 @@ class plugins extends common {
                             }
                             $corePlugin->changePluginStatus($status);
 
-                            if($success && !helper::isFunctionEnabled("exec")){
+                            if ($success && !helper::isFunctionEnabled("exec")) {
                                 $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
                             }
 

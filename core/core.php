@@ -414,7 +414,7 @@ class common {
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
-                        'fontawesome'
+			'fontawesome'
 		],
 		'view' => ''
 	];
@@ -1817,14 +1817,18 @@ class helper {
         public static function rm_recursive($object) {
             $object = trim($object);
 
-            if(strlen($object) > 1 && file_exists($object)) {
+            if(strlen($object) > 1) {
                 if (is_dir($object)) {
+                    // suppression du contenu du répertoire
                     $it = new RecursiveDirectoryIterator($object, FilesystemIterator::SKIP_DOTS);
                     $it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
                     foreach($it as $file) {
                         if ($file->isDir()) rmdir($file->getPathname());
                         else unlink($file->getPathname());
                     }
+
+                    // Suppression du répertoire
+                    rmdir($object);
                 } else {
                     if(file_exists($object)) unlink($object);
                 }
