@@ -24,7 +24,6 @@ Correctif :
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
     - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
-    - suppression des barres latérales dans les pages de configuration des modules
 Mise à jour : 
     - TinyColoPicker
 
