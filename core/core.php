@@ -1972,14 +1972,6 @@ class layout extends common {
 	 * Affiche le contenu
 	 */
 	public function showContent() {
-		// Exception pour le module code
-		if ($this->getData(['page', $this->getUrl(0), 'moduleId']) == 'code'&&
-		    $this->getUrl(1) !== 'config') {	
-			$this->core->output['title'];
-			//$this->core->output[include('site/file/source/' . $this->getdata(['module',$this->getUrl(0),'file']))];
-			echo include('site/file/source/' . $this->getdata(['module',$this->getUrl(0),'file']));
-		} else {
-			// Fin de l'exception
 			if(
 				$this->core->output['title']
 				AND (
