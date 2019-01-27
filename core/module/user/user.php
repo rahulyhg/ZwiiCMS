@@ -152,14 +152,12 @@ class user extends common {
 				'access' => false
 			]);
 		}
-		if ($this->getUrl(3) !== $_SESSION['csrf']) {
-			if ( $this->getUrl(4) !== $_SESSION['csrf']) {
+		if ($this->getUrl(4) !== $_SESSION['csrf']) {			
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Action  non autorisée'
 			]);
-			}
 		}		
 		// Accès autorisé
 		else {
