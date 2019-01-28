@@ -222,7 +222,7 @@ class common {
 			    'typeMenu' => '',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => '<p>Bloc à gauche du site</p>',
+				'content' => '<p>Barre latérale à gauche du site</p>',
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
