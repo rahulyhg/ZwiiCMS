@@ -40,7 +40,7 @@ class CorePlugins {
      * Affecte l'identifiant du plugin sur lequel les actions dopivent être jouées
      * @param string $idPlugin identifiant du plugin
      */
-    public function setIdPlugin($idPlugin){
+    public function setIdPlugin($idPlugin) {
         $this->idPlugin = $idPlugin;
     }
 
@@ -48,7 +48,7 @@ class CorePlugins {
      * Affecte le type d'action en cours (deploy, upload, activate, deactivate)
      * @param string $actionType type de l'action
      */
-    public function setActionType($actionType){
+    public function setActionType($actionType) {
         $this->actionType = $actionType;
     }
 
@@ -173,7 +173,7 @@ class CorePlugins {
      */
     public function checkPhpFiles(&$errorMsg, $dir = null) {
         $success = true;
-        if(helper::isFunctionEnabled("exec")){
+        if (helper::isFunctionEnabled("exec")) {
             $pluginDir = self::PLUGIN_DIR . $this->idPlugin;
             $pluginDir = ($dir ? $pluginDir . '/' . $dir : $pluginDir);
             if (file_exists($pluginDir)) {
@@ -295,5 +295,364 @@ class CorePlugins {
         ]);
 
         $this->pluginManager->saveData();
+    }
+
+
+    /* *************************************************************************
+     * Fonctions pour faciliter l'écriture des plugins
+     * *************************************************************************
+     */
+
+    /*
+     * Fonction pour dézipper une archive
+     * @param String $archive Chemin complet vers l'archive
+     * @param String $destination Répertoire de destination
+     * @param boolean $success Valeur indiquant si le contrôle est Ok ou non (passage par référence)
+     * @param String $errorMsg En cas d'erreur, message (passage par référence)
+     * @return null
+     */
+    public static function extractArchive($archive, $destination, &$success, &$errorMsg) {
+        if(!file_exists($archive)){
+            $success = false;
+            $errorMsg = "Le fichier {." . $archive . "} n'existe pas.";
+        }
+        if($success){
+            // Récupération de l'extension du fichier
+            $extension = strtolower(substr(strrchr($archive, '.'), 1));
+
+            switch ($extension) {
+                case 'gz':
+                    $compressedFileName = substr($archive, 0, strrpos($archive, '.', -1));
+                    $ext = strtolower(substr(strrchr($compressedFileName, '.'), 1));
+                    if ($ext !== 'tar') {
+                        $success = false;
+                        $errorMsg = "L'extension {." . $ext . ".gz} n'est pas gérée, impossible de décompresser le fichier {" . $archive . "}.";
+                    } else {
+                        $gz = new PharData($archive);
+                        $gz->decompress();
+                        unset($gz);
+                        $tar = new PharData($compressedFileName);
+                        $tar->extractTo($destination, null, true);
+                        unset($tar);
+                    }
+                    break;
+
+                case 'tar':
+                    $tar = new PharData($archive);
+                    $tar->extractTo($destination, null, true);
+                    unset($tar);
+                    break;
+
+                case 'zip':
+                    $zip = new ZipArchive;
+                    if ($zip->open($archive) === TRUE) {
+                        $zip->extractTo($destination);
+                        $zip->close();
+                    } else {
+                        $success = false;
+                        $errorMsg = "Erreur lors de la décompression de l'archive {" . $archive . "}.";
+                    }
+                    unset($zip);
+                    break;
+            }
+        }
+    }
+
+    /*
+     * Fonction pour contrôler la possibilité de modifier les fichiers existants
+     * @param Array $arrChanges Tableau contenant le fichier à modifier, le texte à rechercher et sa valeur de remplacement
+     * @param boolean $success Valeur indiquant si le contrôle est Ok ou non (passage par référence)
+     * @param String $errorMsg En cas d'erreur, message (passage par référence)
+     * @return null
+     */
+    public static function checkUpdateFiles($arrChanges, &$success, &$errorMsg) {
+        $errorMsg = "";
+
+        try{
+            foreach ($arrChanges as $change) {
+                $fileName = $change["file"];
+                $filecontent = file_get_contents($fileName);
+
+                if($filecontent === false || strlen($filecontent) === 0){
+                    $errorMsg = "problème lors de la lecture du fichier [$fileName].";
+                    $success = false;
+                } else {
+                    if(isset($change["delete"])){
+                        $lines = file($fileName); // pour contrôler les lignes du fichier
+                        foreach ($change["delete"] as $delete) {
+                            $lineNumber = strtolower($delete["line"]);
+                            $control = $delete["control"];
+
+                            $pos = strpos($filecontent, $control);
+                            if ($pos === false) {
+                                $errorMsg = "[$fileName] ne contient aucune ligne avec le contenu [$control]";
+                                $success = false;
+                                break 2; // Sort des 2 boucles
+                            }
+                            if(strlen($lineNumber) > 0 ){
+                                $line = trim(preg_replace('/\s+/', ' ', $lines[$lineNumber - 1]));
+                                if($line !== $control){
+                                    $errorMsg = "Dans [$fileName], le contenu de la ligne n°" . $lineNumber . " [" . $line . "] ne correspond pas à la valeur attendue [" . $control . "].";
+                                    $success = false;
+                                    break 2; // Sort des 2 boucles
+                                }
+                            }
+                        }
+                    }
+                    if(isset($change["insert"])){
+                        $lines = file($fileName); // pour contrôler les lignes du fichier
+                        foreach ($change["insert"] as $insert) {
+                            $text = $insert["content"];
+                            $lineNumber = strtolower($insert["line"]);
+                            $control = $insert["control"];
+
+                            switch ($lineNumber) {
+                                case 'begin':
+                                    $lineNumber = 1;
+                                    $position = 'before';
+                                    $control = trim(preg_replace('/\s+/', ' ', $lines[0]));
+                                    break;
+
+                                case 'end':
+                                    $lineNumber = $nbLines;
+                                    $position = 'after';
+                                    $control = trim(preg_replace('/\s+/', ' ', $lines[$nbLines - 1]));
+                                    break;
+
+                                case '':
+                                    $lineNumber = -1; // on recherche la ligne par rapport à son contenu (dans $control)
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                            $pos = strpos($filecontent, $text);
+                            if ($pos !== false) {
+                                $errorMsg = "[$fileName] contient déjà la ligne `$text`";
+                                $success = false;
+                                break 2; // Sort des 2 boucles
+                            }
+
+                            if ($lineNumber >= 0){
+                                $line = trim(preg_replace('/\s+/', ' ', $lines[$lineNumber - 1]));
+                                if($line !== $control){
+                                    $errorMsg = "Dans [$fileName], le contenu de la ligne n°" . $lineNumber . " [" . $line . "] ne correspond pas à la valeur attendue [" . $control . "].";
+                                    $success = false;
+                                    break 2; // Sort des 2 boucles
+                                }
+                            } else {
+                                $pos = strpos($filecontent, $control);
+                                if ($pos === false) {
+                                    $errorMsg = "Dans [$fileName], aucune ligne n'a été trouvée avec le contenu [" . $control . "].";
+                                    $success = false;
+                                    break 2; // Sort des 2 boucles
+                                }
+                            }
+                        }
+                    }
+                    if(isset($change["update"])){
+                        foreach ($change["update"] as $update) {
+                            $pattern = $update["pattern"];
+
+                            if (preg_match($pattern, $filecontent) !== 1) {
+                                $errorMsg = "[$fileName] Expression `$pattern` non résolue.";
+                                $success = false;
+                                break 2; // Sort des 2 boucles
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e){
+            $success = false;
+            $errorMsg = $e->getMessage();
+        }
+    }
+
+    /*
+     * Fonction pour effectuer les modifications des fichiers existants
+     * @param Array $arrChanges Tableau contenant le fichier à modifier, le texte à rechercher et sa valeur de remplacement
+     * @param boolean $success Valeur indiquant si le contrôle est Ok ou non (passage par référence)
+     * @param String $errorMsg En cas d'erreur, message (passage par référence)
+     * @return null
+     */
+    public static function updateFiles($arrChanges, &$success, &$errorMsg) {
+        try{
+            foreach ($arrChanges as $change) {
+                $fileName = $change["file"];
+
+                /* Suppression de lignes */
+                if(isset($change["delete"]) && count($change["delete"]) > 0){
+                    $lines = file($fileName);
+                    if($lines === false){
+                        $errorMsg = "problème lors de la lecture du fichier [$fileName].";
+                        $success = false;
+                    } else {
+                        $nbLines = count($lines);
+                        foreach ($change["delete"] as $delete) {
+                            $lineNumber = strtolower($delete["line"]);
+                            $control = $delete["control"];
+
+                            if(strlen($lineNumber) === 0){
+                                $lineNumber = -1; // on recherche la ligne par rapport à son contenu (dans $control)
+                            }
+
+                            if($nbLines < $lineNumber){
+                                $errorMsg = "Le fichier [$fileName] contient " . $nbLines . " lignes, impossible de supprimer la ligne n°" . $lineNumber;
+                                $success = false;
+                            } else {
+                                $counter = 0;
+                                $newContent = "";
+                                $found = false;
+                                foreach ($lines as $line) {
+                                    $counter++;
+                                    if(trim(preg_replace('/\s+/', ' ', $line)) === $control && ($counter == $lineNumber || $lineNumber == -1)){
+                                        $found = true;
+                                    } else {
+                                        $newContent .= $line;
+                                    }
+                                }
+                                if($found){
+                                    file_put_contents($fileName, $newContent);
+                                    $lines = file($fileName);
+                                    $nbLines = count($lines);
+                                } else {
+                                    $errorMsg = "La ligne avec le contenu [".$control."] n'a pas été trouvé dans le fichier [$fileName].";
+                                    $success = false;
+                                    break 2; // Sort des 2 boucles
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /* Insertion de nouvelles lignes */
+                if(isset($change["insert"]) && count($change["insert"]) > 0){
+                    $lines = file($fileName);
+                    if($lines === false){
+                        $errorMsg = "problème lors de la lecture du fichier [$fileName].";
+                        $success = false;
+                    } else {
+                        $nbLines = count($lines);
+                        foreach ($change["insert"] as $insert) {
+                            $lineNumber = strtolower($insert["line"]);
+                            $control = $insert["control"];
+                            $position = strtolower($insert["position"]); // before ou after
+                            $text = $insert["content"];
+
+                            switch ($lineNumber) {
+                                case 'begin':
+                                    $lineNumber = 1;
+                                    $position = 'before';
+                                    $control = trim(preg_replace('/\s+/', ' ', $lines[0]));
+                                    break;
+
+                                case 'end':
+                                    $lineNumber = $nbLines;
+                                    $position = 'after';
+                                    $control = trim(preg_replace('/\s+/', ' ', $lines[$nbLines - 1]));
+                                    break;
+
+                                case '':
+                                    $lineNumber = -1; // on recherche la ligne par rapport à son contenu (dans $control)
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                            if($nbLines < $lineNumber){
+                                $errorMsg = "Le fichier [$fileName] contient " . $nbLines . " lignes, impossible d'insérer un texte à la ligne n°" . $lineNumber;
+                                $success = false;
+                            } else {
+                                $counter = 0;
+                                $newContent = "";
+                                $found = false;
+                                foreach ($lines as $line) {
+                                    $counter++;
+                                    if(trim(preg_replace('/\s+/', ' ', $line)) === $control && ($counter == $lineNumber || $lineNumber == -1)){
+                                        $found = true;
+                                        if($position === 'before'){
+                                            $newContent .= CorePlugins::replaceSpecialCharacters($text) . "\n" . $line;
+                                        } else {
+                                            $newContent .= $line . CorePlugins::replaceSpecialCharacters($text) . "\n";
+                                        }
+                                    } else {
+                                        $newContent .= $line;
+                                    }
+                                }
+                                if($found){
+                                    file_put_contents($fileName, $newContent);
+                                    $lines = file($fileName);
+                                    $nbLines = count($lines);
+                                } else {
+                                    $errorMsg = "La ligne avec le contenu [".$control."] n'a pas été trouvé dans le fichier [$fileName].";
+                                    $success = false;
+                                    break 2; // Sort des 2 boucles
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /* Modifications de lignes existantes */
+                if(isset($change["update"]) && count($change["update"]) > 0){
+                    $filecontent = file_get_contents($fileName);
+                    if($filecontent === false || strlen($filecontent) === 0){
+                        $errorMsg = "problème lors de la lecture du fichier [$fileName].";
+                        $success = false;
+                    } else {
+                        foreach ($change["update"] as $update) {
+                            $pattern = $update["pattern"];
+                            $replacement = $update["replace"];
+
+                            $filecontent = preg_replace($pattern, $replacement, $filecontent, -1, $count);
+                            if ($count < 1) {
+                                // Aucun remplacemnt d'effectuer --> erreur
+                                $errorMsg = "[$fileName] Remplacement de `$pattern` par `$replacement` non réalisé.";
+                                $success = false;
+                                break 2; // Sort des 2 boucles
+                            }
+                        }
+                        file_put_contents($fileName, CorePlugins::replaceSpecialCharacters($filecontent));
+                    }
+                }
+            }
+        } catch (Exception $e){
+            $success = false;
+            $errorMsg = $e->getMessage();
+        }
+    }
+
+    /*
+     * Fonction pour remplace [tab], [tab{i}], [newline], [newline{i}] par \t ou \n
+     * @param String $string Texte
+     * @return string
+     */
+    private static function replaceSpecialCharacters($string){
+        $nbOcc = preg_match_all('#\[(tab|newline)(\{([0-9]*)\})*\]#i', $string, $toReplace);
+        for ($i = 0; $i < $nbOcc; $i++) {
+            $text = $toReplace[0][$i];
+            $substitute = $toReplace[1][$i];
+            if ($substitute === "newline") {
+                $substitute = "\n";
+            }
+            if ($substitute === "tab") {
+                $substitute = "\t";
+            }
+
+            $replaceText = "";
+            if (strlen($toReplace[3][$i]) > 0) {
+                $nb = $toReplace[3][$i];
+                for ($j = 0; $j < $nb; $j++) {
+                    $replaceText .= $substitute;
+                }
+            } else {
+                $replaceText = $substitute;
+            }
+            $string = str_replace($text, $replaceText, $string);
+        }
+        return $string;
     }
 }

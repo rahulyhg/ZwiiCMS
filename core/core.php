@@ -414,7 +414,7 @@ class common {
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
-			'fontawesome'
+                        'fontawesome'
 		],
 		'view' => ''
 	];
