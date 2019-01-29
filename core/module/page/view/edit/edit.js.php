@@ -36,6 +36,23 @@ pageEditModuleIdDOM.on("change", function() {
 });
 
 /**
+ * Masquer et démasquer le contenu pour les modules code
+ */
+var pageEditModuleIdDOM = $("#pageEditModuleId");
+pageEditModuleIdDOM.on("change", function() {
+	if($(this).val() === "code" ||
+	   $(this).val() === "redirection") {
+		$("#pageEditContentWrapper").removeClass("disabled");
+		$("#pageEditContentWrapper").slideUp();		
+	}
+	else {
+		$("#pageEditContentWrapper").addClass("disabled");
+		$("#pageEditContentWrapper").slideDown();
+	}
+});
+
+
+/**
  * Soumission du formulaire pour éditer le module
  */
 $("#pageEditModuleConfig").on("click", function() {
