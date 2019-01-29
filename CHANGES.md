@@ -21,8 +21,8 @@
             - Correction faille CSRF dans Data
     - Module Code en test
     - Edition de page : masquage des options inutiles selon le module
-        - redirection : contenu et masquer le titre
-        - code : contenu
+        - redirection : contenu de page et masquer le titre
+        - code : contenu de page
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
