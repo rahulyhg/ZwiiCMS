@@ -36,7 +36,7 @@ pageEditModuleIdDOM.on("change", function() {
 });
 
 /**
- * Masquer et démasquer le contenu pour les modules code
+ * Masquer et démasquer le contenu pour les modules code et redirection
  */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
@@ -50,6 +50,15 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditContentWrapper").slideDown();		
 	}
 });
+if($("#pageEditModuleId").val() === "code" ||
+   $("#pageEditModuleId").val() === "redirection") {
+		$("#pageEditContentWrapper").removeClass("disabled");
+		$("#pageEditContentWrapper").slideUp();
+	}
+	else {
+		$("#pageEditContentWrapper").addClass("disabled");
+		$("#pageEditContentWrapper").slideDown();		
+	}
 
 
 /**
@@ -66,6 +75,14 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditHideTitleWrapper").slideDown();
 	}
 });
+if($("#pageEditModuleId").val() === "redirection") {
+		$("#pageEditHideTitleWrapper").removeClass("disabled");
+		$("#pageEditHideTitleWrapper").slideUp();	
+	}
+	else {	
+		$("#pageEditHideTitleWrapper").addClass("disabled");
+		$("#pageEditHideTitleWrapper").slideDown();
+	}
 
 
 /**
