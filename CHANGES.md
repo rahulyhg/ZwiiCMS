@@ -8,6 +8,7 @@
         - Importer un thème à partir des fichiers
     - Option de position fixe du menu type Facebook        
     - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
+    - Contenu des barres latérales intégré aux pages.
     - Changement du libellé Modérateur devient Editeur 
     - Editeur :     
         - VisualBlocks dans TinyMCE
@@ -23,6 +24,7 @@
     - Edition de page : masquage des options inutiles selon le module
         - redirection : contenu de page et masquer le titre
         - code : contenu de page
+
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
