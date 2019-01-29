@@ -43,11 +43,15 @@ pageEditModuleIdDOM.on("change", function() {
 	if($(this).val() === "code" ||
 	   $(this).val() === "redirection") {
 		$("#pageEditContentWrapper").removeClass("disabled");
-		$("#pageEditContentWrapper").slideUp();		
+		$("#pageEditContentWrapper").slideUp();
+		$("#pageEditHideTitleWrapper").removeClass("disabled");
+		$("#pageEditHideTitleWrapper").slideUp();	
 	}
 	else {
 		$("#pageEditContentWrapper").addClass("disabled");
-		$("#pageEditContentWrapper").slideDown();
+		$("#pageEditContentWrapper").slideDown();		
+		$("#pageEditHideTitleWrapper").addClass("disabled");
+		$("#pageEditHideTitleWrapper").slideDown();
 	}
 });
 
