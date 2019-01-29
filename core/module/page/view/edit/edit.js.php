@@ -44,12 +44,24 @@ pageEditModuleIdDOM.on("change", function() {
 	   $(this).val() === "redirection") {
 		$("#pageEditContentWrapper").removeClass("disabled");
 		$("#pageEditContentWrapper").slideUp();
-		$("#pageEditHideTitleWrapper").removeClass("disabled");
-		$("#pageEditHideTitleWrapper").slideUp();	
 	}
 	else {
 		$("#pageEditContentWrapper").addClass("disabled");
 		$("#pageEditContentWrapper").slideDown();		
+	}
+});
+
+
+/**
+ * Masquer et démasquer le masquage du titre pour le module redirection
+ */
+var pageEditModuleIdDOM = $("#pageEditModuleId");
+pageEditModuleIdDOM.on("change", function() {
+	if($(this).val() === "redirection") {
+		$("#pageEditHideTitleWrapper").removeClass("disabled");
+		$("#pageEditHideTitleWrapper").slideUp();	
+	}
+	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").slideDown();
 	}
