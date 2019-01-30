@@ -22,18 +22,47 @@ $("#pageEditDelete").on("click", function() {
 
 /**
  * Bloque/Débloque le bouton de configuration au changement de module
+ * Affiche ou masque la position du module selon le call_user_func
  */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
 	if($(this).val() === "") {
 		$("#pageEditModuleConfig").addClass("disabled");
-		$("#pageEditContentContainer").slideDown();
+		$("#pageEditContentContainer").slideDown();		 
 	}
 	else {
 		$("#pageEditModuleConfig").removeClass("disabled");
-		$("#pageEditContentContainer").slideUp();
+		$("#pageEditContentContainer").slideUp();	
 	}
 });
+
+/**
+ * Masquer et affiche le contenu pour les modules form et gallery
+ */
+var pageEditModuleIdDOM = $("#pageEditModuleId");
+pageEditModuleIdDOM.on("change", function() {
+	if($(this).val() === "form" ||
+	   $(this).val() === "gallery") {
+		$("#configModulePositionWrapper").addClass("disabled");
+		$("#configModulePositionWrapper").slideDown();	
+	}
+	else {
+		$("#configModulePositionWrapper").removeClass("disabled");
+ 		$("#configModulePositionWrapper").slideUp();			
+	}
+});
+if($("#pageEditModuleId").val() === "form" ||
+   $("#pageEditModuleId").val() === "gallery") {
+	   console.log('ok');
+    	$("#configModulePositionWrapper").addClass("disabled");
+		$("#configModulePositionWrapper").slideDown();	
+	}
+	else {
+		console.log('pas ok');
+	    $("#configModulePositionWrapper").removeClass("disabled");
+		$("#configModulePositionWrapper").slideUp();				
+}
+
 
 /**
  * Masquer et démasquer le contenu pour les modules code et redirection
@@ -58,7 +87,7 @@ if($("#pageEditModuleId").val() === "code" ||
 	else {
 		$("#pageEditContentWrapper").addClass("disabled");
 		$("#pageEditContentWrapper").slideDown();		
-	}
+}
 
 
 /**
@@ -66,7 +95,8 @@ if($("#pageEditModuleId").val() === "code" ||
  */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
-	if($(this).val() === "redirection") {
+	if($(this).val() === "redirection" ||
+	   $(this).val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").slideUp();	
 	}
@@ -75,14 +105,87 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditHideTitleWrapper").slideDown();
 	}
 });
-if($("#pageEditModuleId").val() === "redirection") {
+if($("#pageEditModuleId").val() === "redirection" ||
+   $("#pageEditModuleId").val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").slideUp();	
 	}
 	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").slideDown();
+}
+
+/**
+ * Masquer et démasquer la sélection des barres 
+ */
+
+ 
+var pageEditBlockDOM = $("#pageEditBlock");
+pageEditBlockDOM.on("change", function() {
+	switch ($(this).val()) {
+		case "bar":
+		case "12":
+			$("#pageEditBarLeftWrapper").removeClass("disabled");
+			$("#pageEditBarLeftWrapper").slideUp();
+			$("#pageEditBarRightWrapper").removeClass("disabled");
+			$("#pageEditBarRightWrapper").slideUp();	
+			break;
+		case "3-9":
+		case "4-8":
+			$("#pageEditBarLeftWrapper").addClass("disabled");
+			$("#pageEditBarLeftWrapper").slideDown();
+			$("#pageEditBarRightWrapper").removeClass("disabled");
+			$("#pageEditBarRightWrapper").slideUp();					
+			break;
+		case "9-3":
+		case "8-4":
+			$("#pageEditBarLeftWrapper").removeClass("disabled");
+			$("#pageEditBarLeftWrapper").slideUp();	
+			$("#pageEditBarRightWrapper").addClass("disabled");
+			$("#pageEditBarRightWrapper").slideDown();				
+			break;
+		case "3-6-3":
+			$("#pageEditBarLeftWrapper").addClass("disabled");
+			$("#pageEditBarLeftWrapper").slideDown();
+			$("#pageEditBarRightWrapper").addClass("disabled");
+			$("#pageEditBarRightWrapper").slideDown();				
+			break;
 	}
+});
+switch ($("#pageEditBlock").val()) {
+		case "bar":
+		case "12":
+			$("#pageEditBarLeftWrapper").removeClass("disabled");
+			$("#pageEditBarLeftWrapper").slideUp();
+			$("#pageEditBarRightWrapper").removeClass("disabled");
+			$("#pageEditBarRightWrapper").slideUp();	
+			break;
+		case "3-9":
+		case "4-8":
+			$("#pageEditBarLeftWrapper").addClass("disabled");
+			$("#pageEditBarLeftWrapper").slideDown();
+			$("#pageEditBarRightWrapper").removeClass("disabled");
+			$("#pageEditBarRightWrapper").slideUp();					
+			break;
+		case "9-3":
+		case "8-4":
+			$("#pageEditBarLeftWrapper").removeClass("disabled");
+			$("#pageEditBarLeftWrapper").slideUp();	
+			$("#pageEditBarRightWrapper").addClass("disabled");
+			$("#pageEditBarRightWrapper").slideDown();				
+			break;
+		case "3-6-3":
+			$("#pageEditBarLeftWrapper").addClass("disabled");
+			$("#pageEditBarLeftWrapper").slideDown();
+			$("#pageEditBarRightWrapper").addClass("disabled");
+			$("#pageEditBarRightWrapper").slideDown();				
+			break;
+};
+
+
+
+
+
 
 
 /**

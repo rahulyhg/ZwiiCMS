@@ -81,7 +81,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Accueil',
-				'blocks' => '100'
+				'block' => '12'
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
@@ -98,7 +98,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Enfant',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'cachee' => [
 			    'typeMenu' => 'text',
@@ -115,7 +115,7 @@ class common {
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
 				'title' => 'Cachée',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'mise_en_page' => [
 			    'typeMenu' => 'text',
@@ -132,7 +132,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Mise en page',
-				'blocks' => '3-6-3'
+				'block' => '3-6-3'
 			],			
 			'blog' => [
 			    'typeMenu' => 'text',
@@ -149,7 +149,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Blog',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -166,7 +166,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Galeries',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -183,7 +183,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => true,
 				'title' => 'Site de Zwii',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -200,7 +200,7 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact',
-				'blocks' => '12'
+				'block' => '12'
 			],
 			'blockRight' => [
 			    'typeMenu' => '',
@@ -425,7 +425,8 @@ class common {
 	];
 	private $hierarchy = [
 		'all' => [],
-		'visible' => []
+		'visible' => [],
+		'bar' => []
 	];
 	private $input = [
 		'_COOKIE' => [],
@@ -546,6 +547,9 @@ class common {
 					if($pagePosition !== 0) {
 						$this->hierarchy['visible'][$pageId] = [];
 					}
+					if($this->getData(['page', $pageId, 'block']) === 'bar') {
+						$this->hierarchy['bar'][$pageId] = [];
+					}
 					$this->hierarchy['all'][$pageId] = [];
 				}
 			}
@@ -569,6 +573,9 @@ class common {
 				) {
 					if($pagePosition !== 0) {
 						$this->hierarchy['visible'][$parentId][] = $pageId;
+					}
+					if($this->getData(['page', $pageId, 'block']) === 'bar') {
+						$this->hierarchy['bar'][$pageId] = [];
 					}
 					$this->hierarchy['all'][$parentId][] = $pageId;
 				}
@@ -757,10 +764,12 @@ class common {
 	 * Accède à la liste des pages parents et de leurs enfants ou aux enfants d'une page parent
 	 * @param int $parentId Id de la page parent
 	 * @param bool $onlyVisible Affiche seulement les pages visibles
+	 * @param bool $onlyBlock Affcihe seulement les page de type barre
 	 * @return array
 	 */
-	public function getHierarchy($parentId = null, $onlyVisible = true) {
+	public function getHierarchy($parentId = null, $onlyVisible = true, $onlyBlock = false) {
 		$hierarchy = $onlyVisible ? $this->hierarchy['visible'] : $this->hierarchy['all'];
+		$hierarchy = $onlyBlock ? $this->hierarchy['bar'] : $hierarchy;		
 		// Enfants d'un parent
 		if($parentId) {
 			if(array_key_exists($parentId, $hierarchy)) {
@@ -775,6 +784,7 @@ class common {
 			return $hierarchy;
 		}
 	}
+
 
 	/**
 	 * Accède à une valeur des variables http (ordre de recherche en l'absence de type : _COOKIE, _POST)
@@ -1065,7 +1075,7 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 900) {
-			$this->setData(['theme', 'site', 'blocks','100']);
+			$this->setData(['theme', 'site', 'block','12']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
@@ -1970,6 +1980,7 @@ class layout extends common {
 
 	/**
 	 * Affiche le contenu
+	 * @param Page par défaut 
 	 */
 	public function showContent() {
 		if(
@@ -1979,10 +1990,21 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			// Chemin de fer pour le titre avec des enfants
+			echo '<h2 id="sectionTitle">'; 
+			if ($this->getData(['page', $this->getUrl(0), 'parentPageId']) !== '' ) {
+				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
+				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';		
+
+			}
+			echo $this->core->output['title'] . '</h2>';
+			// Fin modif
 		}
 		echo $this->core->output['content'];
 	}
+
+
 
 /**
      * Affiche le copyright
@@ -2217,15 +2239,11 @@ class layout extends common {
 				$leftItems .= '<option value="">Choisissez une page</option>';
 				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
 				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
-					if ($parentPageId === 'blockLeft' 
-					    OR $parentPageId === 'blockRight') { continue; }
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
 				}
-				$leftItems .= '<option value="">-------------------</option>';				
-				$leftItems .= '<option value="' .  helper::baseUrl() . 'page/block">&Eacute;dition des barres latérales</option>';				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
 				if(

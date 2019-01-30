@@ -8,6 +8,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -17,12 +19,14 @@ class page extends common {
 	public static $actions = [
 		'add' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'edit' => self::GROUP_MODERATOR,
-		'block' => self::GROUP_ADMIN
+		'edit' => self::GROUP_MODERATOR
 	];
 	public static $pagesNoParentId = [
 		'' => 'Aucune'
 	];
+	public static $pagesBarId = [
+		'' => 'Aucune'
+	];	
 	public static $moduleIds = [];
 
 	public static $typeMenu = [
@@ -37,12 +41,13 @@ class page extends common {
 		'free' => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12' => 'Pleine page',
+		'12' => 'Pleine page - sans barre latérale',
 		'4-8' => 'Barre latérale 1/3 - Page 2/3',		
 		'8-4' => 'Page 2/3    - Barre latérale 1/3',
 		'3-9' => 'Barre latérale 1/4 - Page 3/4',
 		'9-3' => 'Page 3/4    - Barre latérale 1/4',
-		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
+		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
+		'bar' => 'Barre latérale'
 	];
 	
 	/**
@@ -69,7 +74,9 @@ class page extends common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => $pageTitle,
-				'blocks' => '100'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''
 			]
 		]);
 		// Valeurs en sortie
@@ -136,64 +143,6 @@ class page extends common {
 			]);
 		}
 	}
-
-	/**
-	 * Édition des blocs
-	 */
-	public function block () {
-		if($this->isPost()) {
-			$this->setData([
-				'page',
-				'blockLeft', [
-					'typeMenu' => 'text',
-					'iconUrl' => '',
-					'disable' => true,								
-					'hideTitle' => false,
-					'metaDescription' => '',
-					'metaTitle' => '',
-					'moduleId' => '',
-					'parentPageId' => '',
-					'modulePosition' => 'bottom',
-					'position' => 0,
-					'group' => self::GROUP_VISITOR,
-					'targetBlank' => false,
-					'title' => 'blockLeft',
-					'content' => (empty($this->getInput('pageBlockLeftContent', null)) ? "<p></p>" : $this->getInput('pageBlockLeftContent', null))]
-			]);
-			$this->setData([
-				'page',
-				'blockRight', [
-					'typeMenu' => 'text',
-					'iconUrl' => '',
-					'disable' => true,								
-					'hideTitle' => false,
-					'metaDescription' => '',
-					'metaTitle' => '',
-					'moduleId' => '',
-					'parentPageId' => '',
-					'modulePosition' => 'bottom',
-					'position' => 0,
-					'group' => self::GROUP_VISITOR,
-					'targetBlank' => false,
-					'title' => 'blockRight',
-					'content' => (empty($this->getInput('pageBlockRightContent', null)) ? "<p></p>" : $this->getInput('pageBlockRightContent', null))]
-			]);		
-			$this->addOutput([
-				'redirect' => helper::baseUrl(),
-				'notification' => 'Modifications enregistrées',
-				'state' => true
-			]);
-		}
-
-		// Valeurs en sortie
-		$this->addOutput([
-			'title' => 'Édition des barres latérales',
-			'vendor' => [
-				'tinymce'
-			],
-			'view' => 'block'
-		]);
-	}
 	
 
 	/**
@@ -256,7 +205,14 @@ class page extends common {
 					// Incrémente pour la prochaine position
 					$lastPosition++;
 				}
-				// Modifie la page ou en crée une nouvelle si l'id à changée
+				if ($this->getinput('pageEditBlock') !== 'bar') {
+					$barLeft = $this->getinput('pageEditBarLeft');
+					$barRight = $this->getinput('pageEditBarRight');
+				} else {
+					$barLeft = "";
+					$barRight = "";
+				}
+				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
 					'page',
 					$pageId,
@@ -275,7 +231,9 @@ class page extends common {
 						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
 						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
-						'blocks' => $this->getinput('pageEditBlocks'),
+						'block' => $this->getinput('pageEditBlock'),
+						'barLeft' => $barLeft,
+						'barRight' => $barRight
 					]
 				]);
 				// Redirection vers la configuration
@@ -312,6 +270,13 @@ class page extends common {
 				if($parentPageId !== $this->getUrl(2)) {
 					self::$pagesNoParentId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
 				}
+			}	
+			// Pages barre latérales
+			foreach($this->getHierarchy(null,false,true) as $parentPageId => $childrenPageIds) {
+					if($parentPageId !== $this->getUrl(2) &&
+						$this->getData(['page', $parentPageId, 'block']) === 'bar') {
+						self::$pagesBarId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
+					}
 			}
 			// Valeurs en sortie
 			$this->addOutput([

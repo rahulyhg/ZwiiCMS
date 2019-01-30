@@ -33,7 +33,6 @@
 							'value' => $this->getData(['page', $this->getUrl(2), 'title'])
 						]); ?>
 					</div>
-
 					<div class="col6">
 						<div class="row">
 							<div class="col10">
@@ -52,6 +51,21 @@
 								]); ?>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Cacher le titre dans la page', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
+						]); ?>					
+
+					</div>
+					<div class="col6">			
+					<?php echo template::select('configModulePosition', $module::$modulePosition,[
+							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
+							'label' => 'Position du module dans la page',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
+						]); ?>
 					</div>
 				</div>
 				<div class="row">
@@ -102,12 +116,33 @@
 			</div>
 			<div class="block">
 				<h4>Mise en page</h4>
-				<?php echo template::select('pageEditBlocks', $module::$pageBlocks, [
-						'label' => 'Gabarit :',
-						'help' => 'Pour éditer le contenu des encarts, sélectionnez \'Édition des encarts\' dans la liste des pages.',
-						'selected' => $this->getData(['page', $this->getUrl(2) , 'blocks'])
+				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
+						'label' => 'Gabarit de page :',
+						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard.',
+						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>				
-			</div>
+			<!-- Sélection des barres latérales	 -->
+			<?php if($this->getHierarchy($this->getUrl(2),false,true)): ?>
+					<?php echo template::hidden('pageEditBarLeft', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'barLeft'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditBarLeft', $module::$pagesBarId, [
+						'label' => 'Barre latérale gauche :',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'barLeft'])
+					]); ?>
+				<?php endif; ?>
+				<?php if($this->getHierarchy($this->getUrl(2),false,true)): ?>
+					<?php echo template::hidden('pageEditBarRight', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'barRight'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditBarRight', $module::$pagesBarId, [
+						'label' => 'Barre latérale droite :',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
+					]); ?>
+				<?php endif; ?>				
+				</div>							
 		</div>
 		<div class="col6">
 			<div class="block">
@@ -124,16 +159,6 @@
 					'label' => 'Méta-description',
 					'maxlength' => '500',
 					'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
-				]); ?>
-				<?php if (($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'form') or ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'gallery')) {
-					echo template::select('configModulePosition', $module::$modulePosition,[
-					'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
-					'label' => 'Position du module dans la page',
-					'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
-				]);
-				} ?>				
-				<?php echo template::checkbox('pageEditHideTitle', true, 'Cacher le titre', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 				]); ?>
 			</div>
 		</div>

@@ -127,7 +127,7 @@
 	<?php 
 		// Gabarit :
 		// Récupérer la config de la page courante
-		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'blocks']));
+		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'block']));
 		// Initialiser
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
@@ -156,9 +156,14 @@
 		} else {
 		?>
 		<div class="row">
-			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft"><?php echo $this->getData(['page','blockLeft','content']);?></div> <?php endif; ?>
+			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft">
+			<?php
+			 echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content']);
+			 ?></div> <?php endif; ?>
 			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
-			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright"><?php echo $this->getData(['page','blockRight','content']);?></div> <?php endif; ?>	
+			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright">
+			<?php echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']);
+			?></div> <?php endif; ?>	
 		</div>
 		<?php } ?>
 	</section>
