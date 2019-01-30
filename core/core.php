@@ -1990,9 +1990,10 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
 			// Chemin de fer pour le titre avec des enfants
-			echo '<h2 id="sectionTitle">'; 
+			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			// remplacé par :
+			echo '<h2 id="sectionTitle">';
 			if ($this->getData(['page', $this->getUrl(0), 'parentPageId']) !== '' ) {
 				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
 				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';		
