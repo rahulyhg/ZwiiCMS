@@ -202,38 +202,6 @@ class common {
 				'title' => 'Contact',
 				'block' => '12'
 			],
-			'blockRight' => [
-			    'typeMenu' => '',
-                'iconUrl' => '',
-                'disable' => false,
-				'content' => '<div class="block"><h4>ZwiiCMS</h4><p style="text-align: center;"><a href="https://www.zwiicms.com" target="_blank" rel="noopener"><h3>Le CMS sans base de donn&eacute;es grâce une installation simple et rapide.</h3></a></p></div>',
-				'hideTitle' => false,
-				'metaDescription' => '',
-				'metaTitle' => '',
-				'moduleId' => '',
-				'modulePosition' => '',
-				'parentPageId' => '',
-				'position' => 0,
-				'group' => self::GROUP_VISITOR,
-				'targetBlank' => false,
-				'title' => 'blockRight'
-			],
-			'blockLeft' => [
-			    'typeMenu' => '',
-                'iconUrl' => '',
-                'disable' => false,
-				'content' => '<p>Barre latérale à gauche du site</p>',
-				'hideTitle' => false,
-				'metaDescription' => '',
-				'metaTitle' => '',
-				'moduleId' => '',
-				'modulePosition' => '',
-				'parentPageId' => '',
-				'position' => 0,
-				'group' => self::GROUP_VISITOR,
-				'targetBlank' => false,
-				'title' => 'blockLeft'
-			]
 		],
 		'module' => [
 			'blog' => [
@@ -1991,15 +1959,14 @@ class layout extends common {
 			)
 		) {
 			// Chemin de fer pour le titre avec des enfants
-			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			 echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
 			// remplacé par :
-			echo '<h2 id="sectionTitle">';
-			if ($this->getData(['page', $this->getUrl(0), 'parentPageId']) !== '' ) {
-				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
-				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';		
-
-			}
-			echo $this->core->output['title'] . '</h2>';
+			//echo '<h2 id="sectionTitle">';
+			//if ($this->getData(['page', $this->getUrl(0), 'parentPageId']) !== '' ) {
+			//	echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
+			//	echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';
+			//}
+			echo $this->core->output['title'] . '</h1>';
 			// Fin modif
 		}
 		echo $this->core->output['content'];
