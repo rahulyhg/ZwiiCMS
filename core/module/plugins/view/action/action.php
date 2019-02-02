@@ -76,7 +76,7 @@ switch ($actionType) {
 	<div class="col3 verticalAlignMiddle">
 		<?php echo template::button('actionPluginEnd', [
 			'value' => 'Terminer',
-			'href' => helper::baseUrl() . 'plugins',
+			'href' => helper::baseUrl() . 'plugins/add',
 			'ico' => 'check',
 			'class' => 'disabled'
 		]); ?>

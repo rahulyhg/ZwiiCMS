@@ -28,6 +28,7 @@ class plugins extends common {
     public $notDeployedPlugins = [];
     public $actionType = "";
     public $targetPluginId = "";
+    public $errorMsg = "";
 
     /**
      * Liste des plugins
@@ -165,36 +166,41 @@ class plugins extends common {
     private function getPluginDatas($pluginId = null) {
         $sharedPlugins = Array();
 
-        // Flux RSS donnant l'ensemble des plugins de l'espace partagé
-        $modules = json_decode(file_get_contents('http://forum.zwiicms.com/modules.php'));
+        try{
+            // Flux RSS donnant l'ensemble des plugins de l'espace partagé
+            $modules = json_decode(file_get_contents('http://forum.zwiicms.com/modules.php'));
 
-        //foreach ($items->channel->item as $item) {
-        foreach ($modules as $module) {
-            $link = $module->url;
-            $downloadLink = "http://forum.zwiicms.com/files/file/" . $link . "/?do=download";
+            //foreach ($items->channel->item as $item) {
+            foreach ($modules as $module) {
+                $link = $module->url;
+                $downloadLink = "http://forum.zwiicms.com/files/file/" . $link . "/?do=download";
 
 
-            $ret = preg_match('#[0-9]+-(.+)#', $link, $matches);
-            if ($ret === 1) {
-                if (is_null($pluginId) || $matches[1] === $pluginId) {
-                    array_push($sharedPlugins, array(
-                        'id' => (string) $matches[1],
-                        'name' => (string) $module->name,
-                        'desc' => (string) $module->description,
-                        'link' => (string) $downloadLink,
-                        'author' => (string) $module->author,
-                        'version' => (string) $module->version,
-                        'origin' => "official"
-                            )
-                    );
+                $ret = preg_match('#[0-9]+-(.+)#', $link, $matches);
+                if ($ret === 1) {
+                    if (is_null($pluginId) || $matches[1] === $pluginId) {
+                        array_push($sharedPlugins, array(
+                            'id' => (string) $matches[1],
+                            'name' => (string) $module->name,
+                            'desc' => (string) $module->description,
+                            'link' => (string) $downloadLink,
+                            'author' => (string) $module->author,
+                            'version' => (string) $module->version,
+                            'origin' => "official"
+                                )
+                        );
 
-                    if ($matches[1] === $pluginId) {
-                        break;
+                        if ($matches[1] === $pluginId) {
+                            break;
+                        }
                     }
                 }
             }
+        } catch(Exception $e){
+            $this->errorMsg = $e->getMessage();
+        } finally {
+            return $sharedPlugins;
         }
-        return $sharedPlugins;
     }
 
     /**
@@ -291,25 +297,25 @@ class plugins extends common {
 
         // Effectuer les différents contrôles sur le fichier (extension, taille, etc...)
         $success = true;
-        $errorMsg = "";
+        $this->errorMsg = "";
         if ($uploadedFile['error'] != UPLOAD_ERR_OK) {
             $success = false;
-            $errorMsg = "Erreur lors du transfert de l'archive.";
+            $this->errorMsg = "Erreur lors du transfert de l'archive.";
         } else {
             if ($uploadedFile['size'] == 0) {
                 $success = false;
-                $errorMsg = "L'archive n'a pas été uploadée.";
+                $this->errorMsg = "L'archive n'a pas été uploadée.";
             } else {
                 if ($uploadedFile['size'] > CorePlugins::ARCHIVE_MAX_SIZE) {
                     $success = false;
-                    $errorMsg = "L'archive a une taille trop importante.";
+                    $this->errorMsg = "L'archive a une taille trop importante.";
                 } else {
                     $extensions_valides = array('zip', 'tar', 'gz');
                     // Récupération de l'extension de l'archive
                     $extension_upload = strtolower(substr(strrchr($uploadedFile['name'], '.'), 1));
                     if (!in_array($extension_upload, $extensions_valides)) {
                         $success = false;
-                        $errorMsg = "L'extension du fichier n'est pas correcte.";
+                        $this->errorMsg = "L'extension du fichier n'est pas correcte.";
                     } else {
                         helper::rm_recursive(self::TEMP_DIR . $uploadedFile['name']);
                         if (move_uploaded_file($uploadedFile['tmp_name'], self::TEMP_DIR . $uploadedFile['name'])) {
@@ -323,17 +329,17 @@ class plugins extends common {
                                         ValidateJson::check($manifest_json, 'core/module/plugins/schema.json');
                                         if (!ValidateJson::isValid()) {
                                             $success = false;
-                                            $errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";
+                                            $this->errorMsg = "Le fichier MANIFEST.json n'est pas au bon format.";
                                             $nbErrors = count(ValidateJson::getErrors());
                                             for ($i = 0; $i < $nbErrors; $i++) {
                                                 if ($i === 0) {
-                                                    $errorMsg .= " (";
+                                                    $this->errorMsg .= " (";
                                                 }
-                                                $errorMsg .= ValidateJson::getErrors()[$i];
+                                                $this->errorMsg .= ValidateJson::getErrors()[$i];
                                                 if ($i === ($nbErrors - 1)) {
-                                                    $errorMsg .= ").";
+                                                    $this->errorMsg .= ").";
                                                 } else {
-                                                    $errorMsg .= $error . " / ";
+                                                    $this->errorMsg .= $error . " / ";
                                                 }
                                             }
                                         } else {
@@ -349,10 +355,10 @@ class plugins extends common {
                                                 if ($pluginId === $code) {
                                                     if ($version == self::getData(['plugins', $pluginId, 'version'])) {
                                                         $success = false;
-                                                        $errorMsg = "Le plugin `" . $pluginName . "` est déjà présent en version " . $version;
+                                                        $this->errorMsg = "Le plugin `" . $pluginName . "` est déjà présent en version " . $version;
                                                     } else {
                                                         $success = false;
-                                                        $errorMsg = "Veuillez désintaller le plugin `" . $pluginName . "` en version " . self::getData(['plugins', $pluginId, 'version']) . " avant d'installer cette archive.";
+                                                        $this->errorMsg = "Veuillez désintaller le plugin `" . $pluginName . "` en version " . self::getData(['plugins', $pluginId, 'version']) . " avant d'installer cette archive.";
                                                     }
                                                     break;
                                                 }
@@ -370,7 +376,7 @@ class plugins extends common {
                                                 }
                                             }
                                             if (!$success) {
-                                                $errorMsg = "Ce plugin n'est pas compatible avec votre version de Zwii.";
+                                                $this->errorMsg = "Ce plugin n'est pas compatible avec votre version de Zwii.";
                                             } else {
                                                 $this->targetPluginId = $code;
                                                 if ($extension_upload == 'gz') {
@@ -389,26 +395,26 @@ class plugins extends common {
                                                     // Renommer l'archive afin que la suite du traitement soit identique au cas d'un plugin pris dans la bibliotèque
                                                     if (!rename(self::TEMP_DIR . $uploadedFile['name'], self::TEMP_DIR . $this->targetPluginId . '.' . $extension_upload)) {
                                                         $success = false;
-                                                        $errorMsg = "Erreur lors du renommage de l'archive.";
+                                                        $this->errorMsg = "Erreur lors du renommage de l'archive.";
                                                     }
                                                 }
                                             }
                                         }
                                     } else {
                                         $success = false;
-                                        $errorMsg = "Le fichier MANIFEST.json n'a pas été trouvé dans l'archive.";
+                                        $this->errorMsg = "Le fichier MANIFEST.json n'a pas été trouvé dans l'archive.";
                                     }
                                 } else {
                                     $success = false;
-                                    $errorMsg = "L'archive ne contient aucun fichier.";
+                                    $this->errorMsg = "L'archive ne contient aucun fichier.";
                                 }
                             } catch (Exception $e) {
-                                $errorMsg = $e->getMessage();
+                                $this->errorMsg = $e->getMessage();
                                 $success = false;
                             }
                         } else {
                             $success = false;
-                            $errorMsg = "Une erreur est survenue lors de la récupération du fichier.";
+                            $this->errorMsg = "Une erreur est survenue lors de la récupération du fichier.";
                         }
                     }
                 }
@@ -416,14 +422,14 @@ class plugins extends common {
         }
 
         // Valeurs en sortie
-        $output = ($success) ? $this->targetPluginId : $errorMsg;
+        $output = ($success) ? $this->targetPluginId : $this->errorMsg;
         self::addOutput([
             'display' => self::DISPLAY_JSON,
             'content' => [
                 'success' => $success,
                 'data' => $output
             ],
-            'notification' => $errorMsg
+            'notification' => $this->errorMsg
         ]);
     }
 
@@ -443,7 +449,7 @@ class plugins extends common {
                 // Etape 1
                 case 1:
                     $success = true;
-                    $errorMsg = "";
+                    $this->errorMsg = "";
 
 
                     switch ($this->actionType) {
@@ -465,7 +471,7 @@ class plugins extends common {
                         default:
                             // **** Cas de l'activation/désactivation d'un plugin déjà déployé
                             // Vérifier la syntaxe des fichiers .php
-                            $success = $corePlugin->checkPhpFiles($errorMsg);
+                            $success = $corePlugin->checkPhpFiles($this->errorMsg);
                     }
 
                     // Valeurs en sortie
@@ -473,7 +479,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => $errorMsg
+                            'data' => $this->errorMsg
                         ]
                     ]);
                     break;
@@ -481,16 +487,48 @@ class plugins extends common {
                 // Etape 2
                 case 2:
                     $success = true;
-                    $errorMsg = "";
+                    $this->errorMsg = "";
 
                     switch ($this->actionType) {
                         case 'deploy':
-                            // TODO - Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
+                            // Téléchargement de l'archive du plugin depuis le serveur de Zwii dans le cas du deploy
                             $sharedPlugins = $this->getPluginDatas($this->targetPluginId);
                             if (count($sharedPlugins) == 1 && strlen($sharedPlugins[0]["link"]) > 0) {
-                                $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.zip', file_get_contents($sharedPlugins[0]["link"])) !== false);
+                                try{
+                                    if(!helper::isFunctionEnabled("curl_init")){
+                                        // Utilisation de la méthode file_get_contents qui n'intercepte pas d'erreur en cas d'accès impossible (erreur 403)
+                                        $content = file_get_contents($sharedPlugins[0]["link"]);
+                                    } else {
+                                        // Utilisation de Curl
+                                        $ch = curl_init();
+                                        curl_setopt($ch, CURLOPT_URL, $sharedPlugins[0]["link"]);
+                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0');
+                                        $content = curl_exec($ch);
+                                        curl_close($ch);
+                                    }
+                                    if(strlen($content) > 0){
+                                        // Vérifier si le contenu ne contient pas un message d'erreur (accès interdit)
+                                        $matches = array();
+                                        preg_match('/<div.*elErrorMessage.*>\s*(.*)\s*<\/div>/', $content, $matches);
+                                        if(count($matches) > 1){
+                                            $this->errorMsg = $matches[1];
+                                            $success = false;
+                                        } else {
+                                            $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.zip', $content) !== false);
+                                        }
+                                    } else {
+                                        $this->errorMsg = "L'archive téléchargée est vide.";
+                                        $success = false;
+                                    }
+                                } catch (Exception $e){
+                                    $this->errorMsg = $e->getMessage();
+                                    $success = false;
+                                }
                             } else {
-                                $errorMsg = "URL de téléchargement non trouvé pour ce plugin.";
+                                if(strlen($this->errorMsg) == 0){
+                                    $this->errorMsg = "URL de téléchargement non trouvée pour ce plugin.";
+                                }
                                 $success = false;
                             }
                         // Pas de "break", pour effectuer également le code de la partie "upload"
@@ -515,7 +553,7 @@ class plugins extends common {
                                                 $ext = strtolower(substr(strrchr($compressedFileName, '.'), 1));
                                                 if ($ext !== 'tar') {
                                                     $success = false;
-                                                    $errorMsg = "L'extension {." . $ext . ".gz} n'est pas gérée, impossible de décompresser le fichier {" . $file . "}.";
+                                                    $this->errorMsg = "L'extension {." . $ext . ".gz} n'est pas gérée, impossible de décompresser le fichier {" . $file . "}.";
                                                 } else {
                                                     $gz = new PharData($file);
                                                     $gz->decompress();
@@ -539,17 +577,17 @@ class plugins extends common {
                                                     $zip->close();
                                                 } else {
                                                     $success = false;
-                                                    $errorMsg = "Erreur lors de la décompression de l'archive {" . $file . "}.";
+                                                    $this->errorMsg = "Erreur lors de la décompression de l'archive {" . $file . "}.";
                                                 }
                                                 unset($zip);
                                                 break;
                                         }
                                     } else {
                                         $success = false;
-                                        $errorMsg = "[Nb = " . count($list) . "] Impossible de trouver la bonne archive correspond au plugin {" . $this->targetPluginId . "} dans le répertoire " . self::TEMP_DIR . ".";
+                                        $this->errorMsg = "[Nb = " . count($list) . "] Impossible de trouver la bonne archive correspond au plugin {" . $this->targetPluginId . "} dans le répertoire " . self::TEMP_DIR . ".";
                                     }
                                 } catch (Exception $e) {
-                                    $errorMsg = $e->getMessage();
+                                    $this->errorMsg = $e->getMessage();
                                     $success = false;
                                 } finally {
                                     foreach (glob(self::TEMP_DIR . $this->targetPluginId . ".*") as $filename) {
@@ -560,14 +598,14 @@ class plugins extends common {
 
                             if ($success) {
                                 // Vérifier que le plugin est bien constitué :
-                                $success = $corePlugin->checkPluginStructure($errorMsg);
+                                $success = $corePlugin->checkPluginStructure($this->errorMsg);
                             }
                             break;
 
 
                         default:
                             // **** Cas de l'activation/désactivation d'un plugin déjà déployé
-                            $success = $corePlugin->checkBefore($errorMsg);
+                            $success = $corePlugin->checkBefore($this->errorMsg);
                     }
 
                     // Valeurs en sortie
@@ -575,7 +613,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => $errorMsg
+                            'data' => $this->errorMsg
                         ]
                     ]);
                     break;
@@ -583,12 +621,12 @@ class plugins extends common {
                 // Etape 3
                 case 3:
                     $success = true;
-                    $errorMsg = "";
+                    $this->errorMsg = "";
 
                     switch ($this->actionType) {
                         case 'deploy':
                         case 'upload':
-                            $success = $corePlugin->checkBefore($errorMsg);
+                            $success = $corePlugin->checkBefore($this->errorMsg);
 
                             if ($success) {
                                 try {
@@ -611,7 +649,7 @@ class plugins extends common {
 
                                     // Ajout du plugin en base avec status Désactivé
                                     if (self::getData(['plugins', $this->targetPluginId])) {
-                                        $errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
+                                        $this->errorMsg = 'Un plugin avec l\'identifiant `' . $this->targetPluginId . '` existe déjà !';
                                         $success = false;
                                     } else {
                                         if ($this->actionType === 'deploy') {
@@ -644,7 +682,7 @@ class plugins extends common {
                                     }
                                     //}
                                 } catch (Exception $e) {
-                                    $errorMsg = $e->getMessage();
+                                    $this->errorMsg = $e->getMessage();
                                     $success = false;
                                 }
                             }
@@ -661,7 +699,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => $errorMsg
+                            'data' => $this->errorMsg
                         ]
                     ]);
                     break;
@@ -669,18 +707,18 @@ class plugins extends common {
                 // Etape 4
                 case 4:
                     $success = true;
-                    $errorMsg = "";
+                    $this->errorMsg = "";
 
                     switch ($this->actionType) {
                         case 'deploy':
                         case 'upload':
                             $success = $corePlugin->backup();
-                            $errorMsg = "Erreur lors de la sauvegarde des fichiers.";
+                            $this->errorMsg = "Erreur lors de la sauvegarde des fichiers.";
                             break;
 
                         default:
                             // **** Cas de l'activation/désactivation d'un plugin déjà déployé
-                            $success = $corePlugin->execute($errorMsg);
+                            $success = $corePlugin->execute($this->errorMsg);
 
                             // Changement statut du plugin
                             if ($success) {
@@ -692,7 +730,7 @@ class plugins extends common {
                             $corePlugin->changePluginStatus($status);
 
                             if ($success && !helper::isFunctionEnabled("exec")) {
-                                $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
+                                $this->errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
                             }
                     }
 
@@ -701,7 +739,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => $errorMsg
+                            'data' => $this->errorMsg
                         ]
                     ]);
                     break;
@@ -709,12 +747,12 @@ class plugins extends common {
                 // Etape 5
                 case 5:
                     $success = true;
-                    $errorMsg = "";
+                    $this->errorMsg = "";
 
                     switch ($this->actionType) {
                         case 'deploy':
                         case 'upload':
-                            $success = $corePlugin->execute($errorMsg);
+                            $success = $corePlugin->execute($this->errorMsg);
 
                             // Changement statut du plugin
                             if ($success) {
@@ -727,7 +765,7 @@ class plugins extends common {
                             $corePlugin->changePluginStatus($status);
 
                             if ($success && !helper::isFunctionEnabled("exec")) {
-                                $errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
+                                $this->errorMsg = "La fonction 'exec' n'étant pas accessible sur l'hébergement, le contrôle des fichiers PHP n'a pas pu être effectué.";
                             }
 
                         default:
@@ -739,7 +777,7 @@ class plugins extends common {
                         'display' => self::DISPLAY_JSON,
                         'content' => [
                             'success' => $success,
-                            'data' => $errorMsg
+                            'data' => $this->errorMsg
                         ]
                     ]);
                     break;

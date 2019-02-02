@@ -19,7 +19,6 @@ $(document).ready(function() {
     }
 
     if($("#directUpload")){
-        //$("#uploadSpinner").hide();
         $("#directUpload")
             .change(function() {
                 uploadFile();
