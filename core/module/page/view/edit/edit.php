@@ -117,8 +117,9 @@
 			<div class="block">
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
-						'label' => 'Gabarit de page :',
-						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard.',
+						'label' => 'Gabarit de mise en page :',
+						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard > Cette page sera définie comme barre latérale.
+						          <br>N\'oubliez pas de masquer cette barre latérale dans le menu.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>				
 			<!-- Sélection des barres latérales	 -->

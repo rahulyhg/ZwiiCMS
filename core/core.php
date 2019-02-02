@@ -117,11 +117,14 @@ class common {
 				'title' => 'Cachée',
 				'block' => '12'
 			],
-			'mise_en_page' => [
+			'mise-en-page' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => " Il est désormais possible d'ajouter un ou deux blocs latéraux aux pages de votre site.<p \>Cette mise en page peut être uniforme ou spécifique à certaines pages en fonction de vos goûts ou de vos besoins.<p \>Les gabarits sont disponibles dans les paramètres des pages.<p \>L'édition des blocs est accessible depuis la liste des pages.",
+				'content' => 'Il est désormais possible d\'ajouter une ou deux barres latérales aux pages de votre site. Cette mise en page, qui se définit dans les paramètres de page, peut s\'appliquer à l\'ensemble du site ou à certaines pages en particulier, au gré de vos désirs.</p>
+					<p>Les barres latérales étant constituées par des pages ordinaires dont on a coché l\'option "Barre latérale", cette nouvelle fonctionnalité autorise toutes sortes d\'utilisations : texte, encadrés, images, vidéos... ou simples marges blanches.</p>
+					<p>De plus, on peut définir autant de barres latérales qu\'on le souhaite.</p>
+					<p>La liste des barres disponibles et le choix de leur emplacement apparaissent en fonction du gabarit choisi.</p>',
 				'hideTitle' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
@@ -132,7 +135,10 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Mise en page',
-				'block' => '3-6-3'
+				'block' => '8-4',
+				'barLeft' => '',
+				'barRight' => 'barre'
+
 			],			
 			'blog' => [
 			    'typeMenu' => 'text',
@@ -149,7 +155,9 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Blog',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''				
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -166,7 +174,9 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Galeries',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''				
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -183,7 +193,9 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => true,
 				'title' => 'Site de Zwii',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''				
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -200,7 +212,28 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Contact',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''				
+			],
+			'barre' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<div class="block"><h4>ZwiiCMS</h4><h3>Le CMS sans base de données à l\'installation simple et rapide</p></h3></div>',
+				'hideTitle' => false,
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => 'bottom',
+				'parentPageId' => '',
+				'position' => 0 ,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'Barre Latérale droite',
+				'block' => 'bar',
+				'barLeft' => '',
+				'barRight' => ''
 			],
 		],
 		'module' => [
@@ -1047,7 +1080,7 @@ class common {
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
-			$this->setData(['theme', 'menu','fixed',false]);
+			$this->setData(['theme', 'menu','fixed',false]);			
 			$this->setData(['theme', 'themeVersion', 900]);			
 			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
@@ -1966,7 +1999,7 @@ class layout extends common {
 			//	echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
 			//	echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';
 			//}
-			echo $this->core->output['title'] . '</h1>';
+			// echo $this->core->output['title'] . '</h1>';
 			// Fin modif
 		}
 		echo $this->core->output['content'];
