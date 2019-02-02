@@ -47,7 +47,7 @@ class page extends common {
 		'3-9' => 'Barre latérale 1/4 - Page 3/4',
 		'9-3' => 'Page 3/4    - Barre latérale 1/4',
 		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
-		'bar' => 'Barre latérale'
+		'bar' => 'Cette page est une barre latérale'
 	];
 	
 	/**
@@ -208,9 +208,13 @@ class page extends common {
 				if ($this->getinput('pageEditBlock') !== 'bar') {
 					$barLeft = $this->getinput('pageEditBarLeft');
 					$barRight = $this->getinput('pageEditBarRight');
+
 				} else {
+					// Une barre ne peut pas avoir de barres 
 					$barLeft = "";
 					$barRight = "";
+					// Une barre est masquée
+					$position = 0;
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([

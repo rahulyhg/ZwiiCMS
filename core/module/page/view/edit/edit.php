@@ -107,19 +107,27 @@
 				<?php echo template::select('pageEditPosition', [], [
 					'label' => 'Position'
 				]); ?>
-				<?php echo template::checkbox('pageEditTargetBlank', true, 'Ouvrir dans un nouvel onglet', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
-				]); ?>
-				<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
-				]); ?>
+				<div class="row">
+					<div class="col6">
+					<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
+					]); ?>
+					</div>
+					<div class="col6">
+					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
+					]); ?>
+					</div>
+				</div>
 			</div>
+
+		</div>
+		<div class="col6">
 			<div class="block">
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
 						'label' => 'Gabarit de mise en page :',
-						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard > Cette page sera définie comme barre latérale.
-						          <br>N\'oubliez pas de masquer cette barre latérale dans le menu.',
+						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>				
 			<!-- Sélection des barres latérales	 -->
@@ -143,25 +151,29 @@
 						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
 					]); ?>
 				<?php endif; ?>				
-				</div>							
+			</div>							
 		</div>
-		<div class="col6">
-			<div class="block">
-				<h4>Options avancées</h4>
-				<?php echo template::select('pageEditGroup', self::$groupPublics, [
-					'label' => 'Groupe requis pour accéder à la page',
-					'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
-				]); ?>
-				<?php echo template::text('pageEditMetaTitle', [
-					'label' => 'Méta-titre',
-					'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
-				]); ?>
-				<?php echo template::textarea('pageEditMetaDescription', [
-					'label' => 'Méta-description',
-					'maxlength' => '500',
-					'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
-				]); ?>
-			</div>
+	</div>
+	<div class='row'>
+		<div class="block">
+					<h4>Options avancées</h4>
+					<div class='col6'>
+						<?php echo template::select('pageEditGroup', self::$groupPublics, [
+							'label' => 'Groupe requis pour accéder à la page :',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
+						]); ?>
+					</div>
+					<div class='col12'>
+						<?php echo template::text('pageEditMetaTitle', [
+							'label' => 'Méta-titre',
+							'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
+						]); ?>
+						<?php echo template::textarea('pageEditMetaDescription', [
+							'label' => 'Méta-description',
+							'maxlength' => '500',
+							'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
+						]); ?>
+					</div>						
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
