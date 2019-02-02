@@ -102,11 +102,11 @@ class gallery extends common {
 			]);
 		}
 		// Jeton incorrect
-		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl() . $this->getUrl(0)  . '/config',
-				'notification' => 'Suppression non autorisée'
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Suppression  non autorisée'
 			]);
 		}		
 		// Suppression
