@@ -6,6 +6,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @authorFrédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
