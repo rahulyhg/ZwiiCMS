@@ -1998,7 +1998,7 @@ class layout extends common {
 			if ( !empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'includeParent'])) {
 				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
-				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';
+				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> &#8250; ';
 			}
 			 echo $this->core->output['title'] . '</h2>';
 			// Fin modif
