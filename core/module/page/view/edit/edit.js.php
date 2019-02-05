@@ -51,15 +51,6 @@ pageEditModuleIdDOM.on("change", function() {
  		$("#configModulePositionWrapper").slideUp();			
 	}
 });
-if($("#pageEditModuleId").val() === "form" ||
-   $("#pageEditModuleId").val() === "gallery") {
-    	$("#configModulePositionWrapper").addClass("disabled");
-		$("#configModulePositionWrapper").slideDown();	
-	}
-	else {
-	    $("#configModulePositionWrapper").removeClass("disabled");
-		$("#configModulePositionWrapper").slideUp();				
-}
 
 
 /**
@@ -77,15 +68,6 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditContentWrapper").slideDown();		
 	}
 });
-if($("#pageEditModuleId").val() === "code" ||
-   $("#pageEditModuleId").val() === "redirection") {
-		$("#pageEditContentWrapper").removeClass("disabled");
-		$("#pageEditContentWrapper").slideUp();
-	}
-	else {
-		$("#pageEditContentWrapper").addClass("disabled");
-		$("#pageEditContentWrapper").slideDown();		
-}
 
 
 /**
@@ -103,19 +85,7 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditHideTitleWrapper").slideDown();
 	}
 });
-if($("#pageEditModuleId").val() === "redirection" ||
-   $("#pageEditModuleId").val() === "code") {
-		$("#pageEditHideTitleWrapper").removeClass("disabled");
-		$("#pageEditHideTitleWrapper").slideUp();	
-	}
-	else {	
-		$("#pageEditHideTitleWrapper").addClass("disabled");
-		$("#pageEditHideTitleWrapper").slideDown();
-}
 
-/**
- * Masquer et démasquer la sélection des barres 
- */
 
  
 var pageEditBlockDOM = $("#pageEditBlock");
@@ -169,54 +139,7 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditTargetBlankWrapper").slideDown();
 	}	
 });
-switch ($("#pageEditBlock").val()) {
-		case "bar":
-		case "12":
-			$("#pageEditBarLeftWrapper").removeClass("disabled");
-			$("#pageEditBarLeftWrapper").slideUp();
-			$("#pageEditBarRightWrapper").removeClass("disabled");
-			$("#pageEditBarRightWrapper").slideUp();	
-			break;
-		case "3-9":
-		case "4-8":
-			$("#pageEditBarLeftWrapper").addClass("disabled");
-			$("#pageEditBarLeftWrapper").slideDown();
-			$("#pageEditBarRightWrapper").removeClass("disabled");
-			$("#pageEditBarRightWrapper").slideUp();					
-			break;
-		case "9-3":
-		case "8-4":
-			$("#pageEditBarLeftWrapper").removeClass("disabled");
-			$("#pageEditBarLeftWrapper").slideUp();	
-			$("#pageEditBarRightWrapper").addClass("disabled");
-			$("#pageEditBarRightWrapper").slideDown();				
-			break;
-		case "3-6-3":
-			$("#pageEditBarLeftWrapper").addClass("disabled");
-			$("#pageEditBarLeftWrapper").slideDown();
-			$("#pageEditBarRightWrapper").addClass("disabled");
-			$("#pageEditBarRightWrapper").slideDown();				
-			break;
-};
-if ($("#pageEditBlock").val() === "bar") {
-			$("#pageEditPositionWrapper").removeClass("disabled");
-			$("#pageEditPositionWrapper").slideUp();
-			$("#pageEditTargetBlank").removeClass("disabled");
-			$("#pageEditTargetBlank").slideUp();
-			$("#pageDisableWrapper").removeClass("disabled");
-			$("#pageDisableWrapper").slideUp();	
-			$("#pageEditTargetBlankWrapper").removeClass("disabled");
-			$("#pageEditTargetBlankWrapper").slideUp();
-	} else {
-			$("#pageEditPositionWrapper").addClass("disabled");
-			$("#pageEditPositionWrapper").slideDown();
-			$("#pageEditTargetBlank").addClass("disabled");
-			$("#pageEditTargetBlank").slideDown();
-			$("#pageDisableWrapper").addClass("disabled");
-			$("#pageDisableWrapper").slideDown();	
-			$("#pageEditTargetBlankWrapper").addClass("disabled");
-			$("#pageEditTargetBlankWrapper").slideDown();
-	}
+
 	
 /**
  * Masquer ou afficher le chemin de fer
