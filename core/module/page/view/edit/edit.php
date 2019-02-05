@@ -55,9 +55,6 @@
 				</div>
 				<div class="row">
 					<div class="col6">
-						<?php echo template::checkbox('pageEditHideTitle', true, 'Cacher le titre dans la page', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
-						]); ?>					
 
 					</div>
 					<div class="col6">			
@@ -117,6 +114,18 @@
 					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
 					]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
+						]); ?>
+					</div>
+					<div class="col6">						
+						<?php echo template::checkbox('pageEditIncludeParent', true, 'Nom de la page parente', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'includeParent'])
+						]); ?>
 					</div>
 				</div>
 			</div>

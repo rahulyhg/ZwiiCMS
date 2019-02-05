@@ -1992,15 +1992,17 @@ class layout extends common {
 			)
 		) {
 			// Chemin de fer pour le titre avec des enfants
-			 echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
+			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
 			// remplacé par :
-			//echo '<h2 id="sectionTitle">';
-			//if ($this->getData(['page', $this->getUrl(0), 'parentPageId']) !== '' ) {
-			//	echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
-			//	echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';
-			//}
-			// echo $this->core->output['title'] . '</h1>';
+			echo '<h2 id="sectionTitle">';
+			if ( !empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
+				$this->getData(['page', $this->getUrl(0), 'includeParent'])) {
+				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
+				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> > ';
+			}
+			 echo $this->core->output['title'] . '</h2>';
 			// Fin modif
+		
 		}
 		echo $this->core->output['content'];
 	}

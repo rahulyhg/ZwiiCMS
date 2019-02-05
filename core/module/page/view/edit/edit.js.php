@@ -217,8 +217,33 @@ if ($("#pageEditBlock").val() === "bar") {
 			$("#pageEditTargetBlankWrapper").addClass("disabled");
 			$("#pageEditTargetBlankWrapper").slideDown();
 	}
+	
+/**
+ * Masquer ou afficher le chemin de fer
+ */
 
-
+var pageEditHideTitleDOM = $("#pageEditHideTitle");
+pageEditHideTitleDOM.on("change", function() {
+	if ($(this).is(':checked')) {
+			$("#pageEditIncludeParentWrapper").removeClass("disabled");
+			$("#pageEditIncludeParentWrapper").slideUp();
+	} else {
+			$("#pageEditIncludeParentWrapper").addClass("disabled");
+			$("#pageEditIncludeParentWrapper").slideDown();		
+	}
+});
+var pageEditParentPageIdDOM = $("#pageEditParentPageId");
+pageEditParentPageIdDOM.on("change", function() {
+	if ($(this).val() === "") {
+		console.log('true');
+			$("#pageEditIncludeParentWrapper").removeClass("disabled");
+			$("#pageEditIncludeParentWrapper").slideUp();
+	} else {
+		console.log('faux');
+			$("#pageEditIncludeParentWrapper").addClass("disabled");
+			$("#pageEditIncludeParentWrapper").slideDown();		
+	}
+});
 
 
 
