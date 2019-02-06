@@ -1332,8 +1332,11 @@ class core extends common {
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
-				$title =ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
-						' &#8250; '.
+				$title = '<a href="' . helper::baseUrl() . 
+						$this->getData(['page', $this->getUrl(0), 'parentPageId']) .
+						'">' .
+						ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
+						'</a> &#8250; '.
 						$this->getData(['page', $this->getUrl(0), 'title']);			
 		} 
 		// Importe la page
@@ -1547,7 +1550,7 @@ class core extends common {
 		if($this->output['metaTitle'] === '') {
 			if($this->output['title']) {
 				$this->addOutput([
-					'metaTitle' => $this->output['title'] . ' - ' . $this->getData(['config', 'title'])
+					'metaTitle' => strip_tags($this->output['title']) . ' - ' . $this->getData(['config', 'title'])
 				]);
 			}
 			else {
