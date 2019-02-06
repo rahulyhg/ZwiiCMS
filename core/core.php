@@ -72,6 +72,7 @@ class common {
                 'disable' => false,
 				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a title=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
 				'hideTitle' => false,
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -89,6 +90,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Vous pouvez assigner des parents à vos pages afin de mieux organiser votre menu !</p>\r\n<div class=\"row\">\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n</div>",
 				'hideTitle' => false,
+				'breadCrumb' => true,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -106,6 +108,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
+				'breadCrumb' => true,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -126,6 +129,7 @@ class common {
 					<p>De plus, on peut définir autant de barres latérales qu\'on le souhaite.</p>
 					<p>La liste des barres disponibles et le choix de leur emplacement apparaissent en fonction du gabarit choisi.</p>',
 				'hideTitle' => false,
+				'breadCrumb' => true,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -146,6 +150,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page contient une instance du module de blog. Cliquez sur un article afin de le lire et de poster des commentaires.</p>",
 				'hideTitle' => false,
+				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -165,6 +170,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page contient une instance du module de galeries photos. Cliquez sur la galerie ci-dessous afin de voir les photos qu'elle contient.</p>",
 				'hideTitle' => false,
+				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'gallery',
@@ -184,6 +190,7 @@ class common {
                 'disable' => false,
 				'content' => "",
 				'hideTitle' => false,
+				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'redirection',
@@ -203,6 +210,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page contient un exemple de formulaire conçu à partir du module de génération de formulaires. Il est configuré pour envoyer les données saisies par mail aux administrateurs du site.</p>",
 				'hideTitle' => false,
+				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'form',
@@ -222,6 +230,7 @@ class common {
                 'disable' => false,
 				'content' => '<div class="block"><h4>ZwiiCMS</h4><h3>Le CMS sans base de données à l\'installation simple et rapide</p></h3></div>',
 				'hideTitle' => false,
+				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -1318,6 +1327,15 @@ class core extends common {
 				}
 			}
 		}
+
+		// Breadcrumb
+		$title = $this->getData(['page', $this->getUrl(0), 'title']);
+		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
+				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
+				$title =ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
+						' &#8250; '.
+						$this->getData(['page', $this->getUrl(0), 'title']);			
+		} 
 		// Importe la page
 		if(
 			$this->getData(['page', $this->getUrl(0)]) !== null
@@ -1325,7 +1343,7 @@ class core extends common {
 			AND $access
 		) {
 			$this->addOutput([
-				'title' => $this->getData(['page', $this->getUrl(0), 'title']),
+				'title' => $title,
 				'content' => $this->getData(['page', $this->getUrl(0), 'content']),
 				'metaDescription' => $this->getData(['page', $this->getUrl(0), 'metaDescription']),
 				'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
@@ -1340,7 +1358,7 @@ class core extends common {
 			if($access AND $this->getData(['page', $this->getUrl(0), 'moduleId'])) {
 				$moduleId = $this->getData(['page', $this->getUrl(0), 'moduleId']);
 				$this->addOutput([
-					'title' => $this->getData(['page', $this->getUrl(0), 'title']),
+					'title' => $title,
 					'metaDescription' => $this->getData(['page', $this->getUrl(0), 'metaDescription']),
 					'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
@@ -1486,7 +1504,7 @@ class core extends common {
 								'vendor' => array_merge($this->output['vendor'], $output['vendor'])
 							]);
 						}
-						if($output['title'] !== null) {
+						if($output['title'] !== null) {										
 							$this->addOutput([
 								'title' => $output['title']
 							]);
@@ -1991,18 +2009,7 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			// Chemin de fer pour le titre avec des enfants
-			// echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';
-			// remplacé par :
-			echo '<h2 id="sectionTitle">';
-			if ( !empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
-				$this->getData(['page', $this->getUrl(0), 'includeParent'])) {
-				echo '<a href="' . helper::baseUrl() . $this->getData(['page', $this->getUrl(0), 'parentPageId']) .'">';
-				echo  ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) . '</a> &#8250; ';
-			}
-			 echo $this->core->output['title'] . '</h2>';
-			// Fin modif
-		
+			echo '<h1 id="sectionTitle">' . $this->core->output['title'] . '</h1>';				
 		}
 		echo $this->core->output['content'];
 	}

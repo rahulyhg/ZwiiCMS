@@ -123,8 +123,8 @@
 						]); ?>
 					</div>
 					<div class="col6">						
-						<?php echo template::checkbox('pageEditIncludeParent', true, 'Nom de la page parente', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'includeParent'])
+						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
 						]); ?>
 					</div>
 				</div>
