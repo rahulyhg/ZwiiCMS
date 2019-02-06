@@ -240,27 +240,6 @@ td > .col12 {
 	top: 0;
 	z-index: 19;
 }
-/* Barre pour les membres */
-#bar #barMember {
-	float: right;
-	font-size: .8em;
-	position: fixed;
-	position: -webkit-sticky; /* Safari */
-	position: sticky;
-	top: 0;
-	z-index: 19;
-	right: 10px;
-	top: 10px;;
-	padding: 5px;
-	background: rgba(33, 34, 35, .8);
-	color: #FFF;
-	height: 55px;
-	-webkit-transition: background.3s ease-out;
-	transition: background .3s ease-out;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-}
 /* fin barre pour les membres */
 #bar:after {
 	content: " ";
