@@ -132,6 +132,13 @@ class user extends common {
 	 * Édition
 	 */
 	public function edit() {
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {			
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Action  non autorisée'
+			]);
+		}	
 		// Accès refusé
 		if(
 			// L'utilisateur n'existe pas
@@ -152,13 +159,6 @@ class user extends common {
 				'access' => false
 			]);
 		}
-		if ($this->getUrl(4) !== $_SESSION['csrf']) {			
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'user',
-				'notification' => 'Action  non autorisée'
-			]);
-		}		
 		// Accès autorisé
 		else {
 			// Soumission du formulaire
