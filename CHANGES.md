@@ -6,14 +6,12 @@
     - gestion des thèmes :
         - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
         - Importer un thème à partir des fichiers
-    - Option de position fixe du menu type Facebook        
+       
     - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
-    - Contenu des barres latérales intégré aux pages.
     - Changement du libellé Modérateur devient Editeur 
     - Editeur :     
         - VisualBlocks dans TinyMCE
         - CodeMirror dans TinyMCE
-    - Mini barre pour les membres simples
     - Update : affichage de la version proposée dans la popup de mise à jour
     - Module Formulaire :
             - Case à cocher dans les formulaires
@@ -24,6 +22,8 @@
     - Edition de page : masquage des options inutiles selon le module
         - redirection : contenu de page et masquer le titre
         - code : contenu de page
+    - Barre d'administration fixe
+    - Option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
 
 Correctif : 
     - contrôle CSRF de la configuration du compte connecté
