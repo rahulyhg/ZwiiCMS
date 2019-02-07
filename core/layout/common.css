@@ -326,15 +326,10 @@ header .container {
 body > nav {
 	margin: 0 -10px;
 }
+
+
 /* Items du menu */
 
-/* Barre de navigation fixe quand le menu est en-dehors du site */ 
-#navfixed {
-	position: fixed;
-	top:0;
-	width:100%;
-	z-index:100;
-}
 nav a > img {
 	margin: -4px 0;
 	vertical-align: middle;
@@ -410,6 +405,23 @@ nav a:hover {
 		padding-left: 40px !important;
 	}
 }
+
+/* Barre de navigation fixe quand le menu est en-dehors du site */ 
+
+nav #navStickyLogout {
+	position: fixed !important;
+	top:0px;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;	
+}
+
+nav #navStickyConnected {
+	position: fixed !important;
+	top:45px !important;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;	
+}
+
 
 /* Corps */
 section {
