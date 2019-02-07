@@ -69,6 +69,7 @@ $("input, select").on("change", function() {
 		case 'body-first':
 			$("nav").show().insertAfter("#bar");
 			$("#menu").removeClass('container-large');
+			$("nav").removeClass('#navfixedconnected');
 			$("#menu").addClass('container');
 			break;			
 		case 'body-second':
@@ -78,11 +79,13 @@ $("input, select").on("change", function() {
 			else {
 				$("nav").show().insertAfter("#bar");
 			}
+			$("nav").removeClass('#navfixedconnected');
 			break;
 		case 'top':
 			$("nav").show().insertAfter("#bar");
 			$("#menu").removeClass('container');
 			$("#menu").addClass('container-large');
+			$("nav").addClass('#navfixedconnected');
 			break;			
 	}
 });

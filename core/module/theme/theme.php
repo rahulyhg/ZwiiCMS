@@ -134,10 +134,10 @@ class theme extends common {
 		'20px 15px' => 'Grande',
 		'25px 15px' => 'Très grande'
 	];
-	public static $menuPositionsSite = [		
+	public static $menuPositionsSite = [
+		'top' => 'En-dehors du site',		
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
-		'top' => 'En-dehors du site',	
 		'hide' => 'Caché'
 	];
 	public static $menuPositionsBody = [
