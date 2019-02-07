@@ -226,7 +226,7 @@ td > .col12 {
 .container-large-fixed {
 	width: 100%;
 	position:fixed;
-	z-index: 50;
+	z-index: 15	;
   }
 
 /* Barre de membre */
@@ -404,9 +404,10 @@ nav a:hover {
 }
 /* Barre de navigation fixe quand le menu est en-dehors du site */ 
 #navfixedlogout {
-	position: fixed;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
 	top:0px;
-	z-index:18;
+	z-index:0;
 	width:100%;
 }
 
@@ -416,6 +417,8 @@ nav a:hover {
 	position: -webkit-sticky; /* Safari */
 	position: sticky;
 }
+
+
 
 
 /* Corps */
