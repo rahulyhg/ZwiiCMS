@@ -28,9 +28,10 @@
 		$this->getData(['theme', 'menu', 'fixed']) === true) {
 			if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
 			 	{echo 'id="navfixedlogout"';}
-			else
+			elseif ($this->getUrl(0) !== 'theme') 
 				{echo 'id="navfixedconnected"';} 
-	} ?>
+		}
+	?>
 	>
 		<div id="toggle"><?php echo template::ico('menu'); ?></div>
 		<div id="menu" class="
