@@ -68,8 +68,8 @@ class common {
 		'page' => [
 			'accueil' => [
 			    'typeMenu' => 'text',
-                		'iconUrl' => '',
-                		'disable' => false,
+                'iconUrl' => '',
+                'disable' => false,
 				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a title=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
 				'hideTitle' => false,
 				'breadCrumb' => false,
@@ -86,7 +86,7 @@ class common {
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
-                		'iconUrl' => '',
+                'iconUrl' => '',
                 'disable' => false,
 				'content' => "<p>Vous pouvez assigner des parents à vos pages afin de mieux organiser votre menu !</p>\r\n<div class=\"row\">\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n</div>",
 				'hideTitle' => false,
@@ -104,8 +104,8 @@ class common {
 			],
 			'cachee' => [
 			    'typeMenu' => 'text',
-                		'iconUrl' => '',
-               			'disable' => false,
+                'iconUrl' => '',
+                'disable' => false,
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
 				'breadCrumb' => true,				
@@ -122,8 +122,8 @@ class common {
 			],
 			'mise-en-page' => [
 			    'typeMenu' => 'text',
-                		'iconUrl' => '',
-                		'disable' => false,
+                'iconUrl' => '',
+                'disable' => false,
 				'content' => 'Il est désormais possible d\'ajouter une ou deux barres latérales aux pages de votre site. Cette mise en page, qui se définit dans les paramètres de page, peut s\'appliquer à l\'ensemble du site ou à certaines pages en particulier, au gré de vos désirs.</p>
 					<p>Les barres latérales étant constituées par des pages ordinaires dont on a coché l\'option "Barre latérale", cette nouvelle fonctionnalité autorise toutes sortes d\'utilisations : texte, encadrés, images, vidéos... ou simples marges blanches.</p>
 					<p>De plus, on peut définir autant de barres latérales qu\'on le souhaite.</p>
@@ -153,9 +153,9 @@ class common {
 				'breadCrumb' => false,				
 				'metaDescription' => '',
 				'metaTitle' => '',
-				'moduleId' => '',
+				'moduleId' => 'blog',
 				'modulePosition' => 'bottom',
-				'parentPageId' => 'blog',
+				'parentPageId' => '',
 				'position' => 4,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
