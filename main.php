@@ -27,9 +27,9 @@
 	if($this->getData(['theme', 'menu', 'position']) === 'top' &&
 		$this->getData(['theme', 'menu', 'fixed']) === true) {
 			if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
-			 	{echo 'id="navStickyLogout"';}
+			 	{echo 'id="navfixedlogout"';}
 			else
-				{echo 'id="navStickyConnected"';} 
+				{echo 'id="navfixedconnected"';} 
 	} ?>
 	>
 		<div id="toggle"><?php echo template::ico('menu'); ?></div>
