@@ -179,15 +179,17 @@ class plugins extends common {
                 $ret = preg_match('#[0-9]+-(.+)#', $link, $matches);
                 if ($ret === 1) {
                     if (is_null($pluginId) || $matches[1] === $pluginId) {
-                        array_push($sharedPlugins, array(
-                            'id' => (string) $matches[1],
-                            'name' => (string) $module->name,
-                            'desc' => (string) $module->description,
-                            'link' => (string) $downloadLink,
-                            'author' => (string) $module->author,
-                            'version' => (string) $module->version,
-                            'origin' => "official"
-                                )
+                        array_push($sharedPlugins, 
+                            array(
+                                'id' => (string) $matches[1],
+                                'name' => (string) $module->name,
+                                'desc' => (string) $module->description,
+                                'link' => (string) $downloadLink,
+                                'author' => (string) $module->author,
+                                'version' => (string) $module->version,
+                                'extension' => (string) $module->extension,
+                                'origin' => "official"
+                            )
                         );
 
                         if ($matches[1] === $pluginId) {
@@ -515,7 +517,7 @@ class plugins extends common {
                                             $this->errorMsg = $matches[1];
                                             $success = false;
                                         } else {
-                                            $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.zip', $content) !== false);
+                                            $success = (file_put_contents(self::TEMP_DIR . $this->targetPluginId . '.' . $sharedPlugins[0]["extension"], $content) !== false);
                                         }
                                     } else {
                                         $this->errorMsg = "L'archive téléchargée est vide.";
