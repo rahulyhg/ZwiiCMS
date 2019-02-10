@@ -26,7 +26,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '9.0.0';
+	const ZWII_VERSION = '9.0.00';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -771,10 +771,10 @@ class common {
 	}
 
 	/**
-	 * Accède à la liste des pages parents et de leurs enfants ou aux enfants d'une page parent
+	 * Accède à la liste des pages parents et de leurs enfants
 	 * @param int $parentId Id de la page parent
 	 * @param bool $onlyVisible Affiche seulement les pages visibles
-	 * @param bool $onlyBlock Affcihe seulement les page de type barre
+	 * @param bool $onlyBlock Affiche seulement les pages de type barre
 	 * @return array
 	 */
 	public function getHierarchy($parentId = null, $onlyVisible = true, $onlyBlock = false) {
@@ -794,6 +794,7 @@ class common {
 			return $hierarchy;
 		}
 	}
+
 
 
 	/**
@@ -1084,14 +1085,14 @@ class common {
 			$this->SaveData();
 		}	
 		// Version 9.0.0
-		if($this->getData(['core', 'dataVersion']) < 900) {
+		if($this->getData(['core', 'dataVersion']) < 9000) {
 			$this->setData(['theme', 'site', 'block','12']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
 			$this->setData(['theme', 'menu','fixed',false]);			
-			$this->setData(['theme', 'themeVersion', 900]);			
-			$this->setData(['core', 'dataVersion', 900]);
+			$this->setData(['theme', 'themeVersion', 9000]);			
+			$this->setData(['core', 'dataVersion', 9000]);
 			$this->SaveData();
 		}				
 	}
