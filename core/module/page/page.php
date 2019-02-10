@@ -242,6 +242,26 @@ class page extends common {
 						'barRight' => $barRight
 					]
 				]);
+				// Barre renommée : changement le nom de la barre dans les pages mères
+				if ($this->getinput('pageEditBlock') === 'bar') {
+					echo '<pre>';
+					foreach ($this->getHierarchy() as $eachPageId=>$parentId) {
+						if ($this->getData(['page',$eachPageId,'barRight']) === $this->getUrl(2)) {
+							$this->setData(['page',$eachPageId,'barRight',$pageId]);
+						}
+						if ($this->getData(['page',$eachPageId,'barLeft']) === $this->getUrl(2)) {
+							$this->setData(['page',$eachPageId,'barLeft',$pageId]);
+						}
+						foreach ($parentId as $childId) {
+							if ($this->getData(['page',$childId,'barRight']) === $this->getUrl(2)) {
+								$this->setData(['page',$childId,'barRight',$pageId]);
+							}
+							if ($this->getData(['page',$childId,'barLeft']) === $this->getUrl(2)) {
+								$this->setData(['page',$childId,'barLeft',$pageId]);
+							}
+						}
+					}
+				}
 				// Redirection vers la configuration
 				if($this->getInput('pageEditModuleRedirect', helper::FILTER_BOOLEAN)) {
 					// Valeurs en sortie
