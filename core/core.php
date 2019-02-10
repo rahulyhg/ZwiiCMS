@@ -82,7 +82,9 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Accueil',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
@@ -100,7 +102,9 @@ class common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Enfant',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''
 			],
 			'cachee' => [
 			    'typeMenu' => 'text',
@@ -118,7 +122,9 @@ class common {
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
 				'title' => 'Cachée',
-				'block' => '12'
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''
 			],
 			'mise-en-page' => [
 			    'typeMenu' => 'text',
