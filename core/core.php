@@ -26,7 +26,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '9.0.00';
+	const ZWII_VERSION = '9.0.0';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1091,14 +1091,13 @@ class common {
 			$this->SaveData();
 		}	
 		// Version 9.0.0
-		if($this->getData(['core', 'dataVersion']) < 9000) {
+		if($this->getData(['core', 'dataVersion']) < 900) {
 			$this->setData(['theme', 'site', 'block','12']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
-			$this->setData(['theme', 'menu','fixed',false]);			
-			$this->setData(['theme', 'themeVersion', 9000]);			
-			$this->setData(['core', 'dataVersion', 9000]);
+			$this->setData(['theme', 'menu','fixed',false]);						
+			$this->setData(['core', 'dataVersion', 900]);
 			$this->SaveData();
 		}				
 	}
