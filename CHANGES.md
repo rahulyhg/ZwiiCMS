@@ -18,7 +18,6 @@
             - Bouton d'export au format CSV
             - Bouton effacer toutes les données
             - Correction faille CSRF dans Data
-    - Module Code en test
     - Edition de page : masquage des options inutiles selon le module
         - redirection : contenu de page et masquer le titre
         - code : contenu de page
