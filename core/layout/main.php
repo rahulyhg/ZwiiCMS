@@ -154,8 +154,10 @@
 		}
 		if (sizeof($blocks) === 1 ||
 		   ($this->getData(['page', $this->getUrl(2), 'moduleId']) == '' &&
-		   $this->getUrl(1) == 'config')
-		   ) {
+		   $this->getUrl(1) == 'config' ||  // Configuration d'un module en page pleibe
+		   $this->getUrl(1) == 'data'   ||  // données de formulaire en page pleine
+		   $this->getUrl(1) == 'comment'    // données des commentaires en page pleine
+		   )) {
 			?><?php $layout->showContent();?><?php
 		} else {
 		?>
