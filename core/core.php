@@ -26,7 +26,10 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	const ZWII_VERSION = '9.0.00';
+	// Numéro de version de développement :
+	const ZWII_VERSION = '9.0.00-dev1';
+	// Numéro de version stable
+	//const ZWII_VERSION = '9.0.00';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -536,9 +539,11 @@ class common {
 			$this->readData();
 		}
 
-		// Mise à jour
-		$this->update();
-				
+		// Mise à jour des données core
+		// Fonction désactivée en dev
+		if (stripos(common::ZWII_VERSION, 'dev') === 0 )
+			$this->update();
+	
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
@@ -1010,6 +1015,7 @@ class common {
 	 * Mises à jour
 	 */
 	private function update() {
+		echo "pop";
 		// Version 8.1.0
 		if($this->getData(['core', 'dataVersion']) < 810) {
 			$this->setData(['config', 'timezone', 'Europe/Paris']);
@@ -2285,7 +2291,8 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
 				// Mise à jour automatique
-				 if(helper::checkNewVersion()) {
+				// Désactivee en dev
+				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === 0 ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
 				 }
 				// Mise à jour automatique
