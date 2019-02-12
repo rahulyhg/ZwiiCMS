@@ -132,7 +132,8 @@ class user extends common {
 	 * Édition
 	 */
 	public function edit() {
-		if ($this->getUrl(3) !== $_SESSION['csrf']) {			
+		if ($this->getUrl(3) !== $_SESSION['csrf'] &&
+			$this->getUrl(4) !== $_SESSION['csrf']) {			
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
