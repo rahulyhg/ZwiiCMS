@@ -2940,11 +2940,6 @@ class template {
 		$html .= sprintf('<select %s>',
 			helper::sprintAttributes($attributes)
 		);
-		// Options
-		// Quand selected vaut 0, afficher une sélection vide
-		//if ($attributes['selected'] === 0) {
-		//	$html .= sprintf('<option value=""></option>');
-		//}
 		foreach($options as $value => $text) {
 			$html .= sprintf(
 				'<option value="%s"%s>%s</option>',
