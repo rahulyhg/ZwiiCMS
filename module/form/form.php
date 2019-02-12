@@ -48,10 +48,20 @@ class form extends common {
 		self::TYPE_CHECKBOX => 'Case à cocher'
 	];
 
+	public static $listUsers = [
+	];
+
 	/**
 	 * Configuration
 	 */
 	public function config() {
+		// Liste des utilisateurs 
+		$userIdsFirstnames = helper::arrayCollumn($this->getData(['user']), 'firstname');
+		ksort($userIdsFirstnames);
+		self::$listUsers [] = '';	
+		foreach($userIdsFirstnames as $userId => $userFirstname) {
+			self::$listUsers [] = $this->getData(['user', $userId, 'mail']);
+		}
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Configuration
@@ -63,6 +73,8 @@ class form extends common {
 					'button' => $this->getInput('formConfigButton'),
 					'capcha' => $this->getInput('formConfigCapcha', helper::FILTER_BOOLEAN),
 					'group' => $this->getInput('formConfigGroup', helper::FILTER_INT),
+					'user' =>  self::$listUsers [$this->getInput('formConfigUser', helper::FILTER_INT)],
+					'mail' => $this->getInput('formConfigMail', helper::FILTER_MAIL),
 					'pageId' => $this->getInput('formConfigPageId', helper::FILTER_ID),
 					'subject' => $this->getInput('formConfigSubject')
 				]
@@ -296,9 +308,13 @@ class form extends common {
 			$this->setData(['module', $this->getUrl(0), 'data', helper::increment(1, $this->getData(['module', $this->getUrl(0), 'data'])), $data]);
 			// Envoi du mail
 			$sent = true;
+			$singleuser = $this->getData(['module', $this->getUrl(0), 'config', 'user']);
+			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
 			if(
 				self::$inputNotices === []
 				AND $group = $this->getData(['module', $this->getUrl(0), 'config', 'group'])
+				OR $singleuser !== ''
+				OR $singlemail !== ''
 			) {
 				// Utilisateurs dans le groupe
 				$to = [];
@@ -306,6 +322,15 @@ class form extends common {
 					if($user['group'] === $group) {
 						$to[] = $user['mail'];
 					}
+				}
+								
+				// Utilisateur désigné
+				if (!empty($singleuser)) {
+					$to[] = $singleuser;
+				}
+				// Mail désigné
+				if (!empty($singlemail)) {
+					$to[] = $singlemail;
 				}
 				if($to) {
 					// Sujet du mail

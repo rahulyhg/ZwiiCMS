@@ -142,6 +142,8 @@ $("#formConfigMailOptionsToggle").on("change", function() {
 		$("#formConfigMailOptions").slideUp(function() {
 			$("#formConfigGroup").val("");
 			$("#formConfigSubject").val("");
+			$("#formConfigMail").val("");
+			$("#formConfigUser").val("");
 		});
 	}
 }).trigger("change");
