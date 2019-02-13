@@ -26,8 +26,9 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	// Numéro de version de développement :
-	const ZWII_VERSION = '9.0.00-dev1';
+	// Numéro de version de développement :/
+	// Désactive l'update auto
+	const ZWII_VERSION = '9.0.00-dev2';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
