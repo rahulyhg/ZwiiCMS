@@ -60,7 +60,7 @@ class form extends common {
 		ksort($userIdsFirstnames);
 		self::$listUsers [] = '';	
 		foreach($userIdsFirstnames as $userId => $userFirstname) {
-			self::$listUsers [] = $this->getData(['user', $userId, 'mail']);
+			self::$listUsers [] =  $userId;
 		}
 		// Soumission du formulaire
 		if($this->isPost()) {
@@ -74,7 +74,7 @@ class form extends common {
 					'capcha' => $this->getInput('formConfigCapcha', helper::FILTER_BOOLEAN),
 					'group' => $this->getInput('formConfigGroup', helper::FILTER_INT),
 					'user' =>  self::$listUsers [$this->getInput('formConfigUser', helper::FILTER_INT)],
-					'mail' => $this->getInput('formConfigMail', helper::FILTER_MAIL),
+					'mail' => $this->getInput('formConfigMail') ,
 					'pageId' => $this->getInput('formConfigPageId', helper::FILTER_ID),
 					'subject' => $this->getInput('formConfigSubject')
 				]
@@ -307,9 +307,13 @@ class form extends common {
 			// Crée les données
 			$this->setData(['module', $this->getUrl(0), 'data', helper::increment(1, $this->getData(['module', $this->getUrl(0), 'data'])), $data]);
 			// Envoi du mail
+			// Rechercher l'adresse en fonction du mail
 			$sent = true;
-			$singleuser = $this->getData(['module', $this->getUrl(0), 'config', 'user']);
+			$singleuser = $this->getData(['user',
+						  $this->getData(['module', $this->getUrl(0), 'config', 'user']),
+						  'mail']);
 			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
+			// Verification si le mail peut être envoyé
 			if(
 				self::$inputNotices === []
 				AND $group = $this->getData(['module', $this->getUrl(0), 'config', 'group'])
