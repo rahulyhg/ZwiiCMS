@@ -53,15 +53,28 @@
 				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 					'checked' => helper::checkRewrite(),
 					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
-				]); ?>
-			
-								
+				]); ?>			
 				<?php echo template::select('itemsperPage', $module::$ItemsList, [
 					'label' => 'Pagination Blog et News',
 					'selected' => $this->getData(['config', 'itemsperPage']),
 					'help' => 'Nombre d\'articles de blog ou de news par page'
 				]); ?>
 			</div>
+			<div class="block">
+				<h4>Copie d'écran OpenGraph</h4>
+				<div class="row">
+					<div class="col6">
+						<img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+					</div>
+					<div class="col6">		
+						<?php echo template::button('configMetaImage', [
+						'href' => helper::baseUrl() . 'config/configMetaImage',
+						'value' => 'Rafraîchir la capture d\'écran'
+						]); ?>
+					</div>
+				</div>
+				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>
+			</div>								
 		</div>
 		<div class="col6">
 			<div class="block">
@@ -117,11 +130,54 @@
 			</div>
 			<div class="block">
 				<h4>Système</h4>
-				<?php echo template::text('configVersion', [
-					'label' => 'Version de Zwii',
-					'readonly' => true,
-					'value' => self::ZWII_VERSION
-				]); ?>
+				<div class="row">
+					<div  class="col6">
+						<?php echo template::text('configVersion', [
+						'label' => 'ZwiiCMS Version',
+						'readonly' => true,
+						'value' => self::ZWII_VERSION
+					]); ?>	
+					</div>	
+					<div  class="col6">
+						<?php echo template::text('moduleRedirectionVersion', [
+							'label' => 'Module Redirection version',
+							'readonly' => true,
+							'value' => redirection::REDIRECTION_VERSION
+						]); ?>
+					</div>										
+				</div>							
+				<div class="row">
+					<div  class="col6">
+						<?php echo template::text('moduleFormVersion', [
+							'label' => 'Module Form  version',
+							'readonly' => true,
+							'value' => form::FORM_VERSION
+						]); ?>
+					</div>
+					<div  class="col6">
+						<?php echo template::text('moduleGalleryVersion', [
+							'label' => 'Module Gallery  version',
+							'readonly' => true,
+							'value' => gallery::GALLERY_VERSION
+						]); ?>
+					</div>										
+				</div>
+				<div class="row">
+					<div  class="col6">
+						<?php echo template::text('moduleNewsVersion', [
+							'label' => 'Module News version',
+							'readonly' => true,
+							'value' => news::NEWS_VERSION
+						]); ?>
+					</div>
+					<div  class="col6">
+						<?php echo template::text('moduleBlogVersion', [
+							'label' => 'Module Blog  version',
+							'readonly' => true,
+							'value' => blog::BLOG_VERSION
+						]); ?>
+					</div>										
+				</div>					
 				<?php echo template::select('configTimezone', $module::$timezones, [
 					'label' => 'Fuseau horaire',
 					'selected' => $this->getData(['config', 'timezone'])
@@ -135,29 +191,13 @@
 					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier site/backup/. La sauvegarde est conservée 30 jours.'
 				]); ?>
 				<div class="row">
-					<div class="col6 offset3">
+					<div class="col8 offset2">
 						<?php echo template::button('configExport', [
 							'href' => helper::baseUrl() . 'config/backup',
-							'value' => 'Exporter les données'
+							'value' => 'Exporter une copie du site<br>(données, thème et fichiers)'
 						]); ?>
 					</div>
 				</div>
-			</div>
-			<div class="block">
-				<h4>Copie d'écran pour OpenGraph :</h4>
-				<div clas='row'>
-					<div class="col6 offset3">
-						<p><img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
-				</div>
-				<div class='row'> 
-					<div class="col6 offset3">		
-							<?php echo template::button('configMetaImage', [
-								'href' => helper::baseUrl() . 'config/configMetaImage',
-								'value' => 'Rafraîchir la capture d\'écran'
-								]); ?>
-					</div>
-				</div>	
-				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>				
 			</div>
 		</div>
 	</div>
