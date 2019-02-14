@@ -17,6 +17,7 @@
             - Case à cocher dans les formulaires
             - Bouton d'export au format CSV
             - Bouton effacer toutes les données
+            - Notification d'un membre ou email libre 
             - Correction faille CSRF dans Data
     - Edition de page : masquage des options inutiles selon le module
         - redirection : contenu de page et masquer le titre
