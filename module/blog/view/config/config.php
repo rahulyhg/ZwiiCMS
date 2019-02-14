@@ -27,6 +27,6 @@
 <?php else: ?>
 	<?php echo template::speech('Aucun article.'); ?>
 <?php endif; ?>
-<em>Version du module&nbsp;:&nbsp;
+<div class="moduleVersion">Module version n°
 	<?php echo $module::BLOG_VERSION; ?>
-</em>
+</div>

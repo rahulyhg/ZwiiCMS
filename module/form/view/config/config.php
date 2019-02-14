@@ -150,6 +150,6 @@
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
-<em>Version du module&nbsp;:&nbsp;
+<div class="moduleVersion">Module version n°
 	<?php echo $module::FORM_VERSION; ?>
-</em>
+</div>

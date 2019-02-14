@@ -21,6 +21,6 @@
 <?php else: ?>
 	<?php echo template::speech('Aucune news.'); ?>
 <?php endif; ?>
-<em>Version du module&nbsp;:&nbsp;
+<div class="moduleVersion">Module version n°
 	<?php echo $module::NEWS_VERSION; ?>
-</em>
+</div>

@@ -433,6 +433,13 @@ section:after {
 	clear: both;
 }
 
+/* Version des modules*/
+.moduleVersion {
+	font-size: 0.8em;
+	font-style: italic;
+	text-align: right;  
+}
+
 /* Pied de page */
 body > footer {
 	margin: 0 -10px;
