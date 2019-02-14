@@ -154,11 +154,13 @@
 		}
 		// Page pleine pour la configuration des modules et l'édition des pages
 		if (sizeof($blocks) === 1 ||
-		   $this->getUrl(1) === '' ||
-		   $this->getData(['page', $this->getUrl(2), 'moduleId']) == ''
-		   ) {
-			?><?php $layout->showContent();?><?php
-		} else {
+			($this->getData(['page', $this->getUrl(2), 'moduleId']) == '' &&
+			$this->getUrl(1) == 'config' ||  // Configuration d'un module en page pleine
+			$this->getUrl(1) == 'data'   ||  // données de formulaire en page pleine
+			$this->getUrl(1) == 'comment'    // données des commentaires en page pleine
+			)) {
+				?><?php $layout->showContent();?><?php
+				} else {
 		?>
 		<div class="row">
 			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft">
