@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev2';
+	const ZWII_VERSION = '9.0.00-dev3';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -2293,7 +2293,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
 				// Mise à jour automatique
 				// Désactivee en dev
-				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === 0 ) {
+				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') !== 0 ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
 				 }
 				// Mise à jour automatique
