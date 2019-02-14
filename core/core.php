@@ -2292,8 +2292,8 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
 				// Mise à jour automatique
-				// Désactivee en dev
-				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') !== 0 ) {
+				// Désactivée en dev
+				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === FALSE ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
 				 }
 				// Mise à jour automatique
