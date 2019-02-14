@@ -31,13 +31,16 @@ class form extends common {
 	public static $pages = [];
 	
 	public static $pagination;
+	
+	const FORM_VERSION = '1.3'; 
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
 	const TYPE_TEXT = 'text';
 	const TYPE_TEXTAREA = 'textarea';
 	const TYPE_DATETIME = "date";
-	CONST TYPE_CHECKBOX = "checkbox";
+	const TYPE_CHECKBOX = "checkbox";
+
 
 	public static $types = [
 		self::TYPE_TEXT => 'Champ texte',

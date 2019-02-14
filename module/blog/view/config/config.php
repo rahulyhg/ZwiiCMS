@@ -27,3 +27,6 @@
 <?php else: ?>
 	<?php echo template::speech('Aucun article.'); ?>
 <?php endif; ?>
+<em>Version du module&nbsp;:&nbsp;
+	<?php echo $module::BLOG_VERSION; ?>
+</em>
