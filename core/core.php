@@ -440,7 +440,7 @@ class common {
 				'textColor' => 'rgba(74, 105, 189, 1)',
 				'textTransform' => 'none'
 			],
-			'themeVersion' => 0,
+			'version' => 0,
 		]
 	];
 	private $hierarchy = [
