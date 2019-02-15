@@ -135,7 +135,7 @@
 						<?php echo template::text('configVersion', [
 						'label' => 'ZwiiCMS Version',
 						'readonly' => true,
-						'value' => self::ZWII_VERSION
+						'value' => common::ZWII_VERSION
 					]); ?>	
 					</div>	
 					<div  class="col6">
