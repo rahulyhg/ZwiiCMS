@@ -55,7 +55,6 @@
 					<li>Configuration du site</li>
 					<li>Personnalisation du thème</li>
 				</ul>
-				<?php echo template::checkbox('userAddSendMail', true, 'Prévenir l\'utilisateur par mail'); ?>
 			</div>
 		</div>
 		<div class="col6">
@@ -73,6 +72,9 @@
 					'autocomplete' => 'off',
 					'label' => 'Confirmation'
 				]); ?>
+				<?php echo template::checkbox('userAddSendMail', true,
+				 'Prévenir l\'utilisateur par mail'); 
+				?>				
 			</div>
 		</div>
 	</div>
