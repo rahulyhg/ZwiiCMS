@@ -116,18 +116,6 @@
 					]); ?>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
-						]); ?>
-					</div>
-					<div class="col6">						
-						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
-						]); ?>
-					</div>
-				</div>
 			</div>
 
 		</div>
@@ -136,7 +124,7 @@
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
 						'label' => 'Gabarits :',
-						'help' => 'Une page définie comme barre latérale est utilisée pour la pagination d\'une page standard. Pour définir la page comme barre latérale, choisissez l\'option dans la liste.',
+						'help' => 'Pour définir la page comme barre latérale, choisissez l\'option dans la liste.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>				
 			<!-- Sélection des barres latérales	 -->
@@ -160,7 +148,19 @@
 						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
 					]); ?>
 				<?php endif; ?>				
-			</div>							
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
+						]); ?>
+					</div>
+					<div class="col6">						
+						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
+						]); ?>
+					</div>
+				</div>					
+			</div>		
 		</div>
 	</div>
 	<div class='row'>
