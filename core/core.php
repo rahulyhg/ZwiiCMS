@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev7';
+	const ZWII_VERSION = '9.0.00-dev8';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -249,7 +249,7 @@ class common {
 				'position' => 0 ,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Barre Latérale',
+				'title' => 'Barre latérale',
 				'block' => 'bar',
 				'barLeft' => '',
 				'barRight' => ''
