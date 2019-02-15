@@ -234,20 +234,23 @@ pageEditHideTitleDOM.on("change", function() {
 			$("#pageEditbreadCrumbWrapper").slideDown();		
 	}
 });
+if ($(this).is(':unchecked')) {
+	$("#pageEditbreadCrumbWrapper").addClass("disabled");
+	$("#pageEditbreadCrumbWrapper").slideDown();
+}
+
+
+
 var pageEditParentPageIdDOM = $("#pageEditParentPageId");
 pageEditParentPageIdDOM.on("change", function() {
 	if ($(this).val() === "") {
-		console.log('true');
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
 	} else {
-		console.log('faux');
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideDown();		
 	}
 });
-
-
 
 
 /**
