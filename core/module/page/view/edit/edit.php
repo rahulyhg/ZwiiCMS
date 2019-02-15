@@ -54,9 +54,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">
-
-					</div>
 					<div class="col6">			
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
 							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
@@ -117,7 +114,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<div class="col6">
 			<div class="block">
