@@ -30,11 +30,13 @@ var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
 	if($(this).val() === "") {
 		$("#pageEditModuleConfig").addClass("disabled");
-		$("#pageEditContentContainer").slideDown();		 
+		$("#pageEditContentContainer").slideDown();
+		$("#pageEditBlock").append('<option value="bar">Barre latérale</option>');		
 	}
 	else {
 		$("#pageEditModuleConfig").removeClass("disabled");
-		$("#pageEditContentContainer").slideUp();	
+		$("#pageEditContentContainer").slideUp();
+		$("#pageEditBlock option[value='bar']").remove();		
 	}
 });
 
@@ -123,7 +125,8 @@ if($("#pageEditModuleId").val() === "redirection" ||
 var pageEditBlockDOM = $("#pageEditBlock");
 pageEditBlockDOM.on("change", function() {
 	switch ($(this).val()) {
-		case "bar":						
+		case "bar":
+			$("pageEditModuleId").val() = "";
 		case "12":
 			$("#pageEditBarLeftWrapper").removeClass("disabled");
 			$("#pageEditBarLeftWrapper").slideUp();
