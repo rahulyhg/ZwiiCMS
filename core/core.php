@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev9';
+	const ZWII_VERSION = '9.0.00-dev10';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -2269,7 +2269,7 @@ class layout extends common {
 					}
 				}
 				$leftItems .= '</select></li>';
-				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page">' . template::ico('plus') . '</a></li>';
+				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page ou<br>une barre latérale">' . template::ico('plus') . '</a></li>';
 				if(
 					// Sur un module de page qui autorise le bouton de modification de la page
 					$this->core->output['showBarEditButton']

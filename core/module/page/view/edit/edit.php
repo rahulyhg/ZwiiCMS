@@ -119,7 +119,7 @@
 			<div class="block">
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
-						'label' => 'Gabarits :',
+						'label' => 'Gabarits de page / Barre latérale',
 						'help' => 'Pour définir la page comme barre latérale, choisissez l\'option dans la liste.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>				
