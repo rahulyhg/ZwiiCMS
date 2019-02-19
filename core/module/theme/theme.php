@@ -545,7 +545,8 @@ class theme extends common {
 	 */
 	public function makezip() {
 		// Creation du dossier
-		$zipFilename  =  'theme-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.zip';
+		// $zipFilename  =  'theme-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.zip';
+		$zipFilename  =  'theme  '.date('d m Y').'  '.date('H i s ').'.zip';
 		$zip = new ZipArchive();
 		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
 			$zip->addFile('site/data/theme.json','site/data/theme.json');
