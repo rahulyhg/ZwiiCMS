@@ -11,26 +11,21 @@
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  *
- * 
- *
- *
- * if (document.referrer.indexOf("edit") === -1)
- * {
- * 	core.confirm(
- * 		"Souhaitez-vous accéder à l'interface de modification de la page ? En cas de refus, vous serez redirigé vers l'URL saisie dans le module de redirection.",
- *  		function() {
- * 			$(location).attr("href", "<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>");
- * 		},
- * 		function() {
- * 			$(location).attr("href", "<?php echo helper::baseUrl() . $this->getUrl(); ?>/force");
- * 		}
- * 	);
- * }
- * else
- * {
- * 	$(location).attr("href", "<?php echo helper::baseUrl(); ?>");
- * }
-**/
+ **/ 
 
-
-self.location='<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>';
+if (document.referrer.indexOf("edit") === -1)
+{
+	core.confirm(
+		"OUI pour accéder à l\'écran d'édition du module - NON pour tester le lien saisi.",
+		function() {
+			$(location).attr("href", "<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>");
+		},
+		function() {
+			$(location).attr("href", "<?php echo helper::baseUrl() . $this->getUrl(); ?>/force");
+		}
+	);
+}
+else
+{
+	$(location).attr("href", "<?php echo helper::baseUrl(); ?>");
+}
