@@ -72,7 +72,7 @@
 					</div>
 					<div class="col6">
 						<?php echo template::file('pageIconUrl', [
-							'label' => 'Icône',
+							'label' => 'Icône du menu',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
 						]); ?>
 					</div>
