@@ -13,19 +13,4 @@
  *
  **/ 
 
-if (document.referrer.indexOf("edit") === -1)
-{
-	core.confirm(
-		"OUI pour accéder à l\'écran d'édition du module - NON pour tester le lien saisi.",
-		function() {
-			$(location).attr("href", "<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>");
-		},
-		function() {
-			$(location).attr("href", "<?php echo helper::baseUrl() . $this->getUrl(); ?>/force");
-		}
-	);
-}
-else
-{
-	$(location).attr("href", "<?php echo helper::baseUrl(); ?>");
-}
+self.location='<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>';
