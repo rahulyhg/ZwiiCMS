@@ -101,20 +101,29 @@ pageEditModuleIdDOM.on("change", function() {
 	   $(this).val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").slideUp();	
+		$("#pageEditBlockWrapper").removeClass("disabled");
+		$("#pageEditBlockWrapper").slideUp();		
 	}
 	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").slideDown();
+		$("#pageEditBlockWrapper").addClass("disabled");
+		$("#pageEditBlockWrapper").slideDown();			
 	}
 });
 if($("#pageEditModuleId").val() === "redirection" ||
    $("#pageEditModuleId").val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
-		$("#pageEditHideTitleWrapper").slideUp();	
+		$("#pageEditHideTitleWrapper").slideUp();
+		$("#pageEditBlockWrapper").removeClass("disabled");
+		$("#pageEditBlockWrapper").slideUp();			
+		
 	}
 	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").slideDown();
+		$("#pageEditBlockWrapper").addClass("disabled");
+		$("#pageEditBlockWrapper").slideDown();		
 }
 
 /**
