@@ -160,14 +160,14 @@ class page extends common {
 		// La page existe
 		else {
 			// Soumission du formulaire
-			if($this->isPost()) {
+			if($this->isPost()) {			
 				$pageId = $this->getInput('pageEditTitle', helper::FILTER_ID, true);
 				// Si l'id a changée
-				if($pageId !== $this->getUrl(2)) {
+				if ($pageId !== $this->getUrl(2)) {
 					// Incrémente le nouvel id de la page
-					$pageId = helper::increment($pageId, $this->getData(['page']));
-					$pageId = helper::increment($pageId, self::$coreModuleIds);
-					$pageId = helper::increment($pageId, self::$moduleIds);
+						$pageId = helper::increment($pageId, $this->getData(['page']));
+						$pageId = helper::increment($pageId, self::$coreModuleIds);
+						$pageId = helper::increment($pageId, self::$moduleIds);
 					// Met à jour les enfants
 					foreach($this->getHierarchy($this->getUrl(2)) as $childrenPageId) {
 						$this->setData(['page', $childrenPageId, 'parentPageId', $pageId]);

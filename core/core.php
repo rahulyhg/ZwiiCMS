@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev12';
+	const ZWII_VERSION = '9.0.00-dev13';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -1775,6 +1775,10 @@ class helper {
 				if(intval($text) !== 0) {
 					$text = 'i' . $text;
 				}
+				// un dossier existe du même nom (erreur en cas de redirection)
+				if (file_exists($text)) {
+					$text = 'p-' .  $text;
+				}				
 				break;
 			case self::FILTER_INT:
 				$text = (int) filter_var($text, FILTER_SANITIZE_NUMBER_INT);
