@@ -195,9 +195,7 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideDown();	
 			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();
-			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();								
+			$("#pageEditModuleIdWrapper").slideDown();							
 	}	
 });
 switch ($("#pageEditBlock").val()) {
@@ -260,9 +258,7 @@ if ($("#pageEditBlock").val() === "bar") {
 			$("#pageEditParentPageIdWrapper").addClass("disabled");
 			$("#pageEditParentPageIdWrapper").slideDown();
 			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();
-			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();				
+			$("#pageEditModuleIdWrapper").slideDown();			
 	}
 	
 /**
