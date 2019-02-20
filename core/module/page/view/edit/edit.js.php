@@ -175,7 +175,10 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditParentPageIdWrapper").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
-										
+			$("#pageEditModuleIdWrapper").removeClass("disabled");
+			$("#pageEditModuleIdWrapper").slideUp();
+			$("#pageEditModuleConfig").removeClass("disabled");
+			$("#pageEditModuleConfig").slideUp();																	
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
@@ -190,7 +193,11 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditParentPageIdWrapper").addClass("disabled");
 			$("#pageEditParentPageIdWrapper").slideDown();	
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideDown();							
+			$("#pageEditbreadCrumbWrapper").slideDown();	
+			$("#pageEditModuleIdWrapper").addClass("disabled");
+			$("#pageEditModuleIdWrapper").slideDown();
+			$("#pageEditModuleConfig").addClass("disabled");
+			$("#pageEditModuleConfig").slideDown();								
 	}	
 });
 switch ($("#pageEditBlock").val()) {
@@ -234,7 +241,11 @@ if ($("#pageEditBlock").val() === "bar") {
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditParentPageIdWrapper").removeClass("disabled");
-			$("#pageEditParentPageIdWrapper").slideUp();								
+			$("#pageEditParentPageIdWrapper").slideUp();
+			$("#pageEditModuleIdWrapper").removeClass("disabled");
+			$("#pageEditModuleIdWrapper").slideUp();
+			$("#pageEditModuleConfig").removeClass("disabled");
+			$("#pageEditModuleConfig").slideUp();													
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
@@ -248,6 +259,10 @@ if ($("#pageEditBlock").val() === "bar") {
 			$("#pageEditHideTitleWrapper").slideDown();	
 			$("#pageEditParentPageIdWrapper").addClass("disabled");
 			$("#pageEditParentPageIdWrapper").slideDown();
+			$("#pageEditModuleIdWrapper").addClass("disabled");
+			$("#pageEditModuleIdWrapper").slideDown();
+			$("#pageEditModuleConfig").addClass("disabled");
+			$("#pageEditModuleConfig").slideDown();				
 	}
 	
 /**
