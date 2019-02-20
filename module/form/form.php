@@ -32,7 +32,7 @@ class form extends common {
 	
 	public static $pagination;
 	
-	const FORM_VERSION = '1.3'; 
+	const FORM_VERSION = '1.4'; 
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
@@ -183,7 +183,7 @@ class form extends common {
 				fclose($fp);
 				// Valeurs en sortie
 				$this->addOutput([
-					'notification' => ' Export  CSV effectué dans :<br />'.$csvfilename,
+					'notification' => 'Export CSV effectué dans le gestionnaire de fichiers<br />sous le nom '.$csvfilename,
 					'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
 					'state' => true
 				]);
