@@ -134,10 +134,10 @@ class common {
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => '<p>Il est désormais possible d\'ajouter une ou deux barres latérales aux pages de votre site. Cette mise en page, qui se définit dans les paramètres de page, peut s\'appliquer à l\'ensemble du site ou à certaines pages en particulier, au gré de vos désirs.
-							Pour créer une barre latérale à partir d\'une nouvelle page ou transformer une page existante en barre latérale, sélectionnez l\'option dans la liste des gabarits.</p>
-							<p>Cette nouvelle fonctionnalité autorise toutes sortes d\'utilisations : texte, encadrés, images, vidéos... ou simple marge blanche. De plus, on peut définir autant de barres latérales qu\'on le souhaite.</p>
-							<p>La liste des barres disponibles et le choix de leur emplacement apparaissent en fonction du gabarit que vous aurez choisi.</p>',
+				'content' => '<p>Vous pouvez ajouter une ou deux barres latérales aux pages de votre site. Cette mise en page se définit dans les paramètres de page et peut s\'appliquer à l\'ensemble du site ou à certaines pages en particulier, au gré de vos désirs.</p>
+							<p>Pour créer une barre latérale à partir d\'une "Nouvelle page" ou transformer une page existante en barre latérale, sélectionnez l\'option dans la liste des gabarits. On peut bien sûr définir autant de barres latérales qu\'on le souhaite.</p>
+							<p>Cette nouvelle fonctionnalité autorise toutes sortes d\'utilisations : texte, encadrés, images, vidéos... ou simple marge blanche. Seule restriction : on ne peut pas installer un module dans une barre latérale.</p>
+							<p>La liste des barres disponibles et leur emplacement s\'affichent en fonction du gabarit que vous aurez choisi.',
 				'hideTitle' => false,
 				'breadCrumb' => true,				
 				'metaDescription' => '',
