@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev15';
+	const ZWII_VERSION = '9.0.00-dev16';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -968,7 +968,7 @@ class common {
 			}
 		}
 		else {
-			$mail->addBCC($to);
+			$mail->addAddress($to);
 		}
 		$mail->isHTML(true);
 		$mail->Subject = $subject;
@@ -1213,7 +1213,7 @@ class core extends common {
 				}
 			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
 			$css .= '@media (max-width: 767px) {header{height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;line-height:' . $this->getData(['theme', 'header', 'height'])/2 . 'px;}}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
