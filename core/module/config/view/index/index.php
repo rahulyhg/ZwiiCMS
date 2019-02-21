@@ -149,14 +149,14 @@
 				<div class="row">
 					<div  class="col6">
 						<?php echo template::text('moduleFormVersion', [
-							'label' => 'Module Form  version',
+							'label' => 'Module Form version',
 							'readonly' => true,
 							'value' => form::FORM_VERSION
 						]); ?>
 					</div>
 					<div  class="col6">
 						<?php echo template::text('moduleGalleryVersion', [
-							'label' => 'Module Gallery  version',
+							'label' => 'Module Gallery version',
 							'readonly' => true,
 							'value' => gallery::GALLERY_VERSION
 						]); ?>
@@ -172,7 +172,7 @@
 					</div>
 					<div  class="col6">
 						<?php echo template::text('moduleBlogVersion', [
-							'label' => 'Module Blog  version',
+							'label' => 'Module Blog version',
 							'readonly' => true,
 							'value' => blog::BLOG_VERSION
 						]); ?>
