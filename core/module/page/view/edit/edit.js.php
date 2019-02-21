@@ -39,6 +39,17 @@ pageEditModuleIdDOM.on("change", function() {
 		$("#pageEditBlock option[value='bar']").remove();		
 	}
 });
+if($("#pageEditModuleId").val() === "") {
+		$("#pageEditModuleConfig").addClass("disabled");
+		$("#pageEditContentContainer").slideDown();
+		$("#pageEditBlock").append('<option value="bar">Barre latérale</option>');		
+	}
+	else {
+		$("#pageEditModuleConfig").removeClass("disabled");
+		$("#pageEditContentContainer").slideUp();
+		$("#pageEditBlock option[value='bar']").remove();		
+	}
+
 
 /**
  * Masquer et affiche le contenu pour les modules form et gallery
@@ -285,7 +296,7 @@ if ($("input[name=pageEditHideTitle]").is(':checked'))  {
 	} else {
 		if ($("#pageEditParentPageId").val() !== "") {
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadC	rumbWrapper").slideDown();	
+			$("#pageEditbreadCrumbWrapper").slideDown();	
 		}			
 }
 
