@@ -195,7 +195,9 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideDown();	
 			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();							
+			$("#pageEditModuleIdWrapper").slideDown();	
+			$("#pageEditModuleConfig").addClass("disabled");
+			$("#pageEditModuleConfig").slideDown();									
 	}	
 });
 switch ($("#pageEditBlock").val()) {
