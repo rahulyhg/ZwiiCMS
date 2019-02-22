@@ -1,7 +1,3 @@
-<!--
-code d'origine	
-
--->
 <div class="blogDate">
 	<i class="far fa-calendar-alt"></i>
 	<?php echo utf8_encode(strftime('- %d %B %Y', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
@@ -21,10 +17,10 @@ code d'origine
 </p>
 
 <div class="clearBoth"></div>
-<h2 id="comment">
+<h3 id="comment">
 	<?php $commentsNb = count($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment'])); ?>
 	<?php echo $commentsNb . ' ' . ($commentsNb > 1 ? 'commentaires' : 'commentaire'); ?>
-</h2>
+</h3>
 <?php if($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'closeComment'])): ?>
 	<p>Les commentaires sont fermés pour cet article.</p>
 <?php else: ?>
