@@ -14,20 +14,22 @@
 								<?php echo $article['title']; ?>
 							</a>
 						</h1>
-						<div id="blogDate">
-						<i class="far fa-calendar-alt"></i>
-						<?php echo utf8_encode(strftime('%d %B %Y', $article['publishedOn']));  ?>
-						</div>
-						<p class="blogContent">
-							<?php echo helper::subword(strip_tags($article['content']), 0, 300); ?>...
-							<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>">Lire la suite</a>
-						</p>
 						<div class="blogComment">
 							<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>#comment">
 								<?php echo count($article['comment']); ?>
 							</a>
 							<?php echo template::ico('comment', 'left'); ?>
+						</div>						
+						<div id="blogDate">
+							<i class="far fa-calendar-alt"></i>
+							<?php echo utf8_encode(strftime('%d %B %Y', $article['publishedOn']));  ?>
 						</div>
+					
+						<p class="blogContent">
+							<?php echo helper::subword(strip_tags($article['content']), 0, 300); ?>...
+							<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>">Lire la suite</a>
+						</p>
+
 					</div>
 				</div>
 				<hr />
