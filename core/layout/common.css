@@ -90,23 +90,6 @@ img[align='right'] {
 Signature dans les articles blog et news
 */
 
-#blogPicture {
-	text-align: center;	
-	margin-right: -10px;
-}
-
-#blogTitle {
-	background-color: #ECEFF1;
-	padding: 3px;
-	margin-left: -10px;
-}
-
-#blogDate {
-	font-size:0.8em;
-	font-style: italic;
-	color: grey;
-}
-
 .signature {
 	font-size: 0.8em;
 	font-style: italic;
