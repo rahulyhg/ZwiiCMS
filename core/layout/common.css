@@ -11,8 +11,14 @@
  */
 
 /**
+* Police des icônes
+*/
+ @import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
+
+/**
  * Éléments génériques
  */
+ 
 
 html,
 body {
