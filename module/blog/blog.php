@@ -37,7 +37,7 @@ class blog extends common {
 
 	public static $users = [];
 
-	const BLOG_VERSION = '1.1';
+	const BLOG_VERSION = '1.2';
 
 	/**
 	 * Édition

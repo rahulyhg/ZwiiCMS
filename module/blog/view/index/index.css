@@ -1,17 +1,34 @@
 .blogPicture {
-	float: left;
-	margin: 10px 20px 0 0;
+	float: center;
 }
+.blogPicture img {
+	width: 100%;
+	height: auto;
+	}
 .blogPicture:hover {
 	opacity: .7;
 }
-.block:after {
+.row:after {
 	content: " ";
 	display: table;
 	clear: both;
 }
 .blogComment {
+	padding-right: 10px;
 	float: right;
+}
+.blogTitle {
+	background-color: #ECEFF1;
+	padding: 5px;
+}
+.blogContent {
+	float: left;
+}
+.blogDate {
+	font-size:0.8em;
+	font-style: italic;
+	color: grey;
+	margin-left: 10px;
 }
 @media (max-width: 768px) {
 	.blogContent {
