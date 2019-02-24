@@ -145,11 +145,34 @@ select:hover,
 textarea:hover {
 }
 
-/* Iframe du module Code */
-iframe#modulecode {
-    height: 400px !important;
-    border: none;
-    margin-top: 10px;
-    margin-bottom: 10px;
+/* Modules News et Blog */
 
-  }
+.blogDate {
+}
+
+.blogPicture {
+}
+
+.blogPicture img {
+}
+
+.blogComment {
+}
+
+.blogTitle {
+}
+
+.blogContent {
+}
+
+.newsTitle {
+}
+
+.newsContent {
+}
+
+.newsDate {
+}
+
+.newsSignature {
+}
