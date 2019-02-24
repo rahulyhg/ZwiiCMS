@@ -1,7 +1,10 @@
 .blogPicture {
 	float: center;
-	margin-left: 10px;
 }
+.blogPicture img {
+	width: 100%;
+	height: auto;
+	}
 .blogPicture:hover {
 	opacity: .7;
 }
@@ -17,11 +20,9 @@
 .blogTitle {
 	background-color: #ECEFF1;
 	padding: 5px;
-	margin-left: -10px;
 }
 .blogContent {
 	float: left;
-	margin-left: -10px;
 }
 .blogDate {
 	font-size:0.8em;
