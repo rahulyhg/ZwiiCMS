@@ -184,8 +184,8 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditParentPageIdWrapper").removeClass("disabled");
 			$("#pageEditParentPageIdWrapper").slideUp();
-			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideUp();
+			$("#pageEditbreadCrumbWrapper").addClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideDown();
 			$("#pageEditModuleIdWrapper").removeClass("disabled");
 			$("#pageEditModuleIdWrapper").slideUp();
 			$("#pageEditModuleConfig").removeClass("disabled");
@@ -203,8 +203,8 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditHideTitleWrapper").slideDown();	
 			$("#pageEditParentPageIdWrapper").addClass("disabled");
 			$("#pageEditParentPageIdWrapper").slideDown();	
-			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideDown();	
+			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideUp();				
 			$("#pageEditModuleIdWrapper").addClass("disabled");
 			$("#pageEditModuleIdWrapper").slideDown();	
 			$("#pageEditModuleConfig").addClass("disabled");
@@ -286,7 +286,7 @@ pageEditHideTitleDOM.on("change", function() {
 	} else {
 		if ($("#pageEditParentPageId").val() !== "") {
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadC	rumbWrapper").slideDown();	
+			$("#pageEditbreadCrumbWrapper").slideDown();	
 		}			
 	}
 });
@@ -309,21 +309,25 @@ if ($("input[name=pageEditHideTitle]").is(':checked'))  {
  */
 var pageEditParentPageIdDOM = $("#pageEditParentPageId");
 pageEditParentPageIdDOM.on("change", function() {
-	if ($(this).val() === "") {
-		$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-		$("#pageEditbreadCrumbWrapper").slideUp();	
+	if ($(this).val() === "" &&
+		!$('input[name=pageEditHideTitle]').is(':checked') ) {
+			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideUp();	
 	} else {
-		$("#pageEditbreadCrumbWrapper").addClass("disabled");
-		$("#pageEditbreadCrumbWrapper").slideDown();					
+			$("#pageEditbreadCrumbWrapper").addClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideDown();		
+		
+					
 	}
 });
-if ($("#pageEditParentPageId").val() === "") {
-		$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-		$("#pageEditbreadCrumbWrapper").slideUp();	
+if ($("#pageEditParentPageId").val() === "" &&
+		!$('input[name=pageEditHideTitle]').is(':checked') ) {
+			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideUp();	
 	} else {
-		$("#pageEditbreadCrumbWrapper").addClass("disabled");
-		$("#pageEditbreadCrumbWrapper").slideDown();					
-}
+			$("#pageEditbreadCrumbWrapper").addClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideDown();				
+	}
 
 
 /**
