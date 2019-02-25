@@ -46,8 +46,7 @@ class page extends common {
 		'8-4' => 'Page 2/3    - Barre latérale 1/3',
 		'3-9' => 'Barre latérale 1/4 - Page 3/4',
 		'9-3' => 'Page 3/4    - Barre latérale 1/4',
-		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
-		'bar' => 'Barre latérale'
+		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
 	];
 	
 	/**
