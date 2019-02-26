@@ -82,6 +82,7 @@ $("input, select").on("change", function() {
 			}
 			break;
 	}
+
 	// Ajout du css au DOM
 	$("#themePreview").remove();
 	$("<style>")
@@ -90,6 +91,15 @@ $("input, select").on("change", function() {
 		.text(css)
 		.appendTo("head");
 });
+
+$("#themeHeaderImage").on("change", function() {
+	if($("#themeHeaderImage").val()) {
+			$("#themeHeaderBackgroundColorWrapper").slideUp();			
+		} else {
+			$("#themeHeaderBackgroundColorWrapper").slideDown();
+		}
+});
+
 // Affiche / Cache les options de l'image du fond
 $("#themeHeaderImage").on("change", function() {
 	if($(this).val()) {
