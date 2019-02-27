@@ -94,7 +94,8 @@ $("input, select").on("change", function() {
 
 $("#themeHeaderImage").on("change", function() {
 	if($("#themeHeaderImage").val()) {
-			$("#themeHeaderBackgroundColorWrapper").slideUp();			
+			$("#themeHeaderBackgroundColorWrapper").slideUp();
+			$("#themeHeaderBackgroundColor").val($("#themeHeaderBackgroundColor").val());		
 		} else {
 			$("#themeHeaderBackgroundColorWrapper").slideDown();
 		}
