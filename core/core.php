@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev24';
+	const ZWII_VERSION = '9.0.00-dev25';
 	// Numéro de version stable
 	//const ZWII_VERSION = '9.0.00';
 
@@ -363,7 +363,7 @@ class common {
 		'user' => [],
 		'theme' =>  [
 			'body' => [
-				'backgroundColor' => '2(236, 239, 241, 1)',
+				'backgroundColor' => 'rgba(236, 239, 241, 1)',
 				'image' => '',
 				'imageAttachment' => 'scroll',
 				'imageRepeat' => 'no-repeat',
