@@ -943,8 +943,7 @@ class common {
 	}
 
 
-	
-	/**
+		/**
 	 * Envoi un mail
 	 * @param string|array $to Destinataire
 	 * @param string $subject Sujet
@@ -952,35 +951,45 @@ class common {
 	 * @return bool
 	 */
 	public function sendMail($to, $subject, $content) {
+		// Utilisation de PHPMailer version 6.0.6
+		require "core/vendor/phpmailer/phpmailer.php";
+		require "core/vendor/phpmailer/exception.php";
+
 		// Layout
 		ob_start();
 		include 'core/layout/mail.php';
 		$layout = ob_get_clean();
 		// Mail
-		$mail = new PHPMailer;
-		$mail->CharSet = 'UTF-8';
-		$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-		$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-		$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
-		if(is_array($to)) {
-			foreach($to as $userMail) {
-				$mail->addBCC($userMail);
+		try{
+			$mail = new PHPMailer\PHPMailer\PHPMailer;
+			$mail->CharSet = 'UTF-8';
+			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
+			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
+			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			if(is_array($to)) {
+					foreach($to as $userMail) {
+							$mail->addAddress($userMail);
+					}
 			}
+			else {
+					$mail->addBCC($to);
+			}
+			$mail->isHTML(true);
+			$mail->Subject = $subject;
+			$mail->Body = $layout;
+			$mail->AltBody = strip_tags($content);
+			if($mail->send()) {
+					return true;
+			}
+			else {
+					return $mail->ErrorInfo;
+			}
+		} catch (phpmailerException $e) {
+			return $e->errorMessage();
+		} catch (Exception $e) {
+			return $e->getMessage();
 		}
-		else {
-			$mail->addAddress($to);
-		}
-		$mail->isHTML(true);
-		$mail->Subject = $subject;
-		$mail->Body = $layout;
-		$mail->AltBody = strip_tags($content);
-		if($mail->send()) {
-			return true;
-		}
-		else {
-			return $mail->ErrorInfo;
-		}
-	}
+}
 
 	/**
 	 * Insert des données

@@ -14,14 +14,16 @@
         - CodeMirror dans TinyMCE
     - Update : affichage de la version proposée dans la popup de mise à jour
     - Module Formulaire :
-            - Case à cocher dans les formulaires
-            - Bouton d'export au format CSV
-            - Bouton effacer toutes les données
-            - Notification d'un membre ou email libre 
-            - Correction faille CSRF dans Data
-    - Edition de page : masquage des options inutiles selon le module
-        - redirection : contenu de page et masquer le titre
-        - code : contenu de page
+        - Case à cocher dans les formulaires
+        - Bouton d'export au format CSV
+        - Bouton effacer toutes les données
+        - Notification d'un membre ou email libre 
+        - Correction faille CSRF dans Data
+    - Edition de page :
+        - masquage des options inutiles selon le module
+        - nouvelle option : fil d'ariane des pages filles
+    - Thème : 
+        - La couleur d'arrière-plan n'est plus disponible lorsque qu'une image est définie dans la bannière. Il devient alors automatiquement transparent afin de laisser passer la couleur de l'arrière-plan du site lorsque l'image de la bannière a une chouche alpha.
     - Barre d'administration fixe
     - Option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
 
@@ -29,8 +31,14 @@ Correctif :
     - contrôle CSRF de la configuration du compte connecté
     - Problème dans data/.htaccess
     - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+
 Mise à jour : 
     - TinyColoPicker
+    - PhpMailer 6.0.6
+    - Responsive FileManager version 9.14.0
+    - Flatpickr version 4.5.2
+    - Normalize.css version 8.0.1
+    - Tippy version 3.3.0
 
      
 ## Version 8.5.6
