@@ -7,12 +7,19 @@
  * Éléments principaux
  */
 
-/* Fond du site */
+
+
+/* Fond du site 
+*
+* Pour restaurer les marges par défaut,décommentez margin: 20px: auto
+*/
 body {
     /* margin: 0px 10px; */
 }
 
-/* Site */
+/* Site 
+* Pour restaurer les marges par défaut,décommentez margin: 20px: auto
+*/
 #site {
     /* margin: 20px auto; */
 }
