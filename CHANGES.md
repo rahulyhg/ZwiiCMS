@@ -23,7 +23,7 @@
         - masquage des options inutiles selon le module
         - nouvelle option : fil d'ariane des pages filles
     - Thème : 
-        - La couleur d'arrière-plan n'est plus disponible lorsque qu'une image est définie dans la bannière. Il devient alors automatiquement transparent afin de laisser passer la couleur de l'arrière-plan du site lorsque l'image de la bannière a une chouche alpha.
+        - La couleur d'arrière-plan n'est plus disponible lorsque qu'une image est définie dans la bannière. Il devient alors automatiquement transparent afin de laisser passer la couleur de l'arrière-plan du site lorsque l'image de la bannière a une couche alpha.
     - Barre d'administration fixe
     - Option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
 
