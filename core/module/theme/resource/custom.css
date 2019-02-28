@@ -9,11 +9,12 @@
 
 /* Fond du site */
 body {
-    margin: 0px 10px;
+    /* margin: 0px 10px; */
 }
 
 /* Site */
 #site {
+    /* margin: 20px auto; */
 }
 
 /* Grille du site */
