@@ -9,19 +9,18 @@
 
 
 
-/* Fond du site 
-*
-* Pour restaurer les marges par défaut,décommentez margin: 20px: auto
+/* 
+* Fond du site 
 */
 body {
-    /* margin: 0px 10px; */
+    margin: 0px 10px;
 }
 
-/* Site 
-* Pour restaurer les marges par défaut,décommentez margin: 20px: auto
+/* 
+* Site 
 */
 #site {
-    /* margin: 20px auto; */
+    margin: 20px auto;
 }
 
 /* Grille du site */
