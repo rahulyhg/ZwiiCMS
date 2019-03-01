@@ -1,6 +1,6 @@
 # ChangeLog 
 
-## Préversion 9.0.0
+## Version 9.0.0
 - Modification :
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
     - gestion des thèmes :
