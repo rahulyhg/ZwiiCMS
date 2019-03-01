@@ -3,33 +3,29 @@
 ## Version 9.0.0
 - Modification :
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
-    - gestion des thèmes :
+    - Gestion des thèmes :
         - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
         - Importer un thème à partir des fichiers
-       
+        - Désactivation de la couleur d'arrière plan du header lors de l'insertion d'une image
+        - Nouvelle option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
     - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
-    - Changement du libellé Modérateur devient Editeur 
-    - Editeur :     
+    - Libellé Modérateur devient Editeur 
+    - Editeur de texte :     
         - VisualBlocks dans TinyMCE
         - CodeMirror dans TinyMCE
-    - Update : affichage de la version proposée dans la popup de mise à jour
+    - Affichage de la version proposée dans la popup de mise à jour
     - Module Formulaire :
         - Case à cocher dans les formulaires
         - Bouton d'export au format CSV
         - Bouton effacer toutes les données
         - Notification d'un membre ou email libre 
-        - Correction faille CSRF dans Data
     - Edition de page :
         - masquage des options inutiles selon le module
         - nouvelle option : fil d'ariane des pages filles
-    - Thème : 
-        - La couleur d'arrière-plan n'est plus disponible lorsque qu'une image est définie dans la bannière. Il devient alors automatiquement transparent afin de laisser passer la couleur de l'arrière-plan du site lorsque l'image de la bannière a une couche alpha.
     - Barre d'administration fixe
-    - Option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
 
 Correctif : 
-	- contrôle CSRF de la configuration du compte connecté
-	- Problème dans data/.htaccess
+	- amélioration contre mesure CSRF
 	- Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
 
 Mise à jour : 

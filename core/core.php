@@ -28,9 +28,9 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :/
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.00-dev26';
+	//const ZWII_VERSION = '9.0.00-dev26';
 	// Numéro de version stable
-	//const ZWII_VERSION = '9.0.00';
+	const ZWII_VERSION = '9.0.00';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
