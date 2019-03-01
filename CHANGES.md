@@ -28,17 +28,17 @@
     - Option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
 
 Correctif : 
-    - contrôle CSRF de la configuration du compte connecté
-    - Problème dans data/.htaccess
-    - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+	- contrôle CSRF de la configuration du compte connecté
+	- Problème dans data/.htaccess
+	- Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
 
 Mise à jour : 
-    - TinyColoPicker
-    - PhpMailer 6.0.6
-    - Responsive FileManager version 9.14.0
-    - Flatpickr version 4.5.2
-    - Normalize.css version 8.0.1
-    - Tippy version 3.3.0
+	- TinyColoPicker
+	- PhpMailer 6.0.6
+	- Responsive FileManager version 9.14.0
+	- Flatpickr version 4.5.2
+	- Normalize.css version 8.0.1
+	- Tippy version 3.3.0
 
      
 ## Version 8.5.6
