@@ -41,7 +41,7 @@ En cas de difficulté avec la nouvelle version, il suffira de téléverser la sa
 
 Les données du site dans 'site/data' sont désormais stockées dans deux fichiers : core.json et theme.json
 
-Après la copie des fichiers ces deux fichiers sont créés à partir du data.json de la version 8, ce fichier est ansuite renommée en data_imported.json
+Après la copie des fichiers ces deux fichiers sont créés à partir du data.json de la version 8, ce fichier est ensuite renommée en data_imported.json
 
 En cas de retour à une version 8, ce fichier devra être renommé en data.json
 
