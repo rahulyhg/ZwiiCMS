@@ -40,10 +40,12 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Image</h4>
-				<?php echo template::file('themeHeaderImage', [
+				<?php 
+				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
+				echo template::file('themeHeaderImage', [
 					'label' => 'Fond',
 					'type' => 1,
-					'value' => $this->getData(['theme', 'header', 'image'])
+					'value' => $imageFile
 				]); ?>
 				<div id="themeHeaderImageOptions" class="displayNone">
 					<div class="row">

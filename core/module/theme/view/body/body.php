@@ -26,10 +26,12 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Image</h4>
-				<?php echo template::file('themeBodyImage', [
+				<?php
+				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'body', 'image'])) ? $this->getData(['theme', 'body', 'image']) : "";
+				echo template::file('themeBodyImage', [
 					'label' => 'Fond',
 					'type' => 1,
-					'value' => $this->getData(['theme', 'body', 'image'])
+					'value' => $imageFile
 				]); ?>
 				<div id="themeBodyImageOptions" class="displayNone">
 					<div class="row">

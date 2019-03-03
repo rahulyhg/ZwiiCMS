@@ -26,7 +26,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	// Numéro de version de développement :/
+	// Numéro de version de développement :
 	// Désactive l'update auto
 	const ZWII_VERSION = '9.0.00-dev27';
 	// Numéro de version stable
@@ -59,6 +59,7 @@ class common {
 				'pinterestId' => '',
 				'twitterId' => '',
 				'youtubeId' => ''
+			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10
