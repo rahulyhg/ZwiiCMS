@@ -1,7 +1,4 @@
 <?php echo template::formOpen('themeHeaderForm'); ?>
-	<?php echo template::hidden('themeSiteBackgrounColor', [
-			'value' => $this->getData(['theme', 'site', 'backgroundColor'])
-			]); ?>
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('themeHeaderBack', [
@@ -26,7 +23,7 @@
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'header', 'backgroundColor'])
 						]); ?>
-					</div>
+					</div>							
 					<div class="col6">
 						<?php echo template::text('themeHeaderTextColor', [
 							'class' => 'colorPicker',

@@ -92,14 +92,6 @@ $("input, select").on("change", function() {
 		.appendTo("head");
 });
 
-$("#themeHeaderImage").on("change", function() {
-	if($("#themeHeaderImage").val()) {
-			$("#themeHeaderBackgroundColorWrapper").slideUp();
-			$("#themeHeaderBackgroundColor").val($("#themeHeaderBackgroundColor").val());		
-		} else {
-			$("#themeHeaderBackgroundColorWrapper").slideDown();
-		}
-});
 
 // Affiche / Cache les options de l'image du fond
 $("#themeHeaderImage").on("change", function() {

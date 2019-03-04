@@ -299,13 +299,8 @@ class theme extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Si une image est positionnée, l'arrière en transparent.
-			if ($this->getInput('themeHeaderImage') === "") {		
-				$themeHeaderBackgroundColor = $this->getInput('themeHeaderBackgroundColor'); } 
-				else { 
-				$themeHeaderBackgroundColor = 'rgba(0, 0, 0, 0)'; 
-			}
 			$this->setData(['theme', 'header', [
-				'backgroundColor' => $themeHeaderBackgroundColor,
+				'backgroundColor' => $this->getInput('themeHeaderBackgroundColor'),
 				'font' => $this->getInput('themeHeaderFont'),
 				'fontSize' => $this->getInput('themeHeaderFontSize'),
 				'fontWeight' => $this->getInput('themeHeaderFontWeight'),
