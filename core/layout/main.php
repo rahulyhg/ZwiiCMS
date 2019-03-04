@@ -44,11 +44,10 @@
 <?php endif; ?>
 <?php if($this->getData(['theme', 'header', 'position']) === 'body'): ?>
 	<!-- Bannière dans le fond du site -->
-	<?php	
-	if ($this->getData(['theme','header','linkHome'])){
-	echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-
 	<header>
+		<?php	
+		if ($this->getData(['theme','header','linkHome'])){
+		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
 		<?php if(
 			$this->getData(['theme', 'header', 'textHide']) === false
 			// Affiche toujours le titre de la bannière pour l'édition du thème
@@ -58,10 +57,10 @@
 				<span><?php echo $this->getData(['config', 'title']); ?></span>
 			</div>
 		<?php endif; ?>
-	</header>		
-	<?php
-	if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
-	?>	
+		<?php
+		if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
+		?>	
+	</header>
 <?php endif; ?>
 
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
