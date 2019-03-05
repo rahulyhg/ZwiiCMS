@@ -967,7 +967,7 @@ class common {
 			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
 			if(is_array($to)) {
 					foreach($to as $userMail) {
-							$mail->addBCC($userMail);
+							$mail->addAddress($userMail);
 					}
 			}
 			else {
