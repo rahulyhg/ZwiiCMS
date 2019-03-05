@@ -968,11 +968,11 @@ class common {
 			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
 			if(is_array($to)) {
 					foreach($to as $userMail) {
-							$mail->addAddress($userMail);
+							$mail->addBCC($userMail);
 					}
 			}
 			else {
-					$mail->addBCC($to);
+					$mail->addAddress($to);
 			}
 			$mail->isHTML(true);
 			$mail->Subject = $subject;
