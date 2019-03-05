@@ -79,10 +79,10 @@ class theme extends common {
 	];
 	public static $footerHeights = [
 		'0px' => 'Très petite',
-		'5px' => 'Petite',
-		'10px' => 'Moyenne',
-		'15px' => 'Grande',
-		'20px' => 'Très grande'
+		'10px' => 'Petite',
+		'20px' => 'Moyenne',
+		'35px' => 'Grande',
+		'40px' => 'Très grande'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',

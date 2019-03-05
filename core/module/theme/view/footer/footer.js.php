@@ -22,9 +22,9 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	css += "footer .container > div{padding:0}";	
+	//css += "footer .container > div{padding:0}";	
 	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	css += "footer .container-large > div{padding:0}";		
+	//css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
