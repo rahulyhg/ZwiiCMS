@@ -8,6 +8,7 @@
     - Opération sur un mauvais type affichant une notice
 - Correction : 
     - La bannière hors site cliquable replacée dans le header
+    - Hauteur du footer hors site non appliquée
 
 
 ## Version 9.0.00
