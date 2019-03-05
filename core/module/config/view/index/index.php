@@ -87,38 +87,16 @@
 							'value' => $this->getData(['config', 'social', 'facebookId'])
 						]); ?>
 					</div>
-					<div class="col6">
-						<?php echo template::text('configSocialGoogleplusId', [
-							'help' => 'Saisissez votre ID Google+ : https://plus.google.com/[CETTE PARTIE].',
-							'label' => 'Google+',
-							'value' => $this->getData(['config', 'social', 'googleplusId'])
-						]); ?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col6">
+					<div class="col6">					
 						<?php echo template::text('configSocialInstagramId', [
 							'help' => 'Saisissez votre ID Instagram : https://www.instagram.com/[CETTE PARTIE].',
 							'label' => 'Instagram',
 							'value' => $this->getData(['config', 'social', 'instagramId'])
 						]); ?>
 					</div>
-					<div class="col6">
-						<?php echo template::text('configSocialPinterestId', [
-							'help' => 'Saisissez votre ID Pinterest : https://pinterest.com/[CETTE PARTIE].',
-							'label' => 'Pinterest',
-							'value' => $this->getData(['config', 'social', 'pinterestId'])
-						]); ?>
-					</div>
 				</div>
 				<div class="row">
-					<div class="col6">
-						<?php echo template::text('configSocialTwitterId', [
-							'help' => 'Saisissez votre ID Twitter : https://twitter.com/[CETTE PARTIE].',
-							'label' => 'Twitter',
-							'value' => $this->getData(['config', 'social', 'twitterId'])
-						]); ?>
-					</div>
+
 					<div class="col6">
 						<?php echo template::text('configSocialYoutubeId', [
 							'help' => 'Saisissez votre ID Youtube : https://www.youtube.com/channel/[CETTE PARTIE].',
@@ -126,6 +104,22 @@
 							'value' => $this->getData(['config', 'social', 'youtubeId'])
 						]); ?>
 					</div>
+					<div class="col6">
+						<?php echo template::text('configSocialTwitterId', [
+							'help' => 'Saisissez votre ID Twitter : https://twitter.com/[CETTE PARTIE].',
+							'label' => 'Twitter',
+							'value' => $this->getData(['config', 'social', 'twitterId'])
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::text('configSocialPinterestId', [
+							'help' => 'Saisissez votre ID Pinterest : https://pinterest.com/[CETTE PARTIE].',
+							'label' => 'Pinterest',
+							'value' => $this->getData(['config', 'social', 'pinterestId'])
+						]); ?>
+					</div>					
 				</div>
 			</div>
 			<div class="block">

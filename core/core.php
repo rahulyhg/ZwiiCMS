@@ -1113,7 +1113,14 @@ class common {
 			$this->setData(['theme', 'menu','fixed',false]);						
 			$this->setData(['core', 'dataVersion', 9000]);
 			$this->SaveData();
+		}	
+		// Version 9.0.01
+		if($this->getData(['core', 'dataVersion']) < 9000) {
+			$this->deleteData(['config', 'social', 'googleplusId']);						
+			$this->setData(['core', 'dataVersion', 9001]);
+			$this->SaveData();
 		}			
+		
 	}
 }
 
