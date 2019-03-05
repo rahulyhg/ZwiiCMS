@@ -54,7 +54,6 @@ class common {
 			'metaDescription' => 'Zwii est un CMS sans base de données qui permet à ses utilisateurs de créer et gérer facilement un site web sans aucune connaissance en programmation.',
 			'social' => [
 				'facebookId' => 'ZwiiCMS',
-				'googleplusId' => '',
 				'instagramId' => '',
 				'pinterestId' => '',
 				'twitterId' => '',
