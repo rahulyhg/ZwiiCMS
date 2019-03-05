@@ -1,6 +1,16 @@
 # ChangeLog 
 
-## Version 9.0.0
+## Version 9.0.01
+- Modifications : 
+    - Abandon de l'evoi masqué des mails du formulaire
+    - Effacement Google+ des réseaux sociaux
+    - Rétablissement du background du header
+    - Opération sur un mauvais type affichant une notice
+- Correction : 
+    - La bannière hors site cliquable replacée dans le header
+
+
+## Version 9.0.00
 - Modification :
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
     - Les thèmes :
