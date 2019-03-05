@@ -2,7 +2,7 @@
 
 ## Version 9.0.01
 - Modifications : 
-    - Abandon de l'evoi masqué des mails du formulaire
+    - Abandon de l'envoi masqué des mails du formulaire
     - Effacement Google+ des réseaux sociaux
     - Rétablissement du background du header
     - Opération sur un mauvais type affichant une notice
