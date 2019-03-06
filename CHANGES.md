@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 9.0.02
+- Correction :
+    - Mauvais affichage des bulles TIPPY, remplacement des balises TITLE
+
+
 ## Version 9.0.01
 - Modifications : 
     - Abandon de l'envoi masqué des mails du formulaire
