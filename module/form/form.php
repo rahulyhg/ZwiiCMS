@@ -29,10 +29,10 @@ class form extends common {
 	public static $data = [];
 
 	public static $pages = [];
-	
+
 	public static $pagination;
-	
-	const FORM_VERSION = '1.4'; 
+
+	const FORM_VERSION = '1.4';
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
@@ -58,10 +58,9 @@ class form extends common {
 	 * Configuration
 	 */
 	public function config() {
-		// Liste des utilisateurs 
-		$userIdsFirstnames = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort($userIdsFirstnames);
-		self::$listUsers [] = '';	
+		// Liste des utilisateurs
+		$userIdsFirstnames = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
+		self::$listUsers [] = '';
 		foreach($userIdsFirstnames as $userId => $userFirstname) {
 			self::$listUsers [] =  $userId;
 		}
@@ -143,7 +142,7 @@ class form extends common {
 					template::button('formDataDelete' . $dataIds[$i], [
 						'class' => 'formDataDelete buttonRed',
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i]  . '/' . $_SESSION['csrf'],
-						'value' => template::ico('cancel')
+						'value' => template::ico('times')
 					])
 				];
 			}
@@ -173,9 +172,9 @@ class form extends common {
 			if ($data !== []) {
 				$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
 				if (!file_exists('site/file/source/data')) {
-					mkdir('site/file/source/data');
+					mkdir(self::FILE_DIR.'source/data');
 				}
-				$fp = fopen('site/file/source/data/'.$csvfilename, 'w');
+				$fp = fopen(self::FILE_DIR.'source/data/'.$csvfilename, 'w');
 				fputcsv($fp, array_keys($data[1]), ';','"');
 				foreach ($data as $fields) {
 					fputcsv($fp, $fields, ';','"');
@@ -208,7 +207,7 @@ class form extends common {
 				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
 				'notification' => 'Action non autorisée'
 			]);
-		} else {	
+		} else {
 			$data = ($this->getData(['module', $this->getUrl(0), 'data']));
 			if (count($data) > 0 ) {
 				// Suppression multiple
@@ -231,7 +230,7 @@ class form extends common {
 		}
 	}
 
-	
+
 	/**
 	 * Suppression
 	 */
@@ -292,10 +291,10 @@ class form extends common {
 					case self::TYPE_TEXTAREA:
 						$filter = helper::FILTER_STRING_LONG;
 						break;
-					case self::TYPE_DATETIME: 
+					case self::TYPE_DATETIME:
 						$filter = helper::FILTER_STRING_SHORT; // Mettre TYPE_DATETIME pour récupérer un TIMESTAMP
 						break;
-					CASE self::TYPE_CHECKBOX: 
+					CASE self::TYPE_CHECKBOX:
 						$filter = helper::FILTER_BOOLEAN;
 						break;
 					default:
@@ -330,7 +329,7 @@ class form extends common {
 						$to[] = $user['mail'];
 					}
 				}
-								
+
 				// Utilisateur désigné
 				if (!empty($singleuser)) {
 					$to[] = $singleuser;

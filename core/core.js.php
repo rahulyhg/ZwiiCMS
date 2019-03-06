@@ -192,11 +192,11 @@ core.start = function() {
 			// Disparition de la notification
 			notificationTimer = setTimeout(function() {
 				$("#notification").fadeOut();
-			}, 2000);
+			}, 3000);
 			// Barre de progression
 			$("#notificationProgress").animate({
 				"width": "0%"
-			}, 2000, "linear");
+			}, 3000, "linear");
 		})
 		.trigger("mouseleave");
 	$("#notificationClose").on("click", function() {
@@ -290,7 +290,7 @@ core.start = function() {
 			.prop("disabled", true)
 			.empty()
 			.append(
-				$("<span>").addClass("zwiico-spin animate-spin")
+				$("<span>").addClass("fas fa-spinner fa-spin")
 			)
 	});
 	/**

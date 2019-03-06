@@ -1,0 +1,3 @@
+# Bloque l'accès aux plugins
+Order deny,allow
+Deny from all

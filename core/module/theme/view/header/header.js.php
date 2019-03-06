@@ -25,7 +25,7 @@ $("input, select").on("change", function() {
 		
 	var themeHeaderImage = $("#themeHeaderImage").val();
 	if(themeHeaderImage) {
-		css += "header{background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + "}";
+		css += "header{background-image:url('<?php echo (helper::baseUrl(false)).self::FILE_DIR; ?>source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + "}";
 	}
 	else {
 		css += "header{background-image:none}";

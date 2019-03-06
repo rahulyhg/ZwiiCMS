@@ -140,7 +140,7 @@ class config extends common {
 		5 => '5 articles',
 		10 => '10 articles',
 		15 => '15 articles',
-		20 => '20  articles'		
+		20 => '20  articles'
 	];
 
 
@@ -152,7 +152,7 @@ class config extends common {
 		// Creation du ZIP
 		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
-		if($zip->open('site/tmp/' . $fileName, ZipArchive::CREATE) === TRUE){
+		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
 			foreach(configHelper::scanDir('site/') as $file) {
 				$zip->addFile($file);
 			}
@@ -161,8 +161,8 @@ class config extends common {
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
-		header('Content-Length: ' . filesize('site/tmp/' . $fileName));
-		readfile('site/tmp/' . $fileName);
+		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
+		readfile(self::TEMP_DIR . $fileName);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
@@ -174,8 +174,8 @@ class config extends common {
 	 *  https://www.codexworld.com/capture-screenshot-website-url-php-google-api/
 	 */
 	public function configMetaImage() {
-		// fonction désactivée pour un site local		
-		if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
+		// fonction désactivée pour un site local
+		if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{
 			$site = 'https://zwiicms.com/'; } else {
 			$site = helper::baseUrl(false);	}
 
@@ -184,8 +184,8 @@ class config extends common {
 		$screenshot = $googlePagespeedData['screenshot']['data'];
 		$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
 		$data = 'data:image/jpeg;base64,'.$screenshot;
-		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-		file_put_contents( 'site/file/source/screenshot.png',$data);
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+		file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
 
 		// Valeurs en sortie
 		$this->addOutput([
@@ -268,7 +268,7 @@ class config extends common {
 				'state' => true
 			]);
 		}
-		// Initialisation du screen 
+		// Initialisation du screen
 		if (!file_exists('site/file/source/screenshot.png')) {
 			$this->configMetaImage();
 		}

@@ -10,9 +10,13 @@
 	<?php $layout->showMetaImage(); ?>		
 	<?php $layout->showFavicon(); ?>
 	<?php $layout->showVendor(); ?>
+	<link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+	<link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+	<link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/icozwii.min.css" rel="stylesheet">
+	<link href="<?php echo helper::baseUrl(false); ?>core/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
-	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file('site/data/theme.css'); ?>">
-	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file('site/data/custom.css'); ?>">
+	<link rel="stylesheet" href="<?php echo (helper::baseUrl(false)).self::DATA_DIR; ?>theme.css?<?php echo md5_file(self::DATA_DIR.'theme.css'); ?>">
+	<link rel="stylesheet" href="<?php echo (helper::baseUrl(false)).self::DATA_DIR; ?>custom.css?<?php echo md5_file(self::DATA_DIR.'custom.css'); ?>">
 </head>
 <body>
 <?php $layout->showStyle(); ?>
@@ -21,19 +25,19 @@
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'top' ): ?>
 	<!-- Menu dans le fond du site avant la bannière -->
 	<nav
-	<?php 
+	<?php
 	// Détermine si le menu est fixe en haut de page lorsque l'utilisateur n'est pas connecté
-    // 
+    //
 	if($this->getData(['theme', 'menu', 'position']) === 'top' &&
 		$this->getData(['theme', 'menu', 'fixed']) === true) {
 			if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
-			 	{echo 'id="navfixedlogout"';}
-			elseif ($this->getUrl(0) !== 'theme') 
+				{echo 'id="navfixedlogout"';}
+			elseif ($this->getUrl(0) !== 'theme')
 				{echo 'id="navfixedconnected"';} 
 		}
 	?>
 	>
-		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="toggle"><?php echo template::ico('bars'); ?></div>
 		<div id="menu" class="
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
 		?>">
@@ -66,7 +70,7 @@
 <?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 	<!-- Menu dans le fond du site après la bannière -->
 	<nav>
-		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="toggle"><?php echo template::ico('bars'); ?></div>
 		<div id="menu" class="container">
 			<?php $layout->showMenu(); ?>
 		</div>
@@ -77,7 +81,7 @@
 	<?php if($this->getData(['theme', 'menu', 'position']) === 'site-first'): ?>
 		<!-- Menu dans le site avant la bannière -->
 		<nav>
-			<div id="toggle"><?php echo template::ico('menu'); ?></div>
+			<div id="toggle"><?php echo template::ico('bars'); ?></div>
 			<div id="menu" class="container">
 				<?php $layout->showMenu(); ?>
 			</div>
@@ -119,7 +123,7 @@
 	): ?>
 	<!-- Menu dans le site après la bannière -->
 	<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-		<div id="toggle"><?php echo template::ico('menu'); ?></div>
+		<div id="toggle"><?php echo template::ico('bars'); ?></div>
 		<div id="menu" class="container">
 			<?php $layout->showMenu(); ?>
 		</div>
@@ -127,7 +131,7 @@
 	<?php endif; ?>
 	<!-- Corps de page -->
 	<section>
-	<?php 
+	<?php
 		// Gabarit :
 		// Récupérer la config de la page courante
 		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'block']));
@@ -135,27 +139,27 @@
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
 			case 1 :  // une colonne
-				$content    = 'col'. $blocks[0] ; 
-				break;			
-			case 2 :  // 2 blocks 
+				$content    = 'col'. $blocks[0] ;
+				break;
+			case 2 :  // 2 blocks
 				if ($blocks[0] < $blocks[1]) { // détermine la position de la colonne
 					$blockleft = 'col'. $blocks[0];
 					$content    = 'col'. $blocks[1] ;
 				} else {
 					$content    = 'col' . $blocks[0];
-					$blockright  = 'col' . $blocks[1];						
+					$blockright  = 'col' . $blocks[1];
 				}
 			break;
 			case 3 :  // 3 blocks
 					$blockleft  = 'col' . $blocks[0];
 					$content    = 'col' . $blocks[1];
-					$blockright = 'col' . $blocks[2];	
+					$blockright = 'col' . $blocks[2];
 		}
 		// Page pleine pour la configuration des modules et l'édition des pages
 		//	($this->getData(['page', $this->getUrl(2), 'moduleId']) == '' &&
 		//	$this->getUrl(1) == 'config' ||  // Configuration d'un module en page pleine
 		//	$this->getUrl(1) == 'data'   ||  // données de formulaire en page pleine
-		//	$this->getUrl(1) == 'comment'    // données des commentaires en page pleine		
+		//	$this->getUrl(1) == 'comment'    // données des commentaires en page pleine
 		if (sizeof($blocks) === 1 ||
 		    !empty($this->getUrl(1)) ) { // Pleine page en mode configuration
 				$layout->showContent();
@@ -169,7 +173,7 @@
 			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
 			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright">
 			<?php echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']);
-			?></div> <?php endif; ?>	
+			?></div> <?php endif; ?>
 		</div>
 		<?php } ?>
 	</section>
@@ -187,7 +191,7 @@
 		<footer <?php if($this->getData(['theme', 'footer', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div class="container">
 				<div class="row" id="footersite">
-					<div class="col4" id="footersiteLeft"> <!-- bloc gauche -->						
+					<div class="col4" id="footersiteLeft"> <!-- bloc gauche -->
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 								$layout->showFooterText();} 
@@ -201,7 +205,7 @@
 								$layout->showCopyright(); } 
 						?>	
 					</div>
-					<div class="col4" id="footersiteCenter"> <!-- bloc central -->						
+					<div class="col4" id="footersiteCenter"> <!-- bloc central -->
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 								$layout->showFooterText(); } 
@@ -215,7 +219,7 @@
 								$layout->showCopyright(); } 
 						?>	
 					</div>				
-					<div class="col4" id="footersiteRight"> <!-- bloc droite -->						
+					<div class="col4" id="footersiteRight"> <!-- bloc droite -->
 						<?php
 							if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 								$layout->showFooterText(); } 
@@ -239,7 +243,7 @@
 	<footer>
 		<div class="container-large">
 			<div class="row" id="footerbody">
-				<div class="col4" id="footerbodyLeft"> <!-- bloc gauche -->						
+				<div class="col4" id="footerbodyLeft"> <!-- bloc gauche -->
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'left') {
 							$layout->showFooterText(); } 
@@ -253,7 +257,7 @@
 							$layout->showCopyright(); } 
 					?>	
 				</div>
-				<div class="col4" id="footerbodyCenter"> <!-- bloc central -->						
+				<div class="col4" id="footerbodyCenter"> <!-- bloc central -->
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'center') {
 							$layout->showFooterText(); } 
@@ -267,7 +271,7 @@
 							$layout->showCopyright(); } 
 					?>	
 				</div>				
-				<div class="col4" id="footerbodyRight"> <!-- bloc droite -->						
+				<div class="col4" id="footerbodyRight"> <!-- bloc droite -->
 					<?php
 						if($this->getData(['theme', 'footer', 'textPosition']) === 'right') {
 							$layout->showFooterText(); } 
@@ -286,7 +290,7 @@
 	</footer>
 <?php endif; ?>
 <!-- Lien remonter en haut -->
-<div id="backToTop"><?php echo template::ico('up'); ?></div>
+<div id="backToTop"><?php echo template::ico('chevron-up'); ?></div>
 <?php $layout->showAnalytics(); ?>
 <?php $layout->showScript(); ?>
 </body>

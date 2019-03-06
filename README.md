@@ -67,6 +67,7 @@ En cas de retour à une version 8, ce fichier devra être renommé en data.json
   [D] file                 Contient les fichiers envoyés sur le serveur depuis le gestionnaire de fichiers
     [D] source             Contient les fichiers
     [D] thumb              Contient les miniatures des fichiers de type image
+  [D] plugins              Contient les plugins déployés sur Zwii
   [D] tmp                  Contient les fichiers temporaire
 [F] index.php              Fichier d'initialisation de Zwii
 ```

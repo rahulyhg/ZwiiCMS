@@ -22,9 +22,9 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	//css += "footer .container > div{padding:0}";	
+	//css += "footer .container > div{padding:0}";
 	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	//css += "footer .container-large > div{padding:0}";		
+	//css += "footer .container-large > div{padding:0}";
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
@@ -68,21 +68,21 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerText").show().appendTo("#footerbodyLeft");
 				$("#footerText").show().appendTo("#footersiteLeft");
 				break;
-			case 'center':			
+			case 'center':
 				$("#footerText").show().appendTo("#footerbodyCenter");
 				$("#footerText").show().appendTo("#footersiteCenter");
 				break;
-			case 'right':			
+			case 'right':
 				$("#footerText").show().appendTo("#footerbodyRight");
-				$("#footerText").show().appendTo("#footersiteRight");				
+				$("#footerText").show().appendTo("#footersiteRight");
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
 			case 'hide':
 				$("#footerSocials").hide();
-				break;		
+				break;
 			case 'left':
-				$("#footerSocials").show().appendTo("#footerbodyLeft");	
+				$("#footerSocials").show().appendTo("#footerbodyLeft");
 				$("#footerSocials").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
@@ -92,15 +92,15 @@ $("#themeFooterForm").on("change",function() {
 			case 'right':
 				console.log("right");
 				$("#footerSocials").show().appendTo("#footerbodyRight");
-				$("#footerSocials").show().appendTo("#footersiteRight");				
+				$("#footerSocials").show().appendTo("#footersiteRight");
 				break;
 	}
 		switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
-				break;		
+				break;
 			case 'left':
-				$("#footerCopyright").show().appendTo("#footerbodyLeft");			
+				$("#footerCopyright").show().appendTo("#footerbodyLeft");
 				$("#footerCopyright").show().appendTo("#footersiteLeft");
 				break;
 			case 'center':
@@ -109,7 +109,7 @@ $("#themeFooterForm").on("change",function() {
 				break;
 			case 'right':
 				$("#footerCopyright").show().appendTo("#footerbodyRight");
-				$("#footerCopyright").show().appendTo("#footersiteRight");				
+				$("#footerCopyright").show().appendTo("#footersiteRight");
 				break;
 	}
 }).trigger("change");

@@ -19,8 +19,11 @@ function step(i, data) {
 				// Succès
 				if(result.success === true) {
 					// Fin de la mise à jour
-					if(i === 4) {
+					if(i === 5) {
 						// Affiche le message de succès
+						if(result.data != undefined){
+							$("#installUpdateDetailWarningStep").text(result.data);
+						}
 						$("#installUpdateSuccess").show();
 						// Déverrouille le bouton "Terminer"
 						$("#installUpdateEnd").removeClass("disabled");
@@ -36,6 +39,9 @@ function step(i, data) {
 				else {
 					// Affiche le message d'erreur
 					$("#installUpdateErrorStep").text(i);
+					if(result.data != undefined){
+						$("#installUpdateDetailErrorStep").text(result.data);
+					}
 					$("#installUpdateError").show();
 					// Déverrouille le bouton "Terminer"
 					$("#installUpdateEnd").removeClass("disabled");

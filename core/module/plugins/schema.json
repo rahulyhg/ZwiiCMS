@@ -1,0 +1,69 @@
+{
+  "title": "Plugin",
+  "description": "Format Json attendu dans un plugin Zwii",
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "string",
+      "required": true
+    },
+    "version_date": {
+      "type": "string",
+      "required": true
+    },
+    "zwii_version": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "support_url": {
+      "type": "string",
+      "required": true
+    },
+    "updated_files": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }      
+    },
+    "added_files": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }      
+    },
+    "updated_datas": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }      
+    },
+    "added_datas": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }      
+    }
+  }
+}

@@ -17,7 +17,7 @@
 			<div class="block">
 				<h4>Informations générales</h4>
 
-				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+				<?php echo template::select('configHomePageId', helper::arrayColumn($this->getData(['page']), 'title', 'VAL_SORT_ASC'), [
 					'label' => 'Page d\'accueil',
 					'selected' => $this->getData(['config', 'homePageId'])
 				]); ?>
@@ -49,11 +49,11 @@
 				]); ?>
 				<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
 					'checked' => $this->getData(['config', 'cookieConsent'])
-				]); ?>					
+				]); ?>
 				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 					'checked' => helper::checkRewrite(),
 					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
-				]); ?>			
+				]); ?>
 				<?php echo template::select('itemsperPage', $module::$ItemsList, [
 					'label' => 'Pagination Blog et News',
 					'selected' => $this->getData(['config', 'itemsperPage']),
@@ -66,7 +66,7 @@
 					<div class="col6">
 						<img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
 					</div>
-					<div class="col6">		
+					<div class="col6">
 						<?php echo template::button('configMetaImage', [
 						'href' => helper::baseUrl() . 'config/configMetaImage',
 						'value' => 'Rafraîchir la capture d\'écran'
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>
-			</div>								
+			</div>
 		</div>
 		<div class="col6">
 			<div class="block">
@@ -87,7 +87,7 @@
 							'value' => $this->getData(['config', 'social', 'facebookId'])
 						]); ?>
 					</div>
-					<div class="col6">					
+					<div class="col6">
 						<?php echo template::text('configSocialInstagramId', [
 							'help' => 'Saisissez votre ID Instagram : https://www.instagram.com/[CETTE PARTIE].',
 							'label' => 'Instagram',
@@ -119,7 +119,7 @@
 							'label' => 'Pinterest',
 							'value' => $this->getData(['config', 'social', 'pinterestId'])
 						]); ?>
-					</div>					
+					</div>
 				</div>
 			</div>
 			<div class="block">
@@ -130,16 +130,16 @@
 						'label' => 'ZwiiCMS Version',
 						'readonly' => true,
 						'value' => common::ZWII_VERSION
-					]); ?>	
-					</div>	
+					]); ?>
+					</div>
 					<div  class="col6">
 						<?php echo template::text('moduleRedirectionVersion', [
 							'label' => 'Module Redirection version',
 							'readonly' => true,
 							'value' => redirection::REDIRECTION_VERSION
 						]); ?>
-					</div>										
-				</div>							
+					</div>
+				</div>
 				<div class="row">
 					<div  class="col6">
 						<?php echo template::text('moduleFormVersion', [
@@ -154,7 +154,7 @@
 							'readonly' => true,
 							'value' => gallery::GALLERY_VERSION
 						]); ?>
-					</div>										
+					</div>
 				</div>
 				<div class="row">
 					<div  class="col6">
@@ -170,8 +170,8 @@
 							'readonly' => true,
 							'value' => blog::BLOG_VERSION
 						]); ?>
-					</div>										
-				</div>					
+					</div>
+				</div>
 				<?php echo template::select('configTimezone', $module::$timezones, [
 					'label' => 'Fuseau horaire',
 					'selected' => $this->getData(['config', 'timezone'])
@@ -182,7 +182,7 @@
 				]); ?>
 				<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique des données', [
 					'checked' => $this->getData(['config', 'autoBackup']),
-					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier site/backup/. La sauvegarde est conservée 30 jours.'
+					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier '.self::BACKUP_DIR.'. La sauvegarde est conservée 30 jours.'
 				]); ?>
 				<div class="row">
 					<div class="col8 offset2">

@@ -9,7 +9,7 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
- * @link http://zwiicms.com/  
+ * @link http://zwiicms.com/
  * @copyright  :  Frédéric Tempez <frederic.tempez@outlook.com>
  * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  */
@@ -135,7 +135,7 @@ class theme extends common {
 		'25px 15px' => 'Très grande'
 	];
 	public static $menuPositionsSite = [
-		'top' => 'En-dehors du site',		
+		'top' => 'En-dehors du site',
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
 		'hide' => 'Caché'
@@ -143,9 +143,9 @@ class theme extends common {
 	public static $menuPositionsBody = [
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
-		'top' => 'Au-dessus et en-dehors du site',		
+		'top' => 'Au-dessus et en-dehors du site',
 		'hide' => 'Caché'
-	];	
+	];
 	public static $radius = [
 		'0' => 'Aucun',
 		'5px' => 'Très léger',
@@ -192,7 +192,7 @@ class theme extends common {
 
 	public static $headerWide = [
 		'auto' => 'Automatique',
-		'contain' => 'Image entière',		
+		'contain' => 'Image entière',
 		'cover' => 'Largeur adaptée au fond',
 		'100% 100%' => 'Taille adaptée au fond'
 	];
@@ -205,7 +205,7 @@ class theme extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Enregistre le CSS
-			file_put_contents('site/data/custom.css', $this->getInput('themeAdvancedCss', null));
+			file_put_contents(self::DATA_DIR.'custom.css', $this->getInput('themeAdvancedCss', null));
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',
@@ -313,7 +313,7 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
-				'textTransform' => $this->getInput('themeHeaderTextTransform'),				
+				'textTransform' => $this->getInput('themeHeaderTextTransform'),
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
@@ -321,9 +321,9 @@ class theme extends common {
 			switch ($this->getInput('themeHeaderPosition')) {
 				case 'site' :
 					$this->setData(['theme', 'menu',
-						['position' => str_replace ('site','body',$this->getData(['theme','menu','position'])) ],				
+						['position' => str_replace ('site','body',$this->getData(['theme','menu','position'])) ],
 						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
-						'font' => $this->getData('themeMenuFont'),				
+						'font' => $this->getData('themeMenuFont'),
 						'fontSize' => $this->getData('themeMenuFontSize'),
 						'fontWeight' => $this->getData('themeMenuFontWeight'),
 						'height' => $this->getData('themeMenuHeight'),
@@ -336,9 +336,9 @@ class theme extends common {
 				break;
 				case 'body' :
 					$this->setData(['theme', 'menu',
-						['position' => str_replace ('body','site',$this->getData(['theme','menu','position'])) ],				
+						['position' => str_replace ('body','site',$this->getData(['theme','menu','position'])) ],
 						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
-						'font' => $this->getData('themeMenuFont'),				
+						'font' => $this->getData('themeMenuFont'),
 						'fontSize' => $this->getData('themeMenuFontSize'),
 						'fontWeight' => $this->getData('themeMenuFontWeight'),
 						'height' => $this->getData('themeMenuHeight'),
@@ -347,7 +347,7 @@ class theme extends common {
 						'textAlign' => $this->getData('themeMenuTextAlign'),
 						'textColor' => $this->getData('themeMenuTextColor'),
 						'textTransform' => $this->getData('themeMenuTextTransform'),
-					]);						
+					]);
 				break;
 			}
 			// Valeurs en sortie
@@ -386,7 +386,7 @@ class theme extends common {
 		if($this->isPost()) {
 			$this->setData(['theme', 'menu', [
 				'backgroundColor' => $this->getInput('themeMenuBackgroundColor'),
-				'font' => $this->getInput('themeMenuFont'),				
+				'font' => $this->getInput('themeMenuFont'),
 				'fontSize' => $this->getInput('themeMenuFontSize'),
 				'fontWeight' => $this->getInput('themeMenuFontWeight'),
 				'height' => $this->getInput('themeMenuHeight'),
@@ -396,7 +396,7 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
-				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)			
+				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -420,7 +420,7 @@ class theme extends common {
 	 */
 	public function reset() {
 		// Supprime le fichier de personnalisation avancée
-		unlink('site/data/custom.css');
+		unlink(self::DATA_DIR.'custom.css');
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Personnalisation avancée réinitialisée',
@@ -478,9 +478,8 @@ class theme extends common {
 	public function manage() {
 		if($this->isPost() ) {
 			$zipFilename =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
-
 			$zip = new ZipArchive();
-			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
+			if ($zip->open(self::FILE_DIR.'source/'.$zipFilename) === TRUE) {
 				$zip->extractTo('.');
 				$zip->close();
 			// Valeurs en sortie
@@ -500,25 +499,24 @@ class theme extends common {
 			'title' => 'Gestion des thèmes',
 			'view' => 'manage'
 		]);
-	
 	}
-	
+
 
 	/**
 	 * Export du thème
 	 */
 	public function export() {
 		// Make zip
-			$zipFilename = $this->makezip();			
+			$zipFilename = $this->makezip();
 			// Téléchargement du ZIP
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/octet-stream');
 			header('Content-Transfer-Encoding: binary');
 			header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
-			header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
-			readfile('site/tmp/' . $zipFilename);
+			header('Content-Length: ' . filesize(self::TEMP_DIR . $zipFilename));
+			readfile(self::TEMP_DIR . $zipFilename);
 			// Nettoyage du dossier
-			unlink ('site/tmp/' . $zipFilename);
+			unlink (self::TEMP_DIR . $zipFilename);
 			die();
 	}
 
@@ -529,10 +527,10 @@ class theme extends common {
 		// Make zip
 		$zipFilename = $this->makezip();
 		// Téléchargement du ZIP
-		mkdir('site/file/source/theme');
-		copy ('site/tmp/' . $zipFilename , 'site/file/source/theme/' . $zipFilename);
+		mkdir(self::FILE_DIR.'source/theme');
+		copy (self::TEMP_DIR . $zipFilename , self::FILE_DIR.'source/theme/' . $zipFilename);
 		// Nettoyage du dossier
-		unlink ('site/tmp/' . $zipFilename);
+		unlink (self::TEMP_DIR . $zipFilename);
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
@@ -550,17 +548,17 @@ class theme extends common {
 		$zipFilename  =  'theme  '.date('d m Y').'  '.date('H i s ').'.zip';
 		$zip = new ZipArchive();
 		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
-			$zip->addFile('site/data/theme.json','site/data/theme.json');
-			$zip->addFile('site/data/theme.json','site/data/theme.css');
-			$zip->addFile('site/data/theme.json','site/data/custom.css');			
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/theme.json');
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/theme.css');
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/custom.css');
 			if ($this->getData(['theme','body','image']) !== '' ) {
-			$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
-						'site/file/source/'.$this->getData(['theme','body','image'])
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','body','image']),
+						self::FILE_DIR.'source/'.$this->getData(['theme','body','image'])
 						);
 			}
-			if ($this->getData(['theme','header','image']) !== '' ) {			
-			$zip->addFile('site/file/source/'.$this->getData(['theme','header','image']),
-						  'site/file/source/'.$this->getData(['theme','header','image'])
+			if ($this->getData(['theme','header','image']) !== '' ) {
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','header','image']),
+						  self::FILE_DIR.'source/'.$this->getData(['theme','header','image'])
 						);
 			}
 			$ret = $zip->close();

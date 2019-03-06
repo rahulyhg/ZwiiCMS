@@ -1,5 +1,12 @@
 # ChangeLog 
 
+## Version 9.1.0
+- Modification :
+    - Utilisation des icones de la librairie FontAwesome 5.5.0 en remplacement de zwiico
+    - Ajout de la gestion des plugins
+    - Ajout de la propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+
+
 ## Version 9.0.01
 - Modifications : 
     - Abandon de l'envoi masqué des mails du formulaire

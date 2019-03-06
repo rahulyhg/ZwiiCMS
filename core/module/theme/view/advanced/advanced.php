@@ -4,7 +4,7 @@
 			<?php echo template::button('themeAdvancedBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'theme',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -12,7 +12,7 @@
 			<?php echo template::button('themeAdvancedReset', [
 				'href' => helper::baseUrl() . 'theme/reset',
 				'class' => 'buttonRed',
-				'ico' => 'cancel',
+				'ico' => 'times',
 				'value' => 'Réinitialiser'
 			]); ?>
 		</div>
@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col12">
 			<?php echo template::textarea('themeAdvancedCss', [
-				'value' => file_get_contents('site/data/custom.css'),
+				'value' => file_get_contents(self::DATA_DIR.'custom.css'),
 				'class' => 'editorCss'
 			]); ?>
 		</div>

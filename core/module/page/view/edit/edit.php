@@ -6,7 +6,7 @@
 			<?php echo template::button('pageEditBack', [
 				'class' => 'buttonGrey',
 				'href' => $href,
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -15,7 +15,7 @@
 				'class' => 'buttonRed',
 				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2) . '&csrf=' . $_SESSION['csrf'],
 				'value' => 'Supprimer',
-				'ico' => 'cancel'
+				'ico' => 'times'
 			]); ?>
 		</div>
 		<div class="col2">
@@ -47,14 +47,14 @@
 								<?php echo template::button('pageEditModuleConfig', [
 									'disabled' => (bool) $this->getData(['page', $this->getUrl(2), 'moduleId']) === false,
 									'uniqueSubmission' => true,
-									'value' => template::ico('gear')
+									'value' => template::ico('cogs')
 								]); ?>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">			
+					<div class="col6">
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
 							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
 							'label' => 'Position du module dans la page',
@@ -63,7 +63,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">							
+					<div class="col6">
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
 								'help' => 'Sélectionnez le type de menu.',
 								'label' => 'Type de menu',
@@ -109,7 +109,7 @@
 					</div>
 					<div class="col6">
 					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
+						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])
 					]); ?>
 					</div>
 				</div>
@@ -122,7 +122,7 @@
 						'label' => 'Gabarits de page / Barre latérale',
 						'help' => 'Pour définir la page comme barre latérale, choisissez l\'option dans la liste.',
 						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
-				]); ?>				
+				]); ?>
 			<!-- Sélection des barres latérales	 -->
 			<?php if($this->getHierarchy($this->getUrl(2),false,true)): ?>
 					<?php echo template::hidden('pageEditBarLeft', [
@@ -143,20 +143,20 @@
 						'label' => 'Barre latérale droite :',
 						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
 					]); ?>
-				<?php endif; ?>				
+				<?php endif; ?>
 				<div class="row">
 					<div class="col6">
 						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 						]); ?>
 					</div>
-					<div class="col6">						
+					<div class="col6">
 						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
 						]); ?>
 					</div>
-				</div>					
-			</div>		
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class='row'>
@@ -178,7 +178,7 @@
 							'maxlength' => '500',
 							'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
 						]); ?>
-					</div>						
+					</div>
 		</div>
 	</div>
 <?php echo template::formClose(); ?>

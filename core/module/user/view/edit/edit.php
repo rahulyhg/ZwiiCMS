@@ -5,7 +5,7 @@
 				<?php echo template::button('userEditBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . 'user',
-					'ico' => 'left',
+					'ico' => 'caret-left',
 					'value' => 'Retour'
 				]); ?>
 			<?php else: ?>

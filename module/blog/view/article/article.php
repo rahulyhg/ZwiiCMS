@@ -1,11 +1,11 @@
 <div class="blogDate">
 	<i class="far fa-calendar-alt"></i>
 	<?php echo utf8_encode(strftime('- %d %B %Y', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
-		à <?php echo utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>		
+		à <?php echo utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
 </div>
 
 	<?php if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'hidePicture']) == false) {
-		echo '<div id="blogArticlePicture" style="background-image:url(' . helper::baseUrl(false) . 'site/file/source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']) . ');"></div>';
+		echo '<div id="blogArticlePicture" style="background-image:url(' . helper::baseUrl(false) . self::FILE_DIR . 'source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']) . ');"></div>';
 	} ?>
 
 <?php echo $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'content']); ?>
@@ -108,7 +108,7 @@
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
-					'ico' => 'left',
+					'ico' => 'caret-left',
 					'value' => 'Retour'
 		]); ?>
     </div>
@@ -126,7 +126,7 @@
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
-					'ico' => 'left',
+					'ico' => 'caret-left',
 					'value' => 'Retour'
 		]); ?>
 	</div>

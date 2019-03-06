@@ -4,7 +4,7 @@
 			<?php echo template::button('themeHeaderBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'theme',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -23,7 +23,7 @@
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'header', 'backgroundColor'])
 						]); ?>
-					</div>							
+					</div>
 					<div class="col6">
 						<?php echo template::text('themeHeaderTextColor', [
 							'class' => 'colorPicker',
@@ -37,8 +37,8 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Image</h4>
-				<?php 
-				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
+				<?php
+				$imageFile = file_exists(self::FILE_DIR.'source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
 				echo template::file('themeHeaderImage', [
 					'label' => 'Fond',
 					'type' => 1,

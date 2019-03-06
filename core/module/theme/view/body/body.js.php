@@ -19,7 +19,7 @@ $("input, select").on("change", function() {
 	// Image du fond
 	var themeBodyImage = $("#themeBodyImage").val();
 	if(themeBodyImage) {
-		css += "body{background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeBodyImage + "');background-repeat:" + $("#themeBodyImageRepeat").val() + ";background-position:" + $("#themeBodyImagePosition").val() + ";background-attachment:" + $("#themeBodyImageAttachment").val() + ";background-size:" + $("#themeBodyImageSize").val() + "]";
+		css += "body{background-image:url('<?php echo (helper::baseUrl(false)).self::FILE_DIR; ?>source/" + themeBodyImage + "');background-repeat:" + $("#themeBodyImageRepeat").val() + ";background-position:" + $("#themeBodyImagePosition").val() + ";background-attachment:" + $("#themeBodyImageAttachment").val() + ";background-size:" + $("#themeBodyImageSize").val() + "]";
 	}
 	else {
 		css += "body{background-image:none}";

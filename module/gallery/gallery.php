@@ -30,7 +30,7 @@ class gallery extends common {
 
 	public static $pictures = [];
 
-	const GALLERY_VERSION = '1.1';	
+	const GALLERY_VERSION = '1.1';
 
 	/**
 	 * Configuration
@@ -57,12 +57,12 @@ class gallery extends common {
 					$gallery['config']['directory'],
 					template::button('galleryConfigEdit' . $galleryId, [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
-						'value' => template::ico('pencil')
+						'value' => template::ico('pencil-alt')
 					]),
 					template::button('galleryConfigDelete' . $galleryId, [
 						'class' => 'galleryConfigDelete buttonRed',
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $galleryId . '/' . $_SESSION['csrf'],
-						'value' => template::ico('cancel')
+						'value' => template::ico('times')
 					])
 				];
 			}
@@ -95,7 +95,7 @@ class gallery extends common {
 	 * Suppression
 	 */
 	public function delete() {
-		// $url prend l'adresse sans le token	
+		// $url prend l'adresse sans le token
 		// La galerie n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
@@ -110,7 +110,7 @@ class gallery extends common {
 				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
 				'notification' => 'Suppression  non autorisée'
 			]);
-		}		
+		}
 		// Suppression
 		else {
 			$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
@@ -130,7 +130,7 @@ class gallery extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_JSON,
-			'content' => galleriesHelper::scanDir('site/file/source')
+			'content' => galleriesHelper::scanDir(self::FILE_DIR.'source')
 		]);
 	}
 
@@ -145,7 +145,7 @@ class gallery extends common {
 				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
 				'notification' => 'Action  non autorisée'
 			]);
-		}			
+		}
 		// La galerie n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie

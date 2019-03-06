@@ -4,7 +4,7 @@
 			<?php echo template::button('themeBodyBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'theme',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -27,7 +27,7 @@
 			<div class="block">
 				<h4>Image</h4>
 				<?php
-				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'body', 'image'])) ? $this->getData(['theme', 'body', 'image']) : "";
+				$imageFile = file_exists(self::FILE_DIR.'source/'.$this->getData(['theme', 'body', 'image'])) ? $this->getData(['theme', 'body', 'image']) : "";
 				echo template::file('themeBodyImage', [
 					'label' => 'Fond',
 					'type' => 1,

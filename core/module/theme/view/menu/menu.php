@@ -4,7 +4,7 @@
 			<?php echo template::button('themeMenuBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'theme',
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -74,7 +74,7 @@
 				<h4>Configuration</h4>
 				<div class="row">
 					<div class="col4">
-					<?php 
+					<?php
 					if ( $this->getData(['theme', 'header', 'position']) == "site")
 					{	echo template::select('themeMenuPosition', $module::$menuPositionsSite, [
 							'label' => 'Position',
@@ -85,7 +85,7 @@
 						'label' => 'Position',
 						'selected' => $this->getData(['theme', 'menu', 'position'])
 					]);	}
-					?>	
+					?>
 					</div>
 					<div class="col4">
 						<?php echo template::select('themeMenuHeight', $module::$menuHeights, [
@@ -110,8 +110,7 @@
 								'checked' => $this->getData(['theme', 'menu', 'fixed'])
 							]); ?>
 				</div>
-								
-			</div>			
+			</div>
 		</div>
 	</div>
 	<div class="row">

@@ -14,12 +14,12 @@
 			]); ?>
 		</div>
 		<div class="col2">
-			<?php echo template::button('themeManage', [				
+			<?php echo template::button('themeManage', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
 				'value' => 'Thèmes'
 			]); ?>
-		</div>	
+		</div>
 		<div class="col2">
 			<?php echo template::button('themeAdvanced', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
@@ -46,7 +46,7 @@
 			]); ?>
 		</div>
 		<div class="col2">
-			<?php echo template::button('themeManage', [				
+			<?php echo template::button('themeManage', [
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'ico' => 'download',
 				'value' => 'Thèmes'

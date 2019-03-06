@@ -26,7 +26,7 @@ class page extends common {
 	];
 	public static $pagesBarId = [
 		'' => 'Aucune'
-	];	
+	];
 	public static $moduleIds = [];
 
 	public static $typeMenu = [
@@ -42,13 +42,13 @@ class page extends common {
 	];
 	public static $pageBlocks = [
 		'12' => 'Page pleine',
-		'4-8' => 'Barre latérale 1/3 - Page 2/3',		
+		'4-8' => 'Barre latérale 1/3 - Page 2/3',
 		'8-4' => 'Page 2/3    - Barre latérale 1/3',
 		'3-9' => 'Barre latérale 1/4 - Page 3/4',
 		'9-3' => 'Page 3/4    - Barre latérale 1/4',
 		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
 	];
-	
+
 	/**
 	 * Création
 	 */
@@ -58,10 +58,10 @@ class page extends common {
 		$this->setData([
 			'page',
 			$pageId,
-			[		
+			[
 				'typeMenu' => 'text',
 				'iconUrl' => '',
-                'disable' => false,								
+                'disable' => false,
 				'content' => 'Contenu de votre nouvelle page.',
 				'hideTitle' => false,
 				'breadCrumb' => false,
@@ -143,7 +143,7 @@ class page extends common {
 			]);
 		}
 	}
-	
+
 
 	/**
 	 * Édition
@@ -159,7 +159,7 @@ class page extends common {
 		// La page existe
 		else {
 			// Soumission du formulaire
-			if($this->isPost()) {			
+			if($this->isPost()) {
 				$pageId = $this->getInput('pageEditTitle', helper::FILTER_ID, true);
 				// Si l'id a changée
 				if ($pageId !== $this->getUrl(2)) {
@@ -208,9 +208,8 @@ class page extends common {
 				if ($this->getinput('pageEditBlock') !== 'bar') {
 					$barLeft = $this->getinput('pageEditBarLeft');
 					$barRight = $this->getinput('pageEditBarRight');
-
 				} else {
-					// Une barre ne peut pas avoir de barres 
+					// Une barre ne peut pas avoir de barres
 					$barLeft = "";
 					$barRight = "";
 					// Une barre est masquée
@@ -220,10 +219,10 @@ class page extends common {
 				$this->setData([
 					'page',
 					$pageId,
-					[					
+					[
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 						
+						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN),
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
@@ -295,7 +294,7 @@ class page extends common {
 				if($parentPageId !== $this->getUrl(2)) {
 					self::$pagesNoParentId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
 				}
-			}	
+			}
 			// Pages barre latérales
 			foreach($this->getHierarchy(null,false,true) as $parentPageId => $childrenPageIds) {
 					if($parentPageId !== $this->getUrl(2) &&
@@ -313,5 +312,4 @@ class page extends common {
 			]);
 		}
 	}
-
 }

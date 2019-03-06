@@ -71,7 +71,7 @@ $("input, select").on("change", function() {
 			$("#menu").removeClass('container-large');
 			$("nav").removeClass('#navfixedconnected');
 			$("#menu").addClass('container');
-			break;			
+			break;
 		case 'body-second':
 			if(<?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>) {
 				$("nav").show().insertAfter("header");
@@ -86,7 +86,7 @@ $("input, select").on("change", function() {
 			$("#menu").removeClass('container');
 			$("#menu").addClass('container-large');
 			$("nav").addClass('#navfixedconnected');
-			break;			
+			break;
 	}
 });
 // Lien de connexion (addClass() et removeClass() au lieu de hide() et show() car ils ne conservent pas le display-inline: block; de #themeMenuLoginLink)
@@ -101,7 +101,7 @@ $("#themeMenuLoginLink").on("change", function() {
 // Affiche / Cache les options de la position
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'site-first' || $(this).val() === 'site-second') {
-		$("#themeMenuPositionOptions").slideDown();	
+		$("#themeMenuPositionOptions").slideDown();
 	}
 	else {
 		$("#themeMenuPositionOptions").slideUp(function() {
@@ -112,7 +112,7 @@ $("#themeMenuPosition").on("change", function() {
 // Affiche / Cache les options du menu fixe
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'top') {
-		$("#themeMenuPositionFixed").slideDown();	
+		$("#themeMenuPositionFixed").slideDown();
 	}
 	else {
 		$("#themeMenuPositionFixed").slideUp(function() {

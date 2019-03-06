@@ -3,7 +3,7 @@
 		<?php echo template::button('newsConfigBack', [
 			'class' => 'buttonGrey',
 			'href' => helper::baseUrl() . 'page/edit/' . $this->getUrl(0),
-			'ico' => 'left',
+			'ico' => 'caret-left',
 			'value' => 'Retour'
 		]); ?>
 	</div>

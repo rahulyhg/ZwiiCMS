@@ -10,10 +10,6 @@
  * @link http://zwiicms.com/
  */
 
-/**
-* Police des icônes
-*/
- @import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
 
 /**
  * Éléments génériques
@@ -444,7 +440,7 @@ section:after {
 .moduleVersion {
 	font-size: 0.8em;
 	font-style: italic;
-	text-align: right;  
+	text-align: right;
 }
 
 /* Pied de page */
@@ -483,40 +479,40 @@ footer #footerSocials span {
 	-webkit-transition: background .3s ease-out;
 	transition: background .3s ease-out;
 }
-footer #footerSocials .zwiico-facebook {
+footer #footerSocials .fa-facebook-f {
 	background: #3B5999;
 }
-footer #footerSocials .zwiico-facebook:hover {
+footer #footerSocials .fa-facebook-f:hover {
 	background: #324B80;
 }
-footer #footerSocials .zwiico-googleplus {
+footer #footerSocials .fa-google-plus-g {
 	background: #DD4B39;
 }
-footer #footerSocials .zwiico-googleplus:hover {
+footer #footerSocials .fa-google-plus-g:hover {
 	background: #D03724;
 }
-footer #footerSocials .zwiico-instagram {
+footer #footerSocials .fa-instagram {
 	background: #E4405F;
 }
-footer #footerSocials .zwiico-instagram:hover {
+footer #footerSocials .fa-instagram:hover {
 	background: #E02246;
 }
-footer #footerSocials .zwiico-pinterest {
+footer #footerSocials .fa-pinterest-p {
 	background: #BD081C;
 }
-footer #footerSocials .zwiico-pinterest:hover {
+footer #footerSocials .fa-pinterest-p:hover {
 	background: #9C0717;
 }
-footer #footerSocials .zwiico-twitter {
+footer #footerSocials .fa-twitter {
 	background: #55ACEE;
 }
-footer #footerSocials .zwiico-twitter:hover {
+footer #footerSocials .fa-twitter:hover {
 	background: #369DEB;
 }
-footer #footerSocials .zwiico-youtube {
+footer #footerSocials .fa-youtube {
 	background: #CD201F;
 }
-footer #footerSocials .zwiico-youtube:hover {
+footer #footerSocials .fa-youtube:hover {
 	background: #AF1B1B;
 }
 
@@ -701,7 +697,7 @@ textarea:disabled {
 	background: #F6F7F8 !important;
 	color: #94A5B0 !important;
 }
-button:disabled .zwiico-spin {
+button:disabled .fa-spinner {
 	color: #50616C !important /* Icône de soumission unique */
 }
 button {
@@ -774,6 +770,26 @@ label {
 .button.buttonRed:active {
 	background: #E3301E;
 }
+.button.buttonGreen {
+	background: #27AE60;
+	color: #FFF;
+}
+.button.buttonGreen:hover {
+	background: #19CC5F;
+}
+.button.buttonGreen:active {
+	background: #17C050;
+}
+.button.buttonOrange {
+	background: #F39C12;
+	color: #FFF;
+}
+.button.buttonOrange:hover {
+	background: #E59C11;
+}
+.button.buttonOrange:active {
+	background: #E39002;
+}
 
 /* Upload de fichiers */
 .inputFile {
@@ -787,7 +803,7 @@ label {
 	padding: 10px 0;
 	background: #F5F5F5;
 	text-align: center;
-	/*float: right;*/	
+	/*float: right;*/
 }
 .inputFile:hover {
 	text-decoration: none;
@@ -1087,6 +1103,9 @@ th.col12 {
 .clearBoth {
 	clear: both;
 }
+.smallText {
+    font-size: 0.8em !important;
+}
 .colorGreen {
 	color: #27AE60;
 }
@@ -1095,4 +1114,18 @@ th.col12 {
 }
 .colorOrange {
 	color: #F39C12;
+}
+.colorGrey {
+	color: #9C9C9C;
+}
+
+/* Classes pour les icônes */
+.ico-margin-left:before {
+	margin-left: .4em;
+}
+.ico-margin-right:before {
+	margin-right: .4em;
+}
+.ico-margin-all:before {
+	margin: 0 .4em;
 }

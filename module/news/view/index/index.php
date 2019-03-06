@@ -6,16 +6,16 @@
 					<?php echo $news['title']; ?>
 				</h1>
 				<div class="newsDate">
-					<i class="far fa-calendar-alt"></i>					
+					<i class="far fa-calendar-alt"></i>
 					<?php echo utf8_encode(strftime('%d %B %Y', $news['publishedOn'])); ?>
 				</div>
 				<div class="newsSignature">
 					<?php echo $this->getData(['user', $news['userId'], 'firstname']) . ' ' . $this->getData(['user', $news['userId'], 'lastname']); ?>
-				</div>				
+				</div>
 				<div class="newsContent">
 					<?php echo $news['content']; ?>
 				</div>
-				<div class="clearBoth"></div>				
+				<div class="clearBoth"></div>
 				<hr />
 			<?php endforeach; ?>
 		</div>

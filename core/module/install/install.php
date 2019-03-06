@@ -12,6 +12,9 @@
  * @link http://zwiicms.com/
  */
 
+// Inclusion de la classe spécifique à la gestion des plugins
+require_once 'core/core-plugins.php';
+
 class install extends common {
 
 	public static $actions = [
@@ -97,13 +100,13 @@ class install extends common {
 			case 1:
 				$success = true;
 				// Copie du fichier de données
-				copy('site/data/core.json', 'site/backup/' . date('Y-m-d', time()) . '-update.json');
+				copy(self::DATA_DIR . 'core.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-update.json');
 				// Nettoyage des fichiers temporaires
-				if(file_exists('site/tmp/update.tar.gz')) {
-					$success = unlink('site/tmp/update.tar.gz');
+				if(file_exists(self::TEMP_DIR . 'update.tar.gz')) {
+					$success = unlink(self::TEMP_DIR . 'update.tar.gz');
 				}
-				if(file_exists('site/tmp/update.tar')) {
-					$success = unlink('site/tmp/update.tar');
+				if(file_exists(self::TEMP_DIR . 'update.tar')) {
+					$success = unlink(self::TEMP_DIR . 'update.tar');
 				}
 				// Valeurs en sortie
 				$this->addOutput([
@@ -117,7 +120,7 @@ class install extends common {
 			// Téléchargement
 			case 2:
 				// Téléchargement depuis le serveur de Zwii
-				$success = (file_put_contents('site/tmp/update.tar.gz', file_get_contents('https://zwiicms.com/update/update.tar.gz')) !== false);
+				$success = (file_put_contents(self::TEMP_DIR . 'update.tar.gz', file_get_contents('https://zwiicms.com/update/update.tar.gz')) !== false);
 				// Valeurs en sortie
 				$this->addOutput([
 					'display' => self::DISPLAY_JSON,
@@ -135,7 +138,7 @@ class install extends common {
 				// Décompression et installation
 				try {
 					// Décompression dans le dossier de fichier temporaires
-					$pharData = new PharData('site/tmp/update.tar.gz');
+					$pharData = new PharData(self::TEMP_DIR . 'update.tar.gz');
 					$pharData->decompress();
 					// Installation
 					$pharData->extractTo(__DIR__ . '/../../../', null, true);
@@ -175,6 +178,61 @@ class install extends common {
 					'content' => [
 						'success' => $success,
 						'data' => null
+					]
+				]);
+				break;
+			// Re-déploiement des éventuels plugins
+			case 5:
+				$corePlugin = new CorePlugins($this);
+				$corePlugin->setActionType("deploy");
+				$errorMsg = "";
+
+				// Récupération des plugins qui étaient activés avant mise à jour
+				$deployedPlugins = helper::arrayColumn($this->getData(['plugins']), 'name', 'KEY_SORT_ASC');
+				foreach ($deployedPlugins as $pluginId => $pluginName) {
+					$corePlugin->setIdPlugin($pluginId);
+					$status = $this->getData(['plugins', $pluginId, 'status']);
+					if ($status == CorePlugins::IS_ACTIVATE) {
+						// Il faut tenter de réinstaller le plugin
+						$success = true;
+						$status = "";
+
+						// 1- Vérifier que le plugin est correctement constitué
+						$success = $corePlugin->checkPluginStructure($msg);
+
+						if ($success) {
+							// 2- Vérifier que le plugin peut-être déployé
+							$success = $corePlugin->checkBefore($msg);
+						} else {
+							$status = CorePlugins::IS_NOT_APPLICABLE;
+						}
+
+						if ($success) {
+							// 3- Déployer le plugin
+							$success = $corePlugin->backup();
+							$success = $corePlugin->execute($msg);
+							if (!$success) {
+								$status = CorePlugins::ON_ERROR;
+							}
+						} else {
+							$status = CorePlugins::IS_NOT_APPLICABLE;
+						}
+
+						if (!$success) {
+							// Désactiver le plugin en base mais pas générer d'erreur, juste un warning
+							$corePlugin->changePluginStatus(CorePlugins::IS_NOT_APPLICABLE);
+							$errorMsg .= "Le plugin {" . $pluginId . "} ne peut pas être déployé sur cette nouvelle version. ";
+							$success = true;
+						}
+					}
+				}
+
+				// Valeurs en sortie
+				$this->addOutput([
+					'display' => self::DISPLAY_JSON,
+					'content' => [
+						'success' => $success,
+						'data' => $errorMsg
 					]
 				]);
 				break;

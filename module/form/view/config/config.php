@@ -22,7 +22,7 @@
 			</div>
 			<div class="col1">
 				<?php echo template::button('formConfigMoreToggle[]', [
-					'value' => template::ico('gear'),
+					'value' => template::ico('cogs'),
 					'class' => 'formConfigMoreToggle'
 				]); ?>
 			</div>
@@ -49,7 +49,7 @@
 			<?php echo template::button('formConfigBack', [
 				'class' => 'buttonGrey',
 				'href' => helper::baseUrl() . 'page/edit/' . $this->getUrl(0),
-				'ico' => 'left',
+				'ico' => 'caret-left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
@@ -77,7 +77,7 @@
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'user'])) ||
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'mail'])),
 					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email'
-				]); ?>						
+				]); ?>
 				<div id="formConfigMailOptions" class="displayNone">
 					<div class="row">
 						<div class="col11 offset1">
@@ -87,10 +87,10 @@
 								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'subject'])
 							]); ?>
 						</div>
-					</div>				
-					<?php 
+					</div>
+					<?php
 						// Element 0 quand aucun membre a été sélectionné
-						$groupMembers = [''] + $module::$groupNews; 
+						$groupMembers = [''] + $module::$groupNews;
 					?>
 					Destinataires  :
 					<div class="row">
@@ -109,7 +109,7 @@
 							]); ?>
 						</div>
 					</div>
-					<div class="row">								
+					<div class="row">
 						<div class="col6 offset1">
 							<?php echo template::text('formConfigMail', [
 								'label' => 'Un eMail :',

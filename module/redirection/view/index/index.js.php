@@ -11,6 +11,6 @@
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  *
- **/ 
+ **/
 
 self.location='<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>';

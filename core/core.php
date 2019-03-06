@@ -26,6 +26,10 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
+	const BACKUP_DIR = 'site/backup/';
+	const DATA_DIR = 'site/data/';
+	const FILE_DIR = 'site/file/';
+	const TEMP_DIR = 'site/tmp/';
 	// Numéro de version de développement :
 	// Désactive l'update auto
 	// const ZWII_VERSION = '9.0.00-dev27';
@@ -38,6 +42,7 @@ class common {
 		'install',
 		'maintenance',
 		'page',
+		'plugins',
 		'sitemap',
 		'theme',
 		'user'
@@ -73,7 +78,7 @@ class common {
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a title=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
+				'content' => "<h3>Bienvenue sur votre nouveau site Zwii !</h3>\r\n<p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>\r\n<p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous allez pouvoir personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>\r\n<p>Si vous avez besoin d'aide ou si vous cherchez des informations sur Zwii, n'hésitez pas à jeter un œil à notre <a data-tippy-content=\"Forum\" href=\"http://forum.zwiicms.com/\">forum</a>.</p>",
 				'hideTitle' => false,
 				'breadCrumb' => false,
 				'metaDescription' => '',
@@ -95,7 +100,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Vous pouvez assigner des parents à vos pages afin de mieux organiser votre menu !</p>\r\n<div class=\"row\">\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col4\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n</div>",
 				'hideTitle' => false,
-				'breadCrumb' => true,				
+				'breadCrumb' => true,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -115,7 +120,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page n'est visible que par les membres de votre site !</p>\r\n<div class=\"row\">\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>\r\n<div class=\"col6\">\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum, neque non vulputate hendrerit, arcu turpis dapibus nisl, id scelerisque metus lectus vitae nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec feugiat dolor et turpis finibus condimentum. Cras sit amet ligula sagittis justo.</p>\r\n</div>r\n</div>",
 				'hideTitle' => false,
-				'breadCrumb' => true,				
+				'breadCrumb' => true,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -138,7 +143,7 @@ class common {
 							<p>Cette nouvelle fonctionnalité autorise toutes sortes d\'utilisations : texte, encadrés, images, vidéos... ou simple marge blanche. Seule restriction : on ne peut pas installer un module dans une barre latérale.</p>
 							<p>La liste des barres disponibles et leur emplacement s\'affichent en fonction du gabarit que vous aurez choisi.',
 				'hideTitle' => false,
-				'breadCrumb' => true,				
+				'breadCrumb' => true,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -152,14 +157,14 @@ class common {
 				'barLeft' => '',
 				'barRight' => 'barre'
 
-			],			
+			],
 			'blog' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
 				'content' => "<p>Cette page contient une instance du module de blog. Cliquez sur un article afin de le lire et de poster des commentaires.</p>",
 				'hideTitle' => false,
-				'breadCrumb' => false,				
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'blog',
@@ -171,7 +176,7 @@ class common {
 				'title' => 'Blog',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => ''
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -179,7 +184,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page contient une instance du module de galeries photos. Cliquez sur la galerie ci-dessous afin de voir les photos qu'elle contient.</p>",
 				'hideTitle' => false,
-				'breadCrumb' => false,				
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'gallery',
@@ -191,7 +196,7 @@ class common {
 				'title' => 'Galeries',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => ''
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -199,7 +204,7 @@ class common {
                 'disable' => false,
 				'content' => "",
 				'hideTitle' => false,
-				'breadCrumb' => false,				
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'redirection',
@@ -211,7 +216,7 @@ class common {
 				'title' => 'Site de Zwii',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => ''
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -219,7 +224,7 @@ class common {
                 'disable' => false,
 				'content' => "<p>Cette page contient un exemple de formulaire conçu à partir du module de génération de formulaires. Il est configuré pour envoyer les données saisies par mail aux administrateurs du site.</p>",
 				'hideTitle' => false,
-				'breadCrumb' => false,				
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => 'form',
@@ -231,7 +236,7 @@ class common {
 				'title' => 'Contact',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => ''
 			],
 			'barre' => [
 			    'typeMenu' => 'text',
@@ -239,7 +244,7 @@ class common {
                 'disable' => false,
 				'content' => '<div class="block"><h4>ZwiiCMS</h4><h3>Le CMS sans base de données à l\'installation simple et rapide</p></h3></div>',
 				'hideTitle' => false,
-				'breadCrumb' => false,				
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -301,7 +306,7 @@ class common {
 				'beaux-paysages' => [
 					'config' => [
 						'name' => 'Beaux paysages',
-						'directory' => 'site/file/source/galerie/landscape'
+						'directory' => self::FILE_DIR.'source/galerie/landscape'
 					],
 					'legend' => [
 						'desert.jpg' => 'Un désert',
@@ -312,7 +317,7 @@ class common {
 				'espace' => [
 					'config' => [
 						'name' => 'Espace',
-						'directory' => 'site/file/source/galerie/space'
+						'directory' => self::FILE_DIR.'source/galerie/space'
 					],
 					'legend' => [
 						'earth.jpg' => 'La Terre et la Lune',
@@ -381,9 +386,9 @@ class common {
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'copyrightPosition' => 'center',
 				'copyrightAlign' => 'center',
-				'text' => 'Pied de page personnalisé',				
+				'text' => 'Pied de page personnalisé',
 				'textPosition' => 'left',
-				'textAlign' => 'left',				
+				'textAlign' => 'left',
 				'socialsPosition' => 'right',
 				'socialsAlign' => 'right'
 			],
@@ -410,7 +415,7 @@ class common {
 			],
 			'menu' => [
 				'backgroundColor' => 'rgba(74, 105, 189, 1)',
-				'font' => 'Open+Sans',				
+				'font' => 'Open+Sans',
 				'fontSize' => '1em',
 				'fontWeight' => 'normal',
 				'height' => '15px 10px',
@@ -478,7 +483,7 @@ class common {
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
-			'zwiico'
+			'fontawesome'
 		],
 		'view' => ''
 	];
@@ -522,17 +527,17 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 
-		// Import des données d'une version 8		
+		// Import des données d'une version 8
 		$this->importData();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
-		if(file_exists('site/data/core.json')   === false OR 
-		   file_exists('site/data/theme.json')  === false) {
+		if(file_exists(self::DATA_DIR.'core.json')   === false OR
+		   file_exists(self::DATA_DIR.'theme.json')  === false) {
 			$this->setData([$this->defaultData]);
 			$this->saveData();
-			chmod('site/data/core.json', 0755);
-			chmod('site/data/theme.json', 0755);
-		} 
+			chmod(self::DATA_DIR.'core.json', 0755);
+			chmod(self::DATA_DIR.'theme.json', 0755);
+		}
 
 		// Import des données d'un fichier data.json déjà présent
 		if($this->data === [])  {
@@ -543,14 +548,14 @@ class common {
 		// Fonction désactivée en dev
 		if (stripos(common::ZWII_VERSION, 'dev') === 0 )
 			$this->update();
-	
+
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
 		}
 		// Construit la liste des pages parents/enfants
 		if($this->hierarchy['all'] === []) {
-			$pages = helper::arrayCollumn($this->getData(['page']), 'position', 'SORT_ASC');
+			$pages = helper::arrayColumn($this->getData(['page']), 'position', 'VAL_SORT_ASC');
 			// Parents
 			foreach($pages as $pageId => $pagePosition) {
 				if(
@@ -615,12 +620,12 @@ class common {
 
 	/**
 	 * Lecture des fichiers de données
-	 * 
+	 *
 	 */
 	public function readData() {
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
+			$this->setData([json_decode(file_get_contents(self::DATA_DIR.'core.json'), true) + json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true)]);
 			if($this->data) {
 				break;
 			}
@@ -637,26 +642,26 @@ class common {
 	 * Converti un fichier de données data.json puis le renomme
 	 */
 	public function importData() {
-		if(file_exists('site/data/data.json')) {
+		if(file_exists(self::DATA_DIR.'data.json')) {
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
-				$tempData = [json_decode(file_get_contents('site/data/data.json'), true)];			
+				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];
 				if($tempData) {
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
+						if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
 						usleep(10000);
 					}
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
+						if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
 						usleep(10000);
-					}					
-					rename ('site/data/data.json','site/data/imported_data.json');
+					}
+					rename (self::DATA_DIR.'data.json', self::DATA_DIR.'imported_data.json');
 					break;
 				}
 				elseif($i === 2) {
@@ -665,7 +670,6 @@ class common {
 				// Pause de 10 millisecondes
 				usleep(10000);
 			}
-		
 		}
 	}
 
@@ -739,7 +743,7 @@ class common {
 	 * En local, copie du site décran de ZwiiCMS
 	 */	
 	public function makeImageTag () {
-		if (!file_exists('site/file/source/screenshot.png'))
+		if (!file_exists(self::FILE_DIR.'source/screenshot.png'))
 		{ 			
 			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
 				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
@@ -747,8 +751,8 @@ class common {
 				$screenshot = $googlePagespeedData['screenshot']['data'];
 				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
 				$data = 'data:image/jpeg;base64,'.$screenshot;
-				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-				file_put_contents( 'site/file/source/screenshot.png',$data);
+				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+				file_put_contents(self::FILE_DIR.'source/screenshot.png',$data);
 			}
 		}
 	}
@@ -790,7 +794,7 @@ class common {
 	 */
 	public function getHierarchy($parentId = null, $onlyVisible = true, $onlyBlock = false) {
 		$hierarchy = $onlyVisible ? $this->hierarchy['visible'] : $this->hierarchy['all'];
-		$hierarchy = $onlyBlock ? $this->hierarchy['bar'] : $hierarchy;		
+		$hierarchy = $onlyBlock ? $this->hierarchy['bar'] : $hierarchy;
 		// Enfants d'un parent
 		if($parentId) {
 			if(array_key_exists($parentId, $hierarchy)) {
@@ -922,7 +926,7 @@ class common {
 		// 5 premières clés principales
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -933,7 +937,7 @@ class common {
 		// dernière clé principale
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -1075,15 +1079,15 @@ class common {
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {
 			$this->setData(['theme','footer','socialsPosition','right']);
-			$this->setData(['theme','footer','textPosition','left']);			
-			$this->setData(['theme','footer','copyrightPosition','center']);			
+			$this->setData(['theme','footer','textPosition','left']);
+			$this->setData(['theme','footer','copyrightPosition','center']);
 			$this->setData(['core', 'dataVersion', 844]);
 			$this->SaveData();
-		}			
+		}
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {
 			echo $this->getData(['core', 'dataVersion']);
-			echo '<br>';			
+			echo '<br>';
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
 			$this->SaveData();
@@ -1093,7 +1097,7 @@ class common {
 			$this->setData(['theme','menu','font','Open+Sans']);
 			$this->setData(['core', 'dataVersion', 850]);
 			$this->SaveData();
-		}	
+		}
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
 			echo $this->getData(['core', 'dataVersion']);
@@ -1102,7 +1106,7 @@ class common {
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
 			$this->SaveData();
-		}	
+		}
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
 			$this->setData(['theme', 'site', 'block','12']);
@@ -1140,7 +1144,7 @@ class core extends common {
 		// Supprime les fichiers temporaires
 		$lastClearTmp = mktime(0, 0, 0);
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
-			$iterator = new DirectoryIterator('site/tmp/');
+			$iterator = new DirectoryIterator(self::TEMP_DIR);
 			foreach($iterator as $fileInfos) {
 				if($fileInfos->isFile() AND $fileInfos->getBasename() !== '.gitkeep') {
 					@unlink($fileInfos->getPathname());
@@ -1159,13 +1163,13 @@ class core extends common {
 			AND $this->getData(['user']) // Pas de backup pendant l'installation
 		) {
 			// Copie du fichier de données
-			copy('site/data/core.json', 'site/backup/' . date('Y-m-d', $lastBackup) . '.json');
+			copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
 			// Date du dernier backup
 			$this->setData(['core', 'lastBackup', $lastBackup]);
 			// Enregistre les données
 			$this->saveData();
 			// Supprime les backups de plus de 30 jours
-			$iterator = new DirectoryIterator('site/backup/');
+			$iterator = new DirectoryIterator(self::BACKUP_DIR);
 			foreach($iterator as $fileInfos) {
 				if(
 					$fileInfos->isFile()
@@ -1177,17 +1181,17 @@ class core extends common {
 			}
 		}
 		// Crée le fichier de personnalisation avancée
-		if(file_exists('site/data/custom.css') === false) {
-			file_put_contents('site/data/custom.css', file_get_contents('core/module/theme/resource/custom.css'));
-			chmod('site/data/custom.css', 0755);
+		if(file_exists(self::DATA_DIR.'custom.css') === false) {
+			file_put_contents(self::DATA_DIR.'custom.css', file_get_contents('core/module/theme/resource/custom.css'));
+			chmod(self::DATA_DIR.'custom.css', 0755);
 		}
 		// Crée le fichier de personnalisation
-		if(file_exists('site/data/theme.css') === false) {
-			file_put_contents('site/data/theme.css', '');
-			chmod('site/data/theme.css', 0755);
+		if(file_exists(self::DATA_DIR.'theme.css') === false) {
+			file_put_contents(self::DATA_DIR.'theme.css', '');
+			chmod(self::DATA_DIR.'theme.css', 0755);
 		}
 		// Check la version
-		$cssVersion = preg_split('/\*+/', file_get_contents('site/data/theme.css'));
+		$cssVersion = preg_split('/\*+/', file_get_contents(self::DATA_DIR.'theme.css'));
 		if(empty($cssVersion[1]) OR $cssVersion[1] !== md5(json_encode($this->getData(['theme'])))) {
 			// Version
 			$css = '/*' . md5(json_encode($this->getData(['theme']))) . '*/';
@@ -1227,13 +1231,14 @@ class core extends common {
 					$css .= 'header{margin:20px 20px 0 20px}';
 				}
 			}
+			// Suppression de l'unité Px pour éviter une erreur
+			$headerHeight = $this->getData(['theme', 'header', 'height']);
+			if(substr($headerHeight, -2) == 'px'){
+				$headerHeight = substr($headerHeight, 0, strlen($headerHeight) - 2);
+			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';			
-			$css .= '@media (max-width: 767px) {header{height:' .
-					 str_replace("px","",$this->getData(['theme', 'header', 'height']))/2 . 
-					 'px;line-height:' . 
-					 str_replace("px","",$this->getData(['theme', 'header', 'height']))/2 . 
-					 'px;}}';
+			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $headerHeight . 'px;line-height:' . $headerHeight . 'px;text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
+			$css .= '@media (max-width: 767px) {header{height:' . $headerHeight/2 . 'px;line-height:' . $headerHeight/2 . 'px;}}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
@@ -1271,7 +1276,7 @@ class core extends common {
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
 			// Enregistre la personnalisation
-			file_put_contents('site/data/theme.css', $css);
+			file_put_contents(self::DATA_DIR.'theme.css', $css);
 		}
 	}
 
@@ -1363,13 +1368,13 @@ class core extends common {
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
-				$title = '<a href="' . helper::baseUrl() . 
+				$title = '<a href="' . helper::baseUrl() .
 						$this->getData(['page', $this->getUrl(0), 'parentPageId']) .
 						'">' .
 						ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
 						'</a> &#8250; '.
-						$this->getData(['page', $this->getUrl(0), 'title']);			
-		} 
+						$this->getData(['page', $this->getUrl(0), 'title']);
+		}
 		// Importe la page
 		if(
 			$this->getData(['page', $this->getUrl(0)]) !== null
@@ -1538,7 +1543,7 @@ class core extends common {
 								'vendor' => array_merge($this->output['vendor'], $output['vendor'])
 							]);
 						}
-						if($output['title'] !== null) {										
+						if($output['title'] !== null) {
 							$this->addOutput([
 								'title' => $output['title']
 							]);
@@ -1645,21 +1650,27 @@ class helper {
 	 * Retourne les valeurs d'une colonne du tableau de données
 	 * @param array $array Tableau cible
 	 * @param string $column Colonne à extraire
-	 * @param string $sort Type de tri à appliquer au tableau (SORT_ASC, SORT_DESC, ou null)
+	 * @param string $sort Type de tri à appliquer au tableau (VAL_SORT_ASC, VAL_SORT_DESC, KEY_SORT_ASC, KEY_SORT_DESC ou null)
 	 * @return array
 	 */
-	public static function arrayCollumn($array, $column, $sort = null) {
+	public static function arrayColumn($array, $column, $sort = null) {
 		$newArray = [];
 		if(empty($array) === false) {
 			$newArray = array_map(function($element) use($column) {
 				return $element[$column];
 			}, $array);
-			switch($sort) {
-				case 'SORT_ASC':
+			switch(strtoupper($sort)) {
+				case 'VAL_SORT_ASC':
 					asort($newArray);
 					break;
-				case 'SORT_DESC':
+				case 'VAL_SORT_DESC':
 					arsort($newArray);
+					break;
+				case 'KEY_SORT_ASC':
+					ksort($newArray);
+					break;
+				case 'KEY_SORT_DESC':
+					krsort($newArray);
 					break;
 			}
 		}
@@ -1727,12 +1738,11 @@ class helper {
 	 * @return bool
 	 */
 	public static function checkNewVersion() {
+		$newVersion  = false;
 		if($version = helper::getOnlineVersion()) {
-			return (trim($version) !== common::ZWII_VERSION);
+			if(version_compare(trim($version), common::ZWII_VERSION) === 1) $newVersion = true;
 		}
-		else {
-			return false;
-		}
+		return $newVersion;
 	}
 
 
@@ -1798,7 +1808,7 @@ class helper {
 				// un dossier existe du même nom (erreur en cas de redirection)
 				if (file_exists($text)) {
 					$text = 'p-' .  $text;
-				}				
+				}
 				break;
 			case self::FILTER_INT:
 				$text = (int) filter_var($text, FILTER_SANITIZE_NUMBER_INT);
@@ -2005,6 +2015,44 @@ class helper {
 		return $text;
 	}
 
+/**
+	* Supprime un répertoire avec tous ses descendants ou un fichier
+	* @param string $object Répertoire racine ou fichier à supprimer
+	*/
+	public static function rm_recursive($object) {
+		$object = trim($object);
+
+		if(strlen($object) > 1) {
+			if (is_dir($object)) {
+				// suppression du contenu du répertoire
+				$it = new RecursiveDirectoryIterator($object, FilesystemIterator::SKIP_DOTS);
+				$it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+				foreach($it as $file) {
+					if ($file->isDir()) rmdir($file->getPathname());
+					else unlink($file->getPathname());
+				}
+
+				// Suppression du répertoire
+				rmdir($object);
+			} else {
+				if(file_exists($object)) unlink($object);
+			}
+		}
+	}
+
+	/**
+	* Détermine si une fonction PHP est disponible sur l'hébergement
+	* @param string $function Nom de la fonction à vérifier
+	* @return boolean
+	*/
+	public static function isFunctionEnabled($function) {
+		$enabled = false;
+		if(function_exists($function)){
+			$disabled = explode(',', ini_get('disable_functions'));
+			$enabled = !in_array($function, $disabled);
+		}
+		return $enabled;
+	}
 }
 
 class layout extends common {
@@ -2079,7 +2127,7 @@ class layout extends common {
 	 */
 	public function showFavicon() {
 		if($favicon = $this->getData(['config', 'favicon'])) {
-			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'site/file/source/' . $favicon . '">';
+			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . self::FILE_DIR . 'source/' . $favicon . '">';
 		}
 	}
 
@@ -2111,7 +2159,7 @@ class layout extends common {
 
 					{$items .= '<a href="'.$this->getUrl(1).'">';
 			} else {
-					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '" data-tippy-content="'.$this->getData(['page', $parentPageId, 'title']).'" ' . $active . $targetBlank . '>';
 			}
 
 
@@ -2124,14 +2172,14 @@ class layout extends common {
 				    break;
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" title="';
+				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" data-tippy-content="';
 				   	 	$items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				  	 	$items .= $this->getData(['page', $parentPageId, 'title']);
@@ -2142,7 +2190,7 @@ class layout extends common {
 
 
 			if($childrenPageIds) {
-				$items .= template::ico('down', 'left');
+				$items .= template::ico('sort-down', 'left');
 			}
 			$items .= '</a>';
 
@@ -2171,14 +2219,14 @@ class layout extends common {
 						break;
 					case 'icon' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						} else {
 						$items .= $this->getData(['page', $parentPageId, 'title']);
 						}
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" title="';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" data-tippy-content="';
 						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2186,7 +2234,7 @@ class layout extends common {
 						break;
 					case 'icontext' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						$items .= $this->getData(['page', $childKey, 'title']);
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2242,7 +2290,7 @@ class layout extends common {
 	 * Affiche la meta image (site screenshot)
 	 */
 	public function showMetaImage() {
-		echo '<meta property="og:image" content="' . helper::baseUrl() .'/site/file/source/screenshot.png" />';
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'/' . self::FILE_DIR.'source/screenshot.png" />';
 	}
 
 
@@ -2271,7 +2319,7 @@ class layout extends common {
 			unset($_SESSION['ZWII_NOTIFICATION_OTHER']);
 		}
 		if(isset($notification) AND isset($notificationClass)) {
-			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('cancel') . '</span><div id="notificationProgress"></div></div>';
+			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('times') . '</span><div id="notificationProgress"></div></div>';
 		}
 	}
 
@@ -2293,7 +2341,7 @@ class layout extends common {
 					}
 				}
 				$leftItems .= '</select></li>';
-				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" title="Créer une page ou<br>une barre latérale">' . template::ico('plus') . '</a></li>';
+				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" data-tippy-content="Créer une page ou<br>une barre latérale">' . template::ico('plus') . '</a></li>';
 				if(
 					// Sur un module de page qui autorise le bouton de modification de la page
 					$this->core->output['showBarEditButton']
@@ -2302,28 +2350,29 @@ class layout extends common {
 					// Sur une page d'accueil
 					OR $this->getUrl(0) === ''
 				) {
-					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" title="Modifier la page">' . template::ico('pencil') . '</a></li>';
+					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" data-tippy-content="Modifier la page">' . template::ico('pencil-alt') . '</a></li>';
 				}
 			}
 			// Items de droite
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 
-				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/core.json') .'" title="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" title="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" title="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" title="Configurer le site">' . template::ico('gear') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cogs') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
 				// Mise à jour automatique
 				// Désactivée en dev
 				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === FALSE ) {
-				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" title="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
+				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('sync-alt colorRed') . '</a></li>';
 				 }
 				// Mise à jour automatique
 			}
-			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" title="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
-			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" title="Se déconnecter">' . template::ico('logout') . '</a></li>';
+			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" data-tippy-content="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
+			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" data-tippy-content="Se déconnecter">' . template::ico('sign-out-alt') . '</a></li>';
 			// Barre de membre 
 			echo '<div id="bar"><div class="container"><ul id="barLeft">' . $leftItems . '</ul><ul id="barRight">' . $rightItems . '</ul></div></div>';
 		}
@@ -2358,31 +2407,38 @@ class layout extends common {
 				case 'facebookId':
 					$socialUrl = 'https://www.facebook.com/';
 					$title = 'Facebook';
+					$ico = substr($socialName, 0, -2).'-f';
 					break;
 				case 'googleplusId':
 					$socialUrl = 'https://plus.google.com/';
 					$title = 'Google +';
+					$ico = "google-plus-g";
 					break;
 				case 'instagramId':
 					$socialUrl = 'https://www.instagram.com/';
 					$title = 'Instagram';
+					$ico = substr($socialName, 0, -2);
 					break;
 				case 'pinterestId':
 					$socialUrl = 'https://pinterest.com/';
 					$title = 'Pinterest';
+					$ico = substr($socialName, 0, -2).'-p';
 					break;
 				case 'twitterId':
 					$socialUrl = 'https://twitter.com/';
 					$title = 'Twitter';
+					$ico = substr($socialName, 0, -2);
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
+					$title = 'YouTube';
+					$ico = substr($socialName, 0, -2);
 					break;
 				default:
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" title="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico($ico) . '</a>';
 			}
 		}
 		if($socials !== '') {
@@ -2401,7 +2457,7 @@ class layout extends common {
 			$this->getUser('password') === $this->getInput('ZWII_USER_PASSWORD')
 			AND $this->getUser('group') >= self::GROUP_MODERATOR
 		) {
-			$vars .= 'var privateKey = ' . json_encode(md5_file('site/data/core.json')) . ';';
+			$vars .= 'var privateKey = ' . json_encode(md5_file(self::DATA_DIR.'core.json')) . ';';
 		}
 		echo '<script>' . helper::minifyJs($vars) . '</script>';
 		// Librairies
@@ -2441,7 +2497,7 @@ class layout extends common {
 }
 
 class template {
-
+	const DATA_DIR = 'site/data/'; // Pour éviter de faire un extend de la class common juste pour une constante, redéfinition de celle-ci
 	/**
 	 * Crée un bouton
 	 * @param string $nameId Nom et id du champ
@@ -2453,6 +2509,7 @@ class template {
 		$attributes = array_merge([
 			'class' => '',
 			'disabled' => false,
+			'help' => '',
 			'href' => 'javascript:void(0);',
 			'ico' => '',
 			'id' => $nameId,
@@ -2463,11 +2520,12 @@ class template {
 		], $attributes);
 		// Retourne le html
 		return sprintf(
-			'<a %s class="button %s %s %s">%s</a>',
+			'<a %s class="button %s %s %s" %s>%s</a>',
 			helper::sprintAttributes($attributes, ['class', 'disabled', 'ico', 'value']),
 			$attributes['disabled'] ? 'disabled' : '',
 			$attributes['class'],
 			$attributes['uniqueSubmission'] ? 'uniqueSubmission' : '',
+			($attributes['help'] ? ' data-tippy-content=\''.$attributes['help'].'\' ' : ''),
 			($attributes['ico'] ? template::ico($attributes['ico'], 'right') : '') . $attributes['value']
 		);
 	}
@@ -2689,7 +2747,7 @@ class template {
 					'?relative_url=1' .
 					'&field_id=' . $attributes['id'] .
 					'&type=' . $attributes['type'] .
-					'&akey=' . md5_file('site/data/core.json') .
+					'&akey=' . md5_file(self::DATA_DIR.'core.json') .
 					($attributes['extensions'] ? '&extensions=' . $attributes['extensions'] : '')
 				. '"
 				class="inputFile %s %s"
@@ -2705,7 +2763,7 @@ class template {
 		);
 		$html .= self::button($attributes['id'] . 'Delete', [
 			'class' => 'inputFileDelete',
-			'value' => self::ico('cancel')
+			'value' => self::ico('times')
 		]);
 		$html .= '</div>';
 		// Fin du wrapper
@@ -2746,7 +2804,7 @@ class template {
 	 * @return string
 	 */
 	public static function help($text) {
-		return '<span class="helpButton" title="' . $text . '">' . self::ico('help') . '</span>';
+		return '<span class="helpButton" data-tippy-content="' . $text . '">' . self::ico('question-circle') . '</span>';
 	}
 
 	/**
@@ -2784,8 +2842,12 @@ class template {
 	 * @param string $fontSize Taille de la police
 	 * @return string
 	 */
-	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em') {
-		return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . '" style="font-size:' . $fontSize . '"></span>';
+	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em', $colorClass = '') {
+		$brands = array ("facebook-f", "google-plus-g", "instagram", "pinterest-p", "twitter", "youtube");
+		$iconFont = "fas";
+		if(in_array($ico, $brands)) $iconFont = "fab";
+
+		return '<span class="'.$iconFont.' fa-' . $ico . ($margin ? ' ico-margin-' . $margin : '') . ($animate ? ' fa-spin' : '') . ' ' . $colorClass . '" style="font-size:' . $fontSize . '"></span>';
 	}
 
 	/**
@@ -3181,4 +3243,138 @@ class template {
 		return $html;
 	}
 
+}
+class ValidateJson {
+	public static $isValid = true;
+	public static $errorMsg = array();
+
+	/**
+	 * Vérifie si le contenu d'un fichier Json correspond bien au schéma de référence
+	 * @param string $json contenu du fichier Json à contrôler
+	 * @param string $schema chemin du fichier correspond au schéma de référence
+	*/
+	public static function check($json, $schema)
+	{
+		self::$isValid = true;
+		self::$errorMsg = array();
+		self::validate($json, $schema);
+	}
+
+	/**
+	 * Retourne true si le json correspond bien au schéma, sinon false
+	 * @return boolean
+	*/
+	public static function isValid()
+	{
+		return self::$isValid;
+	}
+
+	/**
+	 * Retourne les erreurs éventuelles
+	 * @return array
+	*/
+	public static function getErrors()
+	{
+		return self::$errorMsg;
+	}
+
+	/**
+	 * Effectue la comparaison du fichier Json et du Schema de référence
+	 * @param string $json contenu du fichier Json à contrôler
+	 * @param string $schemaFile chemin du fichier correspond au schéma de référence
+	*/
+	private static function validate($json, $schemaFile)
+	{
+		$json = json_decode($json);
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			self::$isValid = false;
+			$error = "Problème pour lire le fichier Json";
+			if (function_exists('json_last_error_msg')) {
+				$error .= ' : ' . json_last_error_msg();
+			}
+			array_push(self::$errorMsg, $error);
+		} else {
+			$schemaContent = file_get_contents($schemaFile);
+			$schema = json_decode($schemaContent);
+			if (json_last_error() !== JSON_ERROR_NONE) {
+				self::$isValid = false;
+				$error = "Problème pour lire le schéma de référece {".$schemaFile."}";
+				if (function_exists('json_last_error_msg')) {
+					$error .= ' : ' . json_last_error_msg();
+				}
+				array_push(self::$errorMsg, $error);
+			} else {
+				// Vérifier que le Json est conforme à la structure du modèle (schema)
+				foreach ($schema->properties as $key => $property) {
+					$required = $property->required;
+					$type = $property->type;
+					$items_type = null;
+					if(isset($property->items))
+						$items_type = ($property->items->type ? $property->items->type : null);
+
+					if(property_exists($json, $key)){
+						// Récupérer la valeur
+						$value = $json->{$key};
+
+						// Vérification des types de données
+					   self::checkType($value, $type, $items_type);
+					} else {
+						if($required){
+							// La propriété doit être présente dans le Json
+							self::$isValid = false;
+							array_push(self::$errorMsg, "Propriété {".$key."} manquante");
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Effectue la comparaison du type des différentes valeurs
+	 * @param string $value valeur à vérifier
+	 * @param string $type type attendu pour la valeur
+	 * @param $items_type $type type attendu pour les valeurs contenu dans un tableau
+	*/
+	private static function checkType($value, $type, $items_type = null){
+		switch (strtolower($type)) {
+			case "string":
+				if(!is_string($value)){
+					self::$isValid = false;
+					array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : String attendu");
+				}
+				break;
+
+			case "numeric":
+				if(!is_numeric($value)){
+					self::$isValid = false;
+					array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Numeric attendu");
+				}
+				break;
+
+			 case "boolean":
+				if(!is_bool($value)){
+					self::$isValid = false;
+					array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Boolean attendu");
+				}
+				break;
+
+			case "array":
+				if(!is_array($value)){
+					self::$isValid = false;
+					array_push(self::$errorMsg, "Mauvais format pour la propriété {".$key."} : Array attendu");
+				} else {
+					// Vérifier que les éléments du tableau ont le bon format également
+					foreach ($value as $arrValue) {
+						self::checkType($arrValue, $items_type);
+					}
+				}
+				break;
+
+			default:
+				self::$isValid = false;
+				array_push(self::$errorMsg, "Erreur dans le fichier modèle du Json. Contacter le support");
+				break;
+		}
+	}
 }

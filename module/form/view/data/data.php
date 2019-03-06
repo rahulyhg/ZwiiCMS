@@ -3,7 +3,7 @@
 		<?php echo template::button('formDataBack', [
 			'class' => 'buttonGrey',
 			'href' => helper::baseUrl() . $this->getUrl(0) . '/config',
-			'ico' => 'left',
+			'ico' => 'caret-left',
 			'value' => 'Retour'
 		]); ?>
 	</div>
@@ -11,7 +11,7 @@
 	<?php echo template::button('formDataDeleteAll', [
 			'class' => 'formDataDeleteAll buttonRed',
 			'href' => helper::baseUrl() . $this->getUrl(0) . '/deleteall' . '/' . $_SESSION['csrf'],
-			'ico' => 'cancel',
+			'ico' => 'times',
 			'value' => 'Tout effacer'
 		]); ?>
 	</div>
@@ -19,7 +19,7 @@
 	<?php echo template::button('formDataBack', [
 			'class' => 'buttonBlue',
 			'href' => helper::baseUrl() . $this->getUrl(0) . '/export2csv' . '/' . $_SESSION['csrf'],
-			'ico' => 'download',			
+			'ico' => 'download',
 			'value' => 'Export CSV'
 		]); ?>
 	</div>

@@ -35,7 +35,7 @@
 				]); ?>
 			<?php elseif($input['type'] === $module::TYPE_CHECKBOX): ?>
 				<?php echo template::checkbox('formInput[' . $index . ']', true, $input['name']
-				); ?>							
+				); ?>
 			<?php endif; ?>
 		<?php endforeach; ?>
 		<?php if($this->getData(['module', $this->getUrl(0), 'config', 'capcha'])): ?>

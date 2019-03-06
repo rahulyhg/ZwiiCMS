@@ -40,7 +40,7 @@ class user extends common {
 			// Double vérification pour le mot de passe
 			if($this->getInput('userAddPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('userAddConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 				self::$inputNotices['userAddConfirmPassword'] = 'Incorrect';
-			}		
+			}
 			// Crée l'utilisateur
 			$userFirstname = $this->getInput('userAddFirstname', helper::FILTER_STRING_SHORT, true);
 			$userLastname = $this->getInput('userAddLastname', helper::FILTER_STRING_SHORT, true);
@@ -107,7 +107,7 @@ class user extends common {
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Action non autorisée'
 			]);
-		}		
+		}
 		// Bloque la suppression de son propre compte
 		elseif($this->getUser('id') === $this->getUrl(2)) {
 			// Valeurs en sortie
@@ -133,13 +133,13 @@ class user extends common {
 	 */
 	public function edit() {
 		if ($this->getUrl(3) !== $_SESSION['csrf'] &&
-			$this->getUrl(4) !== $_SESSION['csrf']) {			
+			$this->getUrl(4) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
 				'notification' => 'Action  non autorisée'
 			]);
-		}	
+		}
 		// Accès refusé
 		if(
 			// L'utilisateur n'existe pas
@@ -283,8 +283,7 @@ class user extends common {
 	 * Liste des utilisateurs
 	 */
 	public function index() {
-		$userIdsFirstnames = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort($userIdsFirstnames);
+		$userIdsFirstnames = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
 		foreach($userIdsFirstnames as $userId => $userFirstname) {
 			self::$users[] = [
 				$userId,
@@ -292,12 +291,12 @@ class user extends common {
 				self::$groups[$this->getData(['user', $userId, 'group'])],
 				template::button('userEdit' . $userId, [
 					'href' => helper::baseUrl() . 'user/edit/' . $userId . '/back/'. $_SESSION['csrf'],
-					'value' => template::ico('pencil')
+					'value' => template::ico('pencil-alt')
 				]),
 				template::button('userDelete' . $userId, [
 					'class' => 'userDelete buttonRed',
 					'href' => helper::baseUrl() . 'user/delete/' . $userId. '/' . $_SESSION['csrf'],
-					'value' => template::ico('cancel')
+					'value' => template::ico('times')
 				])
 			];
 		}
