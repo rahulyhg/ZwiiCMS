@@ -1,5 +1,10 @@
 # Bloque l'accès aux données
-<Files data.json>
+<Files core.json>
+	Order deny,allow
+	Deny from all
+</Files>
+# Bloque l'accès htaccess
+<Files .htaccess>
 	Order deny,allow
 	Deny from all
 </Files>

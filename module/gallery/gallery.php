@@ -30,6 +30,8 @@ class gallery extends common {
 
 	public static $pictures = [];
 
+	const GALLERY_VERSION = '1.1';
+
 	/**
 	 * Configuration
 	 */
@@ -54,12 +56,12 @@ class gallery extends common {
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
 					template::button('galleryConfigEdit' . $galleryId, [
-						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId,
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil-alt')
 					]),
 					template::button('galleryConfigDelete' . $galleryId, [
 						'class' => 'galleryConfigDelete buttonRed',
-						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $galleryId,
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $galleryId . '/' . $_SESSION['csrf'],
 						'value' => template::ico('times')
 					])
 				];
@@ -93,11 +95,20 @@ class gallery extends common {
 	 * Suppression
 	 */
 	public function delete() {
+		// $url prend l'adresse sans le token
 		// La galerie n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
+			]);
+		}
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Suppression  non autorisée'
 			]);
 		}
 		// Suppression
@@ -127,6 +138,14 @@ class gallery extends common {
 	 * Édition
 	 */
 	public function edit() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Action  non autorisée'
+			]);
+		}
 		// La galerie n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie

@@ -7,9 +7,25 @@ tinymce.init({
 	// Langue
 	language: "fr_FR",
 	// Plugins
-	plugins: "advlist anchor autolink autoresize autosave code codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor",
+	plugins: "advlist anchor autolink autoresize autosave codemirror codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code fullscreen",
+	toolbar: "restoredraft | undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code visualblocks fullscreen",
+	// CodeMirror
+	codemirror: {
+		indentOnInit: true, // Whether or not to indent code on init.
+		fullscreen: false,   // Default setting is false
+		path: 'codemirror', // Path to CodeMirror distribution
+		config: {           // CodeMirror config object
+			mode: 'application/x-httpd-php',
+			lineNumbers: true
+		},
+		width: 800,         // Default value is 800
+		height: 500,        // Default value is 550
+		jsFiles: [          // Additional JS files to load
+			'mode/clike/clike.js',
+			'mode/php/php.js'
+		]
+	}, 
 	// Contenu du menu contextuel
 	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
@@ -89,37 +105,37 @@ tinymce.init({
 			description: "Bloc de texte avec un titre."
 		},
 		{
-			title: "Colonnes symétriques : 6 - 6",
+			title: "Grille symétrique : 6 - 6",
 			url: baseUrl + "core/vendor/tinymce/templates/col6.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes symétriques : 4 - 4 - 4",
+			title: "Grille symétrique : 4 - 4 - 4",
 			url: baseUrl + "core/vendor/tinymce/templates/col4.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes symétriques : 3 - 3 - 3 - 3",
+			title: "Grille symétrique : 3 - 3 - 3 - 3",
 			url: baseUrl + "core/vendor/tinymce/templates/col3.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 4 - 8",
+			title: "Grille asymétrique : 4 - 8",
 			url: baseUrl + "core/vendor/tinymce/templates/col4-8.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 8 - 4",
+			title: "Grille asymétrique : 8 - 4",
 			url: baseUrl + "core/vendor/tinymce/templates/col8-4.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 2 - 10",
+			title: "Grille asymétrique : 2 - 10",
 			url: baseUrl + "core/vendor/tinymce/templates/col2-10.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		},
 		{
-			title: "Colonnes asymétriques : 10 - 2",
+			title: "Grille asymétrique : 10 - 2",
 			url: baseUrl + "core/vendor/tinymce/templates/col10-2.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
 		}

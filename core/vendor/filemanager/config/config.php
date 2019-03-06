@@ -1,5 +1,5 @@
 <?php
-$version = "9.13.4";
+$version = "9.14.0";
 if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
@@ -8,7 +8,7 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
-date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/Paris');
 setlocale(LC_CTYPE, 'fr_FR'); //correct transliteration
 
 /*
@@ -30,7 +30,7 @@ setlocale(LC_CTYPE, 'fr_FR'); //correct transliteration
 */
 
 define('USE_ACCESS_KEYS', true); // TRUE or FALSE
-$privateKey = md5_file('../../../site/data/data.json'); // TODO - Voir comment utiliser la variable self::DATA_DIR
+$privateKey = md5_file('../../../site/data/core.json');
 
 /*
 |--------------------------------------------------------------------------
@@ -66,10 +66,7 @@ $config = array(
 	| without final / (DON'T TOUCH)
 	|
 	*/
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST'],
-        /*
-         'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('/core/vendor/filemanager', '', pathinfo($_SERVER['PHP_SELF'])['dirname']), ' /'),
-         */
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('/core/vendor/filemanager', '', pathinfo($_SERVER['PHP_SELF'])['dirname']), ' /'),
 	/*
 	|--------------------------------------------------------------------------
 	| path from base_url to base of upload folder
@@ -78,7 +75,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => '/site/file/source/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
+	'upload_dir' => '/site/file/source/',
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -87,7 +84,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../site/file/source/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
+	'current_path' => '../../../site/file/source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -98,7 +95,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../../../site/file/thumb/',   // TODO - Voir comment utiliser la constante self::FILE_DIR
+	'thumbs_base_path' => '../../../site/file/thumb/',
 
 
 	/*
@@ -159,7 +156,7 @@ $config = array(
 	| If you use responsivefilemanager tinymce extension can copy into editor multiple object like images, videos, audios, links in the same time
 	|
 	 */
-	'multiple_selection_action_button' => false,
+	'multiple_selection_action_button' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -201,7 +198,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 1024,
+	'MaxSizeUpload' => 20000,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -371,7 +368,7 @@ $config = array(
 	//**********************
 	//Allowed extensions (lowercase insert)
 	//**********************
-	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'ico' ), //Images
+	'ext_img'                                 => array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff','svg', 'ico' ), //Images
 	'ext_file'                                => array( 'doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz','dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff',''), //Files
 	'ext_video'                               => array( 'mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm" ), //Video
 	'ext_music'                               => array( 'mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav' ), //Audio
@@ -403,7 +400,7 @@ $config = array(
 	*******************/
 	'aviary_active'                           => true,
 	'aviary_apiKey'                           => "2444282ef4344e3dacdedc7a78f8877d",
-	'aviary_language'                         => "en",
+	'aviary_language'                         => "fr",
 	'aviary_theme'                            => "light",
 	'aviary_tools'                            => "all",
 	'aviary_maxSize'                          => "1400",
@@ -444,8 +441,8 @@ $config = array(
 	'fixed_path_from_filemanager'             => array( '../test/', '../test1/' ), //fixed path of the image folder from the current position on upload folder
 	'fixed_image_creation_name_to_prepend'    => array( '', 'test_' ), //name to prepend on filename
 	'fixed_image_creation_to_append'          => array( '_test', '' ), //name to appendon filename
-	'fixed_image_creation_width'              => array( 300, 400 ), //width of image
-	'fixed_image_creation_height'             => array( 200, 300 ), //height of image
+	'fixed_image_creation_width'              => array( 300, 400 ), //width of image (you can leave empty if you set height)
+	'fixed_image_creation_height'             => array( 200, '' ), //height of image (you can leave empty if you set width)
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
@@ -465,8 +462,8 @@ $config = array(
 	'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
 	'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
 	'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
-	'relative_image_creation_width'           => array( 300, 400 ), //width of image
-	'relative_image_creation_height'          => array( 200, 300 ), //height of image
+	'relative_image_creation_width'           => array( 300, 400 ), //width of image (you can leave empty if you set height)
+	'relative_image_creation_height'          => array( 200, '' ), //height of image (you can leave empty if you set width)
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;

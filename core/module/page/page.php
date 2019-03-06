@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of Zwii.
  *
@@ -8,12 +7,12 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
-
 class page extends common {
-
 	public static $actions = [
 		'add' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
@@ -22,21 +21,28 @@ class page extends common {
 	public static $pagesNoParentId = [
 		'' => 'Aucune'
 	];
+	public static $pagesBarId = [
+		'' => 'Aucune'
+	];
 	public static $moduleIds = [];
-
-	// Menu image
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
-		'icontitle' => 'Icône et bulle',
-		'icontext' => 'Icône et texte'
+		'icontitle' => 'Icône et bulle'
 	];
-	// menu image
 	// Position du module
 	public static $modulePosition = [
-	'bottom' => 'En bas',
-	'top' => 'En haut',
-	'free' => 'Libre'
+		'bottom' => 'En bas',
+		'top' => 'En haut',
+		'free' => 'Libre'
+	];
+	public static $pageBlocks = [
+		'12' => 'Page pleine',
+		'4-8' => 'Barre latérale 1/3 - Page 2/3',
+		'8-4' => 'Page 2/3    - Barre latérale 1/3',
+		'3-9' => 'Barre latérale 1/4 - Page 3/4',
+		'9-3' => 'Page 3/4    - Barre latérale 1/4',
+		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
 	];
 	/**
 	 * Création
@@ -48,13 +54,12 @@ class page extends common {
 			'page',
 			$pageId,
 			[
-				//  Menu icon				
 				'typeMenu' => 'text',
 				'iconUrl' => '',
-                'disable' => false,				
-				// Menu icon				
+                'disable' => false,
 				'content' => 'Contenu de votre nouvelle page.',
 				'hideTitle' => false,
+				'breadCrumb' => false,
 				'metaDescription' => '',
 				'metaTitle' => '',
 				'moduleId' => '',
@@ -63,7 +68,10 @@ class page extends common {
 				'position' => 0,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => $pageTitle
+				'title' => $pageTitle,
+				'block' => '12',
+				'barLeft' => '',
+				'barRight' => ''
 			]
 		]);
 		// Valeurs en sortie
@@ -73,38 +81,54 @@ class page extends common {
 			'state' => true
 		]);
 	}
-
 	/**
 	 * Suppression
 	 */
 	public function delete() {
+		// $url prend l'adresse sans le token
+		$url = explode('&',$this->getUrl(2));
 		// La page n'existe pas
-		if($this->getData(['page', $this->getUrl(2)]) === null) {
+		if($this->getData(['page', $url[0]]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
 			]);
 		}
 		// Impossible de supprimer la page d'accueil
-		elseif($this->getUrl(2) === $this->getData(['config', 'homePageId'])) {
+		elseif($url[0] === $this->getData(['config', 'homePageId'])) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
 				'notification' => 'Impossible de supprimer la page d\'accueil'
 			]);
 		}
-		// Impossible de supprimer une page contenant des enfants
-		elseif($this->getHierarchy($this->getUrl(2))) {
+		// Jeton incorrect
+		elseif(!isset($_GET['csrf'])) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl() . 'page/edit/' . $this->getUrl(2),
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Jeton invalide'
+			]);
+		}
+		elseif ($_GET['csrf'] !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
+				'notification' => 'Suppression non autorisée'
+			]);
+		}
+		// Impossible de supprimer une page contenant des enfants
+		elseif($this->getHierarchy($url[0])) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'page/edit/' . $url[0],
 				'notification' => 'Impossible de supprimer une page contenant des enfants'
 			]);
 		}
 		// Suppression
 		else {
-			$this->deleteData(['page', $this->getUrl(2)]);
-			$this->deleteData(['module', $this->getUrl(2)]);
+			$this->deleteData(['page', $url[0]]);
+			$this->deleteData(['module', $url[0]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl(false),
@@ -113,7 +137,6 @@ class page extends common {
 			]);
 		}
 	}
-
 	/**
 	 * Édition
 	 */
@@ -131,11 +154,11 @@ class page extends common {
 			if($this->isPost()) {
 				$pageId = $this->getInput('pageEditTitle', helper::FILTER_ID, true);
 				// Si l'id a changée
-				if($pageId !== $this->getUrl(2)) {
+				if ($pageId !== $this->getUrl(2)) {
 					// Incrémente le nouvel id de la page
-					$pageId = helper::increment($pageId, $this->getData(['page']));
-					$pageId = helper::increment($pageId, self::$coreModuleIds);
-					$pageId = helper::increment($pageId, self::$moduleIds);
+						$pageId = helper::increment($pageId, $this->getData(['page']));
+						$pageId = helper::increment($pageId, self::$coreModuleIds);
+						$pageId = helper::increment($pageId, self::$moduleIds);
 					// Met à jour les enfants
 					foreach($this->getHierarchy($this->getUrl(2)) as $childrenPageId) {
 						$this->setData(['page', $childrenPageId, 'parentPageId', $pageId]);
@@ -174,16 +197,27 @@ class page extends common {
 					// Incrémente pour la prochaine position
 					$lastPosition++;
 				}
-				// Modifie la page ou en crée une nouvelle si l'id à changée
+				if ($this->getinput('pageEditBlock') !== 'bar') {
+					$barLeft = $this->getinput('pageEditBarLeft');
+					$barRight = $this->getinput('pageEditBarRight');
+				} else {
+					// Une barre ne peut pas avoir de barres
+					$barLeft = "";
+					$barRight = "";
+					// Une barre est masquée
+					$position = 0;
+				}
+				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
 					'page',
 					$pageId,
-					[					
+					[
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 						
+						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN),
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
+						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
 						'metaDescription' => $this->getInput('pageEditMetaDescription', helper::FILTER_STRING_LONG),
 						'metaTitle' => $this->getInput('pageEditMetaTitle'),
 						'moduleId' => $this->getInput('pageEditModuleId'),
@@ -192,9 +226,32 @@ class page extends common {
 						'position' => $position,
 						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
-						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true)
+						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
+						'block' => $this->getinput('pageEditBlock'),
+						'barLeft' => $barLeft,
+						'barRight' => $barRight
 					]
 				]);
+				// Barre renommée : changement le nom de la barre dans les pages mères
+				if ($this->getinput('pageEditBlock') === 'bar') {
+					echo '<pre>';
+					foreach ($this->getHierarchy() as $eachPageId=>$parentId) {
+						if ($this->getData(['page',$eachPageId,'barRight']) === $this->getUrl(2)) {
+							$this->setData(['page',$eachPageId,'barRight',$pageId]);
+						}
+						if ($this->getData(['page',$eachPageId,'barLeft']) === $this->getUrl(2)) {
+							$this->setData(['page',$eachPageId,'barLeft',$pageId]);
+						}
+						foreach ($parentId as $childId) {
+							if ($this->getData(['page',$childId,'barRight']) === $this->getUrl(2)) {
+								$this->setData(['page',$childId,'barRight',$pageId]);
+							}
+							if ($this->getData(['page',$childId,'barLeft']) === $this->getUrl(2)) {
+								$this->setData(['page',$childId,'barLeft',$pageId]);
+							}
+						}
+					}
+				}
 				// Redirection vers la configuration
 				if($this->getInput('pageEditModuleRedirect', helper::FILTER_BOOLEAN)) {
 					// Valeurs en sortie
@@ -230,6 +287,13 @@ class page extends common {
 					self::$pagesNoParentId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
 				}
 			}
+			// Pages barre latérales
+			foreach($this->getHierarchy(null,false,true) as $parentPageId => $childrenPageIds) {
+					if($parentPageId !== $this->getUrl(2) &&
+						$this->getData(['page', $parentPageId, 'block']) === 'bar') {
+						self::$pagesBarId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
+					}
+			}
 			// Valeurs en sortie
 			$this->addOutput([
 				'title' => $this->getData(['page', $this->getUrl(2), 'title']),
@@ -240,5 +304,4 @@ class page extends common {
 			]);
 		}
 	}
-
 }

@@ -8,6 +8,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -18,33 +20,50 @@ class form extends common {
 		'config' => self::GROUP_MODERATOR,
 		'data' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
-		'index' => self::GROUP_VISITOR
+		'deleteall' => self::GROUP_MODERATOR,
+		'index' => self::GROUP_VISITOR,
+		'export2csv' => self::GROUP_MODERATOR,
+		'output2csv' => self::GROUP_MODERATOR
 	];
 
 	public static $data = [];
 
 	public static $pages = [];
-	
+
 	public static $pagination;
+
+	const FORM_VERSION = '1.4';
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
 	const TYPE_TEXT = 'text';
 	const TYPE_TEXTAREA = 'textarea';
 	const TYPE_DATETIME = "date";
+	const TYPE_CHECKBOX = "checkbox";
+
 
 	public static $types = [
 		self::TYPE_TEXT => 'Champ texte',
 		self::TYPE_TEXTAREA => 'Grand champ texte',
 		self::TYPE_MAIL => 'Champ mail',
 		self::TYPE_SELECT => 'Sélection',
-		self::TYPE_DATETIME => 'Date'
+		self::TYPE_DATETIME => 'Date',
+		self::TYPE_CHECKBOX => 'Case à cocher'
+	];
+
+	public static $listUsers = [
 	];
 
 	/**
 	 * Configuration
 	 */
 	public function config() {
+		// Liste des utilisateurs
+		$userIdsFirstnames = helper::arrayColumn($this->getData(['user']), 'firstname', 'KEY_SORT_ASC');
+		self::$listUsers [] = '';
+		foreach($userIdsFirstnames as $userId => $userFirstname) {
+			self::$listUsers [] =  $userId;
+		}
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Configuration
@@ -56,6 +75,8 @@ class form extends common {
 					'button' => $this->getInput('formConfigButton'),
 					'capcha' => $this->getInput('formConfigCapcha', helper::FILTER_BOOLEAN),
 					'group' => $this->getInput('formConfigGroup', helper::FILTER_INT),
+					'user' =>  self::$listUsers [$this->getInput('formConfigUser', helper::FILTER_INT)],
+					'mail' => $this->getInput('formConfigMail') ,
 					'pageId' => $this->getInput('formConfigPageId', helper::FILTER_ID),
 					'subject' => $this->getInput('formConfigSubject')
 				]
@@ -104,7 +125,7 @@ class form extends common {
 		$data = $this->getData(['module', $this->getUrl(0), 'data']);
 		if($data) {
 			// Pagination
-			$pagination = helper::pagination($data, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+			$pagination = helper::pagination($data, $this->getUrl(),$this->getData(['config','itemsperPage']));
 			// Liste des pages
 			self::$pagination = $pagination['pages'];
 			// Inverse l'ordre du tableau
@@ -120,7 +141,7 @@ class form extends common {
 					$content,
 					template::button('formDataDelete' . $dataIds[$i], [
 						'class' => 'formDataDelete buttonRed',
-						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i],
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $dataIds[$i]  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('times')
 					])
 				];
@@ -134,27 +155,114 @@ class form extends common {
 	}
 
 	/**
+	 * Export CSV
+	 * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ 	 * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+	 */
+	public function export2csv() {
+		// Jeton incorrect
+		if ($this->getUrl(2) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
+			]);
+		} else {
+			$data = $this->getData(['module', $this->getUrl(0), 'data']);
+			if ($data !== []) {
+				$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
+				if (!file_exists('site/file/source/data')) {
+					mkdir(self::FILE_DIR.'source/data');
+				}
+				$fp = fopen(self::FILE_DIR.'source/data/'.$csvfilename, 'w');
+				fputcsv($fp, array_keys($data[1]), ';','"');
+				foreach ($data as $fields) {
+					fputcsv($fp, $fields, ';','"');
+				}
+				fclose($fp);
+				// Valeurs en sortie
+				$this->addOutput([
+					'notification' => 'Export CSV effectué dans le gestionnaire de fichiers<br />sous le nom '.$csvfilename,
+					'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data',
+					'state' => true
+				]);
+			} else {
+				$this->addOutput([
+					'notification' => 'Aucune donnée à exporter',
+					'redirect' => helper::baseUrl() . $this->getUrl(0) .'/data'
+				]);
+			}
+		}
+	}
+	/**
+	 * Suppression
+	 */
+	public function deleteall() {
+		// Jeton incorrect
+		if ($this->getUrl(2) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
+			]);
+		} else {
+			$data = ($this->getData(['module', $this->getUrl(0), 'data']));
+			if (count($data) > 0 ) {
+				// Suppression multiple
+				for ($i = 1; $i <= count($data) ; $i++) {
+					echo $this->deleteData(['module', $this->getUrl(0), 'data', $i]);
+				}
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
+					'notification' => 'Données supprimées',
+					'state' => true
+				]);
+			} else {
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
+					'notification' => 'Aucune donnée à supprimer'
+				]);
+			}
+		}
+	}
+
+
+	/**
 	 * Suppression
 	 */
 	public function delete() {
-		// La donnée n'existe pas
-		if($this->getData(['module', $this->getUrl(0), 'data', $this->getUrl(2)]) === null) {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'access' => false
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/data',
+				'notification' => 'Action non autorisée'
 			]);
-		}
-		// Suppression
-		else {
-			$this->deleteData(['module', $this->getUrl(0), 'data', $this->getUrl(2)]);
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
-				'notification' => 'Donnée supprimée',
-				'state' => true
-			]);
+		} else {
+			// La donnée n'existe pas
+			if($this->getData(['module', $this->getUrl(0), 'data', $this->getUrl(2)]) === null) {
+				// Valeurs en sortie
+				$this->addOutput([
+					'access' => false
+				]);
+			}
+			// Suppression
+			else {
+				$this->deleteData(['module', $this->getUrl(0), 'data', $this->getUrl(2)]);
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/data',
+					'notification' => 'Donnée supprimée',
+					'state' => true
+				]);
+			}
 		}
 	}
+
+
+
 
 	/**
 	 * Accueil
@@ -181,8 +289,11 @@ class form extends common {
 					case self::TYPE_TEXTAREA:
 						$filter = helper::FILTER_STRING_LONG;
 						break;
-					case self::TYPE_DATETIME: 
+					case self::TYPE_DATETIME:
 						$filter = helper::FILTER_STRING_SHORT; // Mettre TYPE_DATETIME pour récupérer un TIMESTAMP
+						break;
+					CASE self::TYPE_CHECKBOX:
+						$filter = helper::FILTER_BOOLEAN;
 						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
@@ -196,10 +307,18 @@ class form extends common {
 			// Crée les données
 			$this->setData(['module', $this->getUrl(0), 'data', helper::increment(1, $this->getData(['module', $this->getUrl(0), 'data'])), $data]);
 			// Envoi du mail
+			// Rechercher l'adresse en fonction du mail
 			$sent = true;
+			$singleuser = $this->getData(['user',
+						  $this->getData(['module', $this->getUrl(0), 'config', 'user']),
+						  'mail']);
+			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
+			// Verification si le mail peut être envoyé
 			if(
 				self::$inputNotices === []
 				AND $group = $this->getData(['module', $this->getUrl(0), 'config', 'group'])
+				OR $singleuser !== ''
+				OR $singlemail !== ''
 			) {
 				// Utilisateurs dans le groupe
 				$to = [];
@@ -207,6 +326,14 @@ class form extends common {
 					if($user['group'] === $group) {
 						$to[] = $user['mail'];
 					}
+				}
+				// Utilisateur désigné
+				if (!empty($singleuser)) {
+					$to[] = $singleuser;
+				}
+				// Mail désigné
+				if (!empty($singlemail)) {
+					$to[] = $singlemail;
 				}
 				if($to) {
 					// Sujet du mail

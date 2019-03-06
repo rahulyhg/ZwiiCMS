@@ -16,6 +16,7 @@ class config extends common {
 
 	public static $actions = [
 		'backup' => self::GROUP_ADMIN,
+		'configMetaImage' => self::GROUP_ADMIN,
 		'index' => self::GROUP_ADMIN
 	];
 	
@@ -169,16 +170,16 @@ class config extends common {
 	}
 
 	/**
-	 * Réalise une copie d'écran
+	 * Réalise une copie d'écran du site
 	 *  https://www.codexworld.com/capture-screenshot-website-url-php-google-api/
 	 */
-	public function configmetaimage() {
+	public function configMetaImage() {
 		// fonction désactivée pour un site local		
 		if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
-			$site = 'https://ZwiiCMS.com'; } else {
+			$site = 'https://zwiicms.com/'; } else {
 			$site = helper::baseUrl(false);	}
 
-		$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true&key=AIzaSyA_JOJidlWFgEiyxTlSGi2_fORgYsCZFtA');
+		$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');
 		$googlePagespeedData = json_decode($googlePagespeedData, true);
 		$screenshot = $googlePagespeedData['screenshot']['data'];
 		$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
@@ -222,7 +223,7 @@ class config extends common {
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'ItemsperPage' => $this->getInput('ItemsperPage', helper::FILTER_INT,true)
+					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true)
 				]
 			]);
 			if(self::$inputNotices === []) {
@@ -266,6 +267,10 @@ class config extends common {
 				'notification' => 'Modifications enregistrées',
 				'state' => true
 			]);
+		}
+		// Initialisation du screen
+		if (!file_exists('site/file/source/screenshot.png')) {
+			$this->configMetaImage();
 		}
 		// Valeurs en sortie
 		$this->addOutput([

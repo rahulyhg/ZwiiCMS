@@ -7,12 +7,28 @@
  * Éléments principaux
  */
 
-/* Fond du site */
+
+
+/*
+* Fond du site
+*/
 body {
+    margin: 0px 10px;
 }
 
-/* Site */
+/*
+* Site
+*/
 #site {
+    margin: 20px auto;
+}
+
+/* Grille du site */
+#contentleft {
+}
+#contentright {
+}
+#contentsite {
 }
 
 /* Bannière */
@@ -43,21 +59,33 @@ nav a.active {
 footer {
 }
 
+footer #footersite, #footerbody {
+}
+
 /* Liens du bas de page */
-footer a {
+footer #footersite, #footerbody a {
 }
 
-/* Réseaux sociaux dans le bas de page */
-#footerSocials {
+/* footer bloc gauche */
+footer #footersiteLeft, #footerbodyLeft  {
 }
 
-/* Texte libre dans le bas de page */
+/* footer bloc central */
+footer #footersiteCenter, #footerbodyCenter {
+}
+
+/* footer bloc droite */
+footer #footersiteRight, #footerbodyRight {
+}
+
+/* footer bloc de chaque élément */
 #footerText {
 }
-
-/* Copyright dans le bas de page */
+#footerSocials {
+}
 #footerCopyright {
 }
+
 
 /**
  * Éléments de contenu
@@ -123,4 +151,36 @@ input[type='password']:hover,
 .inputFile:hover,
 select:hover,
 textarea:hover {
+}
+
+/* Modules News et Blog */
+
+.blogDate {
+}
+
+.blogPicture {
+}
+
+.blogPicture img {
+}
+
+.blogComment {
+}
+
+.blogTitle {
+}
+
+.blogContent {
+}
+
+.newsTitle {
+}
+
+.newsContent {
+}
+
+.newsDate {
+}
+
+.newsSignature {
 }

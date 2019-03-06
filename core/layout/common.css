@@ -18,8 +18,12 @@ html,
 body {
 	min-height: 100%;
 }
+
+/**
+ * Original : margin: 0px 10px;
+ */
 body {
-	margin: 0 10px;
+	margin: 0px 0px;
 }
 
 /**
@@ -223,13 +227,24 @@ td > .col12 {
 	width: 100%;
 }
 
+.container-large-fixed {
+	width: 100%;
+	position:fixed;
+	z-index: 15	;
+  }
+
 /* Barre de membre */
 #bar {
 	background: #212223;
 	padding-left: 5px; /* Pour éviter que le select touche le bord lorsque la fenêtre est redimensionnée */
 	margin: 0 -10px;
 	text-align: right;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
+	z-index: 19;
 }
+/* fin barre pour les membres */
 #bar:after {
 	content: " ";
 	clear: both;
@@ -286,7 +301,7 @@ td > .col12 {
 
 /* Site */
 #site {
-	margin: 20px auto;
+	/* margin: 20px auto; */
 	overflow: hidden;
 }
 
@@ -391,6 +406,23 @@ nav a:hover {
 		padding-left: 40px !important;
 	}
 }
+/* Barre de navigation fixe quand le menu est en-dehors du site */
+#navfixedlogout {
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top:0px;
+	z-index:10;
+}
+
+#navfixedconnected {
+	top:45px;
+	z-index:10;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+}
+
+
+
 
 /* Corps */
 section {
@@ -403,6 +435,13 @@ section:after {
 	content: " ";
 	display: table;
 	clear: both;
+}
+
+/* Version des modules*/
+.moduleVersion {
+	font-size: 0.8em;
+	font-style: italic;
+	text-align: right;
 }
 
 /* Pied de page */
@@ -423,6 +462,15 @@ footer .col4 {
 footer #footerSocials {
 	font-size: 1.0em;
 }
+
+footer #footerSocials {
+	font-size: 1.0em;
+}
+
+footer #footerCopyright, #footerText {
+	font-size: 0.8em;
+}
+
 footer #footerSocials span {
 	color: #FFF;
 	padding: 9px;
@@ -756,7 +804,7 @@ label {
 	padding: 10px 0;
 	background: #F5F5F5;
 	text-align: center;
-	float: right;
+	/*float: right;*/
 }
 .inputFile:hover {
 	text-decoration: none;

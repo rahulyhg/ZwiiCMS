@@ -7,7 +7,7 @@
             'value' => 'Retour'
         ]); ?>
     </div>
-    <div class="col2 offset8">
+    <div class="col3 offset7">
         <?php echo template::formOpen('directUploadForm'); ?>
             <?php echo template::button('directUploadButton', [
                 'ico' => 'plus',

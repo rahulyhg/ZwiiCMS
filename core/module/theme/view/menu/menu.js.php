@@ -14,14 +14,17 @@
  * Aperçu en direct
  */
 $("input, select").on("change", function() {
-	// Couleurs du menu
+	// Import des polices de caractères
+	var menuFont = $("#themeMenuFont").val();
+	var css = "@import url('https://fonts.googleapis.com/css?family=" + menuFont + "');";
 	var colors = core.colorVariants($("#themeMenuBackgroundColor").val());
-	var css = "nav,nav a{background-color:" + colors.normal + "}";
+	// Couleurs du menu
+	css += "nav,nav a{background-color:" + colors.normal + "}";
 	css += "nav a,#toggle span,nav a:hover{color:" + $("#themeMenuTextColor").val() + "}";
 	css += "nav a:hover{background-color:" + colors.darken + "}";
 	css += "nav a.active{background-color:" + colors.veryDarken + "}";
 	// Taille, hauteur, épaisseur et capitalisation de caractères du menu
-	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
+	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-family:'" + menuFont.replace(/\+/g, " ")  + "',sans-serif;font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
 	// Alignement du menu
 	css += "#menu{text-align:" + $("#themeMenuTextAlign").val() + "}";
 	// Marge
@@ -46,6 +49,7 @@ $("input, select").on("change", function() {
 		.attr("id", "themePreview")
 		.text(css)
 		.appendTo("head");
+
 	// Position du menu
 	switch($("#themeMenuPosition").val()) {
 		case 'hide':
@@ -64,6 +68,9 @@ $("input, select").on("change", function() {
 			break;
 		case 'body-first':
 			$("nav").show().insertAfter("#bar");
+			$("#menu").removeClass('container-large');
+			$("nav").removeClass('#navfixedconnected');
+			$("#menu").addClass('container');
 			break;
 		case 'body-second':
 			if(<?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>) {
@@ -72,6 +79,13 @@ $("input, select").on("change", function() {
 			else {
 				$("nav").show().insertAfter("#bar");
 			}
+			$("nav").removeClass('#navfixedconnected');
+			break;
+		case 'top':
+			$("nav").show().insertAfter("#bar");
+			$("#menu").removeClass('container');
+			$("#menu").addClass('container-large');
+			$("nav").addClass('#navfixedconnected');
 			break;
 	}
 });
@@ -87,11 +101,22 @@ $("#themeMenuLoginLink").on("change", function() {
 // Affiche / Cache les options de la position
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'site-first' || $(this).val() === 'site-second') {
-		$("#themeMenuPositionOptions").slideDown();	
+		$("#themeMenuPositionOptions").slideDown();
 	}
 	else {
 		$("#themeMenuPositionOptions").slideUp(function() {
 			$("#themeMenuMargin").prop("checked", false).trigger("change");
+		});
+	}
+}).trigger("change");
+// Affiche / Cache les options du menu fixe
+$("#themeMenuPosition").on("change", function() {
+	if($(this).val() === 'top') {
+		$("#themeMenuPositionFixed").slideDown();
+	}
+	else {
+		$("#themeMenuPositionFixed").slideUp(function() {
+			$("#themeMenuFixed").prop("checked", false).trigger("change");
 		});
 	}
 }).trigger("change");

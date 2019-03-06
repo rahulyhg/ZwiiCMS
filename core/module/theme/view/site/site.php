@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col4">
+					<div class="col4 offset2">
 						<?php echo template::text('themeButtonBackgroundColor', [
 							'class' => 'colorPicker',
 							'label' => 'Boutons',

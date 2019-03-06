@@ -43,7 +43,7 @@
 					<li>Accès aux pages privées membres</li>
 				</ul>
 				<ul id="userAddGroupDescription<?php echo self::GROUP_MODERATOR; ?>" class="userAddGroupDescription displayNone">
-					<li>Accès aux pages privées membres et modérateurs</li>
+					<li>Accès aux pages privées membres et éditeurs</li>
 					<li>Ajout / Édition / Suppression de pages</li>
 					<li>Ajout / Édition / Suppression de fichiers</li>
 				</ul>
@@ -55,7 +55,6 @@
 					<li>Configuration du site</li>
 					<li>Personnalisation du thème</li>
 				</ul>
-				<?php echo template::checkbox('userAddSendMail', true, 'Prévenir l\'utilisateur par mail'); ?>
 			</div>
 		</div>
 		<div class="col6">
@@ -73,6 +72,9 @@
 					'autocomplete' => 'off',
 					'label' => 'Confirmation'
 				]); ?>
+				<?php echo template::checkbox('userAddSendMail', true,
+				 'Prévenir l\'utilisateur par mail');
+				?>
 			</div>
 		</div>
 	</div>

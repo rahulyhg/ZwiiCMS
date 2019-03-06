@@ -2,7 +2,7 @@
 	<div class="row">
 	<div class="col2">
 			<?php $href = helper::baseUrl() . $this->getUrl(2); ?>
-      <?php if ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'redirection')$href = helper::baseUrl(); ?>
+      <?php if ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'redirection' || 'code')$href = helper::baseUrl(); ?>
 			<?php echo template::button('pageEditBack', [
 				'class' => 'buttonGrey',
 				'href' => $href,
@@ -13,7 +13,7 @@
 		<div class="col2 offset6">
 			<?php echo template::button('pageEditDelete', [
 				'class' => 'buttonRed',
-				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2),
+				'href' => helper::baseUrl() . 'page/delete/' . $this->getUrl(2) . '&csrf=' . $_SESSION['csrf'],
 				'value' => 'Supprimer',
 				'ico' => 'times'
 			]); ?>
@@ -33,7 +33,6 @@
 							'value' => $this->getData(['page', $this->getUrl(2), 'title'])
 						]); ?>
 					</div>
-
 					<div class="col6">
 						<div class="row">
 							<div class="col10">
@@ -56,7 +55,15 @@
 				</div>
 				<div class="row">
 					<div class="col6">
-										
+					<?php echo template::select('configModulePosition', $module::$modulePosition,[
+							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
+							'label' => 'Position du module dans la page',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
 								'help' => 'Sélectionnez le type de menu.',
 								'label' => 'Type de menu',
@@ -64,9 +71,8 @@
 						]); ?>
 					</div>
 					<div class="col6">
-
 						<?php echo template::file('pageIconUrl', [
-							'label' => 'Icône',
+							'label' => 'Icône du menu',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
 						]); ?>
 					</div>
@@ -95,43 +101,84 @@
 				<?php echo template::select('pageEditPosition', [], [
 					'label' => 'Position'
 				]); ?>
-				<?php echo template::checkbox('pageEditTargetBlank', true, 'Ouvrir dans un nouvel onglet', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
-				]); ?>
-				<!-- menu image -->
-				<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
-				]); ?>								
-				<!-- menu image -->
+				<div class="row">
+					<div class="col6">
+					<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
+					]); ?>
+					</div>
+					<div class="col6">
+					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])
+					]); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col6">
 			<div class="block">
-				<h4>Options avancées</h4>
-				<?php echo template::select('pageEditGroup', self::$groupPublics, [
-					'label' => 'Groupe requis pour accéder à la page',
-					'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
+				<h4>Mise en page</h4>
+				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
+						'label' => 'Gabarits de page / Barre latérale',
+						'help' => 'Pour définir la page comme barre latérale, choisissez l\'option dans la liste.',
+						'selected' => $this->getData(['page', $this->getUrl(2) , 'block'])
 				]); ?>
-				<?php echo template::text('pageEditMetaTitle', [
-					'label' => 'Méta-titre',
-					'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
-				]); ?>
-				<?php echo template::textarea('pageEditMetaDescription', [
-					'label' => 'Méta-description',
-					'maxlength' => '500',
-					'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
-				]); ?>
-				<?php if (($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'form') or ($this->getData(['page', $this->getUrl(2), 'moduleId']) === 'gallery')) {
-					echo template::select('configModulePosition', $module::$modulePosition,[
-					'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
-					'label' => 'Position du module dans la page',
-					'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
-				]);
-				} ?>				
-				<?php echo template::checkbox('pageEditHideTitle', true, 'Cacher le titre', [
-					'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
-				]); ?>
+			<!-- Sélection des barres latérales	 -->
+			<?php if($this->getHierarchy($this->getUrl(2),false,true)): ?>
+					<?php echo template::hidden('pageEditBarLeft', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'barLeft'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditBarLeft', $module::$pagesBarId, [
+						'label' => 'Barre latérale gauche :',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'barLeft'])
+					]); ?>
+				<?php endif; ?>
+				<?php if($this->getHierarchy($this->getUrl(2),false,true)): ?>
+					<?php echo template::hidden('pageEditBarRight', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'barRight'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditBarRight', $module::$pagesBarId, [
+						'label' => 'Barre latérale droite :',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
+					]); ?>
+				<?php endif; ?>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
+						]); ?>
+					</div>
+					<div class="col6">
+						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
+						]); ?>
+					</div>
+				</div>
 			</div>
+		</div>
+	</div>
+	<div class='row'>
+		<div class="block">
+					<h4>Options avancées</h4>
+					<div class='col6'>
+						<?php echo template::select('pageEditGroup', self::$groupPublics, [
+							'label' => 'Groupe requis pour accéder à la page :',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
+						]); ?>
+					</div>
+					<div class='col12'>
+						<?php echo template::text('pageEditMetaTitle', [
+							'label' => 'Méta-titre',
+							'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
+						]); ?>
+						<?php echo template::textarea('pageEditMetaDescription', [
+							'label' => 'Méta-description',
+							'maxlength' => '500',
+							'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
+						]); ?>
+					</div>
 		</div>
 	</div>
 <?php echo template::formClose(); ?>

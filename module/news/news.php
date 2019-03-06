@@ -32,6 +32,7 @@ class news extends common {
 		false => 'Brouillon',
 		true => 'Publié'
 	];
+	const NEWS_VERSION = '1.2';
 
 	public static $users = [];
 
@@ -81,7 +82,7 @@ class news extends common {
 		// Ids des news par ordre de publication
 		$newsIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// News en fonction de la pagination
@@ -91,15 +92,15 @@ class news extends common {
 				$this->getData(['module', $this->getUrl(0), $newsIds[$i], 'title']),
 				utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $newsIds[$i], 'publishedOn'])))
 				.' à '.
-				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $newsIds[$i], 'publishedOn']))),				
+				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $newsIds[$i], 'publishedOn']))),
 				self::$states[$this->getData(['module', $this->getUrl(0), $newsIds[$i], 'state'])],
 				template::button('newsConfigEdit' . $newsIds[$i], [
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $newsIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $newsIds[$i]. '/' . $_SESSION['csrf'],
 					'value' => template::ico('pencil-alt')
 				]),
 				template::button('newsConfigDelete' . $newsIds[$i], [
 					'class' => 'newsConfigDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $newsIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('times')
 				])
 			];
@@ -122,6 +123,14 @@ class news extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/config',
+				'notification' => 'Action non autorisée'
+			]);
+		}
 		// Suppression
 		else {
 			$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
@@ -138,6 +147,14 @@ class news extends common {
 	 * Édition
 	 */
 	public function edit() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Action  non autorisée'
+			]);
+		}
 		// La news n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
@@ -203,7 +220,7 @@ class news extends common {
 			}
 		}
 		// Pagination
-		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+		$pagination = helper::pagination($newsIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// News en fonction de la pagination

@@ -10,7 +10,8 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
- * @Edition  : 23/9/18 Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright  :  Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  */
 
 class theme extends common {
@@ -23,7 +24,10 @@ class theme extends common {
 		'index' => self::GROUP_ADMIN,
 		'menu' => self::GROUP_ADMIN,
 		'reset' => self::GROUP_ADMIN,
-		'site' => self::GROUP_ADMIN
+		'site' => self::GROUP_ADMIN,
+		'manage' => self::GROUP_ADMIN,
+		'export' => self::GROUP_ADMIN,
+		'save' => self::GROUP_ADMIN
 	];
 	public static $aligns = [
 		'left' => 'À gauche',
@@ -74,11 +78,11 @@ class theme extends common {
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'5px' => 'Très petite',
-		'10px' => 'Petite',
-		'20px' => 'Moyenne',
-		'30px' => 'Grande',
-		'40px' => 'Très grande'
+		'0px' => 'Très petite',
+		'5px' => 'Petite',
+		'10px' => 'Moyenne',
+		'15px' => 'Grande',
+		'20px' => 'Très grande'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',
@@ -130,20 +134,18 @@ class theme extends common {
 		'20px 15px' => 'Grande',
 		'25px 15px' => 'Très grande'
 	];
-	public static $menuPositionsSite = [		
+	public static $menuPositionsSite = [
+		'top' => 'En-dehors du site',
 		'site-first' => 'Dans le site avant la bannière',
 		'site-second' => 'Dans le site après la bannière',
-		'body-top' => 'Au-dessus et en-dehors du site',	
 		'hide' => 'Caché'
-
 	];
 	public static $menuPositionsBody = [
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
-		'body-top' => 'Au-dessus et en-dehors du site',		
+		'top' => 'Au-dessus et en-dehors du site',
 		'hide' => 'Caché'
-
-	];	
+	];
 	public static $radius = [
 		'0' => 'Aucun',
 		'5px' => 'Très léger',
@@ -188,18 +190,13 @@ class theme extends common {
 		'100%' => 'Fluide (100%)'
 	];
 
-	public static $menuWide = [
-		'container' => 'sur la largeur du site',
-		'container-large' => 'sur la largeur de la page'
-	];
-
 	public static $headerWide = [
 		'auto' => 'Automatique',
-		'contain' => 'Image entière',		
+		'contain' => 'Image entière',
 		'cover' => 'Largeur adaptée au fond',
 		'100% 100%' => 'Taille adaptée au fond'
-
 	];
+
 
 	/**
 	 * Mode avancé
@@ -218,7 +215,7 @@ class theme extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Personnalisation avancée',
+			'title' => 'Éditeur CSS',
 			'vendor' => [
 				'codemirror'
 			],
@@ -301,8 +298,14 @@ class theme extends common {
 	public function header() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			// Si une image est positionnée, l'arrière en transparent.
+			if ($this->getInput('themeHeaderImage') === "") {
+				$themeHeaderBackgroundColor = $this->getInput('themeHeaderBackgroundColor'); }
+				else {
+				$themeHeaderBackgroundColor = 'rgba(0, 0, 0, 0)';
+			}
 			$this->setData(['theme', 'header', [
-				'backgroundColor' => $this->getInput('themeHeaderBackgroundColor'),
+				'backgroundColor' => $themeHeaderBackgroundColor,
 				'font' => $this->getInput('themeHeaderFont'),
 				'fontSize' => $this->getInput('themeHeaderFontSize'),
 				'fontWeight' => $this->getInput('themeHeaderFontWeight'),
@@ -315,11 +318,43 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
-				'textTransform' => $this->getInput('themeHeaderTextTransform'),				
+				'textTransform' => $this->getInput('themeHeaderTextTransform'),
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
-
+			// Modification de la position du menu selon la position de la bannière
+			switch ($this->getInput('themeHeaderPosition')) {
+				case 'site' :
+					$this->setData(['theme', 'menu',
+						['position' => str_replace ('site','body',$this->getData(['theme','menu','position'])) ],
+						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
+						'font' => $this->getData('themeMenuFont'),
+						'fontSize' => $this->getData('themeMenuFontSize'),
+						'fontWeight' => $this->getData('themeMenuFontWeight'),
+						'height' => $this->getData('themeMenuHeight'),
+						'loginLink' => $this->getData('themeMenuLoginLink'),
+						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
+						'textAlign' => $this->getData('themeMenuTextAlign'),
+						'textColor' => $this->getData('themeMenuTextColor'),
+						'textTransform' => $this->getData('themeMenuTextTransform'),
+					]);
+				break;
+				case 'body' :
+					$this->setData(['theme', 'menu',
+						['position' => str_replace ('body','site',$this->getData(['theme','menu','position'])) ],
+						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
+						'font' => $this->getData('themeMenuFont'),
+						'fontSize' => $this->getData('themeMenuFontSize'),
+						'fontWeight' => $this->getData('themeMenuFontWeight'),
+						'height' => $this->getData('themeMenuHeight'),
+						'loginLink' => $this->getData('themeMenuLoginLink'),
+						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
+						'textAlign' => $this->getData('themeMenuTextAlign'),
+						'textColor' => $this->getData('themeMenuTextColor'),
+						'textTransform' => $this->getData('themeMenuTextTransform'),
+					]);
+				break;
+			}
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',
@@ -356,15 +391,17 @@ class theme extends common {
 		if($this->isPost()) {
 			$this->setData(['theme', 'menu', [
 				'backgroundColor' => $this->getInput('themeMenuBackgroundColor'),
+				'font' => $this->getInput('themeMenuFont'),
 				'fontSize' => $this->getInput('themeMenuFontSize'),
 				'fontWeight' => $this->getInput('themeMenuFontWeight'),
 				'height' => $this->getInput('themeMenuHeight'),
-				'loginLink' => $this->getInput('themeMenuLoginLink'),
+				'loginLink' => $this->getInput('themeMenuLoginLink', helper::FILTER_BOOLEAN),
 				'margin' => $this->getInput('themeMenuMargin', helper::FILTER_BOOLEAN),
 				'position' => $this->getInput('themeMenuPosition'),
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
+				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -433,10 +470,102 @@ class theme extends common {
 		$this->addOutput([
 			'title' => 'Personnalisation du site',
 			'vendor' => [
-				'tinycolorpicker'
+				'tinycolorpicker',
+				'tinymce'
 			],
 			'view' => 'site'
 		]);
+	}
+
+	/**
+	 * Import du thème
+	 */
+	public function manage() {
+		if($this->isPost() ) {
+			$zipFilename =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
+			$zip = new ZipArchive();
+			if ($zip->open(self::FILE_DIR.'source/'.$zipFilename) === TRUE) {
+				$zip->extractTo('.');
+				$zip->close();
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'theme'
+			]);
+			} else {
+				$this->addOutput([
+					'notification' => 'Erreur avec le thème <b>'.$zipFilename.'</b>',
+					'redirect' => helper::baseUrl() . 'theme/manage'
+				]);
+			}
+		}
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Gestion des thèmes',
+			'view' => 'manage'
+		]);
+	}
+	/**
+	 * Export du thème
+	 */
+	public function export() {
+		// Make zip
+			$zipFilename = $this->makezip();
+			// Téléchargement du ZIP
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
+			header('Content-Length: ' . filesize(self::TEMP_DIR . $zipFilename));
+			readfile(self::TEMP_DIR . $zipFilename);
+			// Nettoyage du dossier
+			unlink (self::TEMP_DIR . $zipFilename);
+			die();
+	}
+
+	/**
+	 * Export du thème
+	 */
+	public function save() {
+		// Make zip
+		$zipFilename = $this->makezip();
+		// Téléchargement du ZIP
+		mkdir(self::FILE_DIR.'source/theme');
+		copy (self::TEMP_DIR . $zipFilename , self::FILE_DIR.'source/theme/' . $zipFilename);
+		// Nettoyage du dossier
+		unlink (self::TEMP_DIR . $zipFilename);
+		// Valeurs en sortie
+		$this->addOutput([
+			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
+			'redirect' => helper::baseUrl() . 'theme/manage',
+			'state' => true
+		]);
+	}
+
+	/**
+	 * construction du zip
+	 */
+	public function makezip() {
+		// Creation du dossier
+		// $zipFilename  =  'theme-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.zip';
+		$zipFilename  =  'theme  '.date('d m Y').'  '.date('H i s ').'.zip';
+		$zip = new ZipArchive();
+		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/theme.json');
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/theme.css');
+			$zip->addFile(self::DATA_DIR.'theme.json','site/data/custom.css');
+			if ($this->getData(['theme','body','image']) !== '' ) {
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','body','image']),
+						self::FILE_DIR.'source/'.$this->getData(['theme','body','image'])
+						);
+			}
+			if ($this->getData(['theme','header','image']) !== '' ) {
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','header','image']),
+						  self::FILE_DIR.'source/'.$this->getData(['theme','header','image'])
+						);
+			}
+			$ret = $zip->close();
+		}
+		return ($zipFilename);
 	}
 
 }

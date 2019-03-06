@@ -7,6 +7,22 @@
 			'value' => 'Retour'
 		]); ?>
 	</div>
+	<div class="col2 offset6">
+	<?php echo template::button('formDataDeleteAll', [
+			'class' => 'formDataDeleteAll buttonRed',
+			'href' => helper::baseUrl() . $this->getUrl(0) . '/deleteall' . '/' . $_SESSION['csrf'],
+			'ico' => 'times',
+			'value' => 'Tout effacer'
+		]); ?>
+	</div>
+	<div class="col2">
+	<?php echo template::button('formDataBack', [
+			'class' => 'buttonBlue',
+			'href' => helper::baseUrl() . $this->getUrl(0) . '/export2csv' . '/' . $_SESSION['csrf'],
+			'ico' => 'download',
+			'value' => 'Export CSV'
+		]); ?>
+	</div>
 </div>
 <?php echo template::table([11, 1], $module::$data, ['Données', '']); ?>
 <?php echo $module::$pagination; ?>

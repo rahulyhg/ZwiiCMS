@@ -77,8 +77,12 @@ $("input, select").on("change", function() {
 			else {
 				$("header").show().insertAfter("#bar");
 			}
+			if(<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'top'); ?>) {
+				$("header").show().insertAfter("nav");
+			}
 			break;
 	}
+
 	// Ajout du css au DOM
 	$("#themePreview").remove();
 	$("<style>")
@@ -87,6 +91,16 @@ $("input, select").on("change", function() {
 		.text(css)
 		.appendTo("head");
 });
+
+$("#themeHeaderImage").on("change", function() {
+	if($("#themeHeaderImage").val()) {
+			$("#themeHeaderBackgroundColorWrapper").slideUp();
+			$("#themeHeaderBackgroundColor").val($("#themeHeaderBackgroundColor").val());		
+		} else {
+			$("#themeHeaderBackgroundColorWrapper").slideDown();
+		}
+});
+
 // Affiche / Cache les options de l'image du fond
 $("#themeHeaderImage").on("change", function() {
 	if($(this).val()) {

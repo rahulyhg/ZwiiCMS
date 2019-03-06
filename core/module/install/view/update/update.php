@@ -11,14 +11,12 @@
                         <span class="installUpdateProgressText displayNone" data-id="5">5/5 : Déploiement des plugins...</span>
 		</div>
 		<div id="installUpdateError" class="colorRed displayNone">
-			<span class="colorRed"><?php echo template::ico('times', ''); ?></span>
-			Une erreur est survenue lors de l'étape <span id="installUpdateErrorStep" class="colorRed"></span>.<br/>
-                        <span id="installUpdateDetailErrorStep" class="smallText colorRed"></span>
+                    <span class="colorRed"><?php echo template::ico('times', ''); ?></span>
+                    Une erreur est survenue lors de l'étape <span id="installUpdateErrorStep" class="colorRed"></span>.
 		</div>
 		<div id="installUpdateSuccess" class="colorGreen displayNone">
-                        <span class="colorGreen"><?php echo template::ico('check', ''); ?></span>
-			Mise à jour terminée avec succès.<br/>
-                        <span id="installUpdateDetailWarningStep" class="smallText colorOrange"></span>
+                    <span class="colorGreen"><?php echo template::ico('check', ''); ?></span>
+                    Mise à jour terminée avec succès.<br/>
 		</div>
 	</div>
 	<div class="col3 verticalAlignMiddle">

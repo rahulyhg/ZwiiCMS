@@ -100,6 +100,14 @@ class user extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Action non autorisée'
+			]);
+		}
 		// Bloque la suppression de son propre compte
 		elseif($this->getUser('id') === $this->getUrl(2)) {
 			// Valeurs en sortie
@@ -124,6 +132,14 @@ class user extends common {
 	 * Édition
 	 */
 	public function edit() {
+		if ($this->getUrl(3) !== $_SESSION['csrf'] &&
+			$this->getUrl(4) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'user',
+				'notification' => 'Action  non autorisée'
+			]);
+		}
 		// Accès refusé
 		if(
 			// L'utilisateur n'existe pas
@@ -274,12 +290,12 @@ class user extends common {
 				$userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']),
 				self::$groups[$this->getData(['user', $userId, 'group'])],
 				template::button('userEdit' . $userId, [
-					'href' => helper::baseUrl() . 'user/edit/' . $userId . '/back',
+					'href' => helper::baseUrl() . 'user/edit/' . $userId . '/back/'. $_SESSION['csrf'],
 					'value' => template::ico('pencil-alt')
 				]),
 				template::button('userDelete' . $userId, [
 					'class' => 'userDelete buttonRed',
-					'href' => helper::baseUrl() . 'user/delete/' . $userId,
+					'href' => helper::baseUrl() . 'user/delete/' . $userId. '/' . $_SESSION['csrf'],
 					'value' => template::ico('times')
 				])
 			];
@@ -348,6 +364,7 @@ class user extends common {
 	public function logout() {
 		helper::deleteCookie('ZWII_USER_ID');
 		helper::deleteCookie('ZWII_USER_PASSWORD');
+		session_destroy();
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Déconnexion réussie',

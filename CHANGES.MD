@@ -1,15 +1,100 @@
 # ChangeLog 
 
-## Version 9.0.0-Alpha
-* Ajout : icones de la librairie FontAwesome 5.5.0
-* Ajout : gestion des plugins
-* Ajout : propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
-* Mise à jour : Responsive FileManager version 9.14.0
-* Mise à jour : Flatpickr version 4.5.2
-* Mise à jour : Lity version 2.3.1
-* Mise à jour : Normalize.css version 8.0.1
-* Mise à jour : PHPMailer version 6.0.6
-* Mise à jour : Tippy version 3.3.0
+## Version 9.1.0
+- Modification :
+    - Utilisation des icones de la librairie FontAwesome 5.5.0
+    - Ajout de la gestion des plugins
+    - Ajout de la propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+
+
+## Version 9.0.0
+- Modification :
+    - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
+    - Les thèmes :
+        - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
+        - Importer un thème à partir des fichiers
+        - Désactivation de la couleur d'arrière plan du header lors de l'insertion d'une image
+        - Nouvelle option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
+        - Nettoyage des images effacées
+    - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
+    - Libellé Modérateur devient Editeur
+    - Editeur de texte :
+        - VisualBlocks dans TinyMCE
+        - CodeMirror dans TinyMCE
+    - Affichage de la version proposée dans la popup de mise à jour
+    - Module Formulaire :
+        - Case à cocher dans les formulaires
+        - Bouton d'export au format CSV
+        - Bouton effacer toutes les données
+        - Notification d'un membre ou email libre
+    - Edition de page :
+        - masquage des options inutiles selon le module
+        - nouvelle option : fil d'ariane des pages filles
+    - Barre d'administration fixe
+
+Correctif :
+	- amélioration contre mesure CSRF
+	- Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+
+Mise à jour :
+	- TinyColoPicker
+	- PhpMailer 6.0.6
+	- Responsive FileManager version 9.14.0
+	- Flatpickr version 4.5.2
+	- Normalize.css version 8.0.1
+	- Tippy version 3.3.0
+
+
+## Version 8.5.6
+* Correction :
+    - Destruction de la session au logout
+    - Thème : aperçu de la modification de la barre de menu au-dessus du site
+* Modification :
+    - Mise à jour RFM 9.14
+    - Amélioration de la contre mesure CRSF
+    - Libellé dans TinyMCE (gabarit)
+    - Setlocal modification des paramètres FR
+
+## Version 8.5.5
+* Correction :
+    - Faille CSRF lors de l'effacement d'un membre
+    - Faille CSRF lors de l'effacement d'une galerie
+    - Faille CSRF lors de l'effacement d'un article de blog
+    - Faille CSRF lors de l'effacement d'un article de news
+    - Taille de la police dans le footer impossible à modifier
+
+## Version 8.5.4
+* Correction :
+    - Faille CSRF lors de l'effacement d'une page
+
+## Verison 8.5.3
+* Modification :
+    - Config bouton de génération de la capture de l'écran OpenGraph
+* Correction :
+    - Appel de la génération de la capture d'écran OpenGraph quand le fichier est absent
+    - CSS pour le footer des blocs et non des éléments
+        - \#footersite, \#footerbody : bloc footer dans et hors site
+        - \#footersite, \#footerbody a : liens du bloc footer  dans et hors site
+        - Bloc des colonnes dans et hors site :
+            - \#footersiteLeft, \#footerbodyLef
+            - \#footersiteCenter, \#footerbodyCenter
+            - \#footersiteRight, \#footerbodyRight
+
+
+## Verison 8.5.2
+* Correction :
+    - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
+
+## Version 8.5.1
+* Correction :
+    - Nom de variable incorrect
+
+## Version 8.5.0
+* Correction :
+    - Suppression popup active par défaut dans le menu
+    - Suppression option de titre de page dans le menu Icone + Texte
+* Modification :
+    - Thème du menu : sélection de la police de caractère
 
 ## Version 8.4.9
 * Correction :
@@ -28,7 +113,7 @@
 ## Version 8.4.6
 * corrections : 
     - Encodage des dates dans la liste des articles news et blog
-    - Variable itemsperpage stockée dans le mauvais type
+    - Variable itemsperPage stockée dans le mauvais type
 
 ## Version 8.4.5
 * corrections :

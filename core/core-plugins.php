@@ -223,7 +223,7 @@ class CorePlugins {
         }
 
         // Copie du fichier de données
-        $success = copy($this->dataDir . 'data.json', $this->backupDir . $this->idPlugin . '_' . date('Y-m-d_H-i-s', time()) . '_' . $action . '.json');
+        $success = copy($this->dataDir . 'core.json', $this->backupDir . $this->idPlugin . '_' . date('Y-m-d_H-i-s', time()) . '_' . $action . '.json');
 
         // Effectuer une sauvegarde des fichiers qui vont être modifiés
         $updatedFiles = $this->pluginManager->getData(['plugins', $this->idPlugin, 'updated_files']);

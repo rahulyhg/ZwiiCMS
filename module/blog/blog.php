@@ -37,6 +37,8 @@ class blog extends common {
 
 	public static $users = [];
 
+	const BLOG_VERSION = '1.2';
+
 	/**
 	 * Édition
 	 */
@@ -53,7 +55,7 @@ class blog extends common {
 				'comment' => [],
 				'content' => $this->getInput('blogAddContent', null),
 				'picture' => $this->getInput('blogAddPicture', helper::FILTER_STRING_SHORT, true),
-				'hidePicture' => $this->getInput('blogAddHidePicture', helper::FILTER_BOOLEAN),				
+				'hidePicture' => $this->getInput('blogAddHidePicture', helper::FILTER_BOOLEAN),
 				'publishedOn' => $this->getInput('blogAddPublishedOn', helper::FILTER_DATETIME, true),
 				'state' => $this->getInput('blogAddState', helper::FILTER_BOOLEAN),
 				'title' => $this->getInput('blogAddTitle', helper::FILTER_STRING_SHORT, true),
@@ -98,7 +100,7 @@ class blog extends common {
 		// Ids des commentaires par ordre de création
 		$commentIds = array_keys(helper::arrayColumn($comments, 'createdOn', 'VAL_SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+		$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages'];
 		// Commentaires en fonction de la pagination
@@ -112,7 +114,7 @@ class blog extends common {
 				$comment['userId'] ? $this->getData(['user', $comment['userId'], 'firstname']) . ' ' . $this->getData(['user', $comment['userId'], 'lastname']) : $comment['author'],
 				template::button('blogCommentDelete' . $commentIds[$i], [
 					'class' => 'blogCommentDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/comment-delete/' . $comment['articleId'] . '/' . $commentIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/comment-delete/' . $comment['articleId'] . '/' . $commentIds[$i] . '/' . $_SESSION['csrf'] ,
 					'value' => template::ico('times')
 				])
 			];
@@ -135,6 +137,14 @@ class blog extends common {
 				'access' => false
 			]);
 		}
+		// Jeton incorrect
+		elseif ($this->getUrl(4) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/config',
+				'notification' => 'Action non autorisée'
+			]);
+		}
 		// Suppression
 		else {
 			$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2), 'comment', $this->getUrl(3)]);
@@ -154,9 +164,9 @@ class blog extends common {
 		// Ids des articles par ordre de publication
 		$articleIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'VAL_SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 		// Liste des pages
-		self::$pages = $pagination['pages']; 
+		self::$pages = $pagination['pages'];
 		// Articles en fonction de la pagination
 		for($i = $pagination['first']; $i < $pagination['last']; $i++) {
 			// Met en forme le tableau
@@ -165,15 +175,15 @@ class blog extends common {
 				// date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
 				utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])))
 				.' à '.
-				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),				
+				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),
 				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
 				template::button('blogConfigEdit' . $articleIds[$i], [
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('pencil-alt')
 				]),
 				template::button('blogConfigDelete' . $articleIds[$i], [
 					'class' => 'blogConfigDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $articleIds[$i],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $articleIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('times')
 				])
 			];
@@ -189,11 +199,18 @@ class blog extends common {
 	 * Suppression
 	 */
 	public function delete() {
-		// L'article n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
 			$this->addOutput([
 				'access' => false
+			]);
+		}
+		// Jeton incorrect
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl()  . $this->getUrl(0) . '/config',
+				'notification' => 'Action non autorisée'
 			]);
 		}
 		// Suppression
@@ -212,6 +229,14 @@ class blog extends common {
 	 * Édition
 	 */
 	public function edit() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'notification' => 'Action  non autorisée'
+			]);
+		}
 		// L'article n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
 			// Valeurs en sortie
@@ -235,7 +260,7 @@ class blog extends common {
 					'comment' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'comment']),
 					'content' => $this->getInput('blogEditContent', null),
 					'picture' => $this->getInput('blogEditPicture', helper::FILTER_STRING_SHORT, true),
-					'hidePicture' => $this->getInput('blogEditHidePicture', helper::FILTER_BOOLEAN),					
+					'hidePicture' => $this->getInput('blogEditHidePicture', helper::FILTER_BOOLEAN),
 					'publishedOn' => $this->getInput('blogEditPublishedOn', helper::FILTER_DATETIME, true),
 					'state' => $this->getInput('blogEditState', helper::FILTER_BOOLEAN),
 					'title' => $this->getInput('blogEditTitle', helper::FILTER_STRING_SHORT, true),
@@ -316,7 +341,7 @@ class blog extends common {
 				// Ids des commentaires par ordre de publication
 				$commentIds = array_keys(helper::arrayColumn($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']), 'createdOn', 'VAL_SORT_DESC'));
 				// Pagination
-				$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','ItemsperPage']),'#comment');
+				$pagination = helper::pagination($commentIds, $this->getUrl(),$this->getData(['config','itemsperPage']),'#comment');
 				// Liste des pages
 				self::$pages = $pagination['pages'];
 				// Commentaires en fonction de la pagination
@@ -344,7 +369,7 @@ class blog extends common {
 				}
 			}
 			// Pagination
-			$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','ItemsperPage']));
+			$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 			// Liste des pages
 			self::$pages = $pagination['pages'];
 			// Articles en fonction de la pagination

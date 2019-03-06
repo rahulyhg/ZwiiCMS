@@ -72,18 +72,15 @@
 					'label' => 'Texte du bouton de soumission',
 					'value' => $this->getData(['module', $this->getUrl(0), 'config', 'button'])
 				]); ?>
-				<?php echo template::checkbox('formConfigMailOptionsToggle', true, 'Envoyer par mail les données saisies aux utilisateurs d\'un groupe', [
-					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'group'])
+				<?php echo template::checkbox('formConfigMailOptionsToggle', true, 'Envoyer par mail les données saisies :', [
+					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'group']) ||
+										!empty($this->getData(['module', $this->getUrl(0), 'config', 'user'])) ||
+										!empty($this->getData(['module', $this->getUrl(0), 'config', 'mail'])),
+					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email'
 				]); ?>
 				<div id="formConfigMailOptions" class="displayNone">
 					<div class="row">
-						<div class="col6">
-							<?php echo template::select('formConfigGroup', self::$groupNews, [
-								'label' => 'Groupe',
-								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group'])
-							]); ?>
-						</div>
-						<div class="col6">
+						<div class="col11 offset1">
 							<?php echo template::text('formConfigSubject', [
 								'help' => 'Laissez vide afin de conserver le texte par défaut.',
 								'label' => 'Sujet du mail',
@@ -91,15 +88,47 @@
 							]); ?>
 						</div>
 					</div>
+					<?php
+						// Element 0 quand aucun membre a été sélectionné
+						$groupMembers = [''] + $module::$groupNews;
+					?>
+					Destinataires  :
+					<div class="row">
+						<div class="col6 offset1">
+							<?php echo template::select('formConfigGroup', $groupMembers, [
+								'label' => 'Un groupe de membres :',
+								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group'])
+							]); ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col6 offset1">
+							<?php echo template::select('formConfigUser', $module::$listUsers, [
+								'label' => 'Un membre :',
+								'selected' => array_search($this->getData(['module', $this->getUrl(0), 'config', 'user']),$module::$listUsers)
+							]); ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col6 offset1">
+							<?php echo template::text('formConfigMail', [
+								'label' => 'Un eMail :',
+								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'mail']),
+								'help' => 'Saisissez une adresse mail individuelle ou de liste'
+							]); ?>
+						</div>
+					</div>
 				</div>
-				<?php echo template::checkbox('formConfigPageIdToggle', true, 'Rediriger vers une page du site après soumission du formulaire', [
+				<?php echo template::checkbox('formConfigPageIdToggle', true, 'Redirection après soumission du formulaire', [
 					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
 				]); ?>
-				<?php echo template::select('formConfigPageId', $module::$pages, [
-					'classWrapper' => 'displayNone',
-					'label' => 'Page',
-					'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
-				]); ?>
+				<div class="col6 offset1">
+					<?php echo template::select('formConfigPageId', $module::$pages, [
+						'classWrapper' => 'displayNone',
+						'label' => 'Sélectionner une page du site :',
+						'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
+					]); ?>
+				</div>
 				<?php echo template::checkbox('formConfigCapcha', true, 'Capcha à remplir pour soumettre le formulaire', [
 					'checked' => $this->getData(['module', $this->getUrl(0), 'config', 'capcha'])
 				]); ?>
@@ -121,3 +150,6 @@
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
+<div class="moduleVersion">Module version n°
+	<?php echo $module::FORM_VERSION; ?>
+</div>

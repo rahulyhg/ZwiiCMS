@@ -85,7 +85,7 @@
 						'selected' => $this->getData(['theme', 'footer', 'textPosition'])
 					]); ?>
 					<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
-						'label' => 'Alignement',
+						'label' => 'Alignement horizontal',
 						'selected' => $this->getData(['theme', 'footer', 'textAlign'])
 					]); ?>
 
@@ -99,7 +99,7 @@
 						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
 					]); ?>
 					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
-						'label' => 'Alignement',
+						'label' => 'Alignement horizontal',
 						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
 					]); ?>
 			</div>
@@ -112,7 +112,7 @@
 						'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
 					]); ?>	
 					<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
-						'label' => 'Alignement',
+						'label' => 'Alignement horizontal',
 						'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
 					]); ?>								
 			</div>		
