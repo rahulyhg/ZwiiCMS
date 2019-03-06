@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 9.0.02
+- Correction :
+    - Appel du tooltip Tippy après la mise à jour
+
 ## Version 9.0.01
 - Modifications : 
     - Abandon de l'envoi masqué des mails du formulaire
