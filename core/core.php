@@ -2107,8 +2107,8 @@ class layout extends common {
      */
     public function showCopyright() {
         $items = '<div id="footerCopyright">';
-        $items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" title="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
-        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" title="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+        $items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
         if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
@@ -2116,7 +2116,7 @@ class layout extends common {
             )
             OR $this->getUrl(0) === 'theme'
         ) {
-            $items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" title="Connexion à l\'administration" >Connexion</a></span>';
+            $items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" data-tippy-content="Connexion à l\'administration" >Connexion</a></span>';
         }
         $items .= '</div>';
         echo $items;
@@ -2180,7 +2180,7 @@ class layout extends common {
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
 				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" data-tippy-content="';
-				   	 	$items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
+			   	 	$items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				  	 	$items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
@@ -2226,8 +2226,8 @@ class layout extends common {
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" data-tippy-content="';
-						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
+                                                    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) . self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" data-tippy-content="';
+                                                    $items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
 						}
@@ -2350,30 +2350,29 @@ class layout extends common {
 					// Sur une page d'accueil
 					OR $this->getUrl(0) === ''
 				) {
-					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" data-tippy-content="Modifier la page">' . template::ico('pencil-alt') . '</a></li>';
+                                    $leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" data-tippy-content="Modifier la page">' . template::ico('pencil-alt') . '</a></li>';
 				}
 			}
 			// Items de droite
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
-
 				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cogs') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
-				// Mise à jour automatique
-				// Désactivée en dev
-				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === FALSE ) {
-				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('sync-alt colorRed') . '</a></li>';
-				 }
-				// Mise à jour automatique
+                            $rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
+                            $rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('paint-brush') . '</a></li>';
+                            $rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cogs') . '</a></li>';
+                            $rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
+                            // Mise à jour automatique
+                            // Désactivée en dev
+                             if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === FALSE ) {
+                                $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('sync-alt colorRed') . '</a></li>';
+                            }			
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" data-tippy-content="Configurer mon compte">' . template::ico('user', 'right') . $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" data-tippy-content="Se déconnecter">' . template::ico('sign-out-alt') . '</a></li>';
-			// Barre de membre 
+
+                        // Barre de membre 
 			echo '<div id="bar"><div class="container"><ul id="barLeft">' . $leftItems . '</ul><ul id="barRight">' . $rightItems . '</ul></div></div>';
 		}
 	}
@@ -2438,7 +2437,7 @@ class layout extends common {
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico($ico) . '</a>';
+                            $socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico($ico) . '</a>';
 			}
 		}
 		if($socials !== '') {
@@ -2804,7 +2803,7 @@ class template {
 	 * @return string
 	 */
 	public static function help($text) {
-		return '<span class="helpButton" data-tippy-content="' . $text . '">' . self::ico('question-circle') . '</span>';
+            return '<span class="helpButton" data-tippy-content="' . $text . '">' . self::ico('question-circle') . '</span>';
 	}
 
 	/**
