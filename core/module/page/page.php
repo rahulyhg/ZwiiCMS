@@ -37,16 +37,17 @@ class page extends common {
 	// Position du module
 	public static $modulePosition = [
 		'bottom' => 'En bas',
-		'top' => 'En haut',
-		'free' => 'Libre'
+		'top'    => 'En haut',
+		'free'   => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12' => 'Page pleine',
-		'4-8' => 'Barre latérale 1/3 - Page 2/3',		
-		'8-4' => 'Page 2/3    - Barre latérale 1/3',
-		'3-9' => 'Barre latérale 1/4 - Page 3/4',
-		'9-3' => 'Page 3/4    - Barre latérale 1/4',
-		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4'
+		'12'    => 'Page pleine',
+		'4-8'   => 'Barre latérale 1/3 - Page 2/3',		
+		'8-4'   => 'Page 2/3    - Barre latérale 1/3',
+		'3-9'   => 'Barre latérale 1/4 - Page 3/4',
+		'9-3'   => 'Page 3/4    - Barre latérale 1/4',
+		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
+		'bar'	=> 'Barre latérale'
 	];
 	
 	/**
@@ -243,7 +244,6 @@ class page extends common {
 				]);
 				// Barre renommée : changement le nom de la barre dans les pages mères
 				if ($this->getinput('pageEditBlock') === 'bar') {
-					echo '<pre>';
 					foreach ($this->getHierarchy() as $eachPageId=>$parentId) {
 						if ($this->getData(['page',$eachPageId,'barRight']) === $this->getUrl(2)) {
 							$this->setData(['page',$eachPageId,'barRight',$pageId]);
@@ -315,3 +315,4 @@ class page extends common {
 	}
 
 }
+?>

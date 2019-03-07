@@ -386,5 +386,5 @@ class blog extends common {
 			]);
 		}
 	}
-
 }
+?>

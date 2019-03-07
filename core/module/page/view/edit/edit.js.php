@@ -32,8 +32,7 @@ $( document ).ready(function() {
 	*/
 	if($("#pageEditModuleId").val() === "") {
 		$("#pageEditModuleConfig").addClass("disabled");
-		$("#pageEditContentContainer").slideDown();
-		$("#pageEditBlock").append('<option value="bar">Barre latérale</option>');		
+		$("#pageEditContentContainer").slideDown();		
 	}
 	else {
 		$("#pageEditModuleConfig").removeClass("disabled");

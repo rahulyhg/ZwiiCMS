@@ -30,7 +30,7 @@ class common {
 	// Désactive l'update auto
 	// const ZWII_VERSION = '9.0.00-dev27';
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.02';
+	const ZWII_VERSION = '9.0.03';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -3180,5 +3180,5 @@ class template {
 		// Retourne le html
 		return $html;
 	}
-
 }
+?>

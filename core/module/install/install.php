@@ -194,5 +194,5 @@ class install extends common {
 			'view' => 'update'
 		]);
 	}
-
 }
+?>

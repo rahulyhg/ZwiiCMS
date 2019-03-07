@@ -236,5 +236,5 @@ class news extends common {
 			'view' => 'index'
 		]);
 	}
-
 }
+?>

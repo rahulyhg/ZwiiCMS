@@ -320,36 +320,26 @@ class theme extends common {
 			// Modification de la position du menu selon la position de la bannière
 			switch ($this->getInput('themeHeaderPosition')) {
 				case 'site' :
-					$this->setData(['theme', 'menu',
-						['position' => str_replace ('site','body',$this->getData(['theme','menu','position'])) ],				
-						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
-						'font' => $this->getData('themeMenuFont'),				
-						'fontSize' => $this->getData('themeMenuFontSize'),
-						'fontWeight' => $this->getData('themeMenuFontWeight'),
-						'height' => $this->getData('themeMenuHeight'),
-						'loginLink' => $this->getData('themeMenuLoginLink'),
-						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
-						'textAlign' => $this->getData('themeMenuTextAlign'),
-						'textColor' => $this->getData('themeMenuTextColor'),
-						'textTransform' => $this->getData('themeMenuTextTransform'),
-					]);
+					$position = str_replace ('body','site',$this->getData(['theme','menu','position']));					
 				break;
 				case 'body' :
-					$this->setData(['theme', 'menu',
-						['position' => str_replace ('body','site',$this->getData(['theme','menu','position'])) ],				
-						'backgroundColor' => $this->getData('themeMenuBackgroundColor'),
-						'font' => $this->getData('themeMenuFont'),				
-						'fontSize' => $this->getData('themeMenuFontSize'),
-						'fontWeight' => $this->getData('themeMenuFontWeight'),
-						'height' => $this->getData('themeMenuHeight'),
-						'loginLink' => $this->getData('themeMenuLoginLink'),
-						'margin' => $this->getData('themeMenuMargin', helper::FILTER_BOOLEAN),
-						'textAlign' => $this->getData('themeMenuTextAlign'),
-						'textColor' => $this->getData('themeMenuTextColor'),
-						'textTransform' => $this->getData('themeMenuTextTransform'),
-					]);						
+					$position = str_replace ('site','body',$this->getData(['theme','menu','position']));								
 				break;
 			}
+			$this->setData(['theme', 'menu', [
+				'backgroundColor' => $this->getData(['theme', 'menu', 'backgroundColor']),
+				'font' => $this->getData(['theme', 'menu', 'font']),				
+				'fontSize' => $this->getData(['theme', 'menu', 'fontSize']),
+				'fontWeight' => $this->getData(['theme', 'menu', 'fontWeight']),
+				'height' => $this->getData(['theme', 'menu', 'height']),
+				'loginLink' => $this->getData(['theme', 'menu', 'loginLink']),
+				'margin' => $this->getData(['theme', 'menu', 'margin']),
+				'position' => $position,
+				'textAlign' => $this->getData(['theme', 'menu', 'textAlign']),
+				'textColor' => $this->getData(['theme', 'menu', 'textColor']),
+				'textTransform' => $this->getData(['theme','menu','textTransform']),
+				'fixed' => $this->getData(['theme','menu','fixed'])	
+			]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',
@@ -569,3 +559,4 @@ class theme extends common {
 	}
 
 }
+?>

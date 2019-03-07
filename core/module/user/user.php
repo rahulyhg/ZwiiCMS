@@ -425,5 +425,5 @@ class user extends common {
 			]);
 		}
 	}
-
 }
+?>
