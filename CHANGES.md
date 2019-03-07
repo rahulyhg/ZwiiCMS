@@ -1,8 +1,13 @@
 # ChangeLog 
 
+## Version 9.0.03
+- Corrections :
+    - Fin de fichiers sans ?> occasionnant des Warning
+
 ## Version 9.0.02
 - Correction :
-    - Appel du tooltip Tippy après la mise à jour
+    - Mauvais affichage des bulles TIPPY, remplacement des balises TITLE
+
 
 ## Version 9.0.01
 - Modifications : 
