@@ -5,6 +5,7 @@
     - Fin de fichiers sans ?> occasionnant des Warning
     - Erreur de mise à jour des options du menu lors du déplacement du header
     - Sélection par défaut d'une page de type barre
+    - Données par défaut : suppression des doubles quotes
 
 ## Version 9.0.02
 - Correction :
