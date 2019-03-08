@@ -70,5 +70,4 @@ class redirection extends common {
 			]);
 		}
 	}
-
 }

@@ -369,5 +369,4 @@ class form extends common {
 			'view' => 'index',
 		]);
 	}
-
 }
