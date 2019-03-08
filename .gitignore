@@ -17,3 +17,7 @@ site/file/thumb/*
 
 # PHPStorm
 .idea/
+
+# Trucs
+.htaccess
+.gitignore
