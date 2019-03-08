@@ -306,4 +306,3 @@ class configHelper extends helper {
 	}
 
 }
-?>

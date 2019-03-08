@@ -237,4 +237,3 @@ class news extends common {
 		]);
 	}
 }
-?>

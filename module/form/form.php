@@ -371,4 +371,3 @@ class form extends common {
 		]);
 	}
 }
-?>

@@ -3194,4 +3194,3 @@ class template {
 		return $html;
 	}
 }
-?>

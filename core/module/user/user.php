@@ -426,4 +426,3 @@ class user extends common {
 		}
 	}
 }
-?>

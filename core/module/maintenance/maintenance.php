@@ -31,4 +31,3 @@ class maintenance extends common {
 	}
 
 }
-?>

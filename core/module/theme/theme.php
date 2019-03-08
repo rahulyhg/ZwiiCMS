@@ -557,6 +557,4 @@ class theme extends common {
 		}
 		return ($zipFilename);
 	}
-
 }
-?>

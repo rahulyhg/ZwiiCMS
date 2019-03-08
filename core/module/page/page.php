@@ -315,4 +315,3 @@ class page extends common {
 	}
 
 }
-?>

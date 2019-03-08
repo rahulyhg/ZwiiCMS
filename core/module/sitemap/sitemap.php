@@ -30,4 +30,3 @@ class sitemap extends common {
 	}
 
 }
-?>

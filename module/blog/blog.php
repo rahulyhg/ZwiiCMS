@@ -387,4 +387,3 @@ class blog extends common {
 		}
 	}
 }
-?>

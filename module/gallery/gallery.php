@@ -303,4 +303,3 @@ class galleriesHelper extends helper {
 		return $dirContent;
 	}
 }
-?>
