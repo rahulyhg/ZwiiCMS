@@ -5,6 +5,22 @@
     - Utilisation des icones de la librairie FontAwesome 5.5.0 en remplacement de zwiico
     - Ajout de la gestion des plugins
     - Ajout de la propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+## Version 9.0.04
+- Corrections : 
+    - Module form 1.5 : 
+        - erreur lors de la non sélection d'un groupe
+        - captcha inefficace
+    - Pour les testeurs : la mise à jour automatique n'est plus proposée lors d'une régression,version en ligne inférieure à la version installée.
+
+## Version 9.0.03
+- Corrections :
+    - Erreur de mise à jour des options du menu lors du déplacement du header
+    - Sélection par défaut d'une page de type barre
+    - Données par défaut : suppression des doubles quotes
+
+## Version 9.0.02
+- Correction :
+    - Mauvais affichage des bulles TIPPY, remplacement des balises TITLE
 
 
 ## Version 9.0.01

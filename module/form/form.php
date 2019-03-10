@@ -31,9 +31,9 @@ class form extends common {
 	public static $pages = [];
 
 	public static $pagination;
-
-	const FORM_VERSION = '1.4';
-
+	
+	const FORM_VERSION = '1.5'; 
+	
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
 	const TYPE_TEXT = 'text';
@@ -278,6 +278,7 @@ class form extends common {
 				AND $this->getInput('formCapcha', helper::FILTER_INT) !== $this->getInput('formCapchaFirstNumber', helper::FILTER_INT) + $this->getInput('formCapchaSecondNumber', helper::FILTER_INT))
 			{
 				self::$inputNotices['formCapcha'] = 'Incorrect';
+				
 			}
 			// Préparation le contenu du mail
 			$data = [];
@@ -317,19 +318,20 @@ class form extends common {
 			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
 			// Verification si le mail peut être envoyé
 			if(
-				self::$inputNotices === []
-				AND $group = $this->getData(['module', $this->getUrl(0), 'config', 'group'])
-				OR $singleuser !== ''
-				OR $singlemail !== ''
+				self::$inputNotices === [] && (
+					$group = $this->getData(['module', $this->getUrl(0), 'config', 'group']) ||
+					$singleuser !== '' ||
+					$singlemail !== '' )
 			) {
 				// Utilisateurs dans le groupe
-				$to = [];
-				foreach($this->getData(['user']) as $userId => $user) {
-					if($user['group'] === $group) {
-						$to[] = $user['mail'];
+				if (!empty($user)){
+					$to = [];
+					foreach($this->getData(['user']) as $userId => $user) {
+						if($user['group'] === $group) {
+							$to[] = $user['mail'];
+						}
 					}
-				}
-
+				}								
 				// Utilisateur désigné
 				if (!empty($singleuser)) {
 					$to[] = $singleuser;

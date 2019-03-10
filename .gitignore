@@ -7,6 +7,9 @@ site/backup/*
 # Fichiers de données
 site/data/*
 
+# Fichiers temporaires
+site/temp/*
+
 # Fichiers uploadés
 site/file/source/*
 site/file/thumb/*
@@ -17,3 +20,7 @@ site/file/thumb/*
 
 # PHPStorm
 .idea/
+
+# Trucs
+.htaccess
+.gitignore

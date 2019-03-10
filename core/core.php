@@ -34,7 +34,7 @@ class common {
 	// Désactive l'update auto
 	// const ZWII_VERSION = '9.0.00-dev27';
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.03';
+	const ZWII_VERSION = '9.0.04';
 
 
 	public static $actions = [];
@@ -1753,7 +1753,11 @@ class helper {
 	public static function checkNewVersion() {
 		$newVersion  = false;
 		if($version = helper::getOnlineVersion()) {
-			if(version_compare(trim($version), common::ZWII_VERSION) === 1) $newVersion = true;
+			//return (trim($version) !== common::ZWII_VERSION);
+			return ((version_compare(common::ZWII_VERSION,$version)) === -1);
+		}
+		else {
+			return false;
 		}
 		return $newVersion;
 	}
