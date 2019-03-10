@@ -32,7 +32,7 @@ class form extends common {
 	
 	public static $pagination;
 	
-	const FORM_VERSION = '1.5'; 
+	const FORM_VERSION = '1.6'; 
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
@@ -314,25 +314,26 @@ class form extends common {
 			// Rechercher l'adresse en fonction du mail
 			$sent = true;
 			$singleuser = $this->getData(['user',
-						  $this->getData(['module', $this->getUrl(0), 'config', 'user']),
-						  'mail']);
+										  $this->getData(['module', $this->getUrl(0), 'config', 'user']),
+										  'mail']);
 			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
+			$group = $this->getData(['module', $this->getUrl(0), 'config', 'group']);
 			// Verification si le mail peut être envoyé
 			if(
 				self::$inputNotices === [] && (
-					$group = $this->getData(['module', $this->getUrl(0), 'config', 'group']) ||
+					$group > 0 ||
 					$singleuser !== '' ||
 					$singlemail !== '' )
 			) {
 				// Utilisateurs dans le groupe
-				if (!empty($user)){
-					$to = [];
+				$to = [];
+				if ($group > 0){
 					foreach($this->getData(['user']) as $userId => $user) {
 						if($user['group'] === $group) {
 							$to[] = $user['mail'];
 						}
 					}
-				}								
+				}							
 				// Utilisateur désigné
 				if (!empty($singleuser)) {
 					$to[] = $singleuser;
