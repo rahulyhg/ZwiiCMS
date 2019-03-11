@@ -7,7 +7,7 @@
         - captcha inefficace
     - Pour les testeurs : la mise à jour automatique n'est plus proposée lors d'une régression,version en ligne inférieure à la version installée.
 - Ajout :
-    - Redimennsionneur d'image map : permet d'obtenir des images map fonctionnelles lorsque les dimensions de l'image sont réduites par le thème ou la taille de l'écran.
+    - Redimensionnement des images map : permet d'obtenir des images map fonctionnelles lorsque les dimensions de l'image sont réduites par le thème ou la taille de l'écran.
         - La carte peut être générée par https://www.image-map.net/
         - Article (en) : https://blog.travismclarke.com/project/imagemap/
         - Git : https://github.com/clarketm/image-map 
