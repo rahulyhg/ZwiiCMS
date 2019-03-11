@@ -491,7 +491,8 @@ class common {
 			// 'tinymce', Désactivé par défaut
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
-			'zwiico'
+			'zwiico',
+			'imagemap'
 		],
 		'view' => ''
 	];
