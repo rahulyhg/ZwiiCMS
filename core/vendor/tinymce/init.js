@@ -172,7 +172,7 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 		  }); 
 		} else {
 		  toolbars.css({
-			top: 45,
+			top: 0,
 			bottom: 'auto',
 			position: 'fixed',
 			width: $(container).width(),
