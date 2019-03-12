@@ -5,7 +5,7 @@
     - Thème : 
         - nouvelle position du menu dans le site quand la bannière est au-dessus.
         - Simplification et ordre des libellés
-    - Editeur de texte, scroll lorsque l'éditeur est ouvert, la barre d'outil se colle sous la barre d'administration.
+    - Editeur de texte, scrolle lorsque l'éditeur est ouvert, la barre d'outil se colle sous la barre d'administration.
 
 ## Version 9.0.04
 - Corrections : 
