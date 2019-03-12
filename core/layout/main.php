@@ -110,7 +110,8 @@
 		if ($this->getData(['theme','header','linkHome'])){echo "</a>";}	?>
 		<?php endif; ?>
 	<?php if(
-		$this->getData(['theme', 'menu', 'position']) === 'site-second'
+		$this->getData(['theme', 'menu', 'position']) === 'site-second' ||
+		$this->getData(['theme', 'menu', 'position']) === 'site'
 		// Affiche toujours le menu pour l'édition du thème
 		OR (
 			$this->getData(['theme', 'menu', 'position']) === 'hide'

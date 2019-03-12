@@ -141,9 +141,10 @@ class theme extends common {
 		'hide' => 'Caché'
 	];
 	public static $menuPositionsBody = [
+		'top' => 'Au-dessus et en-dehors du site',
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
-		'top' => 'Au-dessus et en-dehors du site',		
+		'site' => 'Dans le site',
 		'hide' => 'Caché'
 	];	
 	public static $radius = [
