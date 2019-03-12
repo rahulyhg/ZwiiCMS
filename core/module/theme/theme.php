@@ -141,7 +141,7 @@ class theme extends common {
 		'hide' => 'Caché'
 	];
 	public static $menuPositionsBody = [
-		'top' => 'Au-dessus et en-dehors du site',
+		'top' => 'En haut du site',
 		'body-first' => 'Au dessus du site avant la bannière',
 		'body-second' => 'Au dessus du site après la bannière',
 		'site' => 'Dans le site',
