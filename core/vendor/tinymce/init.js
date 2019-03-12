@@ -185,6 +185,7 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 		});
 		
 		toolbars.css({
+			top:0,
 		  position: 'relative',
 		  width: 'auto',
 		  borderBottom: 'none'
