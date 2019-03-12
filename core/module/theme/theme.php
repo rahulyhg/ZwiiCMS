@@ -104,9 +104,9 @@ class theme extends common {
 		'400px' => 'Très grande (400 pixels)'
 	];
 	public static $headerPositions = [
-		'hide' => 'Cachée',
+		'body' => 'Au dessus du site',
 		'site' => 'Dans le site',
-		'body' => 'Au dessus du site'
+		'hide' => 'Cachée'
 	];
 	public static $imagePositions = [
 		'top left' => 'En haut à gauche',
@@ -136,14 +136,14 @@ class theme extends common {
 	];
 	public static $menuPositionsSite = [
 		'top' => 'En-dehors du site',		
-		'site-first' => 'Dans le site avant la bannière',
-		'site-second' => 'Dans le site après la bannière',
+		'site-first' => 'Avant la bannière',
+		'site-second' => 'Après la bannière',
 		'hide' => 'Caché'
 	];
 	public static $menuPositionsBody = [
-		'top' => 'En haut du site',
-		'body-first' => 'Au dessus du site avant la bannière',
-		'body-second' => 'Au dessus du site après la bannière',
+		'top' => 'En-dehors du site',
+		'body-first' => 'Avant la bannière',
+		'body-second' => 'Après la bannière',
 		'site' => 'Dans le site',
 		'hide' => 'Caché'
 	];	
@@ -190,7 +190,6 @@ class theme extends common {
 		'1170px' => 'Grande (1170 pixels)',
 		'100%' => 'Fluide (100%)'
 	];
-
 	public static $headerWide = [
 		'auto' => 'Automatique',
 		'contain' => 'Image entière',		

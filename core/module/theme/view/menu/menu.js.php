@@ -86,6 +86,9 @@ $("input, select").on("change", function() {
 			$("#menu").removeClass('container');
 			$("#menu").addClass('container-large');
 			$("nav").addClass('#navfixedconnected');
+			break;
+		case 'site':
+			$("nav").show().prependTo("#site");
 			break;			
 	}
 });
