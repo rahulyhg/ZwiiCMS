@@ -20,11 +20,11 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500,        // Default value is 550
-		jsFiles: [          // Additional JS files to load
-			'mode/clike/clike.js',
-			'mode/php/php.js'
-		]
+		height: 500        // Default value is 550
+		//jsFiles: [          // Additional JS files to load
+		//	'mode/clike/clike.js',
+		//	'mode/php/php.js'
+		//]
 	}, 
 	// Contenu du menu contextuel
 	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
@@ -35,6 +35,9 @@ tinymce.init({
 		baseUrl + "site/data/theme.css",
 		baseUrl + "site/data/custom.css"
 	],
+	// Pages internes
+	link_list: "core/vendor/tinymce/links.php",
+	// Thème mobile
 	// Classe à ajouter à la balise body dans l'iframe
 	body_class: "editorWysiwyg",
 	// Cache les menus
@@ -141,6 +144,7 @@ tinymce.init({
 		}
 	]
 });
+
 
 
 tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
