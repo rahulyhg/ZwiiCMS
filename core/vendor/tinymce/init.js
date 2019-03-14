@@ -20,12 +20,24 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500        // Default value is 550
-		//jsFiles: [          // Additional JS files to load
-		//	'mode/clike/clike.js',
-		//	'mode/php/php.js'
-		//]
+		height: 500,       // Default value is 550
+		jsFiles: [          // Additional JS files to load
+			'mode/clike/clike.js',
+			'mode/php/php.js'
+		]
 	}, 
+	// Cibles de la target
+	target_list: [
+		{title: 'None', value: ''},
+		{title: 'Nouvel onglet', value: '_blank'}
+		],
+	// Target pour lightbox
+	rel_list: [
+		{title: 'None', value: ''},
+		{title: 'Ouvrir dans une lightbox', value: 'data-lity'}
+	],	
+	// Pages internes
+	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
 	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
@@ -35,9 +47,6 @@ tinymce.init({
 		baseUrl + "site/data/theme.css",
 		baseUrl + "site/data/custom.css"
 	],
-	// Pages internes
-	link_list: "core/vendor/tinymce/links.php",
-	// Thème mobile
 	// Classe à ajouter à la balise body dans l'iframe
 	body_class: "editorWysiwyg",
 	// Cache les menus

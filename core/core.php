@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 	// Numéro de version de développement :
 	// Désactive l'update auto
-	const ZWII_VERSION = '9.0.-dev.c';
+	const ZWII_VERSION = '9.0.05.dev.d';
 	// Numéro de version stable
 	// const ZWII_VERSION = '9.0.05';
 
@@ -878,7 +878,6 @@ class common {
 				}
 			}
 		}
-
 		// Sinon retourne null
 		return helper::filter(null, $filter);
 	}
@@ -959,34 +958,39 @@ class common {
 	 * Génére un fichier json avec la liste des
 	*/
 	public function linkList() {
-				// Sauve la liste des pages pour TinyMCE
-				$parents = [];
-				$children = [];
-				$rewrite = (helper::checkRewrite()) ? '' : '?';
-				foreach($this->getHierarchy(null,false,false) as $parentId => $childIds) {
-					// Exclure les barres
-					if ($this->getData(['page', $parentId, 'block']) !== 'bar' ) {
-						$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
-									'value'=> $rewrite.$parentId
-						];
-					}
-					//if (!empty($childIds)) { 
-						foreach($childIds as $childId) {
-							$parents [] = ['title' => '› ' . $this->getData(['page', $childId, 'title']) ,
-										'value'=> $rewrite.$childId
-							];				
-						}
-					//	$parents [] = [ 'menu' => $children];
-					//}
+		// Sauve la liste des pages pour TinyMCE
+		$parents = [];
+		$rewrite = (helper::checkRewrite()) ? '' : '?';
+		foreach($this->getHierarchy(null,false,false) as $parentId => $childIds) {
+			$children = [];
+			// Exclure les barres
+			if ($this->getData(['page', $parentId, 'block']) !== 'bar' ) { 
+				foreach($childIds as $childId) {
+					$children [] = ['title' => $this->getData(['page', $childId, 'title']) ,
+								'value'=> $rewrite.$childId
+					];				
 				}
-				// 3 tentatives
-				for($i = 0; $i < 3; $i++) {
-					if (file_put_contents ('core/vendor/tinymce/link_list.json', json_encode($parents), LOCK_EX) !== false) {
-						break;
-					}
-					// Pause de 10 millisecondes
-					usleep(10000);
-				}	
+				if (empty($childIds)) {						
+					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+									'value'=> $rewrite.$parentId 		
+					];	
+				} else {
+					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+									'value'=> $rewrite.$parentId ,  
+									'menu' => $children 
+					];							
+				} 											
+			}
+		}
+		
+		// 3 tentatives
+		for($i = 0; $i < 3; $i++) {
+			if (file_put_contents ('core/vendor/tinymce/link_list.json', json_encode($parents), LOCK_EX) !== false) {
+				break;
+			}
+			// Pause de 10 millisecondes
+			usleep(10000);
+		}	
 	}
 
 
