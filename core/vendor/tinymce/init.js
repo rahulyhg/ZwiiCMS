@@ -20,11 +20,11 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500,       // Default value is 550
-		jsFiles: [          // Additional JS files to load
-			'mode/clike/clike.js',
-			'mode/php/php.js'
-		]
+		height: 500       // Default value is 550
+		//jsFiles: [          // Additional JS files to load
+		//	'mode/clike/clike.js',
+		//	'mode/php/php.js'
+		//]
 	}, 
 	// Cibles de la target
 	target_list: [
