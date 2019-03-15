@@ -20,11 +20,11 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500       // Default value is 550
-		//jsFiles: [          // Additional JS files to load
-		//	'mode/clike/clike.js',
-		//	'mode/php/php.js'
-		//]
+		height: 500,       // Default value is 550
+		Files: [          // Additional JS files to load
+			baseUrl + 'core/vendor/tinymce/mode/clike/clike.js',
+			baseUrl + 'core/vendor/tinymce/mode/php/php.js'
+		]
 	}, 
 	// Cibles de la target
 	target_list: [
@@ -34,7 +34,7 @@ tinymce.init({
 	// Target pour lightbox
 	rel_list: [
 		{title: 'None', value: ''},
-		{title: 'Ouvrir dans une lightbox', value: 'data-lity'}
+		{title: 'Lightbox', value: 'data-lity'}
 	],	
 	// Pages internes
 	link_list: baseUrl + "core/vendor/tinymce/links.php",
