@@ -1,5 +1,11 @@
 # ChangeLog 
 
+## Version 9.0.06
+- Correction :
+    - Configuration des modes de codemirror
+- Modifications : 
+    - TinyMCE : libellés fenêtre des liens
+
 ## Version 9.0.05
 - Modifications :
     - Thème : 
