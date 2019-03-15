@@ -32,9 +32,9 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 	// Numéro de version de développement :
 	// Désactive l'update auto
-	// const ZWII_VERSION = '9.0.00-dev27';
+	// const ZWII_VERSION = '9.0.05.dev.d';
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.04';
+	const ZWII_VERSION = '9.0.05';
 
 
 	public static $actions = [];
@@ -630,6 +630,9 @@ class common {
 				$this->url = $this->getData(['config', 'homePageId']);
 			}
 		}
+
+		// Mise à jour de la liste des pages pour TinyMCE
+		$this->linkList();
 	}
 
 	/**
@@ -824,8 +827,6 @@ class common {
 		}
 	}
 
-
-
 	/**
 	 * Accède à une valeur des variables http (ordre de recherche en l'absence de type : _COOKIE, _POST)
 	 * @param string $key Clé de la valeur
@@ -881,7 +882,6 @@ class common {
 				}
 			}
 		}
-
 		// Sinon retourne null
 		return helper::filter(null, $filter);
 	}
@@ -946,7 +946,6 @@ class common {
 			// Pause de 10 millisecondes
 			usleep(10000);
 		}
-
 		// Save theme
 		// dernière clé principale
 		// Trois tentatives
@@ -957,6 +956,45 @@ class common {
 			// Pause de 10 millisecondes
 			usleep(10000);
 		}
+	}
+
+	/**
+	 * Génére un fichier json avec la liste des
+	*/
+	public function linkList() {
+		// Sauve la liste des pages pour TinyMCE
+		$parents = [];
+		$rewrite = (helper::checkRewrite()) ? '' : '?';
+		foreach($this->getHierarchy(null,false,false) as $parentId => $childIds) {
+			$children = [];
+			// Exclure les barres
+			if ($this->getData(['page', $parentId, 'block']) !== 'bar' ) { 
+				foreach($childIds as $childId) {
+					$children [] = ['title' => $this->getData(['page', $childId, 'title']) ,
+								'value'=> $rewrite.$childId
+					];				
+				}
+				if (empty($childIds)) {						
+					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+									'value'=> $rewrite.$parentId 		
+					];	
+				} else {
+					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+									'value'=> $rewrite.$parentId ,  
+									'menu' => $children 
+					];							
+				} 											
+			}
+		}
+		
+		// 3 tentatives
+		for($i = 0; $i < 3; $i++) {
+			if (file_put_contents ('core/vendor/tinymce/link_list.json', json_encode($parents), LOCK_EX) !== false) {
+				break;
+			}
+			// Pause de 10 millisecondes
+			usleep(10000);
+		}	
 	}
 
 

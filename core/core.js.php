@@ -327,6 +327,10 @@ core.start = function() {
 				.height(width * _this.data("ratio"));
 		});
 	}).trigger("resize");
+
+	// Ajouter l'attribut data-lity afin de faire la liaison avec lity
+	$("a[rel='data-lity']").attr("data-lity","");
+
 };
 core.start();
 

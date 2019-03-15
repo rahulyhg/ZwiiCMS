@@ -20,12 +20,24 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500,        // Default value is 550
+		height: 500,       // Default value is 550
 		jsFiles: [          // Additional JS files to load
 			'mode/clike/clike.js',
 			'mode/php/php.js'
 		]
 	}, 
+	// Cibles de la target
+	target_list: [
+		{title: 'None', value: ''},
+		{title: 'Nouvel onglet', value: '_blank'}
+		],
+	// Target pour lightbox
+	rel_list: [
+		{title: 'None', value: ''},
+		{title: 'Ouvrir dans une lightbox', value: 'data-lity'}
+	],	
+	// Pages internes
+	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
 	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
@@ -141,3 +153,83 @@ tinymce.init({
 		}
 	]
 });
+
+
+
+tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
+	editor.on('init', function() {
+	  setSticky();
+	});
+	
+	$(window).on('scroll', function() {
+	  setSticky();
+	});
+	
+	function setSticky() {
+	  var container = editor.editorContainer;
+	  var toolbars = $(container).find('.mce-toolbar-grp');
+	  var statusbar = $(container).find('.mce-statusbar');
+	  
+	  if (isSticky()) {
+		$(container).css({
+		  paddingTop: toolbars.outerHeight()
+		});
+		
+		if (isAtBottom()) {
+		  toolbars.css({
+			top: 'auto',
+			bottom: statusbar.outerHeight(),
+			position: 'absolute',
+			width: '100%',
+			borderBottom: 'none'
+		  }); 
+		} else {
+		  toolbars.css({
+			top: 45,
+			bottom: 'auto',
+			position: 'fixed',
+			width: $(container).width(),
+			borderBottom: '1px solid rgba(0,0,0,0.2)'
+		  });       
+		}
+	  } else {
+		$(container).css({
+		  paddingTop: 0
+		});
+		
+		toolbars.css({
+			top:0,
+		  position: 'relative',
+		  width: 'auto',
+		  borderBottom: 'none'
+		});
+	  }
+	}
+	
+	function isSticky() {
+	  var container = editor.editorContainer,
+		editorTop = container.getBoundingClientRect().top;
+	  
+	  if (editorTop < 0) {
+		return true;
+	  }
+	  
+	  return false;
+	}
+	
+	function isAtBottom() {
+	  var container = editor.editorContainer,
+		editorTop = container.getBoundingClientRect().top;
+	  
+	  var toolbarHeight = $(container).find('.mce-toolbar-grp').outerHeight();
+	  var footerHeight = $(container).find('.mce-statusbar').outerHeight();
+	  
+	  var hiddenHeight = -($(container).outerHeight() - toolbarHeight - footerHeight);
+	  
+	  if (editorTop < hiddenHeight) {
+		return true;
+	  }
+	  
+	  return false;
+	}
+  });

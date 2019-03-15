@@ -1,10 +1,16 @@
 # ChangeLog 
 
-## Version 9.1.0
-- Modification :
-    - Utilisation des icones de la librairie FontAwesome 5.5.0 en remplacement de zwiico
-    - Ajout de la gestion des plugins
-    - Ajout de la propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+## Version 9.0.05
+- Modifications :
+    - Thème : 
+        - nouvelle position du menu dans le site quand la bannière est au-dessus.
+        - Simplification et ordre des libellés position du menu par rapport à la bannière
+    - Editeur de texte, scrolle lorsque l'éditeur est ouvert, la barre d'outil se colle sous la barre d'administration.
+    - TinyMCE :
+        - liste des pages du site dans la fenêtre des liens
+        - option lightbox pour l'affichage d'images ou de liens
+        usages : https://sorgalla.com/lity/
+
 ## Version 9.0.04
 - Corrections : 
     - Module form 1.6 : 
@@ -16,7 +22,6 @@
         - La carte peut être générée par https://www.image-map.net/
         - Article (en) : https://blog.travismclarke.com/project/imagemap/
         - Git : https://github.com/clarketm/image-map 
-
 
 
 ## Version 9.0.03
