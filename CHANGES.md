@@ -4,7 +4,7 @@
 - Modifications :
     - Thème : 
         - nouvelle position du menu dans le site quand la bannière est au-dessus.
-        - Simplification et ordre des libellés
+        - Simplification et ordre des libellés position du menu par rappor à la bannière
     - Editeur de texte, scrolle lorsque l'éditeur est ouvert, la barre d'outil se colle sous la barre d'administration.
     - TinyMCE :
         - liste des pages dans la fenêtre des liens
