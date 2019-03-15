@@ -4,10 +4,10 @@
 - Modifications :
     - Thème : 
         - nouvelle position du menu dans le site quand la bannière est au-dessus.
-        - Simplification et ordre des libellés position du menu par rappor à la bannière
+        - Simplification et ordre des libellés position du menu par rapport à la bannière
     - Editeur de texte, scrolle lorsque l'éditeur est ouvert, la barre d'outil se colle sous la barre d'administration.
     - TinyMCE :
-        - liste des pages dans la fenêtre des liens
+        - liste des pages du site dans la fenêtre des liens
         - option lightbox pour l'affichage d'images ou de liens
         usages : https://sorgalla.com/lity/
 
