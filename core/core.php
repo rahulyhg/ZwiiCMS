@@ -1076,7 +1076,6 @@ class common {
 	 * Mises à jour
 	 */
 	private function update() {
-		echo "pop";
 		// Version 8.1.0
 		if($this->getData(['core', 'dataVersion']) < 810) {
 			$this->setData(['config', 'timezone', 'Europe/Paris']);
@@ -2338,13 +2337,36 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				$leftItems .= '<li><select id="barSelectPage">';
 				$leftItems .= '<option value="">Choisissez une page</option>';
+				$leftItems .= '<optgroup label="Pages orphelines">';
+				$orpheline = true ;
 				$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);			
-				foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
+				foreach($this->getHierarchy(null,false) as $parentPageId => $childrenPageIds) {
+					if ($this->getData(['page', $parentPageId, 'position']) !== 0  &&
+						$orpheline ) {
+							$orpheline = false;
+							$leftItems .= '<optgroup label="Pages dans le menu">';
+					} 
+					// Exclure les barres
+					if ($this->getData(['page', $parentPageId, 'block']) !== 'bar') {
+						$leftItems .= '<option value="' . 
+									helper::baseUrl() . 
+									$parentPageId . '"' . 
+									($parentPageId === $currentPageId ? ' selected' : false) . 	'>' . 
+									$this->getData(['page', $parentPageId, 'title']) . 
+									'</option>';
+						foreach($childrenPageIds as $childKey) {
+							$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
+						}
+					}
+				}
+				// Afficher les barres
+				$leftItems .= '<optgroup label="Barres latérales">';
+				foreach($this->getHierarchy(null, false,true) as $parentPageId => $childrenPageIds) {
 					$leftItems .= '<option value="' . helper::baseUrl() . $parentPageId . '"' . ($parentPageId === $currentPageId ? ' selected' : false) . '>' . $this->getData(['page', $parentPageId, 'title']) . '</option>';
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
-				}
+				}				
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" data-tippy-content="Créer une page ou<br>une barre latérale">' . template::ico('plus') . '</a></li>';
 				if(
