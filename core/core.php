@@ -118,7 +118,7 @@ class common {
 				'barLeft' => '',
 				'barRight' => ''
 			],
-			'cachee' => [
+			'privee' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
@@ -137,7 +137,7 @@ class common {
 				'position' => 2,
 				'group' => self::GROUP_MEMBER,
 				'targetBlank' => false,
-				'title' => 'Cachée',
+				'title' => 'Privée',
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => ''
