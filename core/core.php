@@ -2344,7 +2344,7 @@ class layout extends common {
 					if ($this->getData(['page', $parentPageId, 'position']) !== 0  &&
 						$orpheline ) {
 							$orpheline = false;
-							$leftItems .= '<optgroup label="Pages dans le menu">';
+							$leftItems .= '<optgroup label="Pages du menu">';
 					} 
 					// Exclure les barres
 					if ($this->getData(['page', $parentPageId, 'block']) !== 'bar') {
