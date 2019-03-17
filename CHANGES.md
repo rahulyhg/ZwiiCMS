@@ -1,5 +1,11 @@
 # ChangeLog 
 
+## Version 9.0.07
+- Correction :
+    - Disparition du menu quand la bannière est masquée
+- Modifications :
+    - Barre d'administration, pages organisées
+
 ## Version 9.0.06
 - Correction :
     - Configuration des modes de codemirror

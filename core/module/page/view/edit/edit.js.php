@@ -414,6 +414,9 @@ $("#pageEditModuleConfig").on("click", function() {
  */
 var hierarchy = <?php echo json_encode($this->getHierarchy()); ?>;
 var pages = <?php echo json_encode($this->getData(['page'])); ?>;
+// 9.0.07 corrige une mauvaise sélection d'une page orpheline avec enfant
+var positionInitial = <?php echo $this->getData(['page',$this->getUrl(2),"position"]); ?>;
+// 9.0.07
 $("#pageEditParentPageId").on("change", function() {
 	var positionDOM = $("#pageEditPosition");
 	positionDOM.empty().append(
@@ -428,7 +431,7 @@ $("#pageEditParentPageId").on("change", function() {
 		// Liste des pages sans parents
 		for(var key in hierarchy) {
 			if(hierarchy.hasOwnProperty(key)) {
-				// Sélectionne la page avant si il s'agit de la page courante
+				// Sélectionne la page avant s'il s'agit de la page courante
 				if(key === "<?php echo $this->getUrl(2); ?>") {
 					positionSelected = positionPrevious;
 				}
@@ -443,6 +446,11 @@ $("#pageEditParentPageId").on("change", function() {
 				}
 			}
 		}
+		// 9.0.07 corrige une mauvaise sélection d'une page orpheline avec enfant
+		if (positionInitial === 0) {
+			positionSelected = 0;
+		}
+		// 9.0.07
 	}
 	// Un page parent est selectionnée
 	else {
