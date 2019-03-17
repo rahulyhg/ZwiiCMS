@@ -5,6 +5,12 @@
     - Utilisation des icones de la librairie FontAwesome 5.5.0 en remplacement de zwiico
     - Ajout de la gestion des plugins
     - Ajout de la propriété "help" sur les boutons afin d'afficher un texte d'aide en infobulle
+    
+## Version 9.0.07
+- Correction :
+    - Disparition du menu quand la bannière est masquée
+- Modifications :
+    - Barre d'administration, pages organisées
 
 ## Version 9.0.06
 - Correction :

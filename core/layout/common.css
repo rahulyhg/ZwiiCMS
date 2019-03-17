@@ -59,6 +59,10 @@ li ul {
 	margin: 0;
 }
 
+option.inactive {
+	color: darkred;
+}
+
 /* Séparateur */
 hr {
 	border: 0;

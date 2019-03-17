@@ -323,8 +323,10 @@ class theme extends common {
 					$position = str_replace ('body','site',$this->getData(['theme','menu','position']));					
 				break;
 				case 'body' :
-					$position = str_replace ('site','body',$this->getData(['theme','menu','position']));								
+					$position = str_replace ('site','body',$this->getData(['theme','menu','position']));
 				break;
+				default:
+					$position = $this->getData(['theme','menu','position']);					
 			}
 			$this->setData(['theme', 'menu', [
 				'backgroundColor' => $this->getData(['theme', 'menu', 'backgroundColor']),
