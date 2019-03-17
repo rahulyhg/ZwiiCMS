@@ -2351,7 +2351,9 @@ class layout extends common {
 						$leftItems .= '<option value="' . 
 									helper::baseUrl() . 
 									$parentPageId . '"' . 
-									($parentPageId === $currentPageId ? ' selected' : false) . 	'>' . 
+									($parentPageId === $currentPageId ? ' selected' : false) . 
+									($this->getData(['page', $parentPageId, 'disable']) === true ? ' class="inactive"' : false) .
+									'>' . 
 									$this->getData(['page', $parentPageId, 'title']) . 
 									'</option>';
 						foreach($childrenPageIds as $childKey) {
