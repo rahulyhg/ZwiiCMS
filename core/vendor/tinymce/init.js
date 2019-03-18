@@ -74,9 +74,11 @@ tinymce.init({
 		"filemanager": baseUrl + "core/vendor/filemanager/plugin.min.js"
 	},
 	// Thème mobile
-	mobile: {
-		theme: "mobile"
-	},
+	// mobile: {
+	//	theme: "mobile",
+	//	plugins: [ 'autosave', 'lists', 'autolink' ],
+	//	toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
+	//},
 	// Contenu du bouton insérer
 	insert_button_items: "image link media template codesample inserttable | hr | anchor",
 	// Contenu du bouton formats
