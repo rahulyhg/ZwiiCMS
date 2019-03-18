@@ -1,8 +1,10 @@
 # ChangeLog 
 
+
 ## Version 9.0.08
 - Modification :
     - Prise en compte taille des petits écrans, suppression des marges
+    - TinyMCE : désactivation du thème mobile
 
 ## Version 9.0.07
 - Correction :
