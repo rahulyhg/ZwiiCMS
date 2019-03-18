@@ -25,3 +25,5 @@ site/file/thumb/*
 .htaccess
 .gitignore
 core/vendor/tinymce/link_list.json
+core/vendor/tinymce/link_list.json
+site/tmp/.htaccess
