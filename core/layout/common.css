@@ -25,9 +25,23 @@ body {
 	min-height: 100%;
 }
 
-body {
-	margin: 0px 10px;
+
+/**
+* Petits écrans inférieurs à 768px de largeur, on supprime les marges
+*/ 
+@media (max-width: 768px) {
+	body {
+		margin:0px 0px !important;
+	}
+	#site {
+		margin:0px auto !important;
+	}
 }
+
+body {
+	margin:0px 10px;
+}
+
 
 /**
  * Éléments spécifiques
@@ -428,7 +442,10 @@ nav a:hover {
 	position: sticky;
 }
 
-
+/* Taille du menu hamburger */
+nav .zwiico-menu {
+	font-size:2em !important;
+}
 
 
 /* Corps */
