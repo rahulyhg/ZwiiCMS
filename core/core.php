@@ -29,7 +29,7 @@ class common {
 	// Numéro de version de développement, ajouter dev:
 	// Désactive l'update auto
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.08';
+	const ZWII_VERSION = '9.0.08-dev';
 
 
 	public static $actions = [];
@@ -2358,12 +2358,19 @@ class layout extends common {
 									helper::baseUrl() . 
 									$parentPageId . '"' . 
 									($parentPageId === $currentPageId ? ' selected' : false) . 
-									($this->getData(['page', $parentPageId, 'disable']) === true ? ' class="inactive"' : false) .
+									($this->getData(['page', $parentPageId, 'disable']) === true ? ' class="inactive"' : '') .
 									'>' . 
 									$this->getData(['page', $parentPageId, 'title']) . 
 									'</option>';
 						foreach($childrenPageIds as $childKey) {
-							$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
+							$leftItems .= '<option value="' . 
+											helper::baseUrl() . 
+											$childKey . '"' . 
+											($childKey === $currentPageId ? ' selected' : false) . 
+											($this->getData(['page', $childKey, 'disable']) === true ? ' class="inactive"' : '') .
+											'>&nbsp;&nbsp;&rang;&nbsp;&nbsp;' . 
+											$this->getData(['page', $childKey, 'title']) . 
+											'</option>';
 						}
 					}
 				}

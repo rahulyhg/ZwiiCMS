@@ -1,11 +1,13 @@
 # ChangeLog 
 
-
 ## Version 9.0.08
-- Modification :
+- Modifications :
     - Prise en compte taille des petits écrans, suppression des marges
-    - TinyMCE : désactivation du thème mobile
-
+- Ajouts :
+    - Thèmes : pied de page choix de police et de styles
+- Corrections :
+    - TinyMCE : désactivation du thème mobile ne fonctionnait pas sur ipad et iphone
+    
 ## Version 9.0.07
 - Correction :
     - Disparition du menu quand la bannière est masquée
