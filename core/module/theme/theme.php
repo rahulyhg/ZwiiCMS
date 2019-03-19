@@ -190,11 +190,11 @@ class theme extends common {
 		'1170px' => 'Grande (1170 pixels)',
 		'100%' => 'Fluide (100%)'
 	];
-	public static $headerWide = [
-		'auto' => 'Automatique',
-		'contain' => 'Image entière',		
-		'cover' => 'Largeur adaptée au fond',
-		'100% 100%' => 'Taille adaptée au fond'
+	public static $headerWide = [	
+		'auto auto' => 'Automatique',
+		'contain' => 'Responsive (contain)',		
+		'cover' => 'Responsive (cover)',
+		'100% 100%' => 'Image étirée',
 	];
 
 
