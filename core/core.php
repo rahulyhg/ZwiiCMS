@@ -29,7 +29,7 @@ class common {
 	// Numéro de version de développement, ajouter dev:
 	// Désactive l'update auto
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.08-dev';
+	const ZWII_VERSION = '9.0.08';
 
 
 	public static $actions = [];
