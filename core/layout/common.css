@@ -334,7 +334,6 @@ header {
 	position: relative;
 	margin:0;
 	padding:0;
-
 }
 header span {
 	display: inline-block;
@@ -421,7 +420,7 @@ nav a:hover {
 		width: auto;
 	}
 	nav a {
-		padding: 15px !important;
+		padding: 10px !important;
 	}
 	nav li ul a {
 		padding-left: 40px !important;
@@ -444,7 +443,7 @@ nav a:hover {
 
 /* Taille du menu hamburger */
 nav .zwiico-menu {
-	font-size:2em !important;
+	font-size:1.5em !important;
 }
 
 
