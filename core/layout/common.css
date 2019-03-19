@@ -473,25 +473,12 @@ body > footer {
 }
 footer {
 	text-align: center;
-	font-size: .8em;
 	padding: 10px 20px;
-    vertical-align:middle;
+  vertical-align:middle;
 }
 
 footer .col4 {
 	vertical-align: middle;
-}
-
-footer #footerSocials {
-	font-size: 1.0em;
-}
-
-footer #footerSocials {
-	font-size: 1.0em;
-}
-
-footer #footerCopyright, #footerText {
-	font-size: 0.8em;
 }
 
 footer #footerSocials span {

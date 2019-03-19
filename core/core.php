@@ -26,10 +26,10 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	// Numéro de version de développement :
+	// Numéro de version de développement, ajouter dev:
 	// Désactive l'update auto
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.08.dev';
+	const ZWII_VERSION = '9.0.08';
 
 
 	public static $actions = [];
@@ -386,18 +386,22 @@ class common {
 			],
 			'footer' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
+				'font' => 'Open+Sans',				
+				'fontSize' => '0.8em',
+				'fontWeight' => 'normal',				
 				'height' => '10px',
 				'loginLink' => true,
 				'margin' => false,
 				'position' => 'site',
 				'textColor' => 'rgba(33, 34, 35, 1)',
-				'copyrightPosition' => 'center',
-				'copyrightAlign' => 'center',
+				'copyrightPosition' => 'right',
+				'copyrightAlign' => 'right',
 				'text' => 'Pied de page personnalisé',				
 				'textPosition' => 'left',
-				'textAlign' => 'left',				
-				'socialsPosition' => 'right',
-				'socialsAlign' => 'right'
+				'textAlign' => 'left',	
+				'textTransform' => 'none',							
+				'socialsPosition' => 'center',
+				'socialsAlign' => 'center'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -1168,8 +1172,16 @@ class common {
 			$this->deleteData(['config', 'social', 'googleplusId']);						
 			$this->setData(['core', 'dataVersion', 9001]);
 			$this->SaveData();
-		}			
-		
+		}
+		// Version 9.0.08
+		if($this->getData(['core', 'dataVersion']) < 9008) {
+			$this->setData(['theme', 'footer', 'textTransform','none']);
+			$this->setData(['theme', 'footer', 'fontWeight','normal']);
+			$this->setData(['theme', 'footer', 'fontSize','0.8em']);
+			$this->setData(['theme', 'footer', 'font','Open+Sans']);			
+			$this->setData(['core', 'dataVersion', 9008]);
+			$this->SaveData();
+		}					
 	}
 }
 
@@ -1308,6 +1320,7 @@ class core extends common {
 			if($this->getData(['theme', 'footer', 'margin'])) {
 				$css .= 'footer{margin:0 20px 20px}';
 			}
+			$css .= 'footer span{color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer .container > div{margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
@@ -1319,7 +1332,6 @@ class core extends common {
 			file_put_contents('site/data/theme.css', $css);
 		}
 	}
-
 	/**
 	 * Auto-chargement des classes
 	 * @param string $className Nom de la classe à charger
@@ -2105,8 +2117,8 @@ class layout extends common {
      */
     public function showCopyright() {
         $items = '<div id="footerCopyright">';
-        $items .= 'Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
-        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+        $items .= '<span>Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
         if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
@@ -2134,7 +2146,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText">' . nl2br($footerText) . '</div>';
+			echo '<div id="footerText"><span>' . nl2br($footerText) . '</span></div>';
 		}
 	}
 

@@ -16,7 +16,6 @@
 $("input, select").on("change", function() {
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
-
 	var css = "@import url('https://fonts.googleapis.com/css?family=" + headerFont + "');";
 	// Adaptation aux média
 	css += "@media (max-width: 767px) {header{height:" + $("#themeHeaderHeight").val() + "/2;line-height:" + $("#themeHeaderHeight").val() + "/2;}}";

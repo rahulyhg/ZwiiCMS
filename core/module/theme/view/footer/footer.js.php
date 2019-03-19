@@ -15,6 +15,9 @@
  * Aperçu en direct
  */
 $("input, select").on("change", function() {
+	// Import des polices de caractères
+	var footerFont = $("#themeFooterFont").val();
+	var css = "@import url('https://fonts.googleapis.com/css?family=" + footerFont + "');";	
 	// Couleurs du pied de page
 	var colors = core.colorVariants($("#themeFooterBackgroundColor").val());
 	var textColor = $("#themeFooterTextColor").val();
@@ -29,6 +32,8 @@ $("input, select").on("change", function() {
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
 	css += "#footerCopyright{text-align:" + $("#themeFooterCopyrightAlign").val() + "}";
+	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
+	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
 		css += 'footer{margin:0 20px 20px}';

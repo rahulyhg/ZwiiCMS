@@ -89,6 +89,14 @@ class theme extends common {
 		'site' => 'Dans le site',
 		'body' => 'En dessous du site'
 	];
+	public static $footerFontSizes = [
+		'.8em' => 'Très petite',
+		'.9em' => 'Petite',
+		'1em' => 'Normale',
+		'1.1em' => 'Moyenne',
+		'1.2em' => 'Grande',
+		'1.3em' => 'Très grande'
+	];	
 	public static $headerFontSizes = [
 		'1.6em' => 'Très petite',
 		'1.8em' => 'Petite',
@@ -273,7 +281,11 @@ class theme extends common {
 				'textColor' => $this->getInput('themeFooterTextColor'),
 				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
 				'textPosition' => $this->getInput('themeFooterTextPosition'),
-				'socialsPosition' => $this->getInput('themeFooterSocialsPosition')
+				'socialsPosition' => $this->getInput('themeFooterSocialsPosition'),
+				'textTransform' => $this->getInput('themeFootererTextTransform'),						
+				'font' => $this->getInput('themeFooterFont'),
+				'fontSize' => $this->getInput('themeFooterFontSize'),
+				'fontWeight' => $this->getInput('themeFooterFontWeight')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -301,6 +313,7 @@ class theme extends common {
 			// Si une image est positionnée, l'arrière en transparent.
 			$this->setData(['theme', 'header', [
 				'backgroundColor' => $this->getInput('themeHeaderBackgroundColor'),
+				'textTransform' => $this->getInput('themeHeaderTextTransform'),						
 				'font' => $this->getInput('themeHeaderFont'),
 				'fontSize' => $this->getInput('themeHeaderFontSize'),
 				'fontWeight' => $this->getInput('themeHeaderFontWeight'),
@@ -312,8 +325,7 @@ class theme extends common {
 				'position' => $this->getInput('themeHeaderPosition'),
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
-				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
-				'textTransform' => $this->getInput('themeHeaderTextTransform'),				
+				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),		
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
