@@ -3,6 +3,7 @@
 ## Version 9.0.08
 - Modifications :
     - Prise en compte taille des petits écrans, suppression des marges
+    - Backup theme.json avant une mise à jour auto
 - Ajouts :
     - Thèmes : pied de page choix de police et de styles
 - Corrections :
