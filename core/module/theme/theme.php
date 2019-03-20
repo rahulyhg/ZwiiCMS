@@ -200,8 +200,8 @@ class theme extends common {
 	];
 	public static $headerWide = [	
 		'auto auto' => 'Automatique',
-		'contain' => 'Responsive (contain)',		
-		'cover' => 'Responsive (cover)',
+		//'contain' => 'Responsive (contain)',		
+		'cover' => 'Responsive',
 		'100% 100%' => 'Image étirée',
 	];
 
