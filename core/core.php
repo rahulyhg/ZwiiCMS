@@ -1136,8 +1136,7 @@ class common {
 		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {
-			echo $this->getData(['core', 'dataVersion']);
-			echo '<br>';			
+			$this->getData(['core', 'dataVersion']);		
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
 			$this->SaveData();
@@ -1150,8 +1149,7 @@ class common {
 		}	
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
-			echo $this->getData(['core', 'dataVersion']);
-			echo '<br>';
+			$this->getData(['core', 'dataVersion']);
 			$this->setData(['config','itemsperPage',10]);
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
