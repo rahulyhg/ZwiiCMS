@@ -74,7 +74,7 @@ class theme extends common {
 		'right' => 'Bloc Droite'
 	];
 	public static $fontWeights = [
-		'normal' => 'Normal',
+		'normal' => 'Standard',
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
@@ -189,8 +189,10 @@ class theme extends common {
 		'cover' => 'Largeur adaptée au fond'
 	];
 	public static $textTransforms = [
-		'none' => 'Normaux',
-		'uppercase' => 'Majuscules'
+		'none' => 'Standard',
+		'lowercase' => 'Minuscules',
+		'uppercase' => 'Majuscules',
+		'capitalize' => 'Majuscule à chaque mot'		
 	];
 	public static $widths = [
 		'750px' => 'Petite (750 pixels)',

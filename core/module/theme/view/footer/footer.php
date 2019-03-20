@@ -64,16 +64,10 @@
 			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
-					<div class="col3">
-						<?php echo template::select('themeFooterTextTransform', $module::$textTransforms, [
-							'label' => 'Caractères',
-							'selected' => $this->getData(['theme', 'footer', 'textTransform'])
-						]); ?>
-					</div>
-					<div class="col3">
-						<?php echo template::select('themeFooterFontWeight', $module::$fontWeights, [
-							'label' => 'Style',
-							'selected' => $this->getData(['theme', 'footer', 'fontWeight'])
+				<div class="col3">
+						<?php echo template::select('themeFooterFont', $module::$fonts, [
+							'label' => 'Police',
+							'selected' => $this->getData(['theme', 'footer', 'font'])
 						]); ?>
 					</div>
 					<div class="col3">
@@ -84,12 +78,17 @@
 						]); ?>
 					</div>
 					<div class="col3">
-						<?php echo template::select('themeFooterFont', $module::$fonts, [
-							'label' => 'Police',
-							'selected' => $this->getData(['theme', 'footer', 'font'])
+						<?php echo template::select('themeFooterFontWeight', $module::$fontWeights, [
+							'label' => 'Style',
+							'selected' => $this->getData(['theme', 'footer', 'fontWeight'])
 						]); ?>
-					</div>
-					
+					</div>																
+					<div class="col3">
+						<?php echo template::select('themeFooterTextTransform', $module::$textTransforms, [
+							'label' => 'Casse',
+							'selected' => $this->getData(['theme', 'footer', 'textTransform'])
+						]); ?>
+					</div>			
 				</div>
 			</div>
 		</div>
