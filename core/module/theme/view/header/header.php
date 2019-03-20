@@ -20,6 +20,7 @@
 					<div class="col6">
 						<?php echo template::text('themeHeaderBackgroundColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',					
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'header', 'backgroundColor'])
 						]); ?>
@@ -27,6 +28,7 @@
 					<div class="col6">
 						<?php echo template::text('themeHeaderTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Texte',
 							'value' => $this->getData(['theme', 'header', 'textColor'])
 						]); ?>
@@ -96,6 +98,7 @@
 					<div class="col3">
 						<?php echo template::select('themeHeaderFontSize', $module::$headerFontSizes, [
 							'label' => 'Taille',
+							'help' => 'Proportionnelle à celle définie dans le site',
 							'selected' => $this->getData(['theme', 'header', 'fontSize'])
 						]); ?>
 					</div>
@@ -104,8 +107,7 @@
 							'label' => 'Police',
 							'selected' => $this->getData(['theme', 'header', 'font'])
 						]); ?>
-					</div>
-					
+					</div>	
 				</div>
 			</div>
 		</div>

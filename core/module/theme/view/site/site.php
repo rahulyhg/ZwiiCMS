@@ -20,6 +20,7 @@
 					<div class="col4">
 						<?php echo template::text('themeSiteBackgroundColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'site', 'backgroundColor'])
 						]); ?>
@@ -27,6 +28,7 @@
 					<div class="col4">
 						<?php echo template::text('themeTextTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Texte',
 							'value' => $this->getData(['theme', 'text', 'textColor'])
 						]); ?>
@@ -34,6 +36,7 @@
 					<div class="col4">
 						<?php echo template::text('themeTitleTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Titres',
 							'value' => $this->getData(['theme', 'title', 'textColor'])
 						]); ?>
@@ -43,6 +46,7 @@
 					<div class="col4 offset2">
 						<?php echo template::text('themeButtonBackgroundColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Boutons',
 							'value' => $this->getData(['theme', 'button', 'backgroundColor'])
 						]); ?>
@@ -50,6 +54,7 @@
 					<div class="col4">
 						<?php echo template::text('themeLinkTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Liens',
 							'value' => $this->getData(['theme', 'link', 'textColor'])
 						]); ?>
@@ -92,7 +97,8 @@
 				<div class="row">
 					<div class="col6">
 						<?php echo template::select('themeTextFontSize', $module::$siteFontSizes, [
-							'label' => 'Taille',
+							'label' => 'Taille du site',
+							'help' => 'Correspond au libellé de taille \'Normale\' du menu, de la  bannière et du pied de page',
 							'selected' => $this->getData(['theme', 'text', 'fontSize'])
 						]); ?>
 					</div>

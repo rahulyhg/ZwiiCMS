@@ -18,6 +18,7 @@
 				<h4>Couleur</h4>
 				<?php echo template::text('themeBodyBackgroundColor', [
 					'class' => 'colorPicker',
+					'help' => 'Le curseur horizontal règle le niveau de transparence',					
 					'label' => 'Fond',
 					'value' => $this->getData(['theme', 'body', 'backgroundColor'])
 				]); ?>

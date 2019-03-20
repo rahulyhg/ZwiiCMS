@@ -90,19 +90,19 @@ class theme extends common {
 		'body' => 'En dessous du site'
 	];
 	public static $footerFontSizes = [
-		'.8em' => 'Très petite',
-		'.9em' => 'Petite',
-		'1em' => 'Normale',
-		'1.1em' => 'Moyenne',
-		'1.2em' => 'Grande',
-		'1.3em' => 'Très grande'
+		'.5em' => 'Microscopique (50%)',
+		'.6em' => 'Minuscule (60%)',
+		'.7em' => 'Infime (70%)',
+		'.8em' => 'Très petite (80%)',
+		'.9em' => 'Petite (90%)',
+		'1em' => 'Normale (100%)',
 	];	
 	public static $headerFontSizes = [
-		'1.6em' => 'Très petite',
-		'1.8em' => 'Petite',
-		'2em' => 'Moyenne',
-		'2.2em' => 'Grande',
-		'2.4vmax' => 'Très grande'
+		'1.6em' => 'Très petite (160%)',
+		'1.8em' => 'Petite (180%)',
+		'2em' => 'Moyenne (200%)',
+		'2.2em' => 'Grande (220%)',
+		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
 		'100px' => 'Très petite (100 pixels)',
@@ -128,12 +128,12 @@ class theme extends common {
 		'bottom right' => 'En bas à droite'
 	];
 	public static $menuFontSizes = [
-		'.8em' => 'Très petite',
-		'.9em' => 'Petite',
-		'1em' => 'Normale',
-		'1.1em' => 'Moyenne',
-		'1.2em' => 'Grande',
-		'1.3em' => 'Très grande'
+		'.8em' => 'Très petite (80%)',
+		'.9em' => 'Petite (90%)',
+		'1em' => 'Normale (100%)',
+		'1.1em' => 'Moyenne (110%)',
+		'1.2em' => 'Grande (120%)',
+		'1.3em' => 'Très grande (130%)'
 	];
 	public static $menuHeights = [
 		'5px 10px' => 'Très petite',
@@ -178,11 +178,11 @@ class theme extends common {
 		'1px 1px 50px' => 'Très importante'
 	];
 	public static $siteFontSizes = [
-		'12px' => '12',
-		'13px' => '13',
-		'14px' => '14',
-		'15px' => '15',
-		'16px' => '16'
+		'12px' => '12 pixels',
+		'13px' => '13 pixels',
+		'14px' => '14 pixels',
+		'15px' => '15 pixels',
+		'16px' => '16 pixels'
 	];
 	public static $sizes = [
 		'auto' => 'Automatique',

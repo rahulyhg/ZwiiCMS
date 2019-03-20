@@ -20,6 +20,7 @@
 					<div class="col6">
 						<?php echo template::text('themeMenuBackgroundColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'menu', 'backgroundColor'])
 						]); ?>
@@ -27,6 +28,7 @@
 					<div class="col6">
 						<?php echo template::text('themeMenuTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Texte',
 							'value' => $this->getData(['theme', 'menu', 'textColor'])
 						]); ?>
@@ -35,37 +37,47 @@
 			</div>
 		</div>
 		<div class="col6">
+				<div class="block">
+				<h4>Contenu</h4>
+				<?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
+					'checked' => $this->getData(['theme', 'menu', 'loginLink']),
+					'help' => 'Visible seulement sur cette page et lorsque vous n\'êtes pas connecté (non recommandé).'
+				]); ?>
+			</div>
+	</div>
+	<div class="row">
+		<div class="col12">		
 			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
-					<div class="col6">
+					<div class="col3">
 						<?php echo template::select('themeMenuTextTransform', $module::$textTransforms, [
 							'label' => 'Caractères',
 							'selected' => $this->getData(['theme', 'menu', 'textTransform'])
 						]); ?>
 					</div>
-					<div class="col6">
+					<div class="col3">
 						<?php echo template::select('themeMenuFontWeight', $module::$fontWeights, [
 							'label' => 'Style',
 							'selected' => $this->getData(['theme', 'menu', 'fontWeight'])
 						]); ?>
 					</div>
-				</div>
-				<div class='row'>
-					<div class="col6">
+					<div class="col3">
 							<?php echo template::select('themeMenuFont', $module::$fonts, [
 								'label' => 'Police',
 								'selected' => $this->getData(['theme', 'menu', 'font'])
 							]); ?>
 						</div>
-					<div class="col6">
+					<div class="col3">
 							<?php echo template::select('themeMenuFontSize', $module::$menuFontSizes, [
 								'label' => 'Taille',
+								'help' => 'Proportionnelle à celle définie dans le site',								
 								'selected' => $this->getData(['theme', 'menu', 'fontSize'])
 							]); ?>
 						</div>
 					</div>
-			</div>
+				</div>
+			<div>
 		</div>
 	</div>
 	<div class="row">
@@ -112,17 +124,6 @@
 				</div>
 								
 			</div>			
-		</div>
-	</div>
-	<div class="row">
-		<div class="col6">
-			<div class="block">
-				<h4>Contenu</h4>
-				<?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
-					'checked' => $this->getData(['theme', 'menu', 'loginLink']),
-					'help' => 'Visible seulement sur cette page et lorsque vous n\'êtes pas connecté.'
-				]); ?>
-			</div>
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
