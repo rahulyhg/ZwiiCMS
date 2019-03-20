@@ -558,8 +558,8 @@ class common {
 
 		// Mise à jour des données core
 		// Fonction désactivée en dev
-		if (stripos(common::ZWII_VERSION, 'dev') === 0 )
-			$this->update();
+		// if (stripos(common::ZWII_VERSION, 'dev') === 0 )
+		$this->update();
 	
 		// Utilisateur connecté
 		if($this->user === []) {
@@ -2406,8 +2406,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
 				// Mise à jour automatique
-				// Désactivée en dev
-				 if(helper::checkNewVersion() && stripos(common::ZWII_VERSION, 'dev') === FALSE ) {
+				 if(helper::checkNewVersion() ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
 				 }
 				// Mise à jour automatique
