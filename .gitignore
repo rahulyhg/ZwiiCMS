@@ -22,6 +22,5 @@ site/file/thumb/*
 .idea/
 
 # Trucs
-.htaccess
 .gitignore
 core/vendor/tinymce/link_list.json
