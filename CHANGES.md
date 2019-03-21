@@ -2,8 +2,11 @@
 
 ## Version 9.0.08
 - Modifications :
-    - Prise en compte taille des petits écrans, suppression des marges
-    - Backup theme.json avant une mise à jour auto
+    - Prise en compte de la taille des petits écrans, suppression des marges
+    - Backup theme.json avant une mise à jour automatique
+    - Réorganisation des écrans de paramètrage du thème, ordre de saisie, bulles d'aide et nouveaux libellés
+    - SimpleLightBox : miniatures cliquables permettant de parcourir toutes les images d'une page (comme dans la galerie)
+    - Barre d'administration : pages inactives en orange, repère pour les pages filles.
 - Ajouts :
     - Thèmes : pied de page choix de police et de styles
 - Corrections :
@@ -13,7 +16,7 @@
 - Correction :
     - Disparition du menu quand la bannière est masquée
 - Modifications :
-    - Barre d'administration, pages organisées
+    - Barre d'administration : pages organisées
 
 ## Version 9.0.06
 - Correction :
