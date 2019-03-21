@@ -473,8 +473,8 @@ body > footer {
 }
 footer {
 	text-align: center;
-	padding: 10px 20px;
-  vertical-align:middle;
+	/*padding: 10px 20px; deleted 9.0.08 */
+  	vertical-align:middle;
 }
 
 footer .col4 {
