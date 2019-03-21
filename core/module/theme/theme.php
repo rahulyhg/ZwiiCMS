@@ -282,7 +282,7 @@ class theme extends common {
 				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
 				'textPosition' => $this->getInput('themeFooterTextPosition'),
 				'socialsPosition' => $this->getInput('themeFooterSocialsPosition'),
-				'textTransform' => $this->getInput('themeFootererTextTransform'),						
+				'textTransform' => $this->getInput('themeFooterTextTransform'),						
 				'font' => $this->getInput('themeFooterFont'),
 				'fontSize' => $this->getInput('themeFooterFontSize'),
 				'fontWeight' => $this->getInput('themeFooterFontWeight')
