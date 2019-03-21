@@ -2115,7 +2115,7 @@ class layout extends common {
      */
     public function showCopyright() {
         $items = '<div id="footerCopyright">';
-        $items .= '<span>Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
+        $items .= '<span id="footerFont">Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii</a>';
         $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
         if(
             (
@@ -2144,7 +2144,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText"><span>' . nl2br($footerText) . '</span></div>';
+			echo '<div id="footerText"><span id="footerFont">' . nl2br($footerText) . '</span></div>';
 		}
 	}
 

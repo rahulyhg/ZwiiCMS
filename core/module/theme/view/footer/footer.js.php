@@ -47,7 +47,7 @@ $("input, select").on("change", function() {
 		.attr("type", "text/css")
 		.attr("id", "themePreview")
 		.text(css)
-		.appendTo("head");
+		.appendTo("footer");
 	// Position du pied de page
 	switch($("#themeFooterPosition").val()) {
 		case 'hide':
@@ -95,7 +95,6 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").show().appendTo("#footersiteCenter");
 				break;
 			case 'right':
-				console.log("right");
 				$("#footerSocials").show().appendTo("#footerbodyRight");
 				$("#footerSocials").show().appendTo("#footersiteRight");				
 				break;

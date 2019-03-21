@@ -20,6 +20,7 @@
 					<div class="col6">
 						<?php echo template::text('themeHeaderBackgroundColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',					
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'header', 'backgroundColor'])
 						]); ?>
@@ -27,6 +28,7 @@
 					<div class="col6">
 						<?php echo template::text('themeHeaderTextColor', [
 							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence',							
 							'label' => 'Texte',
 							'value' => $this->getData(['theme', 'header', 'textColor'])
 						]); ?>
@@ -81,10 +83,17 @@
 			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
+				<div class="col3">
+						<?php echo template::select('themeHeaderFont', $module::$fonts, [
+							'label' => 'Police',
+							'selected' => $this->getData(['theme', 'header', 'font'])
+						]); ?>
+					</div>
 					<div class="col3">
-						<?php echo template::select('themeHeaderTextTransform', $module::$textTransforms, [
-							'label' => 'Caractères',
-							'selected' => $this->getData(['theme', 'header', 'textTransform'])
+						<?php echo template::select('themeHeaderFontSize', $module::$headerFontSizes, [
+							'label' => 'Taille',
+							'help' => 'Proportionnelle à celle définie dans le site',
+							'selected' => $this->getData(['theme', 'header', 'fontSize'])
 						]); ?>
 					</div>
 					<div class="col3">
@@ -92,20 +101,13 @@
 							'label' => 'Style',
 							'selected' => $this->getData(['theme', 'header', 'fontWeight'])
 						]); ?>
-					</div>
+					</div>															
 					<div class="col3">
-						<?php echo template::select('themeHeaderFontSize', $module::$headerFontSizes, [
-							'label' => 'Taille',
-							'selected' => $this->getData(['theme', 'header', 'fontSize'])
+						<?php echo template::select('themeHeaderTextTransform', $module::$textTransforms, [
+							'label' => 'Casse',
+							'selected' => $this->getData(['theme', 'header', 'textTransform'])
 						]); ?>
 					</div>
-					<div class="col3">
-						<?php echo template::select('themeHeaderFont', $module::$fonts, [
-							'label' => 'Police',
-							'selected' => $this->getData(['theme', 'header', 'font'])
-						]); ?>
-					</div>
-					
 				</div>
 			</div>
 		</div>
