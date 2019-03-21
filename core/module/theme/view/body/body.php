@@ -52,7 +52,7 @@
 					<div class="row">
 						<div class="col6">
 							<?php echo template::select('themeBodyImageAttachment', $module::$attachments, [
-								'label' => 'Fixation',
+								'label' => 'Défilement',
 								'selected' => $this->getData(['theme', 'body', 'imageAttachment'])
 							]); ?>
 						</div>

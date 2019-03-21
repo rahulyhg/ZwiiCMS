@@ -35,7 +35,7 @@ class theme extends common {
 		'right' => 'À droite'
 	];
 	public static $attachments = [
-		'scroll' => 'Normale',
+		'scroll' => 'Standard',
 		'fixed' => 'Fixe'
 	];
 	public static $fonts = [
@@ -95,7 +95,7 @@ class theme extends common {
 		'.7em' => 'Infime (70%)',
 		'.8em' => 'Très petite (80%)',
 		'.9em' => 'Petite (90%)',
-		'1em' => 'Normale (100%)',
+		'1em' => 'Standard (100%)',
 	];	
 	public static $headerFontSizes = [
 		'1.6em' => 'Très petite (160%)',
@@ -130,7 +130,7 @@ class theme extends common {
 	public static $menuFontSizes = [
 		'.8em' => 'Très petite (80%)',
 		'.9em' => 'Petite (90%)',
-		'1em' => 'Normale (100%)',
+		'1em' => 'Standard (100%)',
 		'1.1em' => 'Moyenne (110%)',
 		'1.2em' => 'Grande (120%)',
 		'1.3em' => 'Très grande (130%)'
@@ -186,7 +186,8 @@ class theme extends common {
 	];
 	public static $sizes = [
 		'auto' => 'Automatique',
-		'cover' => 'Largeur adaptée au fond'
+		'cover' => 'Responsive',
+		'100% 100%' => 'Image étirée'		
 	];
 	public static $textTransforms = [
 		'none' => 'Standard',
