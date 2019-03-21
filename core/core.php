@@ -495,7 +495,8 @@ class common {
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
 			'zwiico',
-			'imagemap'
+			'imagemap',
+			'simplelightbox'
 		],
 		'view' => ''
 	];
