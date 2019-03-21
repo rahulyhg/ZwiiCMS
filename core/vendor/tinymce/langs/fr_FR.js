@@ -113,7 +113,7 @@ tinymce.addI18n('fr_FR',{
 "Horizontal line": "Ligne horizontale",
 "Insert\/edit image": "Ins\u00e9rer\/modifier une image",
 "Image description": "Description",
-"Image Title": "Titre",
+"Image Title": "Légende",
 "Source": "Source",
 "Dimensions": "Dimensions",
 "Constrain proportions": "Conserver les proportions",
