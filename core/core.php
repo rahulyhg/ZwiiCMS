@@ -2367,7 +2367,7 @@ class layout extends common {
 											$childKey . '"' . 
 											($childKey === $currentPageId ? ' selected' : false) . 
 											($this->getData(['page', $childKey, 'disable']) === true ? ' class="inactive"' : '') .
-											'>&nbsp;&nbsp;&rang;&nbsp;&nbsp;' . 
+											'>&nbsp;&nbsp;&nbsp;&nbsp;' . 
 											$this->getData(['page', $childKey, 'title']) . 
 											'</option>';
 						}
