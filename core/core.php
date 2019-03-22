@@ -1842,11 +1842,11 @@ class helper {
 				break;
 			case self::FILTER_ID:
 				$text = mb_strtolower($text, 'UTF-8');
-				$text = str_replace(
+				$text = strip_tags(str_replace(
 					explode(',', 'á,à,â,ä,ã,å,ç,é,è,ê,ë,í,ì,î,ï,ñ,ó,ò,ô,ö,õ,ú,ù,û,ü,ý,ÿ,\',", '),
 					explode(',', 'a,a,a,a,a,a,c,e,e,e,e,i,i,i,i,n,o,o,o,o,o,u,u,u,u,y,y,-,-,-'),
 					$text
-				);
+				));
 				$text = preg_replace('/([^a-z0-9-])/', '', $text);
 				// Un ID ne peut pas être un entier, pour éviter les conflits avec le système de pagination
 				if(intval($text) !== 0) {
@@ -2125,7 +2125,11 @@ class layout extends common {
             )
             OR $this->getUrl(0) === 'theme'
         ) {
-            $items .= '<span id="footerLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '" data-tippy-content="Connexion à l\'administration" >Connexion</a></span>';
+			$items .= '<span id="footerLoginLink" ' . 
+			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
+			'>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
+			strip_tags(str_replace('/', '_', $this->getUrl())) . 
+			'" data-tippy-content="Connexion à l\'administration" >Connexion</a></span>';
         }
         $items .= '</div>';
         echo $items;
@@ -2266,7 +2270,11 @@ class layout extends common {
 			)
 			OR $this->getUrl(0) === 'theme'
 		) {
-			$items .= '<li id="menuLoginLink" ' . ($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . '><a href="' . helper::baseUrl() . 'user/login/' . str_replace('/', '_', $this->getUrl()) . '">Connexion</a></li>';
+			$items .= '<li id="menuLoginLink" ' . 
+			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
+			'><a href="' . helper::baseUrl() . 'user/login/' . 
+			strip_tags(str_replace('/', '_', $this->getUrl())) . 
+			'">Connexion</a></li>';
 		}
 		// Retourne les items du menu
 		echo '<ul>' . $items . '</ul>';
