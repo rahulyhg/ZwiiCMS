@@ -77,7 +77,7 @@
 					<div class="col6">
 						<?php echo template::select('themeTextFontSize', $module::$siteFontSizes, [
 							'label' => 'Taille',
-							'help' => 'Hauteur de référence pour la bannière, le menu et le pied de page',
+							'help' => 'Taille de référence pour le site. Les tailles des polices de la bannière, de menu et de pied de page sont proportionnelles à cette taille.',
 							'selected' => $this->getData(['theme', 'text', 'fontSize'])
 						]); ?>
 					</div>

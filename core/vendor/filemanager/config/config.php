@@ -458,12 +458,12 @@ $config = array(
 	// just simply add a value in the array
 	// The image creation path is always relative so if i'm inside source/test/test1 and I upload an image, the path start from here
 	//
-	'relative_image_creation'                 => false, //activate or not the creation of one or more image resized with relative path from upload folder
-	'relative_path_from_current_pos'          => array( './', './' ), //relative path of the image folder from the current position on upload folder
+	'relative_image_creation'                 => true, //activate or not the creation of one or more image resized with relative path from upload folder
+	'relative_path_from_current_pos'          => array( './thumb', '' ), //relative path of the image folder from the current position on upload folder
 	'relative_image_creation_name_to_prepend' => array( '', '' ), //name to prepend on filename
-	'relative_image_creation_name_to_append'  => array( '_thumb', '_thumb1' ), //name to append on filename
-	'relative_image_creation_width'           => array( 300, 400 ), //width of image (you can leave empty if you set height)
-	'relative_image_creation_height'          => array( 200, '' ), //height of image (you can leave empty if you set width)
+	'relative_image_creation_name_to_append'  => array( '', '' ), //name to append on filename
+	'relative_image_creation_width'           => array( 300, 225), //width of image (you can leave empty if you set height)
+	'relative_image_creation_height'          => array( 225, 300 ), //height of image (you can leave empty if you set width)
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
