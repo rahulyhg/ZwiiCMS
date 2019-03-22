@@ -480,6 +480,12 @@ footer {
 footer .col4 {
 	vertical-align: middle;
 }
+/* Conserve le pied de page sur une ligne */
+@media (max-width: 992px) {
+	footer .col4 {
+		width:33%;
+	}
+}
 
 footer #footerSocials span {
 	color: #FFF;
