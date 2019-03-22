@@ -1,5 +1,5 @@
 #blogArticlePicture {
-	height: 350px;
+	height: auto;
 	width: 100%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -20,7 +20,7 @@
 }
 @media (max-width: 767px) {
 	#blogArticlePicture {
-	height:150px;
+	height:auto;
 	max-width: 100%;}
   }
 
