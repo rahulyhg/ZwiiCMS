@@ -74,15 +74,15 @@ class theme extends common {
 		'right' => 'Bloc Droite'
 	];
 	public static $fontWeights = [
-		'normal' => 'Standard',
+		'normal' => 'Maigre',
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'0px' => 'Très petite',
-		'10px' => 'Petite',
-		'20px' => 'Moyenne',
-		'35px' => 'Grande',
-		'40px' => 'Très grande'
+		'5px' => 'Très petite (5 pixels)',
+		'10px' => 'Petite (10 pixels)',
+		'20px' => 'Moyenne (20 pixels)',
+		'35px' => 'Grande (35 pixels)',
+		'40px' => 'Très grande (40 pixels)'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',
@@ -136,11 +136,11 @@ class theme extends common {
 		'1.3em' => 'Très grande (130%)'
 	];
 	public static $menuHeights = [
-		'5px 10px' => 'Très petite',
-		'10px' => 'Petite',
-		'15px 10px' => 'Moyenne',
-		'20px 15px' => 'Grande',
-		'25px 15px' => 'Très grande'
+		'5px 10px' => 'Très petite (5 pixels)',
+		'10px' => 'Petite (10 pixels)',
+		'15px 10px' => 'Moyenne (15 pixels)',
+		'20px 15px' => 'Grande (20 pixels)',
+		'25px 15px' => 'Très grande (25 pixels)'
 	];
 	public static $menuPositionsSite = [
 		'top' => 'En-dehors du site',		
