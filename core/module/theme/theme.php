@@ -187,6 +187,7 @@ class theme extends common {
 	public static $sizes = [
 		'auto' => 'Automatique',
 		'cover' => 'Responsive',
+		'contain' => 'Taille réelle',		
 		'100% 100%' => 'Image étirée'		
 	];
 	public static $textTransforms = [
@@ -203,8 +204,8 @@ class theme extends common {
 	];
 	public static $headerWide = [	
 		'auto auto' => 'Automatique',
-		//'contain' => 'Responsive (contain)',		
 		'cover' => 'Responsive',
+		'contain' => 'Taille réelle',		
 		'100% 100%' => 'Image étirée'
 	];
 
