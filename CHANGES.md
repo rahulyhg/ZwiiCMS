@@ -15,6 +15,7 @@
     - TinyMCE : désactivation du thème mobile ne fonctionnait pas sur ipad et iphone
     - Blog 1.3 : image en tête d'article correctement affichée avec effet responsive.
     - TinyMCE : taille des miniatures générées par défaut 480 x 320 en vue d'un affichage correct dans le module blog
+    - Pied de page : correction d'un problème d'affichage sur des écrans inférieurs à 992px
     
 ## Version 9.0.07
 - Correction :
