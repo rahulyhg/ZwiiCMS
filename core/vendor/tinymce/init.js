@@ -34,7 +34,7 @@ tinymce.init({
 	// Target pour lightbox
 	rel_list: [
 		{title: 'None', value: ''},
-		// {title: 'Lightbox', value: 'data-lity'},
+		{title: 'Lity', value: 'data-lity'},
 		{title: 'SimpleLightbox', value: 'gallery'}
 	],	
 	// Titre des image
