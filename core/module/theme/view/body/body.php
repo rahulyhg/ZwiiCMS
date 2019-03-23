@@ -18,6 +18,7 @@
 				<h4>Couleur</h4>
 				<?php echo template::text('themeBodyBackgroundColor', [
 					'class' => 'colorPicker',
+					'help' => 'Le curseur horizontal règle le niveau de transparence',					
 					'label' => 'Fond',
 					'value' => $this->getData(['theme', 'body', 'backgroundColor'])
 				]); ?>
@@ -51,7 +52,7 @@
 					<div class="row">
 						<div class="col6">
 							<?php echo template::select('themeBodyImageAttachment', $module::$attachments, [
-								'label' => 'Fixation',
+								'label' => 'Défilement',
 								'selected' => $this->getData(['theme', 'body', 'imageAttachment'])
 							]); ?>
 						</div>

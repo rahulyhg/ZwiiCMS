@@ -8,7 +8,10 @@
  */
 
 
-/* Grille du site */
+/* 
+* Grille du site
+* Barres et page
+*/
 #contentleft {
 }
 #contentright {
@@ -63,13 +66,6 @@ footer #footersiteCenter, #footerbodyCenter {
 footer #footersiteRight, #footerbodyRight {
 }
 
-/* footer bloc de chaque élément */
-#footerText {
-}
-#footerSocials {
-}
-#footerCopyright {
-}
 
 
 /**

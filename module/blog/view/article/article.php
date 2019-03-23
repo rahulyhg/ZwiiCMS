@@ -5,15 +5,13 @@
 </div>
 
 	<?php if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'hidePicture']) == false) {
-		echo '<div id="blogArticlePicture" style="background-image:url(' . helper::baseUrl(false) . self::FILE_DIR . 'source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']) . ');"></div>';
+		echo '<div id="blogArticlePicture"><img id="blogArticlePicture" src="' . helper::baseUrl(false) . self::FILE_DIR . 'source/' . $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'picture']) . '"></div>';
 	} ?>
 
 <?php echo $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'content']); ?>
-<!-- <h4 class="textAlignRight"> -->
 <p class="signature">
     <?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'firstname']); ?>
 	<?php echo $this->getData(['user', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'userId']), 'lastname']); ?>
-<!-- </h4> -->
 </p>
 
 <div class="clearBoth"></div>
