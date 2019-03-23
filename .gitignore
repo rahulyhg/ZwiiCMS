@@ -7,8 +7,6 @@ site/backup/*
 # Fichiers de données
 site/data/*
 
-# Fichiers temporaires
-site/temp/*
 
 # Fichiers uploadés
 site/file/source/*

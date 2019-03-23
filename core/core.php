@@ -767,6 +767,7 @@ class common {
 			$this->deleteData(['theme', 'site', 'block','12']);
 			$this->setData(['core', 'dataVersion', 9009]);
 			$this->SaveData();
+		}
 								
 	}
 }
