@@ -161,7 +161,7 @@ tinymce.addI18n('fr_FR',{
 "The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?": "L'URL que vous avez entr\u00e9e semble \u00eatre une adresse e-mail. Voulez-vous ajouter le pr\u00e9fixe mailto: n\u00e9cessaire?",
 "The URL you entered seems to be an external link. Do you want to add the required http:\/\/ prefix?": "L'URL que vous avez entr\u00e9e semble \u00eatre un lien externe. Voulez-vous ajouter le pr\u00e9fixe http:\/\/ n\u00e9cessaire?",
 "Link list": "Page",
-"Rel": "Ouvrir avec",
+"Rel": "Afficher dans",
 "Insert video": "Ins\u00e9rer une vid\u00e9o",
 "Insert\/edit video": "Ins\u00e9rer\/modifier une vid\u00e9o",
 "Insert\/edit media": "Ins\u00e9rer\/modifier un m\u00e9dia",
