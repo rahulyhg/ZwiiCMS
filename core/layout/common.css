@@ -21,9 +21,23 @@ body {
 	min-height: 100%;
 }
 
-body {
-	margin: 0px 10px;
+
+/**
+* Petits écrans inférieurs à 768px de largeur, on supprime les marges
+*/ 
+@media (max-width: 768px) {
+	body {
+		margin:0px 0px !important;
+	}
+	#site {
+		margin:0px auto !important;
+	}
 }
+
+body {
+	margin:0px 10px;
+}
+
 
 /**
  * Éléments spécifiques
@@ -60,7 +74,7 @@ li ul {
 }
 
 option.inactive {
-	color: darkred;
+	color: darkorange;
 }
 
 /* Séparateur */
@@ -316,7 +330,6 @@ header {
 	position: relative;
 	margin:0;
 	padding:0;
-
 }
 header span {
 	display: inline-block;
@@ -403,7 +416,7 @@ nav a:hover {
 		width: auto;
 	}
 	nav a {
-		padding: 15px !important;
+		padding: 10px !important;
 	}
 	nav li ul a {
 		padding-left: 40px !important;
@@ -424,7 +437,10 @@ nav a:hover {
 	position: sticky;
 }
 
-
+/* Taille du menu hamburger */
+nav .zwiico-menu {
+	font-size:1.5em !important;
+}
 
 
 /* Corps */
@@ -453,25 +469,18 @@ body > footer {
 }
 footer {
 	text-align: center;
-	font-size: .8em;
-	padding: 10px 20px;
-    vertical-align:middle;
+	/*padding: 10px 20px; deleted 9.0.08 */
+  	vertical-align:middle;
 }
 
 footer .col4 {
 	vertical-align: middle;
 }
-
-footer #footerSocials {
-	font-size: 1.0em;
-}
-
-footer #footerSocials {
-	font-size: 1.0em;
-}
-
-footer #footerCopyright, #footerText {
-	font-size: 0.8em;
+/* Conserve le pied de page sur une ligne */
+@media (max-width: 992px) {
+	footer .col4 {
+		width:33%;
+	}
 }
 
 footer #footerSocials span {
@@ -1118,18 +1127,4 @@ th.col12 {
 }
 .colorOrange {
 	color: #F39C12;
-}
-.colorGrey {
-	color: #9C9C9C;
-}
-
-/* Classes pour les icônes */
-.ico-margin-left:before {
-	margin-left: .4em;
-}
-.ico-margin-right:before {
-	margin-right: .4em;
-}
-.ico-margin-all:before {
-	margin: 0 .4em;
 }

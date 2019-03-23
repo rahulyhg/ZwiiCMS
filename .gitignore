@@ -1,5 +1,6 @@
 # Fichiers temporaires
-site/tmp/*
+site/tmp/*.zip
+site/tmp/*.gz
 
 # Sauvegardes
 site/backup/*
@@ -7,8 +8,6 @@ site/backup/*
 # Fichiers de données
 site/data/*
 
-# Fichiers temporaires
-site/temp/*
 
 # Fichiers uploadés
 site/file/source/*
@@ -22,5 +21,5 @@ site/file/thumb/*
 .idea/
 
 # Trucs
-.htaccess
 .gitignore
+core/vendor/tinymce/link_list.json

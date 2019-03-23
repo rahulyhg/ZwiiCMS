@@ -21,7 +21,7 @@ tinymce.init({
 		},
 		width: 800,         // Default value is 800
 		height: 500,       // Default value is 550
-		Files: [          // Additional JS files to load
+		files: [          // Additional JS files to load
 			baseUrl + 'core/vendor/tinymce/mode/clike/clike.js',
 			baseUrl + 'core/vendor/tinymce/mode/php/php.js'
 		]
@@ -34,8 +34,11 @@ tinymce.init({
 	// Target pour lightbox
 	rel_list: [
 		{title: 'None', value: ''},
-		{title: 'Lightbox', value: 'data-lity'}
+		{title: 'Popup Lity', value: 'data-lity'},
+		{title: 'Diaporama SimpleLightbox', value: 'gallery'}
 	],	
+	// Titre des image
+	image_title: true,
 	// Pages internes
 	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
@@ -74,9 +77,11 @@ tinymce.init({
 		"filemanager": baseUrl + "core/vendor/filemanager/plugin.min.js"
 	},
 	// Thème mobile
-	mobile: {
-		theme: "mobile"
-	},
+	// mobile: {
+	//	theme: "mobile",
+	//	plugins: [ 'autosave', 'lists', 'autolink' ],
+	//	toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
+	//},
 	// Contenu du bouton insérer
 	insert_button_items: "image link media template codesample inserttable | hr | anchor",
 	// Contenu du bouton formats

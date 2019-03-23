@@ -35,7 +35,7 @@ class theme extends common {
 		'right' => 'À droite'
 	];
 	public static $attachments = [
-		'scroll' => 'Normale',
+		'scroll' => 'Standard',
 		'fixed' => 'Fixe'
 	];
 	public static $fonts = [
@@ -74,27 +74,35 @@ class theme extends common {
 		'right' => 'Bloc Droite'
 	];
 	public static $fontWeights = [
-		'normal' => 'Normal',
+		'normal' => 'Maigre',
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'0px' => 'Très petite',
-		'10px' => 'Petite',
-		'20px' => 'Moyenne',
-		'35px' => 'Grande',
-		'40px' => 'Très grande'
+		'5px' => 'Très petite (5 pixels)',
+		'10px' => 'Petite (10 pixels)',
+		'20px' => 'Moyenne (20 pixels)',
+		'35px' => 'Grande (35 pixels)',
+		'40px' => 'Très grande (40 pixels)'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',
 		'site' => 'Dans le site',
 		'body' => 'En dessous du site'
 	];
+	public static $footerFontSizes = [
+		'.5em' => 'Microscopique (50%)',
+		'.6em' => 'Minuscule (60%)',
+		'.7em' => 'Infime (70%)',
+		'.8em' => 'Très petite (80%)',
+		'.9em' => 'Petite (90%)',
+		'1em' => 'Standard (100%)',
+	];	
 	public static $headerFontSizes = [
-		'1.6em' => 'Très petite',
-		'1.8em' => 'Petite',
-		'2em' => 'Moyenne',
-		'2.2em' => 'Grande',
-		'2.4vmax' => 'Très grande'
+		'1.6em' => 'Très petite (160%)',
+		'1.8em' => 'Petite (180%)',
+		'2em' => 'Moyenne (200%)',
+		'2.2em' => 'Grande (220%)',
+		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
 		'100px' => 'Très petite (100 pixels)',
@@ -120,19 +128,19 @@ class theme extends common {
 		'bottom right' => 'En bas à droite'
 	];
 	public static $menuFontSizes = [
-		'.8em' => 'Très petite',
-		'.9em' => 'Petite',
-		'1em' => 'Normale',
-		'1.1em' => 'Moyenne',
-		'1.2em' => 'Grande',
-		'1.3em' => 'Très grande'
+		'.8em' => 'Très petite (80%)',
+		'.9em' => 'Petite (90%)',
+		'1em' => 'Standard (100%)',
+		'1.1em' => 'Moyenne (110%)',
+		'1.2em' => 'Grande (120%)',
+		'1.3em' => 'Très grande (130%)'
 	];
 	public static $menuHeights = [
-		'5px 10px' => 'Très petite',
-		'10px' => 'Petite',
-		'15px 10px' => 'Moyenne',
-		'20px 15px' => 'Grande',
-		'25px 15px' => 'Très grande'
+		'5px 10px' => 'Très petite (5 pixels)',
+		'10px' => 'Petite (10 pixels)',
+		'15px 10px' => 'Moyenne (15 pixels)',
+		'20px 15px' => 'Grande (20 pixels)',
+		'25px 15px' => 'Très grande (25 pixels)'
 	];
 	public static $menuPositionsSite = [
 		'top' => 'En-dehors du site',		
@@ -170,19 +178,23 @@ class theme extends common {
 		'1px 1px 50px' => 'Très importante'
 	];
 	public static $siteFontSizes = [
-		'12px' => '12',
-		'13px' => '13',
-		'14px' => '14',
-		'15px' => '15',
-		'16px' => '16'
+		'12px' => '12 pixels',
+		'13px' => '13 pixels',
+		'14px' => '14 pixels',
+		'15px' => '15 pixels',
+		'16px' => '16 pixels'
 	];
 	public static $sizes = [
 		'auto' => 'Automatique',
-		'cover' => 'Largeur adaptée au fond'
+		'cover' => 'Responsive',
+		'contain' => 'Taille réelle',
+		'100% 100%' => 'Image étirée'		
 	];
 	public static $textTransforms = [
-		'none' => 'Normaux',
-		'uppercase' => 'Majuscules'
+		'none' => 'Standard',
+		'lowercase' => 'Minuscules',
+		'uppercase' => 'Majuscules',
+		'capitalize' => 'Majuscule à chaque mot'		
 	];
 	public static $widths = [
 		'750px' => 'Petite (750 pixels)',
@@ -190,13 +202,12 @@ class theme extends common {
 		'1170px' => 'Grande (1170 pixels)',
 		'100%' => 'Fluide (100%)'
 	];
-	public static $headerWide = [
-		'auto' => 'Automatique',
-		'contain' => 'Image entière',
-		'cover' => 'Largeur adaptée au fond',
-		'100% 100%' => 'Taille adaptée au fond'
+	public static $headerWide = [	
+		'auto auto' => 'Automatique',
+		'contain' => 'Taille réelle',		
+		'cover' => 'Responsive',
+		'100% 100%' => 'Image étirée'
 	];
-
 
 	/**
 	 * Mode avancé
@@ -273,7 +284,11 @@ class theme extends common {
 				'textColor' => $this->getInput('themeFooterTextColor'),
 				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
 				'textPosition' => $this->getInput('themeFooterTextPosition'),
-				'socialsPosition' => $this->getInput('themeFooterSocialsPosition')
+				'socialsPosition' => $this->getInput('themeFooterSocialsPosition'),
+				'textTransform' => $this->getInput('themeFooterTextTransform'),						
+				'font' => $this->getInput('themeFooterFont'),
+				'fontSize' => $this->getInput('themeFooterFontSize'),
+				'fontWeight' => $this->getInput('themeFooterFontWeight')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -301,6 +316,7 @@ class theme extends common {
 			// Si une image est positionnée, l'arrière en transparent.
 			$this->setData(['theme', 'header', [
 				'backgroundColor' => $this->getInput('themeHeaderBackgroundColor'),
+				'textTransform' => $this->getInput('themeHeaderTextTransform'),						
 				'font' => $this->getInput('themeHeaderFont'),
 				'fontSize' => $this->getInput('themeHeaderFontSize'),
 				'fontWeight' => $this->getInput('themeHeaderFontWeight'),
@@ -312,8 +328,7 @@ class theme extends common {
 				'position' => $this->getInput('themeHeaderPosition'),
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
-				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
-				'textTransform' => $this->getInput('themeHeaderTextTransform'),
+				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),		
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);

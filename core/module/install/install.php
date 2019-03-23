@@ -100,7 +100,8 @@ class install extends common {
 			case 1:
 				$success = true;
 				// Copie du fichier de données
-				copy(self::DATA_DIR . 'core.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-update.json');
+				copy('site/data/core.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-core-update.json');
+				copy('site/data/theme.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-theme-update.json');
 				// Nettoyage des fichiers temporaires
 				if(file_exists(self::TEMP_DIR . 'update.tar.gz')) {
 					$success = unlink(self::TEMP_DIR . 'update.tar.gz');
