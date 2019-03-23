@@ -1,10 +1,27 @@
 # ChangeLog 
 
+## Version 9.0.08
+- Modifications :
+    - Core : les données par défaut ne sont chargées qu'à installation afin d'alléger l'empreinte mémoire du noyau
+    - Prise en compte de la taille des petits écrans, suppression des marges
+    - Backup theme.json avant une mise à jour automatique
+    - Réorganisation des écrans de paramètrage du thème, ordre de saisie, bulles d'aide et nouveaux libellés
+    - SimpleLightBox : miniatures cliquables permettant de parcourir toutes les images d'une page (comme dans la galerie)
+    - Barre d'administration : pages inactives en orange.
+- Ajouts :
+    - Thèmes : pied de page choix de police et de styles
+- Corrections :
+    - Faille XSS : liens de connexion encadrés par STRIP_TAGS
+    - TinyMCE : désactivation du thème mobile ne fonctionnait pas sur ipad et iphone
+    - Blog 1.3 : image en tête d'article correctement affichée avec effet responsive.
+    - TinyMCE : taille des miniatures générées par défaut 480 x 320 en vue d'un affichage correct dans le module blog
+    - Pied de page : correction d'un problème d'affichage sur des écrans inférieurs à 992px
+    
 ## Version 9.0.07
 - Correction :
     - Disparition du menu quand la bannière est masquée
 - Modifications :
-    - Barre d'administration, pages organisées
+    - Barre d'administration : pages organisées
 
 ## Version 9.0.06
 - Correction :
