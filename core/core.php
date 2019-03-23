@@ -720,8 +720,7 @@ class common {
 			$this->SaveData();
 		}			
 		// Version 8.4.6
-		if($this->getData(['core', 'dataVersion']) < 846) {
-			$this->getData(['core', 'dataVersion']);		
+		if($this->getData(['core', 'dataVersion']) < 846) {		
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
 			$this->SaveData();
@@ -734,7 +733,6 @@ class common {
 		}	
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
-			$this->getData(['core', 'dataVersion']);
 			$this->setData(['config','itemsperPage',10]);
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
@@ -742,7 +740,6 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
-			$this->setData(['theme', 'site', 'block','12']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
@@ -764,7 +761,13 @@ class common {
 			$this->setData(['theme', 'footer', 'font','Open+Sans']);			
 			$this->setData(['core', 'dataVersion', 9008]);
 			$this->SaveData();
-		}					
+		}
+		// Version 9.0.09
+		if($this->getData(['core', 'dataVersion']) < 9009) {
+			$this->deleteData(['theme', 'site', 'block','12']);
+			$this->setData(['core', 'dataVersion', 9009]);
+			$this->SaveData();
+								
 	}
 }
 
@@ -889,7 +892,7 @@ class core extends common {
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
-					OR $this->getData(['theme', 'header', 'position']) === 'body'
+					OR $this->getData(['theme', 'menu', 'position']) === 'site-second'
 				) {
 					$css .= 'nav{margin:20px 20px 0 20px}';
 				}
