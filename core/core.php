@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.08';
+	const ZWII_VERSION = '9.0.09';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -734,7 +734,7 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
-			//$this->setData(['theme', 'site', 'block','12']);
+			$this->deleteData(['theme', 'site', 'block']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
@@ -753,12 +753,16 @@ class common {
 			$this->setData(['theme', 'footer', 'textTransform','none']);
 			$this->setData(['theme', 'footer', 'fontWeight','normal']);
 			$this->setData(['theme', 'footer', 'fontSize','0.8em']);
-			$this->setData(['theme', 'footer', 'font','Open+Sans']);
-			// Effacer une option de la première v9
-			$this->deleteData(['theme', 'site', 'block',]);	
+			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
 			$this->SaveData();
-		}					
+		}
+		// Version 9.0.09
+		if($this->getData(['core', 'dataVersion']) < 9009) {
+			$this->setData(['core', 'dataVersion', 9009]);
+			$this->SaveData();
+		}
+								
 	}
 }
 
@@ -883,7 +887,7 @@ class core extends common {
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
-					OR $this->getData(['theme', 'header', 'position']) === 'body'
+					OR $this->getData(['theme', 'menu', 'position']) === 'site-second'
 				) {
 					$css .= 'nav{margin:20px 20px 0 20px}';
 				}
