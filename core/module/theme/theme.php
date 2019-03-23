@@ -205,7 +205,7 @@ class theme extends common {
 		'auto auto' => 'Automatique',
 		//'contain' => 'Responsive (contain)',		
 		'cover' => 'Responsive',
-		'100% 100%' => 'Image étirée',
+		'100% 100%' => 'Image étirée'
 	];
 
 
