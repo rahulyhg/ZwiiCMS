@@ -740,6 +740,7 @@ class common {
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
+			$this->deleteData(['theme', 'site', 'block']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
@@ -764,7 +765,6 @@ class common {
 		}
 		// Version 9.0.09
 		if($this->getData(['core', 'dataVersion']) < 9009) {
-			$this->deleteData(['theme', 'site', 'block','12']);
 			$this->setData(['core', 'dataVersion', 9009]);
 			$this->SaveData();
 		}
