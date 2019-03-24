@@ -187,6 +187,7 @@ class theme extends common {
 	public static $sizes = [
 		'auto' => 'Automatique',
 		'cover' => 'Responsive',
+		'contain' => 'Taille réelle',		
 		'100% 100%' => 'Image étirée'		
 	];
 	public static $textTransforms = [
@@ -203,11 +204,14 @@ class theme extends common {
 	];
 	public static $headerWide = [	
 		'auto auto' => 'Automatique',
-		//'contain' => 'Responsive (contain)',		
 		'cover' => 'Responsive',
+<<<<<<< HEAD
 		'100% 100%' => 'Image étirée',
+=======
+		'contain' => 'Taille réelle',		
+		'100% 100%' => 'Image étirée'
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 	];
-
 
 	/**
 	 * Mode avancé
@@ -327,8 +331,11 @@ class theme extends common {
 				'position' => $this->getInput('themeHeaderPosition'),
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
+<<<<<<< HEAD
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),
 				'textTransform' => $this->getInput('themeHeaderTextTransform'),
+=======
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),		
 				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')

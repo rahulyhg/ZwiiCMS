@@ -1128,6 +1128,7 @@ th.col12 {
 .colorOrange {
 	color: #F39C12;
 }
+<<<<<<< HEAD
 .colorGrey {
 	color: #9C9C9C;
 }
@@ -1142,3 +1143,5 @@ th.col12 {
 .ico-margin-all:before {
 	margin: 0 .4em;
 }
+=======
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6

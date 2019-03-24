@@ -26,9 +26,16 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-
+<<<<<<< HEAD
+=======
+	const BACKUP_DIR = 'site/backup/';
+	const DATA_DIR = 'site/data/';
+	const FILE_DIR = 'site/file/';
+	const TEMP_DIR = 'site/tmp/';
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.08';
+	const ZWII_VERSION = '9.1.0';
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
+
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -143,8 +150,11 @@ class common {
 		}
 
 		// Mise à jour des données core
+<<<<<<< HEAD
 		// Fonction désactivée en dev
 		// if (stripos(common::ZWII_VERSION, 'dev') === 0 )
+=======
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 		$this->update();
 	
 		// Utilisateur connecté
@@ -734,7 +744,7 @@ class common {
 		}
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
-			//$this->setData(['theme', 'site', 'block','12']);
+			$this->deleteData(['theme', 'site', 'block']);
 			if ($this->getData(['theme','menu','position']) === 'body-top') {
 				$this->setData(['theme','menu','position','top']);
 			}
@@ -743,8 +753,8 @@ class common {
 			$this->SaveData();
 		}	
 		// Version 9.0.01
-		if($this->getData(['core', 'dataVersion']) < 9000) {
-			$this->deleteData(['config', 'social', 'googleplusId']);						
+		if($this->getData(['core', 'dataVersion']) < 9001) {
+			$this->deleteData(['config', 'social', 'googleplusId']);
 			$this->setData(['core', 'dataVersion', 9001]);
 			$this->SaveData();
 		}
@@ -753,12 +763,21 @@ class common {
 			$this->setData(['theme', 'footer', 'textTransform','none']);
 			$this->setData(['theme', 'footer', 'fontWeight','normal']);
 			$this->setData(['theme', 'footer', 'fontSize','0.8em']);
-			$this->setData(['theme', 'footer', 'font','Open+Sans']);
-			// Effacer une option de la première v9
-			$this->deleteData(['theme', 'site', 'block',]);	
+			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
 			$this->SaveData();
-		}					
+		}
+		// Version 9.0.09
+		if($this->getData(['core', 'dataVersion']) < 9009) {
+			$this->setData(['core', 'dataVersion', 9009]);
+			$this->SaveData();
+		}
+		// Version 9.0.10
+		if($this->getData(['core', 'dataVersion']) < 9010) {
+			$this->deleteData(['config', 'social', 'googleplusId']);			
+			$this->setData(['core', 'dataVersion', 9010]);
+			$this->SaveData();
+		}
 	}
 }
 
@@ -888,7 +907,7 @@ class core extends common {
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
-					OR $this->getData(['theme', 'header', 'position']) === 'body'
+					OR $this->getData(['theme', 'menu', 'position']) === 'site-second'
 				) {
 					$css .= 'nav{margin:20px 20px 0 20px}';
 				}
@@ -2036,11 +2055,19 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
+<<<<<<< HEAD
 			if($this->getUser('group') >= self::GROUP_ADMIN) {                            
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
+=======
+			if($this->getUser('group') >= self::GROUP_ADMIN) {
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';				
+>>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
