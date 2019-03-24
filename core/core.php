@@ -770,6 +770,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 9010]);
 			$this->SaveData();
 		}
+		// Version 9.0.11
+		if($this->getData(['core', 'dataVersion']) < 9011) {
+			if ($this->getData(['theme','menu','position']) === 'body')
+				$this->setData(['theme','menu','position','site']);
+			$this->setData(['core', 'dataVersion', 9011]);
+			$this->SaveData();
+		}
 	}
 }
 
