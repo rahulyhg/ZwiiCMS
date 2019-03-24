@@ -1,7 +1,5 @@
 # ChangeLog 
 
-<<<<<<< HEAD
-=======
 ## Version 9.0.10
 - Corrections :
     - Google non effacé
@@ -11,7 +9,6 @@
 - Corrections :
     - Nettoyage du code, petites corrections.
 
->>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 ## Version 9.0.08
 - Modifications :
     - Core : les données par défaut ne sont chargées qu'à installation afin d'alléger l'empreinte mémoire du noyau

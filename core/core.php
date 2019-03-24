@@ -26,15 +26,12 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-<<<<<<< HEAD
-=======
 	const BACKUP_DIR = 'site/backup/';
 	const DATA_DIR = 'site/data/';
 	const FILE_DIR = 'site/file/';
 	const TEMP_DIR = 'site/tmp/';
 	// Numéro de version stable
 	const ZWII_VERSION = '9.1.0';
->>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 
 
 	public static $actions = [];
@@ -150,11 +147,6 @@ class common {
 		}
 
 		// Mise à jour des données core
-<<<<<<< HEAD
-		// Fonction désactivée en dev
-		// if (stripos(common::ZWII_VERSION, 'dev') === 0 )
-=======
->>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 		$this->update();
 	
 		// Utilisateur connecté
@@ -2055,19 +2047,11 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder-open') . '</a></li>';
 			}
-<<<<<<< HEAD
-			if($this->getUser('group') >= self::GROUP_ADMIN) {                            
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';
-=======
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';				
->>>>>>> 9b675447d348ba9decbaca89402db8fac77193e6
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
