@@ -2,23 +2,34 @@
  * Initialisation de Tippy
  */
 $(document).ready(function() {
-    // Toute les infobulles auront une flèche
-    tippy.setDefaults({
+	// Tooltip des aides
+	tippy(".helpButton", {
         arrow: true,
+        arrowType: "round",
+		placement: "top"
+	});
+	// Tooltip des attributs title
+	tippy("[content-data-tippy]", {
+		arrow: true,
+		placement: "top"
     });
-    
-    // Pour les infobulles d'aide, le texte est positionné à droite
-    tippy(".helpButton", {
-        placement: "right"
-    });
-
+    // Pour les images map, pas de flèche, bulle haut suivant le curseur    
+    tippy('img', {
+        content(reference) {
+          const title = reference.getAttribute('title')
+          reference.removeAttribute('title')
+          return title
+        },
+        placement: "top",
+        followCursor: true,
+        animation: "fade",
+        animateFill: true
+      });
     // Pour les images map, pas de flèche, bulle haut suivant le curseur
     tippy("#image-map", {
         placement: "top",
-        followCursor: true
+        followCursor: true,
+        animation: "fade",
+        animateFill: true
     });
-
-
-    // afficher les infobules si l'attribut data-tippy-content est présent
-    tippy('[data-tippy-content]');
 });
