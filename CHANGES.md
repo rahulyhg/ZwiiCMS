@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 9.0.10
+- Corrections :
+    - Google non effacé
+
+
 ## Version 9.0.09
 - Corrections :
     - Nettoyage du code, petites corrections.
