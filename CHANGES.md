@@ -1,9 +1,14 @@
 # ChangeLog 
 
+## Version 9.0.11
+- Corrections :
+    - Marges du pied de page
+    - Tippy par défaut pour l'argument Title
+    - Disparition du menu lorsque dans le site et que la bannière est déplacée hors du site
+
 ## Version 9.0.10
 - Corrections :
-    - Google non effacé
-
+    - Google + non effacé
 
 ## Version 9.0.09
 - Corrections :
