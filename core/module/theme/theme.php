@@ -78,11 +78,11 @@ class theme extends common {
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'5px' => 'Très petite (5 pixels)',
-		'10px' => 'Petite (10 pixels)',
-		'20px' => 'Moyenne (20 pixels)',
-		'35px' => 'Grande (35 pixels)',
-		'40px' => 'Très grande (40 pixels)'
+		'-5px' => 'Réduite',
+		'0px' => 'Très petite',
+		'5px' => 'Petite',
+		'10px' => 'Grande',
+		'15px' => 'Très grande'
 	];
 	public static $footerPositions = [
 		'hide' => 'Cachée',
@@ -105,11 +105,11 @@ class theme extends common {
 		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
-		'100px' => 'Très petite (100 pixels)',
-		'150px' => 'Petite (150 pixels)',
-		'200px' => 'Moyenne (200 pixels)',
-		'300px' => 'Grande (300 pixels)',
-		'400px' => 'Très grande (400 pixels)'
+		'100px' => 'Très petite',
+		'150px' => 'Petite',
+		'200px' => 'Moyenne',
+		'300px' => 'Grande',
+		'400px' => 'Très grande'
 	];
 	public static $headerPositions = [
 		'body' => 'Au dessus du site',
@@ -136,11 +136,11 @@ class theme extends common {
 		'1.3em' => 'Très grande (130%)'
 	];
 	public static $menuHeights = [
-		'5px 10px' => 'Très petite (5 pixels)',
-		'10px' => 'Petite (10 pixels)',
-		'15px 10px' => 'Moyenne (15 pixels)',
-		'20px 15px' => 'Grande (20 pixels)',
-		'25px 15px' => 'Très grande (25 pixels)'
+		'5px 10px' => 'Très petite',
+		'10px' => 'Petite',
+		'15px 10px' => 'Moyenne',
+		'20px 15px' => 'Grande',
+		'25px 15px' => 'Très grande'
 	];
 	public static $menuPositionsSite = [
 		'top' => 'En-dehors du site',		
