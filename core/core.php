@@ -745,8 +745,8 @@ class common {
 			$this->SaveData();
 		}	
 		// Version 9.0.01
-		if($this->getData(['core', 'dataVersion']) < 9000) {
-			$this->deleteData(['config', 'social', 'googleplusId']);						
+		if($this->getData(['core', 'dataVersion']) < 9001) {
+			$this->deleteData(['config', 'social', 'googleplusId']);
 			$this->setData(['core', 'dataVersion', 9001]);
 			$this->SaveData();
 		}
@@ -764,7 +764,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9009]);
 			$this->SaveData();
 		}
-								
+		// Version 9.0.10
+		if($this->getData(['core', 'dataVersion']) < 9010) {
+			$this->deleteData(['config', 'social', 'googleplusId']);			
+			$this->setData(['core', 'dataVersion', 9010]);
+			$this->SaveData();
+		}
 	}
 }
 
