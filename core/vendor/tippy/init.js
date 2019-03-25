@@ -14,7 +14,7 @@ $(document).ready(function() {
 		placement: "top"
     });
     // Pour les images map, pas de flèche, bulle haut suivant le curseur    
-    tippy('img[title], a[title]', {
+    tippy('img[title], a[title], area[title]', {
         content(reference) {
           const title = reference.getAttribute('title')
           reference.removeAttribute('title')
