@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 9.0.13
+- Modifications :
+    - Paramètre Tippy : ajouter area[title]
+    - SimpleLightbox : bug d'affichage sous Edge, erreur signalée mais corrigée dans Zwii
+
 ## Version 9.0.12
 - Corrections :
     - Configuration de Tippy pour l'utilisation de l'argument title dans les balises a et img. Data-tippy-content reste un argument reconnu

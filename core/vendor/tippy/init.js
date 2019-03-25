@@ -9,12 +9,12 @@ $(document).ready(function() {
 		placement: "top"
 	});
 	// Tooltip des attributs title
-	tippy("[content-data-tippy]", {
+	tippy("[data-tippy-content]", {
 		arrow: true,
 		placement: "top"
     });
     // Pour les images map, pas de flèche, bulle haut suivant le curseur    
-    tippy('img[title], a[title]', {
+    tippy('img[title], a[title], area[title]', {
         content(reference) {
           const title = reference.getAttribute('title')
           reference.removeAttribute('title')
