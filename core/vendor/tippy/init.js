@@ -9,7 +9,7 @@ $(document).ready(function() {
 		placement: "top"
 	});
 	// Tooltip des attributs title
-	tippy("[content-data-tippy]", {
+	tippy("[data-tippy-content]", {
 		arrow: true,
 		placement: "top"
     });
