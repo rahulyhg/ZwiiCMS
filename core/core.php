@@ -1460,11 +1460,7 @@ class helper {
 				// Un ID ne peut pas être un entier, pour éviter les conflits avec le système de pagination
 				if(intval($text) !== 0) {
 					$text = 'i' . $text;
-				}
-				// un dossier existe du même nom (erreur en cas de redirection)
-				if (file_exists($text)) {
-					$text = 'p-' .  $text;
-				}
+				}			
 				break;
 			case self::FILTER_INT:
 				$text = (int) filter_var($text, FILTER_SANITIZE_NUMBER_INT);

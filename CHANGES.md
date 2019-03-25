@@ -1,5 +1,10 @@
 # ChangeLog 
 
+## Version 9.0.12
+- Corrections :
+    - Configuration de Tippy pour l'utilisation de l'argument title dans les balises a et img. Data-tippy-content reste un argument reconnu
+    - Bug de la redirection lorsqu'un dossier porte le nom d'une page, le contrôle de cohérence est déplacé dans page.
+
 ## Version 9.0.11
 - Corrections :
     - Marges du pied de page

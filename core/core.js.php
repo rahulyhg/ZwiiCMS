@@ -334,10 +334,7 @@ core.start = function() {
 	// Ajouter la classe Gallery afin de faire la liaison avec simplelightbox
 	$("a[rel='gallery']").addClass("gallery","");
 
-	/**
-	* Démarrer simplelightbox
-	**/
-
+	//
 	$('.gallery').simpleLightbox();
 
 };
