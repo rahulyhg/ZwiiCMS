@@ -169,7 +169,7 @@
 					<?php
 					// Détermine si le bloc a un menu à inclure
 					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu'])) {
-						$layout->showmenuBar();
+						$layout->showMenuSide();
 					}					
 					$layout->showBarContentLeft(); ?>
 			 	</div> 
@@ -183,7 +183,7 @@
 					<?php
 					// Détermine si le bloc a un menu à inclure
 					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu'])) {
-						$layout->showmenuBar();
+						$layout->showMenuSide();
 					}
 					$layout->showBarContentRight(); ?>
 				</div>

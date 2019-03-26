@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev01';
+	const ZWII_VERSION = '9.1.00-dev2';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -897,7 +897,7 @@ class core extends common {
 			$css .= 'nav a,#toggle span,nav a:hover{color:' . $this->getData(['theme', 'menu', 'textColor']) . '}';
 			$css .= 'nav a:hover{background-color:' . $colors['darken'] . '}';
 			$css .= 'nav a.active{background-color:' . $colors['veryDarken'] . '}';
-			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
+			$css .= '#menu #menuside{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
@@ -909,7 +909,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
+			$css .= '#toggle span,#menu a, #menuside a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
@@ -1898,7 +1898,7 @@ class layout extends common {
 	 * Générer un menu pour la barre latérale
 	 * Uniquement texte et snas le lien de connexion
 	 */
-	public function showMenuBar() {
+	public function showMenuSide() {
 		// Met en forme les items du menu
 		$items = '';
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
@@ -1907,7 +1907,7 @@ class layout extends common {
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
 			// Mise en page de l'item
-			$items .= '<li>';
+			$items .= '<li id="menuside">';
 			
 			if ( $this->getData(['page',$parentPageId,'disable']) === true
 				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
@@ -1925,7 +1925,7 @@ class layout extends common {
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-				$items .= '<li class="sidebar">';
+				$items .= '<li  id="menuside">';
 
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
@@ -1955,7 +1955,7 @@ class layout extends common {
 			'">Connexion</a></li>';
 		}
 		// Retourne les items du menu
-		echo '<div class="col5 offset5"><nav><div id="menu"><ul>' . $items . '</ul></div></nav></div>';
+		echo '<div id="menu" class="container"><nav><ul>' . $items . '</ul></nav></div>';
 	}
 
 

@@ -367,9 +367,6 @@ nav #toggle span {
 nav #menu {
 	display: block;
 }
-nav #menuside {
-	display: list-item;
-}
 
 nav ul {
 	padding: 0;
@@ -380,7 +377,6 @@ nav li {
 	display: inline-block;
 	position: relative;
 }
-/* Menu vertical */
 
 nav li ul {
 	display: block;
@@ -416,6 +412,7 @@ nav a:hover {
 		display: none;
 		text-align: left !important;
 	}
+
 	nav li {
 		display: block;
 	}
@@ -433,6 +430,27 @@ nav a:hover {
 		padding-left: 40px !important;
 	}
 }
+
+/* Menu vertical */
+
+nav #menuside {
+	display: list-item;
+}
+nav li #menuside {
+	display: list-item;
+	position: relative;
+}
+nav ul li #menuside {
+	padding-left: 5px;
+}
+nav li:hover ul #menuside{
+	z-index: 1;
+	opacity: 1;
+	margin-left: 30px;
+	width:auto;
+}
+
+
 /* Barre de navigation fixe quand le menu est en-dehors du site */ 
 #navfixedlogout {
 	position: -webkit-sticky; /* Safari */
