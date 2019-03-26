@@ -77,7 +77,8 @@ class page extends common {
 				'title' => $pageTitle,
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => FALSE
 			]
 		]);
 		// Valeurs en sortie
@@ -243,7 +244,8 @@ class page extends common {
 						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
-						'barRight' => $barRight
+						'barRight' => $barRight,
+						'displayMenu' => $this->getinput('pageEditdisplayMenu')
 					]
 				]);
 				// Barre renommée : changement le nom de la barre dans les pages mères

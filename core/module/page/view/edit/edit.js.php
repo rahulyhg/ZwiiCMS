@@ -69,16 +69,16 @@ $( document ).ready(function() {
 	if($("#pageEditModuleId").val() === "redirection" ||
     $("#pageEditModuleId").val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
-		$("#pageEditHideTitleWrapper").slideUp();
+		$("#pageEditHideTitleWrapper").hide();
 		$("#pageEditBlockWrapper").removeClass("disabled");
-		$("#pageEditBlockWrapper").slideUp();			
+		$("#pageEditBlockWrapper").hide();			
 		
 	}
 	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
-		$("#pageEditHideTitleWrapper").slideDown();
+		$("#pageEditHideTitleWrapper").show();
 		$("#pageEditBlockWrapper").addClass("disabled");
-		$("#pageEditBlockWrapper").slideDown();		
+		$("#pageEditBlockWrapper").show();		
 	}
 	/**
 	* Masquer et démasquer la sélection des barres 
@@ -130,7 +130,9 @@ $( document ).ready(function() {
 			$("#pageEditModuleConfig").removeClass("disabled");
 			$("#pageEditModuleConfig").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideUp();																		
+			$("#pageEditbreadCrumbWrapper").slideUp();
+			$("#pageEditdisplayMenuWrapper").addClass("disabled");
+			$("#pageEditdisplayMenuWrapper").slideDown();																			
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
@@ -147,7 +149,9 @@ $( document ).ready(function() {
 			$("#pageEditModuleIdWrapper").addClass("disabled");
 			$("#pageEditModuleIdWrapper").slideDown();
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideDown();				
+			$("#pageEditbreadCrumbWrapper").slideDown();
+			$("#pageEditdisplayMenuWrapper").removeClass("disabled");
+			$("#pageEditdisplayMenuWrapper").slideUp();						
 	}
 
 	/**
@@ -319,7 +323,9 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleIdWrapper").removeClass("disabled");
 			$("#pageEditModuleIdWrapper").slideUp();
 			$("#pageEditModuleConfig").removeClass("disabled");
-			$("#pageEditModuleConfig").slideUp();																	
+			$("#pageEditModuleConfig").slideUp();	
+			$("#pageEditdisplayMenuWrapper").addClass("disabled");
+			$("#pageEditdisplayMenuWrapper").slideDown();																			
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
@@ -338,7 +344,9 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleIdWrapper").addClass("disabled");
 			$("#pageEditModuleIdWrapper").slideDown();	
 			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();									
+			$("#pageEditModuleConfig").slideDown();	
+			$("#pageEditdisplayMenuWrapper").removeClass("disabled");
+			$("#pageEditdisplayMenuWrapper").slideUp();											
 	}	
 });
 

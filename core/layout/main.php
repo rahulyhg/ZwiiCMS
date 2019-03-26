@@ -163,14 +163,31 @@
 		} else {
 		?>
 		<div class="row">
-			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft">
-			<?php
-			 echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content']);
-			 ?></div> <?php endif; ?>
-			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
-			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright">
-			<?php echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']);
-			?></div> <?php endif; ?>	
+			<?php 
+				if ($blockleft !== "") :?> 
+				<div class="<?php echo $blockleft; ?>" id="contentLeft">		
+					<?php
+					// Détermine si le bloc a un menu à inclure
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu'])) {
+						$layout->showmenuBar();
+					}					
+					$layout->showBarContentLeft(); ?>
+			 	</div> 
+				<?php endif; ?>
+			<div class="<?php echo $content; ?>
+				" id="contentSite"><?php $layout->showContent(); ?>
+			</div>
+			<?php 
+				if ($blockright !== "") :?> 
+				<div class="<?php echo $blockright; ?>" id="contentRight">
+					<?php
+					// Détermine si le bloc a un menu à inclure
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu'])) {
+						$layout->showmenuBar();
+					}
+					$layout->showBarContentRight(); ?>
+				</div>
+				<?php endif; ?>	
 		</div>
 		<?php } ?>
 	</section>

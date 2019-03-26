@@ -150,11 +150,18 @@
 							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 						]); ?>
 					</div>
-					<div class="col6">						
+					<div class="col6">
 						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
 						]); ?>
 					</div>
+				</div>	
+				<div  class="row"> 					
+					<div class="col12">						
+						<?php echo template::checkbox('pageEditdisplayMenu', true, 'Inclus un menu horizontal', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
+						]); ?>
+					</div>					
 				</div>					
 			</div>		
 		</div>

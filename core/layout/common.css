@@ -367,6 +367,10 @@ nav #toggle span {
 nav #menu {
 	display: block;
 }
+nav #menuside {
+	display: list-item;
+}
+
 nav ul {
 	padding: 0;
 	margin: 0;
@@ -376,6 +380,8 @@ nav li {
 	display: inline-block;
 	position: relative;
 }
+/* Menu vertical */
+
 nav li ul {
 	display: block;
 	position: absolute;
@@ -385,6 +391,7 @@ nav li ul {
 	-webkit-transition: .3s ease-out;
 	transition: .3s ease-out;
 }
+
 nav li ul li {
 	display: block;
 	text-align: left;
@@ -445,6 +452,11 @@ nav a:hover {
 nav .zwiico-menu {
 	font-size:1.5em !important;
 }
+
+
+
+/* Menu vertical */
+
 
 
 /* Corps */

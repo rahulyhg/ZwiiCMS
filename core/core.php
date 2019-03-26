@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.13';
+	const ZWII_VERSION = '9.1.00-dev01';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -55,6 +55,8 @@ class common {
 	public $output = [
 		'access' => true,
 		'content' => '',
+		'contentLeft' => '',
+		'contentRight' => '',
 		'display' => self::DISPLAY_LAYOUT_MAIN,
 		'metaDescription' => '',
 		'metaTitle' => '',
@@ -1010,6 +1012,7 @@ class core extends common {
 		}
 
 		// Breadcrumb
+
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
@@ -1033,12 +1036,15 @@ class core extends common {
 				'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 				'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 				'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-				'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+				'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+				'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+				'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 			]);
 		}
 		// Importe le module
 		else {
 			// Id du module, et valeurs en sortie de la page si il s'agit d'un module de page
+
 			if($access AND $this->getData(['page', $this->getUrl(0), 'moduleId'])) {
 				$moduleId = $this->getData(['page', $this->getUrl(0), 'moduleId']);
 				$this->addOutput([
@@ -1047,7 +1053,9 @@ class core extends common {
 					'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+					'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+					'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+					'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
 			}
@@ -1697,9 +1705,25 @@ class layout extends common {
 			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
 		}
 		echo $this->core->output['content'];
+
 	}
 
 
+	/**
+	 * Affiche le contenu de la barre gauche
+	 * @param page chargée
+	 */
+	public function showBarContentLeft() {
+		echo $this->core->output['contentLeft'];		
+	}
+
+	/**
+	 * Affiche le contenu de la barre droite
+	 * @param page chargée
+	 */
+	public function showBarContentRight() {
+		echo $this->core->output['contentRight'];
+	}
 
 /**
      * Affiche le copyright
@@ -1869,6 +1893,72 @@ class layout extends common {
 		// Retourne les items du menu
 		echo '<ul>' . $items . '</ul>';
 	}
+
+		/**
+	 * Générer un menu pour la barre latérale
+	 * Uniquement texte et snas le lien de connexion
+	 */
+	public function showMenuBar() {
+		// Met en forme les items du menu
+		$items = '';
+		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Propriétés de l'item
+			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			// Mise en page de l'item
+			$items .= '<li>';
+			
+			if ( $this->getData(['page',$parentPageId,'disable']) === true
+				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+					 $items .= '<a href="'.$this->getUrl(1).'">';
+			} else {
+					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+			}
+
+
+		    $items .= $this->getData(['page', $parentPageId, 'title']);
+			$items .= '</a>';
+			$items .= '<ul>';
+			foreach($childrenPageIds as $childKey) {
+				// Propriétés de l'item
+				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
+				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
+				// Mise en page du sous-item
+				$items .= '<li class="sidebar">';
+
+				if ( $this->getData(['page',$childKey,'disable']) === true
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+
+						{$items .= '<a href="'.$this->getUrl(1).'">';}
+				else {
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+
+				$items .= $this->getData(['page', $childKey, 'title']);					
+				$items .=  '</a></li>';
+			}
+			$items .= '</ul>';
+			$items .= '</li>';
+		}
+		// Lien de connexion
+		if(
+			(
+				$this->getData(['theme', 'menu', 'loginLink'])
+				AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
+			)
+			OR $this->getUrl(0) === 'theme'
+		) {
+			$items .= '<li id="menuLoginLink" ' . 
+			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
+			'><a href="' . helper::baseUrl() . 'user/login/' . 
+			strip_tags(str_replace('/', '_', $this->getUrl())) . 
+			'">Connexion</a></li>';
+		}
+		// Retourne les items du menu
+		echo '<div class="col5 offset5"><nav><div id="menu"><ul>' . $items . '</ul></div></nav></div>';
+	}
+
+
 
 	/**
 	 * Affiche le meta titre
