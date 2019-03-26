@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev2';
+	const ZWII_VERSION = '9.1.00-dev3';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1814,15 +1814,10 @@ class layout extends common {
 					break;
 		       }
 
-
-
 			if($childrenPageIds) {
 				$items .= template::ico('down', 'left');
 			}
 			$items .= '</a>';
-
-
-
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
 				// Propriétés de l'item
@@ -1916,8 +1911,11 @@ class layout extends common {
 					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 			}
 
-
-		    $items .= $this->getData(['page', $parentPageId, 'title']);
+			$items .= $this->getData(['page', $parentPageId, 'title']);
+			
+			if($childrenPageIds) {
+				$items .= template::ico('down', 'left');
+			}
 			$items .= '</a>';
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
@@ -1925,7 +1923,7 @@ class layout extends common {
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-				$items .= '<li  id="menuside">';
+				$items .= '<li id="menuside">';
 
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)

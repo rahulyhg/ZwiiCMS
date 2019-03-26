@@ -450,7 +450,6 @@ nav li:hover ul #menuside{
 	width:auto;
 }
 
-
 /* Barre de navigation fixe quand le menu est en-dehors du site */ 
 #navfixedlogout {
 	position: -webkit-sticky; /* Safari */
