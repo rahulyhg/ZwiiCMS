@@ -1,5 +1,14 @@
 # ChangeLog 
 
+## Version 9.1.0
+- Modifications : 
+    - Amélioration de l'algorythme de gestion des barres
+    - Script Google Analytics
+    - Menu : effet de surimpression pages filles
+- Ajouts :
+    - Menu dans une barre latérale
+    - Option d'apparition des pages ; menu latéral ou principal
+
 ## Version 9.0.13
 - Modifications :
     - Paramètre Tippy : ajouter area[title]
