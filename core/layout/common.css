@@ -435,10 +435,9 @@ nav a:hover {
 /* Menu vertical */
 
 nav #menuside {
-	display: list-item;
+	display: list-item;	
 }
 nav li #menuside {
-	display: list-item;
 	position: relative;
 }
 nav ul li #menuside {
