@@ -117,8 +117,8 @@ $( document ).ready(function() {
 			$("#pageEditPositionWrapper").slideUp();
 			$("#pageEditTargetBlank").removeClass("disabled");
 			$("#pageEditTargetBlank").slideUp();
-			$("#pageDisableWrapper").removeClass("disabled");
-			$("#pageDisableWrapper").slideUp();	
+			$("#PageEditDisableWrapper").removeClass("disabled");
+			$("#PageEditDisableWrapper").slideUp();	
 			$("#pageEditTargetBlankWrapper").removeClass("disabled");
 			$("#pageEditTargetBlankWrapper").slideUp();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
@@ -131,15 +131,15 @@ $( document ).ready(function() {
 			$("#pageEditModuleConfig").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
-			$("#pageEditdisplayMenuWrapper").addClass("disabled");
-			$("#pageEditdisplayMenuWrapper").slideDown();																			
+			$("#pageEditDisplayMenuWrapper").addClass("disabled");
+			$("#pageEditDisplayMenuWrapper").slideDown();																			
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
 			$("#pageEditTargetBlank").addClass("disabled");
 			$("#pageEditTargetBlank").slideDown();
-			$("#pageDisableWrapper").addClass("disabled");
-			$("#pageDisableWrapper").slideDown();	
+			$("#PageEditDisableWrapper").addClass("disabled");
+			$("#PageEditDisableWrapper").slideDown();	
 			$("#pageEditTargetBlankWrapper").addClass("disabled");
 			$("#pageEditTargetBlankWrapper").slideDown();
 			$("#pageEditHideTitleWrapper").addClass("disabled");
@@ -150,8 +150,8 @@ $( document ).ready(function() {
 			$("#pageEditModuleIdWrapper").slideDown();
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideDown();
-			$("#pageEditdisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditdisplayMenuWrapper").slideUp();						
+			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
+			$("#pageEditDisplayMenuWrapper").slideUp();						
 	}
 
 	/**
@@ -181,7 +181,7 @@ $( document ).ready(function() {
 
 	/**	
 	* Masquer ou afficher le chemin de fer
-	* Quand la page n'est pas mère et que le menu n'est pas masqué
+	* Quand la page n'est pas parente et que le menu n'est pas masqué
 	*/
 	if ($("#pageEditParentPageId").val() === "" &&
 		!$('input[name=pageEditHideTitle]').is(':checked') ) {
@@ -192,6 +192,61 @@ $( document ).ready(function() {
 			$("#pageEditbreadCrumbWrapper").slideDown();				
 	}	
 
+	/**	
+	* Cache les options de masquage dans les menus quand la page n'est pas affichée.
+	*/
+	if ($("#pageEditPosition").val() === "0" ) {
+			$("#pageEditHiddenMenuHeadWrapper").removeClass("disabled");
+			$("#pageEditHiddenMenuHeadWrapper").slideUp();	
+			$("#pageEditHiddenMenuSideWrapper").removeClass("disabled");
+			$("#pageEditHiddenMenuSideWrapper").slideUp();				
+	} else {
+			$("#pageEditHiddenMenuHeadWrapper").addClass("disabled");
+			$("#pageEditHiddenMenuHeadWrapper").slideDown();
+			$("#pageEditHiddenMenuSideWrapper").addClass("disabled");
+			$("#pageEditHiddenMenuSideWrapper").slideDown();								
+	}
+
+});
+
+
+/**
+* Une seule option de masquage dans les menus est autorisée
+*/
+
+var pageEditHiddenMenuHeadDOM = $("#pageEditHiddenMenuHead");
+pageEditHiddenMenuHeadDOM.on("change", function() {
+	if ($('input[name=pageEditHiddenMenuSide]').is(':checked')) {
+		$("#pageEditHiddenMenuSide").prop("checked",false);	
+	}
+});
+
+var pageEditHiddenMenuSideDOM = $("#pageEditHiddenMenuSide");
+pageEditHiddenMenuSideDOM.on("change", function() {
+	if ($('input[name=pageEditHiddenMenuHead]').is(':checked')) {
+		$("#pageEditHiddenMenuHead").prop("checked",false);	
+	}
+});
+
+
+/**	
+* Cache les options de masquage dans les menus quand la page n'est pas affichée.
+*/
+var pageEditPositionDOM = $("#pageEditPosition");
+pageEditPositionDOM.on("change", function() {
+	if ($(this).val()  === "0" ) {
+		$("#pageEditHiddenMenuHeadWrapper").removeClass("disabled");
+		$("#pageEditHiddenMenuHeadWrapper").slideUp();	
+		$("#pageEditHiddenMenuSideWrapper").removeClass("disabled");
+		$("#pageEditHiddenMenuSideWrapper").slideUp();
+		$("#pageEditHiddenMenuSide").prop("checked",false);
+		$("#pageEditHiddenMenuHead").prop("checked",false);
+	} else {
+		$("#pageEditHiddenMenuHeadWrapper").addClass("disabled");
+		$("#pageEditHiddenMenuHeadWrapper").slideDown();
+		$("#pageEditHiddenMenuSideWrapper").addClass("disabled");
+		$("#pageEditHiddenMenuSideWrapper").slideDown();								
+	}
 });
 
 /**
@@ -310,8 +365,8 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditPositionWrapper").slideUp();
 			$("#pageEditTargetBlank").removeClass("disabled");
 			$("#pageEditTargetBlank").slideUp();
-			$("#pageDisableWrapper").removeClass("disabled");
-			$("#pageDisableWrapper").slideUp();	
+			$("#PageEditDisableWrapper").removeClass("disabled");
+			$("#PageEditDisableWrapper").slideUp();	
 			$("#pageEditTargetBlankWrapper").removeClass("disabled");
 			$("#pageEditTargetBlankWrapper").slideUp();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
@@ -324,15 +379,15 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleIdWrapper").slideUp();
 			$("#pageEditModuleConfig").removeClass("disabled");
 			$("#pageEditModuleConfig").slideUp();	
-			$("#pageEditdisplayMenuWrapper").addClass("disabled");
-			$("#pageEditdisplayMenuWrapper").slideDown();																			
+			$("#pageEditDisplayMenuWrapper").addClass("disabled");
+			$("#pageEditDisplayMenuWrapper").slideDown();																			
 	} else {
 			$("#pageEditPositionWrapper").addClass("disabled");
 			$("#pageEditPositionWrapper").slideDown();
 			$("#pageEditTargetBlank").addClass("disabled");
 			$("#pageEditTargetBlank").slideDown();
-			$("#pageDisableWrapper").addClass("disabled");
-			$("#pageDisableWrapper").slideDown();	
+			$("#PageEditDisableWrapper").addClass("disabled");
+			$("#PageEditDisableWrapper").slideDown();	
 			$("#pageEditTargetBlankWrapper").addClass("disabled");
 			$("#pageEditTargetBlankWrapper").slideDown();
 			$("#pageEditHideTitleWrapper").addClass("disabled");
@@ -345,8 +400,8 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleIdWrapper").slideDown();	
 			$("#pageEditModuleConfig").addClass("disabled");
 			$("#pageEditModuleConfig").slideDown();	
-			$("#pageEditdisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditdisplayMenuWrapper").slideUp();											
+			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
+			$("#pageEditDisplayMenuWrapper").slideUp();											
 	}	
 });
 
@@ -366,9 +421,6 @@ pageEditHideTitleDOM.on("change", function() {
 		}			
 	}
 });
-
-
-
 
 
 /**	
@@ -403,8 +455,6 @@ pageTypeMenuDOM.on("change", function() {
 			$("#pageIconUrlWrapper").slideUp();					
 	}
 });
-
-
 
 
 

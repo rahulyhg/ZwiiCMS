@@ -99,20 +99,40 @@
 					]); ?>
 				<?php endif; ?>
 				<?php echo template::select('pageEditPosition', [], [
-					'label' => 'Position'
+					'label' => 'Position',
+					'help' => 'Une page non affichée est invisible dans les menus, elle est classée comme `Page orpheline` dans la liste des pages'
 				]); ?>
 				<div class="row">
-					<div class="col6">
+					<div class="col12">
 					<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
 					]); ?>
 					</div>
-					<div class="col6">
-					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
+				</div>
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('PageEditDisable', true, 'Page désactivée', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
+						'help' => 'Une page désactivée est affichée dans le menu et non cliquable'
 					]); ?>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('pageEditHiddenMenuHead', true, 'Page masquer dans le menu principal', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenmenuhead']),
+						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'
+					]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('pageEditHiddenMenuSide', true, 'Page masquée dans le menu latéral', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenmenuside']),
+						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'				
+					]); ?>
+					</div>
+				</div>				
 			</div>
 		</div>
 		<div class="col6">
@@ -158,7 +178,7 @@
 				</div>	
 				<div  class="row"> 					
 					<div class="col12">						
-						<?php echo template::checkbox('pageEditdisplayMenu', true, 'Inclus un menu horizontal', [
+						<?php echo template::checkbox('pageEditDisplayMenu', true, 'Inclus un menu horizontal', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
 						]); ?>
 					</div>					

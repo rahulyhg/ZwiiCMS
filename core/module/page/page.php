@@ -78,7 +78,9 @@ class page extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => FALSE
+				'displayMenu' => FALSE,
+				'hiddenmenuside' => FALSE,
+				'hiddenmenuhead' => FALSE				
 			]
 		]);
 		// Valeurs en sortie
@@ -229,7 +231,7 @@ class page extends common {
 					[					
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 						
+						'disable'=> $this->getinput('EditPageDisable', helper::FILTER_BOOLEAN), 						
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
@@ -245,7 +247,9 @@ class page extends common {
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
-						'displayMenu' => $this->getinput('pageEditdisplayMenu')
+						'displayMenu' => $this->getinput('pageEditdisplayMenu'),
+						'hiddenmenuside' => $this->getinput('pageEditHiddenMenuSide', helper::FILTER_BOOLEAN),
+						'hiddenmenuhead' => $this->getinput('pageEditHiddenMenuHead', helper::FILTER_BOOLEAN)
 					]
 				]);
 				// Barre renommée : changement le nom de la barre dans les pages mères

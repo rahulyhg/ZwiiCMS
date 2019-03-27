@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev5';
+	const ZWII_VERSION = '9.1.00-dev6';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1775,9 +1775,13 @@ class layout extends common {
 		$items = '';
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hiddenmenuhead']) === true ) {
+				continue;
+			}		
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
-			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';		
 			// Mise en page de l'item
 			$items .= '<li>';
 			
@@ -1788,7 +1792,6 @@ class layout extends common {
 			} else {
 					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 			}
-
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
 				case '' :
@@ -1820,6 +1823,10 @@ class layout extends common {
 			$items .= '</a>';
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$childKey,'hiddenmenuhead']) === true ) {
+				continue;
+			}				
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
@@ -1898,6 +1905,11 @@ class layout extends common {
 		$items = '';
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hiddenmenuside']) === true ) {
+				continue;
+			}
+
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
@@ -1919,6 +1931,10 @@ class layout extends common {
 			$items .= '</a>';
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
+				// Passer les entrées masquées
+				if ($this->getData(['page',$childKey,'hiddenmenuside']) === true ) {
+					continue;
+				}
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
