@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev3';
+	const ZWII_VERSION = '9.1.00-dev4';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1953,7 +1953,7 @@ class layout extends common {
 			'">Connexion</a></li>';
 		}
 		// Retourne les items du menu
-		echo '<div id="menu" class="container"><nav><ul>' . $items . '</ul></nav></div>';
+		echo '<ul>' . $items . '</ul>';
 	}
 
 
