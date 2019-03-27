@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev7';
+	const ZWII_VERSION = '9.1.00-dev8';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1776,7 +1776,7 @@ class layout extends common {
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
 			// Passer les entrées masquées
-			if ($this->getData(['page',$parentPageId,'hiddenmenuhead']) === true ) {
+			if ($this->getData(['page',$parentPageId,'hiddenMenuHead']) === true ) {
 				continue;
 			}		
 			// Propriétés de l'item
@@ -1824,7 +1824,7 @@ class layout extends common {
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
 			// Passer les entrées masquées
-			if ($this->getData(['page',$childKey,'hiddenmenuhead']) === true ) {
+			if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true ) {
 				continue;
 			}				
 				// Propriétés de l'item
@@ -1906,7 +1906,7 @@ class layout extends common {
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
 			// Passer les entrées masquées
-			if ($this->getData(['page',$parentPageId,'hiddenmenuside']) === true ) {
+			if ($this->getData(['page',$parentPageId,'hiddenMenuSide']) === true ) {
 				continue;
 			}
 
@@ -1932,7 +1932,7 @@ class layout extends common {
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
 				// Passer les entrées masquées
-				if ($this->getData(['page',$childKey,'hiddenmenuside']) === true ) {
+				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true ) {
 					continue;
 				}
 				// Propriétés de l'item

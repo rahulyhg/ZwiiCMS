@@ -196,15 +196,15 @@ $( document ).ready(function() {
 	* Cache les options de masquage dans les menus quand la page n'est pas affichée.
 	*/
 	if ($("#pageEditPosition").val() === "0" ) {
-			$("#pageEditHiddenMenuHeadWrapper").removeClass("disabled");
-			$("#pageEditHiddenMenuHeadWrapper").slideUp();	
-			$("#pageEditHiddenMenuSideWrapper").removeClass("disabled");
-			$("#pageEditHiddenMenuSideWrapper").slideUp();				
+			$("#pageEdithiddenMenuHeadWrapper").removeClass("disabled");
+			$("#pageEdithiddenMenuHeadWrapper").slideUp();	
+			$("#pageEdithiddenMenuSideWrapper").removeClass("disabled");
+			$("#pageEdithiddenMenuSideWrapper").slideUp();				
 	} else {
-			$("#pageEditHiddenMenuHeadWrapper").addClass("disabled");
-			$("#pageEditHiddenMenuHeadWrapper").slideDown();
-			$("#pageEditHiddenMenuSideWrapper").addClass("disabled");
-			$("#pageEditHiddenMenuSideWrapper").slideDown();								
+			$("#pageEdithiddenMenuHeadWrapper").addClass("disabled");
+			$("#pageEdithiddenMenuHeadWrapper").slideDown();
+			$("#pageEdithiddenMenuSideWrapper").addClass("disabled");
+			$("#pageEdithiddenMenuSideWrapper").slideDown();								
 	}
 
 });
@@ -214,17 +214,17 @@ $( document ).ready(function() {
 * Une seule option de masquage dans les menus est autorisée
 */
 
-var pageEditHiddenMenuHeadDOM = $("#pageEditHiddenMenuHead");
-pageEditHiddenMenuHeadDOM.on("change", function() {
-	if ($('input[name=pageEditHiddenMenuSide]').is(':checked')) {
-		$("#pageEditHiddenMenuSide").prop("checked",false);	
+var pageEdithiddenMenuHeadDOM = $("#pageEdithiddenMenuHead");
+pageEdithiddenMenuHeadDOM.on("change", function() {
+	if ($('input[name=pageEdithiddenMenuSide]').is(':checked')) {
+		$("#pageEdithiddenMenuSide").prop("checked",false);	
 	}
 });
 
-var pageEditHiddenMenuSideDOM = $("#pageEditHiddenMenuSide");
-pageEditHiddenMenuSideDOM.on("change", function() {
-	if ($('input[name=pageEditHiddenMenuHead]').is(':checked')) {
-		$("#pageEditHiddenMenuHead").prop("checked",false);	
+var pageEdithiddenMenuSideDOM = $("#pageEdithiddenMenuSide");
+pageEdithiddenMenuSideDOM.on("change", function() {
+	if ($('input[name=pageEdithiddenMenuHead]').is(':checked')) {
+		$("#pageEdithiddenMenuHead").prop("checked",false);	
 	}
 });
 
@@ -235,17 +235,17 @@ pageEditHiddenMenuSideDOM.on("change", function() {
 var pageEditPositionDOM = $("#pageEditPosition");
 pageEditPositionDOM.on("change", function() {
 	if ($(this).val()  === "0" ) {
-		$("#pageEditHiddenMenuHeadWrapper").removeClass("disabled");
-		$("#pageEditHiddenMenuHeadWrapper").slideUp();	
-		$("#pageEditHiddenMenuSideWrapper").removeClass("disabled");
-		$("#pageEditHiddenMenuSideWrapper").slideUp();
-		$("#pageEditHiddenMenuSide").prop("checked",false);
-		$("#pageEditHiddenMenuHead").prop("checked",false);
+		$("#pageEdithiddenMenuHeadWrapper").removeClass("disabled");
+		$("#pageEdithiddenMenuHeadWrapper").slideUp();	
+		$("#pageEdithiddenMenuSideWrapper").removeClass("disabled");
+		$("#pageEdithiddenMenuSideWrapper").slideUp();
+		$("#pageEdithiddenMenuSide").prop("checked",false);
+		$("#pageEdithiddenMenuHead").prop("checked",false);
 	} else {
-		$("#pageEditHiddenMenuHeadWrapper").addClass("disabled");
-		$("#pageEditHiddenMenuHeadWrapper").slideDown();
-		$("#pageEditHiddenMenuSideWrapper").addClass("disabled");
-		$("#pageEditHiddenMenuSideWrapper").slideDown();								
+		$("#pageEdithiddenMenuHeadWrapper").addClass("disabled");
+		$("#pageEdithiddenMenuHeadWrapper").slideDown();
+		$("#pageEdithiddenMenuSideWrapper").addClass("disabled");
+		$("#pageEdithiddenMenuSideWrapper").slideDown();								
 	}
 });
 

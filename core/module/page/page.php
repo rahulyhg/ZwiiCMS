@@ -78,9 +78,9 @@ class page extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => FALSE,
-				'hiddenmenuside' => FALSE,
-				'hiddenmenuhead' => FALSE				
+				'displayMenu' => false,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
 			]
 		]);
 		// Valeurs en sortie
@@ -248,8 +248,8 @@ class page extends common {
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
 						'displayMenu' => $this->getinput('pageEditdisplayMenu'),
-						'hiddenmenuside' => $this->getinput('pageEditHiddenMenuSide', helper::FILTER_BOOLEAN),
-						'hiddenmenuhead' => $this->getinput('pageEditHiddenMenuHead', helper::FILTER_BOOLEAN)
+						'hiddenMenuSide' => $this->getinput('pageEdithiddenMenuSide', helper::FILTER_BOOLEAN),
+						'hiddenMenuHead' => $this->getinput('pageEdithiddenMenuHead', helper::FILTER_BOOLEAN)
 					]
 				]);
 				// Barre renommée : changement le nom de la barre dans les pages mères

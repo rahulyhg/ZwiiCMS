@@ -119,16 +119,16 @@
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHiddenMenuHead', true, 'Page masquer dans le menu principal', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenmenuhead']),
+					<?php echo template::checkbox('pageEdithiddenMenuHead', true, 'Page masquer dans le menu principal', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenMenuHead']),
 						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'
 					]); ?>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHiddenMenuSide', true, 'Page masquée dans le menu latéral', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenmenuside']),
+					<?php echo template::checkbox('pageEdithiddenMenuSide', true, 'Page masquée dans le menu latéral', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenMenuSide']),
 						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'				
 					]); ?>
 					</div>

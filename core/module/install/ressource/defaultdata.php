@@ -48,7 +48,10 @@ class install extends common {
 				'title' => 'Accueil',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
 			],
 			'enfant' => [
 			    'typeMenu' => 'text',
@@ -73,7 +76,10 @@ class install extends common {
 				'title' => 'Enfant',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
 			],
 			'privee' => [
 			    'typeMenu' => 'text',
@@ -97,7 +103,10 @@ class install extends common {
 				'title' => 'Privée',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
 			],
 			'mise-en-page' => [
 			    'typeMenu' => 'text',
@@ -118,11 +127,37 @@ class install extends common {
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
 				'title' => 'Mise en page',
-				'block' => '8-4',
+				'block' => '4-8',
+				'barLeft' => 'barre',
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false
+			],
+			'menu-lateral' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '<p>Vous pouvez ajouter un menu dans les barres latérales</p>
+							  <p>Les éléments des menu peuvent être masqués. </p>',
+				'hideTitle' => false,
+				'breadCrumb' => true,				
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'parentPageId' => 'accueil',
+				'modulePosition' => 'bottom',
+				'position' => 3,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'Menu latéral',
+				'block' => '9-3',
 				'barLeft' => '',
-				'barRight' => 'barre'
-
-			],			
+				'barRight' => 'barre-menu',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false
+			],				
 			'blog' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
@@ -141,7 +176,10 @@ class install extends common {
 				'title' => 'Blog',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false								
 			],
 			'galeries' => [
 			    'typeMenu' => 'text',
@@ -161,7 +199,10 @@ class install extends common {
 				'title' => 'Galeries',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false
 			],
 			'site-de-zwii' => [
 			    'typeMenu' => 'text',
@@ -181,7 +222,10 @@ class install extends common {
 				'title' => 'Site de Zwii',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => true								
 			],
 			'contact' => [
 			    'typeMenu' => 'text',
@@ -201,7 +245,10 @@ class install extends common {
 				'title' => 'Contact',
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''				
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false								
 			],
 			'barre' => [
 			    'typeMenu' => 'text',
@@ -221,7 +268,33 @@ class install extends common {
 				'title' => 'Barre latérale',
 				'block' => 'bar',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => false,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
+			],
+			'barre-menu' => [
+			    'typeMenu' => 'text',
+                'iconUrl' => '',
+                'disable' => false,
+				'content' => '',
+				'hideTitle' => false,
+				'breadCrumb' => false,				
+				'metaDescription' => '',
+				'metaTitle' => '',
+				'moduleId' => '',
+				'modulePosition' => 'bottom',
+				'parentPageId' => '',
+				'position' => 0 ,
+				'group' => self::GROUP_VISITOR,
+				'targetBlank' => false,
+				'title' => 'Menu latéral',
+				'block' => 'bar',
+				'barLeft' => '',
+				'barRight' => '',
+				'displayMenu' => true,
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false					
 			],
 		],
 		'module' => [
