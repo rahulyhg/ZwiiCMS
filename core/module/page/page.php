@@ -247,7 +247,7 @@ class page extends common {
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
-						'displayMenu' => $this->getinput('pageEditdisplayMenu'),
+						'displayMenu' => $this->getinput('pageEditDisplayMenu', helper::FILTER_BOOLEAN),
 						'hiddenMenuSide' => $this->getinput('pageEdithiddenMenuSide', helper::FILTER_BOOLEAN),
 						'hiddenMenuHead' => $this->getinput('pageEdithiddenMenuHead', helper::FILTER_BOOLEAN)
 					]
