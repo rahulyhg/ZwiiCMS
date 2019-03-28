@@ -8,6 +8,7 @@ $(function() {
 		enableTime: true,
 		time_24hr: true,
 		locale: "fr",
+		regional:"fr",	
 		dateFormat: "Y-m-d H:i:s"
 	});
 });
