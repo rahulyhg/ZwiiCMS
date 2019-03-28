@@ -1,5 +1,6 @@
 [
 	"simplelightbox.min.js",
 	"simplelightbox.min.css",
-	"init.css"
+	"init.css",
+	"init.js"
 ]
