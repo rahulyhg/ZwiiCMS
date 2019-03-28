@@ -231,7 +231,7 @@ class page extends common {
 					[					
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('EditPageDisable', helper::FILTER_BOOLEAN), 						
+						'disable'=> $this->getinput('PageEditDisable', helper::FILTER_BOOLEAN), 						
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
