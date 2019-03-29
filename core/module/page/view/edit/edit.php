@@ -86,7 +86,7 @@
 	]); ?>
 	<div class="row">
 		<div class="col6">
-			<div class="block" id="PageEditMenu">
+		<div class="block" id="PageEditMenu">
 				<h4>Menu</h4>
 				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
 					<?php echo template::hidden('pageEditParentPageId', [
@@ -119,7 +119,7 @@
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEdithiddenMenuHead', true, 'Page masquer dans le menu principal', [
+					<?php echo template::checkbox('pageEdithiddenMenuHead', true, 'Page masquée dans le menu principal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenMenuHead']),
 						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'
 					]); ?>
@@ -164,6 +164,14 @@
 						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
 					]); ?>
 				<?php endif; ?>				
+				<div  class="row"> 					
+					<div class="col12">
+					<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
+						'label' => 'Menu latéral en haut de barre',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
+					]); ?>
+					</div>
+				</div>				
 				<div class="row">
 					<div class="col6">
 						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
@@ -176,13 +184,6 @@
 						]); ?>
 					</div>
 				</div>	
-				<div  class="row"> 					
-					<div class="col12">						
-						<?php echo template::checkbox('pageEditDisplayMenu', true, 'Inclus un menu horizontal', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
-						]); ?>
-					</div>					
-				</div>					
 			</div>		
 		</div>
 	</div>

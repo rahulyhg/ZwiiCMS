@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev15';
+	const ZWII_VERSION = '9.1.00-dev16';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1896,20 +1896,37 @@ class layout extends common {
 		echo '<ul>' . $items . '</ul>';
 	}
 
-		/**
+	/**
 	 * Générer un menu pour la barre latérale
-	 * Uniquement texte et snas le lien de connexion
+	 * Uniquement texte 
+	 * @param onlyChildren n'affiche les sous-pages de la page actuelle
 	 */
-	public function showMenuSide() {
+	public function showMenuSide($onlyChildren = null) {
 		// Met en forme les items du menu
 		$items = '';
+		// Nom de la page courante
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+		// Nom de la page parente
+		$currentParentPageId = $this->getData(['page',$currentPageId,'parentPageId']);
+		// Détermine si on affiche uniquement le parent et les enfants
+		// Filtre contient le nom de la page parente
+		if ($onlyChildren === true) {
+			if (empty($currentParentPageId)) { 
+				$filterCurrentPageId = $currentPageId;
+			} else {
+				$filterCurrentPageId = $currentParentPageId;
+			}
+		} 
+
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
-			// Passer les entrées masquées
-			if ($this->getData(['page',$parentPageId,'hiddenMenuSide']) === true ) {
+			// Ne pas afficher les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hiddenMenuSide']) === true  ) {
 				continue;
 			}
-
+			// Filtre actif et nom de la page parente courante différente, on sort de la boucle
+			if ($onlyChildren === true && $parentPageId !== $filterCurrentPageId) {
+				continue;
+			}
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';

@@ -49,6 +49,11 @@ class page extends common {
 		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
 		'bar'	=> 'Barre latérale'
 	];
+	public static $displayMenu = [
+		'0'		=> 'Aucun',
+		'1' 	=> 'Menu vertical intégral',
+		'2'		=> 'Sous-menu de page parente'
+	];
 	
 	/**
 	 * Création
@@ -78,7 +83,7 @@ class page extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => false,
+				'displayMenu' => '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			]
@@ -247,7 +252,7 @@ class page extends common {
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
-						'displayMenu' => $this->getinput('pageEditDisplayMenu', helper::FILTER_BOOLEAN),
+						'displayMenu' => $this->getinput('pageEditDisplayMenu'),
 						'hiddenMenuSide' => $this->getinput('pageEdithiddenMenuSide', helper::FILTER_BOOLEAN),
 						'hiddenMenuHead' => $this->getinput('pageEdithiddenMenuHead', helper::FILTER_BOOLEAN)
 					]

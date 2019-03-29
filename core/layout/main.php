@@ -169,9 +169,11 @@
 				<div class="<?php echo $blockleft; ?>" id="contentLeft">		
 					<?php
 					// Détermine si le bloc a un menu à inclure
-					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu'])) {
+					
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) !== '0') {
 						?> <div id="menuside"><nav> <?php
-						$layout->showMenuSide();
+						$filter =  ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === '1') ? false : true;
+						$layout->showMenuSide($filter);
 						?></nav></div><?php
 					}					
 					$layout->showBarContentLeft(); ?>
@@ -185,9 +187,10 @@
 				<div class="<?php echo $blockright; ?>" id="contentRight">
 					<?php
 					// Détermine si le bloc a un menu à inclure
-					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu'])) {
-						?> <div id="menuside"><nav> <?php						
-						$layout->showMenuSide();
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) !== '0') {
+						?> <div id="menuside"><nav> <?php
+						$filter =  ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === '1') ? false : true;
+						$layout->showMenuSide($filter);
 						?></nav></div><?php						
 					}
 					$layout->showBarContentRight(); ?>

@@ -144,7 +144,8 @@ $( document ).ready(function() {
 	* Masquer ou afficher le chemin de fer
 	* Quand le titre est masqué 
 	*/
-	if ($("input[name=pageEditHideTitle]").is(':checked'))  {
+	if ($("input[name=pageEditHideTitle]").is(':checked') &&
+		$("#pageEditParentPageId").val() === "")  {
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
 	} else {
