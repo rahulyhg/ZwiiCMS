@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev16';
+	const ZWII_VERSION = '9.1.00-dev17';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1816,15 +1816,25 @@ class layout extends common {
 				    }
 					break;
 		       }
-
-			if($childrenPageIds) {
+			// Cas où les pages enfants enfant sont toutes masquées dans le menu
+			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+			$totalChild = 0;
+			$disableChild = 0;
+			foreach($childrenPageIds as $childKey) {
+				$totalChild += 1;
+				if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true ) {
+					$disableChild += 1;
+				}
+			}	
+			if($childrenPageIds && $disableChild !== $totalChild ) {
 				$items .= template::ico('down', 'left');
 			}
+			// ------------------------------------------------	
 			$items .= '</a>';
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
 			// Passer les entrées masquées
-			if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true ) {
+			if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true  ) {
 				continue;
 			}				
 				// Propriétés de l'item
@@ -1939,12 +1949,22 @@ class layout extends common {
 			} else {
 					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 			}
-
 			$items .= $this->getData(['page', $parentPageId, 'title']);
 			
-			if($childrenPageIds) {
+			// Cas où les pages enfants enfant sont toutes masquées dans le menu
+			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+			$totalChild = 0;
+			$disableChild = 0;
+			foreach($childrenPageIds as $childKey) {
+				$totalChild += 1;
+				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true  ) {
+					$disableChild += 1;
+				}
+			}	
+			if($childrenPageIds && $disableChild !== $totalChild ) {
 				$items .= template::ico('down', 'left');
 			}
+			// ------------------------------------------------		
 			$items .= '</a>';
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
