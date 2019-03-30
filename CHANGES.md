@@ -1,5 +1,12 @@
 # ChangeLog 
 
+## Version 9.0.14
+- Modifications :
+    - Tippy, lity et TinyMCE, simpleLightbox : 
+        - légende et titre, nouveaux paramètres
+        - SimpleLightbox : buge d'affichage sous Edge, autre méthode
+        - Meilleure intégration
+
 ## Version 9.0.13
 - Modifications :
     - Paramètre Tippy : ajouter area[title]
