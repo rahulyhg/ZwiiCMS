@@ -532,7 +532,7 @@ footer .col4 {
 		text-align: center;
 		
 	}
-  div span:last-of-type {
+  footer div span:last-of-type {
         display: block;
     }	
 }
