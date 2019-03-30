@@ -1,4 +1,5 @@
 [
 	"lity.min.css",
-	"lity.min.js"
+	"lity.min.js",
+	"init.js"
 ]
