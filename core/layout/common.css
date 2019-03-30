@@ -318,6 +318,13 @@ td > .col12 {
 	#bar select {
 		width: 70%;
 	}
+	#bar #barRight {
+		font-size: 1.2em;		
+	}
+	#bar #barSelectPage {
+		width: 80%;
+		font-size: 120%;
+	}
 }
 
 /* Site */
@@ -486,6 +493,9 @@ footer .col4 {
 	footer .col4 {
 		width:33%;
 	}
+    div span:last-of-type {
+        display: block;
+    }	
 }
 
 footer #footerSocials span {
