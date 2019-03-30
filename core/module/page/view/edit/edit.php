@@ -111,7 +111,7 @@
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('PageEditDisable', true, 'Page désactivée', [
+					<?php echo template::checkbox('pageEditDisable', true, 'Page désactivée', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
 						'help' => 'Une page désactivée est affichée dans le menu et non cliquable'
 					]); ?>
@@ -167,7 +167,7 @@
 				<div  class="row"> 					
 					<div class="col12">
 					<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
-						'label' => 'Menu latéral en haut de barre',
+						'label' => 'Commence par un menu vertical',
 						'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
 					]); ?>
 					</div>
