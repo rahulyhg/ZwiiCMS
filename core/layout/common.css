@@ -474,8 +474,8 @@ body > footer {
 footer {
 	text-align: center;
 	padding: 1px 20px;
-	  vertical-align:middle;
-	  overflow-wrap: break-word;
+	vertical-align:middle;
+	overflow-wrap: break-word;
 }
 
 footer .col4 {
