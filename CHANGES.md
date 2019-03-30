@@ -4,7 +4,7 @@
 - Modifications :
     - Tippy, lity et TinyMCE, simpleLightbox : 
         - légende et titre, nouveaux paramètres
-        - SimpleLightbox : buge d'affichage sous Edge, autre méthode
+        - SimpleLightbox : bug d'affichage sous Edge, autre méthode
         - Meilleure intégration
 
 ## Version 9.0.13
