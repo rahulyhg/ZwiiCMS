@@ -6,7 +6,7 @@
     - Script Google Analytics
     - Menu : effet de surimpression pages filles
 - Ajouts :
-    - Menu dans une barre latérale
+    - Menu dans une barre latérale ; intéral ou menu de la page parente
     - Option d'apparition des pages ; menu latéral ou principal
 
 ## Version 9.0.13
