@@ -319,11 +319,16 @@ td > .col12 {
 		width: 70%;
 	}
 	#bar #barRight {
-		font-size: 1.2em;		
+		font-size: 1.2em;
 	}
 	#bar #barSelectPage {
 		width: 80%;
 		font-size: 120%;
+	}
+}
+@media (max-width: 992px) {
+	#bar .zwiico-user {
+		display: none;
 	}
 }
 
