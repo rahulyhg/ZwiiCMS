@@ -327,6 +327,12 @@ td > .col12 {
 	}
 }
 
+@media (max-width: 992px) {
+	#bar .zwiico-user {
+		display: none;
+	}
+}
+
 /* Site */
 #site {
 	margin: 20px auto;
