@@ -6,5 +6,5 @@
 		$("a[rel='gallery']").addClass(
 			"gallery",""
 		);
-		$('.gallery').simpleLightbox({closeText:"&#10005;",captionsData:'alt'});
+		$('.gallery').simpleLightbox({closeText:"&times;",captionsData:'alt'});
 	});
