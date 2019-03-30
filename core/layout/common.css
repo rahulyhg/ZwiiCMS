@@ -526,9 +526,13 @@ footer .col4 {
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 992px) {
 	footer .col4 {
-		width:33%;
+		width:100%;
 	}
-    div span:last-of-type {
+	footer span {
+		text-align: center;
+		
+	}
+  div span:last-of-type {
         display: block;
     }	
 }
