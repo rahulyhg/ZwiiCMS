@@ -9,6 +9,13 @@
     - Menu dans une barre latérale ; intéral ou menu de la page parente
     - Option d'apparition des pages ; menu latéral ou principal
 
+## Version 9.0.14
+- Corrections : 
+    - Débordement dans le pied de page quand le copyright est à droite
+- Modifications : 
+    - Petits écrans, menu d'administration plus icônes plus grandes
+    - Masquage de l'icône de gestion du compte 
+
 ## Version 9.0.13
 - Modifications :
     - Paramètre Tippy : ajouter area[title]
