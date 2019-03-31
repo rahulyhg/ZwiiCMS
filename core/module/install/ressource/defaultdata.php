@@ -153,7 +153,7 @@ class install extends common {
 				'title' => 'Menu latéral',
 				'block' => '9-3',
 				'barLeft' => '',
-				'barRight' => 'barre-lateral-avec-menu',
+				'barRight' => 'barre-laterale-avec-menu',
 				'displayMenu' => true,
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false
@@ -273,7 +273,7 @@ class install extends common {
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
-			'barre-lateral-avec-menu' => [
+			'barre-laterale-avec-menu' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
@@ -288,7 +288,7 @@ class install extends common {
 				'position' => 0 ,
 				'group' => self::GROUP_VISITOR,
 				'targetBlank' => false,
-				'title' => 'Barre latéral avec menu',
+				'title' => 'Barre latérale avec menu',
 				'block' => 'bar',
 				'barLeft' => '',
 				'barRight' => '',

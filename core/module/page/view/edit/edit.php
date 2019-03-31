@@ -100,36 +100,36 @@
 				<?php endif; ?>
 				<?php echo template::select('pageEditPosition', [], [
 					'label' => 'Position',
-					'help' => 'Une page non affichée est invisible dans les menus, elle est classée comme `Page orpheline` dans la liste des pages'
+					'help' => 'Une page non affichée n\'apparaît pas dans les menus mais comme \'Page orpheline\' dans la liste des pages.'
 				]); ?>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
+					<?php echo template::checkbox('pageEditTargetBlank', true, 'Affichée dans un nouvel onglet', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
 					]); ?>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditDisable', true, 'Page désactivée', [
+					<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
-						'help' => 'Une page désactivée est affichée dans le menu et non cliquable'
+						'help' => 'Une page désactivée figure dans le menu sans être cliquable.'
 					]); ?>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEdithiddenMenuHead', true, 'Page masquée dans le menu principal', [
+					<?php echo template::checkbox('pageEdithiddenMenuHead', true, 'Masquée dans le menu principal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenMenuHead']),
-						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'
+						'help' => 'Pour enlever une page des DEUX menus, sélectionnez \'Ne pas afficher\' dans la rubrique \'Position\']. Quand une page parent est masquée, les pages enfants le sont également.'
 					]); ?>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEdithiddenMenuSide', true, 'Page masquée dans le menu latéral', [
+					<?php echo template::checkbox('pageEdithiddenMenuSide', true, 'Masquée dans le menu latéral', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hiddenMenuSide']),
-						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également'				
+						'help' => 'Pour masquer une page dans les DEUX menus, dans `Position`, sélectionnez `Ne pas afficher`. Quand une page parent est masquée, les pages enfants le sont également.'
 					]); ?>
 					</div>
 				</div>				
@@ -174,7 +174,7 @@
 				</div>				
 				<div class="row">
 					<div class="col6">
-						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Titre masquée', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 						]); ?>
 					</div>
