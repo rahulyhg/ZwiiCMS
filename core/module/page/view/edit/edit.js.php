@@ -32,24 +32,24 @@ $( document ).ready(function() {
 	*/
 	if($("#pageEditModuleId").val() === "") {
 		$("#pageEditModuleConfig").addClass("disabled");
-		$("#pageEditContentContainer").slideDown();		
+		$("#pageEditContentContainer").hide();		
 	}
 	else {
 		$("#pageEditModuleConfig").removeClass("disabled");
-		$("#pageEditContentContainer").slideUp();
+		$("#pageEditContentContainer").hide();
 		$("#pageEditBlock option[value='bar']").remove();		
 	}
+
 	/**
 	* Masquer et affiche le contenu pour les modules form et gallery
 	*/
 	if($("#pageEditModuleId").val() === "form" ||
   	$("#pageEditModuleId").val() === "gallery") {
     	$("#configModulePositionWrapper").addClass("disabled");
-		$("#configModulePositionWrapper").slideDown();	
-	}
-	else {
+			$("#configModulePositionWrapper").slideDown();	
+	} else {
 	    $("#configModulePositionWrapper").removeClass("disabled");
-		$("#configModulePositionWrapper").slideUp();				
+			$("#configModulePositionWrapper").slideUp();				
 	}
 	/**
 	* Masquer et démasquer le contenu pour les modules code et redirection
@@ -58,8 +58,7 @@ $( document ).ready(function() {
     $("#pageEditModuleId").val() === "redirection") {
 		$("#pageEditContentWrapper").removeClass("disabled");
 		$("#pageEditContentWrapper").slideUp();
-	}
-	else {
+	} else {
 		$("#pageEditContentWrapper").addClass("disabled");
 		$("#pageEditContentWrapper").slideDown();		
 	}
@@ -73,8 +72,7 @@ $( document ).ready(function() {
 		$("#pageEditBlockWrapper").removeClass("disabled");
 		$("#pageEditBlockWrapper").hide();			
 		
-	}
-	else {	
+	} else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").show();
 		$("#pageEditBlockWrapper").addClass("disabled");
@@ -113,7 +111,7 @@ $( document ).ready(function() {
 			break;
 	};
 	if ($("#pageEditBlock").val() === "bar") {		
-		$("#PageEditMenu").removeClass("disabled");
+			$("#PageEditMenu").removeClass("disabled");
 			$("#PageEditMenu").slideUp();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
@@ -124,20 +122,10 @@ $( document ).ready(function() {
 			$("#pageEditModuleConfig").removeClass("disabled");
 			$("#pageEditModuleConfig").slideUp();	
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideDown();																			
-		} else {
-			$("#PageEditMenu").addClass("disabled");
-			$("#PageEditMenu").slideDown();		
-			$("#pageEditHideTitleWrapper").addClass("disabled");
-			$("#pageEditHideTitleWrapper").slideDown();	
-			$("#pageEditbreadCrumbWrapper").addClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideDown();				
-			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();	
-			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();	
+			$("#pageEditDisplayMenuWrapper").slideDown();	
+	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();							
+			$("#pageEditDisplayMenuWrapper").slideUp();	
 	}
 
 	/**

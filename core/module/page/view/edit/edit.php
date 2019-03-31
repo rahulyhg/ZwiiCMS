@@ -54,6 +54,13 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="col6">							
+						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
+								'help' => 'Sélectionnez le type de menu.',
+								'label' => 'Type de menu',
+								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
+						]); ?>
+					</div>
 					<div class="col6">			
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
 							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
@@ -63,14 +70,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">							
-						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
-								'help' => 'Sélectionnez le type de menu.',
-								'label' => 'Type de menu',
-								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
-						]); ?>
-					</div>
-					<div class="col6">
+>					<div class="col6">
 						<?php echo template::file('pageIconUrl', [
 							'label' => 'Icône du menu',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
