@@ -31,10 +31,10 @@ body {
 */ 
 @media (max-width: 768px) {
 	body {
-		margin:0px 0px !important;
+		margin:2px 2px !important;
 	}
 	#site {
-		margin:0px auto !important;
+		margin:2px auto !important;
 	}
 }
 
@@ -528,9 +528,6 @@ footer .col4 {
 	footer .col4 {
 		width:100%;
 	}
-  footer div span:last-of-type {
-        display: block;
-	}	
 	#footerCopyright, #footerText, #footerSocials {
 		text-align: center !important;
 	}
