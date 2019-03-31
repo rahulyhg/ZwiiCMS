@@ -528,16 +528,13 @@ footer .col4 {
 	footer .col4 {
 		width:100%;
 	}
-	#footerCopyright, #footerText, #footerSocials {
-		text-align: center !important	;
-	}
   footer div span:last-of-type {
         display: block;
     }	
 }
 @media (max-width: 768px) {
 	#footerCopyright, #footerText, #footerSocials {
-		text-align: center !important	;
+		text-align: center;
 	}
 }
 
