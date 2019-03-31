@@ -500,14 +500,11 @@ footer .col4 {
 	}
   footer div span:last-of-type {
         display: block;
-    }	
-}
-@media (max-width: 768px) {
+		}	
 	#footerCopyright, #footerText, #footerSocials {
-		text-align: center;
+		text-align: center !important;
 	}
 }
-
 
 
 footer #footerSocials span {
