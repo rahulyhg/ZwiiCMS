@@ -315,8 +315,8 @@ td > .col12 {
 		float: none !important;
 		height: auto;
 	}
-	#bar select {
-		width: 70%;
+	#bar #barSelectPage {
+		width: 70% !important;
 	}
 	#bar #barRight {
 		font-size: 1.2em;		
