@@ -139,7 +139,7 @@ class install extends common {
                 'iconUrl' => '',
                 'disable' => false,
 				'content' => '<p>Vous pouvez ajouter un menu dans les barres latérales</p>
-							  <p>Les éléments des menu peuvent être masqués. </p>',
+							  <p>Les éléments des menus peuvent être masqués. </p>',
 				'hideTitle' => false,
 				'breadCrumb' => true,				
 				'metaDescription' => '',
@@ -153,7 +153,7 @@ class install extends common {
 				'title' => 'Menu latéral',
 				'block' => '9-3',
 				'barLeft' => '',
-				'barRight' => 'barre-laterale-avec-menu',
+				'barRight' => 'barrelateraleavecmenu',
 				'displayMenu' => true,
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false
@@ -273,11 +273,11 @@ class install extends common {
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
-			'barre-laterale-avec-menu' => [
+			'barrelateraleavecmenu' => [
 			    'typeMenu' => 'text',
                 'iconUrl' => '',
                 'disable' => false,
-				'content' => '',
+				'content' => '<p></p>',
 				'hideTitle' => false,
 				'breadCrumb' => false,				
 				'metaDescription' => '',
