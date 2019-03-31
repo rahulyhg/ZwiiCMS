@@ -49,7 +49,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' => '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
@@ -77,7 +77,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
@@ -104,7 +104,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
@@ -130,7 +130,7 @@ class install extends common {
 				'block' => '4-8',
 				'barLeft' => 'barre',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false
 			],
@@ -154,7 +154,7 @@ class install extends common {
 				'block' => '9-3',
 				'barLeft' => '',
 				'barRight' => 'barrelateraleavecmenu',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false
 			],				
@@ -177,7 +177,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false								
 			],
@@ -200,7 +200,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' =>  '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false
 			],
@@ -223,7 +223,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' => '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => true								
 			],
@@ -246,7 +246,7 @@ class install extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' => '0',
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false								
 			],
@@ -269,7 +269,7 @@ class install extends common {
 				'block' => 'bar',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => false,
+				'displayMenu' => "2",
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false				
 			],
@@ -292,7 +292,7 @@ class install extends common {
 				'block' => 'bar',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => true,
+				'displayMenu' => "1",
 				'hiddenMenuSide' => false,
 				'hiddenMenuHead' => false					
 			],
