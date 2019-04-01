@@ -315,7 +315,7 @@
 	</footer>
 <?php endif; ?>
 <!-- Lien remonter en haut -->
-<div id="backToTop"><?php echo template::ico('up'); ?></div>
+<div id="backToTop"><?php echo template::ico('chevron-up'); ?></div>
 <?php $layout->showScript(); ?>
 </body>
 </html>
