@@ -87,7 +87,7 @@
 	<div class="row">
 		<div class="col6">
 		<div class="block" id="PageEditMenu">
-				<h4>Menu</h4>
+				<h4>Emplacements</h4>
 				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
 					<?php echo template::hidden('pageEditParentPageId', [
 						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
