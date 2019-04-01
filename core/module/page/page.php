@@ -50,9 +50,9 @@ class page extends common {
 		'bar'	=> 'Barre latérale'
 	];
 	public static $displayMenu = [
-		'0'		=> 'Aucun',
-		'1' 	=> 'Menu vertical intégral',
-		'2'		=> 'Sous-menu de page parente'
+		'0'	=> 'Aucun',
+		'1' 	=> 'Menu principal',
+		'2'	=> 'Sous-menu de la page parente'
 	];
 	
 	/**
