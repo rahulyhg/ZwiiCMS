@@ -2194,7 +2194,7 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cogs') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'plugins" data-tippy-content="Gestion des plugins">' . template::ico('puzzle-piece') . '</a></li>';				
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {
