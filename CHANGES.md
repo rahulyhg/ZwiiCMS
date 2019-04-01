@@ -2,12 +2,12 @@
 
 ## Version 9.1.0
 - Modifications : 
-    - Amélioration de l'algorythme de gestion des barres
+    - Amélioration de l'algorithme de gestion des barres
     - Script Google Analytics
     - Menu : effet de surimpression pages filles
 - Ajouts :
-    - Menu dans une barre latérale ; intéral ou menu de la page parente
-    - Option d'apparition des pages ; menu latéral ou principal
+    - Menu dans une barre latérale : intégral ou sous-menu de la page parente
+    - Option d'apparition des pages dans le menu latéral ou le menu principal
 
 ## Version 9.0.14
 - Corrections : 
