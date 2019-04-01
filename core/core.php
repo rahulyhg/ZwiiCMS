@@ -60,6 +60,8 @@ class common {
 	public $output = [
 		'access' => true,
 		'content' => '',
+		'contentLeft' => '',
+		'contentRight' => '',
 		'display' => self::DISPLAY_LAYOUT_MAIN,
 		'metaDescription' => '',
 		'metaTitle' => '',
@@ -902,7 +904,7 @@ class core extends common {
 			$css .= 'nav a,#toggle span,nav a:hover{color:' . $this->getData(['theme', 'menu', 'textColor']) . '}';
 			$css .= 'nav a:hover{background-color:' . $colors['darken'] . '}';
 			$css .= 'nav a.active{background-color:' . $colors['veryDarken'] . '}';
-			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
+			$css .= '#menu #menuside{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
@@ -914,7 +916,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
+			$css .= '#toggle span,#menu a, #menuside a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
@@ -1017,6 +1019,7 @@ class core extends common {
 		}
 
 		// Breadcrumb
+
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
@@ -1040,12 +1043,15 @@ class core extends common {
 				'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 				'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 				'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-				'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+				'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+				'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+				'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 			]);
 		}
 		// Importe le module
 		else {
 			// Id du module, et valeurs en sortie de la page si il s'agit d'un module de page
+
 			if($access AND $this->getData(['page', $this->getUrl(0), 'moduleId'])) {
 				$moduleId = $this->getData(['page', $this->getUrl(0), 'moduleId']);
 				$this->addOutput([
@@ -1054,7 +1060,9 @@ class core extends common {
 					'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+					'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+					'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+					'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
 			}
@@ -1724,14 +1732,14 @@ class layout extends common {
 	 */
 	public function showAnalytics() {
 		if($code = $this->getData(['config', 'analyticsId'])) {
-			echo '<script>
-				(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
-				ga("create", "' . $code . '", "auto");
-				ga("send", "pageview");
-			</script>';
+			echo '<!-- Global site tag (gtag.js) - Google Analytics -->
+				<script async src="https://www.googletagmanager.com/gtag/js?id='. $code .'"></script>
+				<script>
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+				  gtag("js", new Date());
+				  gtag("config","'. $code .'");
+				</script>';
 		}
 	}
 
@@ -1750,9 +1758,25 @@ class layout extends common {
 			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
 		}
 		echo $this->core->output['content'];
+
 	}
 
 
+	/**
+	 * Affiche le contenu de la barre gauche
+	 * @param page chargée
+	 */
+	public function showBarContentLeft() {
+		echo $this->core->output['contentLeft'];		
+	}
+
+	/**
+	 * Affiche le contenu de la barre droite
+	 * @param page chargée
+	 */
+	public function showBarContentRight() {
+		echo $this->core->output['contentRight'];
+	}
 
 /**
      * Affiche le copyright
@@ -1804,9 +1828,13 @@ class layout extends common {
 		$items = '';
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hiddenMenuHead']) === true ) {
+				continue;
+			}		
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
-			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';		
 			// Mise en page de l'item
 			$items .= '<li>';
 			
@@ -1817,7 +1845,6 @@ class layout extends common {
 			} else {
 					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '" data-tippy-content="'.$this->getData(['page', $parentPageId, 'title']).'" ' . $active . $targetBlank . '>';
 			}
-
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
 				case '' :
@@ -1842,18 +1869,27 @@ class layout extends common {
 				    }
 					break;
 		       }
-
-
-
-			if($childrenPageIds) {
-				$items .= template::ico('sort-down', 'left');
+			// Cas où les pages enfants enfant sont toutes masquées dans le menu
+			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+			$totalChild = 0;
+			$disableChild = 0;
+			foreach($childrenPageIds as $childKey) {
+				$totalChild += 1;
+				if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true ) {
+					$disableChild += 1;
+				}
+			}	
+			if($childrenPageIds && $disableChild !== $totalChild ) {
+				$items .= template::ico('down', 'left');
 			}
+			// ------------------------------------------------	
 			$items .= '</a>';
-
-
-
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$childKey,'hiddenMenuHead']) === true  ) {
+				continue;
+			}				
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
@@ -1922,6 +1958,111 @@ class layout extends common {
 		// Retourne les items du menu
 		echo '<ul>' . $items . '</ul>';
 	}
+
+	/**
+	 * Générer un menu pour la barre latérale
+	 * Uniquement texte 
+	 * @param onlyChildren n'affiche les sous-pages de la page actuelle
+	 */
+	public function showMenuSide($onlyChildren = null) {
+		// Met en forme les items du menu
+		$items = '';
+		// Nom de la page courante
+		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+		// Nom de la page parente
+		$currentParentPageId = $this->getData(['page',$currentPageId,'parentPageId']);
+		// Détermine si on affiche uniquement le parent et les enfants
+		// Filtre contient le nom de la page parente
+		if ($onlyChildren === true) {
+			if (empty($currentParentPageId)) { 
+				$filterCurrentPageId = $currentPageId;
+			} else {
+				$filterCurrentPageId = $currentParentPageId;
+			}
+		} 
+
+		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Ne pas afficher les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hiddenMenuSide']) === true  ) {
+				continue;
+			}
+			// Filtre actif et nom de la page parente courante différente, on sort de la boucle
+			if ($onlyChildren === true && $parentPageId !== $filterCurrentPageId) {
+				continue;
+			}
+			// Propriétés de l'item
+			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			// Mise en page de l'item
+			$items .= '<li id="menuside">';
+			
+			if ( $this->getData(['page',$parentPageId,'disable']) === true
+				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+					 $items .= '<a href="'.$this->getUrl(1).'">';
+			} else {
+					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+			}
+			$items .= $this->getData(['page', $parentPageId, 'title']);
+			
+			// Cas où les pages enfants enfant sont toutes masquées dans le menu
+			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+			$totalChild = 0;
+			$disableChild = 0;
+			foreach($childrenPageIds as $childKey) {
+				$totalChild += 1;
+				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true  ) {
+					$disableChild += 1;
+				}
+			}	
+			if($childrenPageIds && $disableChild !== $totalChild ) {
+				$items .= template::ico('down', 'left');
+			}
+			// ------------------------------------------------		
+			$items .= '</a>';
+			$items .= '<ul>';
+			foreach($childrenPageIds as $childKey) {
+				// Passer les entrées masquées
+				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true ) {
+					continue;
+				}
+				// Propriétés de l'item
+				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
+				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
+				// Mise en page du sous-item
+				$items .= '<li id="menuside">';
+
+				if ( $this->getData(['page',$childKey,'disable']) === true
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+
+						{$items .= '<a href="'.$this->getUrl(1).'">';}
+				else {
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+
+				$items .= $this->getData(['page', $childKey, 'title']);					
+				$items .=  '</a></li>';
+			}
+			$items .= '</ul>';
+			$items .= '</li>';
+		}
+		// Lien de connexion
+		if(
+			(
+				$this->getData(['theme', 'menu', 'loginLink'])
+				AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
+			)
+			OR $this->getUrl(0) === 'theme'
+		) {
+			$items .= '<li id="menuLoginLink" ' . 
+			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
+			'><a href="' . helper::baseUrl() . 'user/login/' . 
+			strip_tags(str_replace('/', '_', $this->getUrl())) . 
+			'">Connexion</a></li>';
+		}
+		// Retourne les items du menu
+		echo '<ul>' . $items . '</ul>';
+	}
+
+
 
 	/**
 	 * Affiche le meta titre

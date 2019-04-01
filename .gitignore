@@ -23,4 +23,4 @@ site/file/thumb/*
 # Trucs
 .gitignore
 core/vendor/tinymce/link_list.json
-core/vendor/tinymce/link_list.json
+site/tmp/*

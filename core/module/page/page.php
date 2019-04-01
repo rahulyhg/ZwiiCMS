@@ -41,7 +41,7 @@ class page extends common {
 		'free'   => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12'    => 'Page pleine',
+		'12'    => 'Pleine page',
 		'4-8'   => 'Barre latérale 1/3 - Page 2/3',		
 		'8-4'   => 'Page 2/3    - Barre latérale 1/3',
 		'3-9'   => 'Barre latérale 1/4 - Page 3/4',
@@ -49,7 +49,12 @@ class page extends common {
 		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
 		'bar'	=> 'Barre latérale'
 	];
-
+	public static $displayMenu = [
+		'0'	=> 'Aucun',
+		'1' => 'Menu principal',
+		'2'	=> 'Sous-menu de la page parente'
+	];
+	
 	/**
 	 * Création
 	 */
@@ -77,7 +82,10 @@ class page extends common {
 				'title' => $pageTitle,
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => '0',
+				'hiddenMenuSide' => false,
+				'hiddenMenuHead' => false				
 			]
 		]);
 		// Valeurs en sortie
@@ -227,7 +235,7 @@ class page extends common {
 					[
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN),
+						'disable'=> $this->getinput('pageEditDisable', helper::FILTER_BOOLEAN), 						
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
 						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
 						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
@@ -242,7 +250,10 @@ class page extends common {
 						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
-						'barRight' => $barRight
+						'barRight' => $barRight,
+						'displayMenu' => $this->getinput('pageEditDisplayMenu'),
+						'hiddenMenuSide' => $this->getinput('pageEdithiddenMenuSide', helper::FILTER_BOOLEAN),
+						'hiddenMenuHead' => $this->getinput('pageEdithiddenMenuHead', helper::FILTER_BOOLEAN)
 					]
 				]);
 				// Barre renommée : changement le nom de la barre dans les pages mères

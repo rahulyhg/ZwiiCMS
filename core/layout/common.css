@@ -27,10 +27,10 @@ body {
 */ 
 @media (max-width: 768px) {
 	body {
-		margin:0px 0px !important;
+		margin:2px 2px !important;
 	}
 	#site {
-		margin:0px auto !important;
+		margin:2px auto !important;
 	}
 }
 
@@ -311,8 +311,21 @@ td > .col12 {
 		float: none !important;
 		height: auto;
 	}
-	#bar select {
-		width: 70%;
+	#bar #barSelectPage {
+		width: 70% !important;
+	}
+	#bar #barRight {
+		font-size: 1.2em;		
+	}
+	#bar #barSelectPage {
+		width: 80%;
+		font-size: 120%;
+	}
+}
+
+@media (max-width: 992px) {
+	#bar .zwiico-user {
+		display: none;
 	}
 }
 
@@ -363,6 +376,7 @@ nav #toggle span {
 nav #menu {
 	display: block;
 }
+
 nav ul {
 	padding: 0;
 	margin: 0;
@@ -372,6 +386,7 @@ nav li {
 	display: inline-block;
 	position: relative;
 }
+
 nav li ul {
 	display: block;
 	position: absolute;
@@ -380,7 +395,9 @@ nav li ul {
 	opacity: 0;
 	-webkit-transition: .3s ease-out;
 	transition: .3s ease-out;
+	padding-left: 10px;	
 }
+
 nav li ul li {
 	display: block;
 	text-align: left;
@@ -388,6 +405,7 @@ nav li ul li {
 nav li:hover ul {
 	z-index: 1;
 	opacity: 1;
+	filter: drop-shadow(1px 1px 5px grey);
 }
 nav a {
 	display: inherit;
@@ -422,6 +440,25 @@ nav a:hover {
 		padding-left: 40px !important;
 	}
 }
+
+/* Menu vertical */
+
+nav #menuside {
+	display: list-item;
+}
+nav li #menuside {
+	position: relative;
+}
+nav ul li #menuside {
+	padding-left: 10px;
+}
+nav li:hover ul #menuside{
+	z-index: 1;
+	opacity: 1;
+	/*margin-left: 30px;*/
+	width:100%;
+}
+
 /* Barre de navigation fixe quand le menu est en-dehors du site */ 
 #navfixedlogout {
 	position: -webkit-sticky; /* Safari */
@@ -441,6 +478,11 @@ nav a:hover {
 nav .zwiico-menu {
 	font-size:1.5em !important;
 }
+
+
+
+/* Menu vertical */
+
 
 
 /* Corps */
@@ -470,7 +512,8 @@ body > footer {
 footer {
 	text-align: center;
 	padding: 1px 20px;
-  	vertical-align:middle;
+	vertical-align: middle;
+	overflow-wrap: break-word;	  
 }
 
 footer .col4 {
@@ -479,7 +522,10 @@ footer .col4 {
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 992px) {
 	footer .col4 {
-		width:33%;
+		width:100%;
+	}
+	#footerCopyright, #footerText, #footerSocials {
+		text-align: center !important;
 	}
 }
 

@@ -329,13 +329,14 @@ core.start = function() {
 	}).trigger("resize");
 
 	// Ajouter l'attribut data-lity afin de faire la liaison avec lity
-	$("a[rel='data-lity']").attr("data-lity","");
+	//$("a[rel='data-lity']").attr("data-lity","");
 
 	// Ajouter la classe Gallery afin de faire la liaison avec simplelightbox
-	$("a[rel='gallery']").addClass("gallery","");
+	//$("a[rel='gallery']").addClass("gallery","");
 
-	//
-	$('.gallery').simpleLightbox();
+
+	// Appel dans init.js
+	// $('.gallery').simpleLightbox();
 
 };
 core.start();
