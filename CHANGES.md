@@ -1,6 +1,6 @@
 # ChangeLog 
 
-## Version 9.0.14
+## Version 9.0.15
 - Corrections : 
     - Débordement dans le pied de page quand le copyright est à droite
 - Modifications : 
