@@ -4,7 +4,7 @@
 - Corrections : 
     - Débordement dans le pied de page quand le copyright est à droite
 - Modifications : 
-    - Petits écrans, menu d'administration plus icônes plus grandes
+    - Petits écrans, menu d'administration icônes plus grandes
     - Masquage de l'icône de gestion du compte 
 
 ## Version 9.0.14
