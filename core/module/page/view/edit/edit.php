@@ -167,7 +167,7 @@
 				<div  class="row"> 					
 					<div class="col12">
 					<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
-						'label' => 'Commence par un menu vertical',
+						'label' => 'Configuration du menu vertical',
 						'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
 					]); ?>
 					</div>
