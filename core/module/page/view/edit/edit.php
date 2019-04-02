@@ -56,8 +56,8 @@
 				<div class="row">
 					<div class="col6">							
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
-								'help' => 'Sélectionnez le type de menu.',
-								'label' => 'Type de menu',
+								'help' => 'Choisir une icône ou une image de petite taille.',
+								'label' => 'Aspect du menu',
 								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
 						]); ?>
 					</div>
