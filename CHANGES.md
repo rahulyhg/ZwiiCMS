@@ -9,6 +9,17 @@
     - Menu dans une barre latérale : intégral ou sous-menu de la page parente
     - Option d'apparition des pages dans le menu latéral ou le menu principal
 
+## Version 9.0.16
+- Correction : 
+    - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
+
+## Version 9.0.15
+- Corrections : 
+    - Débordement dans le pied de page quand le copyright est à droite
+- Modifications : 
+    - Petits écrans, menu d'administration icônes plus grandes
+    - Masquage de l'icône de gestion du compte 
+
 ## Version 9.0.14
 - Corrections : 
     - Débordement dans le pied de page quand le copyright est à droite
