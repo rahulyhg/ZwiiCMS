@@ -1,5 +1,9 @@
 # ChangeLog 
 
+## Version 9.0.16
+- Correction : 
+    - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
+
 ## Version 9.0.15
 - Corrections : 
     - Débordement dans le pied de page quand le copyright est à droite
