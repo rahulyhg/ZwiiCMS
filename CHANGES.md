@@ -1,6 +1,6 @@
 # ChangeLog 
 
-## Version 9.1.0
+## Version 9.1.0 bêta
 - Modifications : 
     - Amélioration de l'algorithme de gestion des barres
     - Script Google Analytics
