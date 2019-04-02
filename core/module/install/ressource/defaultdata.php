@@ -139,7 +139,7 @@ class install extends common {
                 	'iconUrl' => '',
                 	'disable' => false,
 			'content' => '<p>Cette page illustre la possibilité d\ajouter un menu dans les barres latérales.<br>
-					Deux types de menus sont disponibles : l\' reprenant les rubriques du menu principal comme celui-ci, l\autre listant les pages d\une même rubrique. Le choix du type de menu se fait dans la page de configuration d\une barre latérale.</p>
+					Deux types de menus sont disponibles : l\'un reprenant les rubriques du menu principal comme celui-ci, l\autre listant les pages d\une même rubrique. Le choix du type de menu se fait dans la page de configuration d\une barre latérale.</p>
 					<p>Pour ajouter un menu à une page, choisissez une barre latérale avec menu dans la page de configuration. Les bulles d\aide de la rubrique \"Menu\" expliquent comment masquer une page.</p>',
 			'hideTitle' => false,
 			'breadCrumb' => true,				
