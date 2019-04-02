@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.1.00-dev21';
+	const ZWII_VERSION = '9.1.00-dev22';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1450,6 +1450,10 @@ class helper {
 					$text
 				));
 				$text = preg_replace('/([^a-z0-9-])/', '', $text);
+				// Cas où un identifiant est vide
+				if (empty($text)) {
+					$text = uniqid('page-');
+				}
 				// Un ID ne peut pas être un entier, pour éviter les conflits avec le système de pagination
 				if(intval($text) !== 0) {
 					$text = 'i' . $text;
