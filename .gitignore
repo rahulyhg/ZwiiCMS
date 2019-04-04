@@ -3,11 +3,7 @@ site/tmp/*.zip
 site/tmp/*.gz
 
 # Sauvegardes
-site/backup/*
-
-# Fichiers de données
-site/data/*
-
+site/backup/*.json
 
 # Fichiers uploadés
 site/file/data/*.json
@@ -23,3 +19,9 @@ site/backup/*.json
 
 # Trucs
 index.php
+site/backup/.htaccess
+site/data/.htaccess
+site/data/core.json
+site/data/custom.css
+site/data/theme.css
+site/data/theme.json
