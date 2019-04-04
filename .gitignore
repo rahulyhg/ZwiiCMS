@@ -10,9 +10,8 @@ site/data/*
 
 
 # Fichiers uploadés
-site/file/source/*.json
 site/file/data/*.json
-site/bakcup/*.json
+site/backup/*.json
 
 
 # Dossiers vides dans GitHub
