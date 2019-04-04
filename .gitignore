@@ -24,3 +24,4 @@ site/file/thumb/*
 .gitignore
 core/vendor/tinymce/link_list.json
 site/tmp/*
+index.php
