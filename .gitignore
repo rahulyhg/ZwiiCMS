@@ -22,6 +22,9 @@ site/file/thumb/*
 
 # Trucs
 .gitignore
-core/vendor/tinymce/link_list.json
 site/tmp/*
+<<<<<<< HEAD
 index.php
+=======
+core/vendor/tinymce/link_list.json
+>>>>>>> 431f004860f06c5ce2fad5ec68baada5c65a9d30
