@@ -1969,7 +1969,7 @@ class layout extends common {
 				//	$items .= template::ico('down', 'left');
 				//}
 				// ------------------------------------------------		
-				// A garder mais désactivé avec la suppresion du thème
+				// A garder mais désactivé avec la suppresion du thème 
 				$items .= '</a>';
 			} else {
 				$items .= '</ul>';

@@ -163,7 +163,7 @@
 				$layout->showContent();
 		} else {
 		?>
-		<div class="row">
+		<div class="row"> 
 			<?php 
 				if ($blockleft !== "") :?> 
 				<div class="<?php echo $blockleft; ?>" id="contentLeft">		
