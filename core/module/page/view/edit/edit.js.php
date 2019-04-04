@@ -122,7 +122,9 @@ $( document ).ready(function() {
 			$("#pageEditModuleConfig").removeClass("disabled");
 			$("#pageEditModuleConfig").slideUp();	
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideDown();	
+			$("#pageEditDisplayMenuWrapper").slideDown();
+			$("#pageEditGroupWrapper").removeClass("disabled");
+			$("#pageEditGroupWrapper").slideUp();						
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
@@ -347,7 +349,9 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleConfig").removeClass("disabled");
 			$("#pageEditModuleConfig").slideUp();	
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideDown();																			
+			$("#pageEditDisplayMenuWrapper").slideDown();
+			$("#pageEditGroupWrapper").removeClass("disabled");
+			$("#pageEditGroupWrapper").slideUp();																							
 	} else {
 			$("#PageEditMenu").addClass("disabled");
 			$("#PageEditMenu").slideDown();		
@@ -360,7 +364,9 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditModuleConfig").addClass("disabled");
 			$("#pageEditModuleConfig").slideDown();	
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();											
+			$("#pageEditDisplayMenuWrapper").slideUp();	
+			$("#pageEditGroupWrapper").addClass("disabled");
+			$("#pageEditGroupWrapper").slideDown();														
 	}	
 });
 
