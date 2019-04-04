@@ -897,7 +897,6 @@ class core extends common {
 			$css .= 'nav a,#toggle span,nav a:hover{color:' . $this->getData(['theme', 'menu', 'textColor']) . '}';
 			$css .= 'nav a:hover{background-color:' . $colors['darken'] . '}';
 			$css .= 'nav a.active{background-color:' . $colors['veryDarken'] . '}';
-			$css .= '#menu #menuside{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
@@ -909,7 +908,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#toggle span,#menu a, #menuside a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
+			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
@@ -1944,33 +1943,39 @@ class layout extends common {
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
-			// Mise en page de l'item
-			$items .= '<li id="menuside">';
-			
-			if ( $this->getData(['page',$parentPageId,'disable']) === true
-				 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
-					 $items .= '<a href="'.$this->getUrl(1).'">';
-			} else {
-					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
-			}
-			$items .= $this->getData(['page', $parentPageId, 'title']);
-			
-			// Cas où les pages enfants enfant sont toutes masquées dans le menu
-			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
-			$totalChild = 0;
-			$disableChild = 0;
-			foreach($childrenPageIds as $childKey) {
-				$totalChild += 1;
-				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true  ) {
-					$disableChild += 1;
+			// Mise en page de l'item;
+			// Ne pas afficher le parent d'une sous-page quand l'option est sélectionnée.
+			if ($onlyChildren === false) {
+				$items .= '<li id="menuside">';
+				if ( $this->getData(['page',$parentPageId,'disable']) === true
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+						$items .= '<a href="'.$this->getUrl(1).'">';
+				} else {
+						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 				}
-			}	
-			if($childrenPageIds && $disableChild !== $totalChild ) {
-				$items .= template::ico('down', 'left');
+
+				$items .= $this->getData(['page', $parentPageId, 'title']);
+				// Cas où les pages enfants enfant sont toutes masquées dans le menu
+				// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+				//$totalChild = 0;
+				//$disableChild = 0;
+				//foreach($childrenPageIds as $childKey) {
+				//	$totalChild += 1;
+				//	if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true  ) {
+				//		$disableChild += 1;
+				//	}
+				//}	
+				//if($childrenPageIds && $disableChild !== $totalChild ) {
+				//	$items .= template::ico('down', 'left');
+				//}
+				// ------------------------------------------------		
+				// A garder mais désactivé avec la suppresion du thème
+				$items .= '</a>';
+			} else {
+				$items .= '</ul>';
 			}
-			// ------------------------------------------------		
-			$items .= '</a>';
-			$items .= '<ul>';
+
+			$items .= '<ul id="menuside">';
 			foreach($childrenPageIds as $childKey) {
 				// Passer les entrées masquées
 				if ($this->getData(['page',$childKey,'hiddenMenuSide']) === true ) {
@@ -2010,7 +2015,7 @@ class layout extends common {
 			'">Connexion</a></li>';
 		}
 		// Retourne les items du menu
-		echo '<ul>' . $items . '</ul>';
+		echo '<ul id="menuside">' . $items . '</ul>';
 	}
 
 
