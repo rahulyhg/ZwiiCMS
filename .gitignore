@@ -23,3 +23,6 @@ site/data/theme.json
 .gitignore
 site/data/core.json
 core/vendor/tinymce/link_list.json
+site/data/theme.css
+site/data/custom.css
+core/vendor/tinymce/link_list.json
