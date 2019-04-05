@@ -19,3 +19,7 @@ site/file/thumb/*
 .idea/
 
 # Trucs
+site/data/theme.json
+.gitignore
+site/data/core.json
+core/vendor/tinymce/link_list.json
