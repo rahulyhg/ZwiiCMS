@@ -30,7 +30,7 @@ class gallery extends common {
 
 	public static $pictures = [];
 
-	const GALLERY_VERSION = '1.1';	
+	const GALLERY_VERSION = '1.2';	
 
 	/**
 	 * Configuration
