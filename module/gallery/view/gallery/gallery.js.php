@@ -16,5 +16,6 @@
 $(".galleryGalleryPicture").simpleLightbox({
 	captionSelector: "self",
 	captionType: "data",
-	captionsData: "caption"
+	captionsData: "caption",
+	closeText: "&times;"
 });
