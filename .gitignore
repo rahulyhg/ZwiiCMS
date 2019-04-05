@@ -19,12 +19,3 @@ site/file/thumb/*
 .idea/
 
 # Trucs
-index.php
-site/backup/.htaccess
-site/data/.htaccess
-site/data/core.json
-site/data/custom.css
-site/data/theme.css
-site/data/theme.json
-site/tmp/.htaccess
-core/vendor/tinymce/link_list.json
