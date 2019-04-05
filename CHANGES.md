@@ -1,4 +1,4 @@
-# ChangeLog 
+    - Module Gallery : bouton de fermeture sous Edge# ChangeLog 
 
 ## Version 9.1.0 bêta
 - Modifications : 
@@ -12,6 +12,7 @@
 ## Version 9.0.16
 - Correction : 
     - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
+    - Module Gallery : bouton de fermeture sous Edge
 
 ## Version 9.0.15
 - Corrections : 
