@@ -9,6 +9,12 @@
     - Menu dans une barre latérale : intégral ou sous-menu de la page parente
     - Option d'apparition des pages dans le menu latéral ou le menu principal
 
+## Version 9.0.17
+- Correction : 
+    - Marges pour les petits écrans en mode connecté
+- Mise à jour :
+    - simpleLightBox 1.17.0
+
 ## Version 9.0.16
 - Correction : 
     - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.

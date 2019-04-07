@@ -310,6 +310,7 @@ td > .col12 {
 	#bar {
 		text-align: center;
 		padding: 0;
+		margin: 0;
 	}
 	#bar ul {
 		float: none !important;
