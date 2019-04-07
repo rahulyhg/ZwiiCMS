@@ -1,5 +1,11 @@
 # ChangeLog 
 
+
+## Version 9.0.16
+- Correction : 
+    - Marges pour les petits écrans en mode connecté
+    - Mise à jour simpleLightBox 1.17.0
+
 ## Version 9.0.16
 - Corrections : 
     - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
